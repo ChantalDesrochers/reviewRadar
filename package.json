@@ -1,0 +1,28 @@
+{
+  "name": "scrapernd2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scrape.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "nightmare": "github:segmentio/nightmare",
+    "request": "^2.87.0",
+    "vo": "^4.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChantalDesrochers/scrapingData.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChantalDesrochers/scrapingData/issues"
+  },
+  "homepage": "https://github.com/ChantalDesrochers/scrapingData#readme"
+}
