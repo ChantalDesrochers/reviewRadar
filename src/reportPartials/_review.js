@@ -6,9 +6,9 @@ const Review = ({ review }) => (
     <br />
     Description: {review.description}
     <br />
-    Date: {review.date}
+    Date: {review.datePublished}
     <br />
-    Rating: {review.rating} | Overall: {review.overall}
+    Rating: {review.rating} | Overall: {review.score}
     <br />
     <br />
   </div>

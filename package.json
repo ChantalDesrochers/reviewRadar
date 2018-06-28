@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "@reach/router": "^1.1.1",
+    "cheerio": "^1.0.0-rc.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "request": "^2.87.0",
+    "watson-developer-cloud": "^3.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
