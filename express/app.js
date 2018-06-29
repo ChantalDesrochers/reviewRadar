@@ -37,8 +37,13 @@ app.get('/1', (req, res) => {
  //  res.send(JSON.stringify(data))
   
   // console.log('after', data)
-
 });
+
+app.post('/1', (req, res) => {
+  console.log(req.params)
+  res.send('made it')
+})
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
