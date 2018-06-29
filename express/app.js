@@ -53,7 +53,12 @@ app.post('/1', (req, res) => {
   console.log('req body', req.body)
   const sendStuff = (data) =>{
     console.log('in sendStuff');
-    reportData = data
+    console.log('type of report data prior', typeof reportData)
+    console.log('type of data', typeof data)
+    data.forEach(function(review) {
+      reportData.push(review)
+    })
+    console.log('type of report data after', typeof reportData)
     res.send('success')
   }
   var data = sentiment.getData(req.body.url, sendStuff)

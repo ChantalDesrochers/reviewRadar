@@ -23,12 +23,13 @@ class Request extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(this.state),
-      }).then(function(res) {
-        return res.json()
       })
-      .then(function(jsonData) {
-        console.log(jsonData)
-      })
+      // .then(function(res) {
+      //   return res.json()
+      // })
+      // .then(function(jsonData) {
+      //   console.log(jsonData)
+      // })
     }
   
     render() {

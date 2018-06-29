@@ -17,8 +17,8 @@ componentDidMount(){
 fetch('http://localhost:3001/1')
 .then(results => { return results.json()  })
 .then(results => {this.setState({reviews: results})
-console.log('in report', this.state)}
-);
+console.log('in report', this.state)
+});
 
    
  }
