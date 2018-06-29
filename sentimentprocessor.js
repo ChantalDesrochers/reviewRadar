@@ -40,7 +40,8 @@ const retrieveSentiment = (review, reviews) =>{
       reviewsCount++;
 
       if (reviewsCount === reviews.length) {
-          console.log('now we are done', reviews);
+          console.log('now we are done', reviews.sort((a,b) => b.score - a.score));
+          // console.log('now we are done', reviews);
           reviewsCount = 0;
         // DONE!
         //final function to call when done
@@ -55,6 +56,3 @@ const getData = () => {
 }
 
 getData()
-
-
-
