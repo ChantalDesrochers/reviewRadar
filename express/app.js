@@ -49,16 +49,29 @@ app.get('/1', (req, res) => {
 })
 
 app.post('/1', (req, res) => {
-  console.log('full request', req)
+  // console.log('full request', req)
   console.log('req body', req.body)
   const sendStuff = (data) =>{
     console.log('in sendStuff');
     data.forEach(function(review) {
       reportData.push(review)
     })
-    res.send('success')
+    // res.send('success')
   }
+
+  if (req.body.url1 != '') {
   var data = sentiment.getData(req.body.url1, sendStuff)
+  }
+
+  if (req.body.url2 != '') {
+  var data2 = sentiment.getData(req.body.url2, sendStuff)
+  }
+
+  if (req.body.url3 != '') {
+  var data3 = sentiment.getData(req.body.url3, sendStuff)
+  }
+
+  res.send('success')
 })
 
 

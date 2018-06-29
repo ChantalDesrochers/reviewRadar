@@ -8,6 +8,7 @@ class Request extends Component {
         email: '',
         url1: '',
         url2: '',
+        url3: '',
         sent: false
       }
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,7 +16,7 @@ class Request extends Component {
   
     handleSubmit(event) {
       event.preventDefault();
-      // console.log(this.state)
+      console.log(this.state)
 
       fetch('http://localhost:3001/1', {
         method: 'POST',
@@ -48,6 +49,10 @@ class Request extends Component {
         <label className="form-text" htmlFor="second-url">Enter your second url</label>
         <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url2: e.target.value})}/>
         <br/> <br/>
+        <label className="form-text" htmlFor="third-url">Enter your third url</label>
+        <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url3: e.target.value})}/>
+        <br/> <br/>
+
         <button>Get Your Report!</button>
       </form>)
 
