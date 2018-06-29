@@ -42,7 +42,12 @@ app.get('/1', (req, res) => {
 app.post('/1', (req, res) => {
   console.log('full request', req)
   console.log('req body', req.body)
-  res.send('made it')
+  const sendStuff = (data) =>{
+    console.log('in sendStuff');
+    // res.send(JSON.stringify(data))
+    console.log(data)
+  }
+  var data = sentiment.getData(req.body.url, sendStuff)
 })
 
 
