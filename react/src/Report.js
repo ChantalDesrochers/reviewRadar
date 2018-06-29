@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import OverallSentimentChart from "./reportPartials/_overallSentimentChart";
-import ReviewsContainer from "./reportPartials/_reviewsContainer";
+import TextContainer from "./reportPartials/_textContainer";
 //import SentimentChart from "./reportPartials/_sentimentChart";
 import Ratings from "./ratings.js"
 
@@ -9,19 +9,19 @@ class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
-   //reviews: Ratings
-  reviews: []
+   reviews: Ratings
+  //reviews: []
     };
   }
-componentDidMount(){
-fetch('http://localhost:3001/1')
-.then(results => { return results.json()  })
-.then(results => {this.setState({reviews: results})
-console.log('in report', this.state)}
-);
+// componentDidMount(){
+// fetch('http://localhost:3001/1')
+// .then(results => { return results.json()  })
+// .then(results => {this.setState({reviews: results})
+// console.log('in report', this.state)}
+// );
 
    
- }
+//  }
 
   render() {
     const { reviews } = this.state;
@@ -35,10 +35,10 @@ console.log('in report', this.state)}
   }
 
     return (
-      <div className="Report">
+      <div className="left">
         <h1>Pai Thai Reviews</h1>
-        <ReviewsContainer reviews={topReviews}/>
-        <ReviewsContainer reviews={bottomReviews} />
+        <TextContainer reviews={topReviews}/>
+        <TextContainer reviews={bottomReviews} />
         {/* <OverallSentimentChart reviews={bottomReviews} /> */}
         <br/>
         {/* <SentimentChart reviews={reviews} /> */}

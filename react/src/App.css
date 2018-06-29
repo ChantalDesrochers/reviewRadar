@@ -2,6 +2,36 @@
   text-align: center;
 }
 
+
+body{
+  display: flex;
+}
+
+.review-container{
+
+background-color: beige;
+
+}
+.left{
+  background-color: aquamarine;
+  width: 61.8%;
+}
+.right{
+  background-color: antiquewhite;
+  width: 38.2%;
+}
+
+
+.form {
+  background-color: #ADACB5;
+  margin-top: 100px;
+  padding:  10px;
+  display: inline-block;
+  
+  width: 400px;
+}
+
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -14,17 +44,6 @@
   color: white;
 }
 
-body{
-  text-align: center;
-}
-.form {
-  background-color: #ADACB5;
-  margin-top: 100px;
-  padding:  10px;
-  display: inline-block;
-  
-  width: 400px;
-}
 .App-title {
   font-size: 1.5em;
 }
@@ -33,13 +52,9 @@ body{
   font-size: large;
 }
 
-.review-Container{
 
-  float: left;
-  width: 25%;
-}
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */
