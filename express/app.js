@@ -12,6 +12,7 @@ var sentiment = require('./public/javascripts/sentimentprocessor.js');
 
 var app = express();
 
+
 // view engine setup
 app.use(cors())
 app.set('views', path.join(__dirname, 'views'));
@@ -25,27 +26,35 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.get('/1', (req, res) => {
-  const sendStuff = (data) =>{
-    console.log('in sendStuff');
-    res.send(JSON.stringify(data))
-  }
-  var data = sentiment.getData('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto', sendStuff)
-  console.log('/1');
-  // console.log('before', data)
-  // Promise.all(sentiment.getData()).then(responses => res.send(responses))
- //  res.send(JSON.stringify(data))
+
+var reportData = []
+
+// app.get('/1', (req, res) => {
+//   const sendStuff = (data) =>{
+//     console.log('in sendStuff');
+//     res.send(JSON.stringify(data))
+//   }
+//   var data = sentiment.getData('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto', sendStuff)
+//   console.log('/1');
+//   // console.log('before', data)
+//   // Promise.all(sentiment.getData()).then(responses => res.send(responses))
+//  //  res.send(JSON.stringify(data))
   
-  // console.log('after', data)
-});
+//   // console.log('after', data)
+// });
+
+
+app.get('/1', (req, res) => {
+  res.send(JSON.stringify(reportData))
+})
 
 app.post('/1', (req, res) => {
   console.log('full request', req)
   console.log('req body', req.body)
   const sendStuff = (data) =>{
     console.log('in sendStuff');
-    console.log(data)
-    res.send(JSON.stringify(data))
+    reportData = data
+    res.send('success')
   }
   var data = sentiment.getData(req.body.url, sendStuff)
 })

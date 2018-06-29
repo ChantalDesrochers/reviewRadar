@@ -7,6 +7,7 @@ class Request extends Component {
         name: '',
         email: '',
         url: '',
+        reviews: []
       }
       this.handleSubmit = this.handleSubmit.bind(this);
     }
