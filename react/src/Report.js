@@ -2,7 +2,7 @@ import React, { Component } from "react";
 //import OverallSentimentChart from "./reportPartials/_overallSentimentChart";
 import ReviewsContainer from "./reportPartials/_reviewsContainer";
 //import SentimentChart from "./reportPartials/_sentimentChart";
-import Ratings from "./ratings.js"
+// import Ratings from "./ratings.js"
 
 // remove hardcoded reviews after database is online
 class Report extends Component {

@@ -6,7 +6,8 @@ class Request extends Component {
       this.state = {
         name: '',
         email: '',
-        url: '',
+        url1: '',
+        url2: '',
       }
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -38,7 +39,10 @@ class Request extends Component {
           <input id="email" name="email" type="email" onChange={e => this.setState({email: e.target.value})}/>
           <br/> <br/>
           <label className="form-text" htmlFor="yelp-url">Enter your yelp page</label>
-          <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url: e.target.value})}/>
+          <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url1: e.target.value})}/>
+          <br/> <br/>
+          <label className="form-text" htmlFor="second-url">Enter your second url</label>
+          <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url2: e.target.value})}/>
           <br/> <br/>
           <button>Get Your Report!</button>
         </form>
