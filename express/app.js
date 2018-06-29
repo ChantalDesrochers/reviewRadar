@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var axios = require('axios');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,10 +24,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.get('/1', (req, res) => {
-  var data = sentiment.getData()
-  console.log('before', data)
-  res.send(JSON.stringify(data))
-  console.log('after', data)
+  const sendStuff = (data) =>{
+    console.log('in sendStuff');
+    res.send(JSON.stringify(data))
+  }
+  var data = sentiment.getData(sendStuff)
+  console.log('/1');
+  // console.log('before', data)
+  // Promise.all(sentiment.getData()).then(responses => res.send(responses))
+ //  res.send(JSON.stringify(data))
+  
+  // console.log('after', data)
+
 });
 
 // catch 404 and forward to error handler
@@ -34,6 +43,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+// sentiment.getData()
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -41,8 +41,8 @@ const retrieveSentiment = (review, reviews) =>{
 
       if (reviewsCount === reviews.length) {
           console.log('now we are done');
-          console.log (reviews)
-          return reviews
+          //console.log (reviews);
+          returnReviews(reviews);
           
           reviewsCount = 0;
           // console.log(sortResults(reviews))
@@ -62,7 +62,11 @@ const sortResults = (results) => {
 
 // getData()
 
-exports.getData = () => {
-
+exports.getData = (cb) => {
+console.log('in get data')
   scraper.yelp(addSentiment);
+  returnReviews = cb;
+}
+let returnReviews = (data) => {
+
 }
