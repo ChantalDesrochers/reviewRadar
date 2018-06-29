@@ -138,7 +138,7 @@ const fs = require('fs');
 // reviews stored in array of objects - need to parse the descriptions on conjunctions
 
 exports.yelp = function(cb) {
-  request('https://www.yelp.com/biz/pai-northern-thai-kitchen-toronto-5', function (error, response, html) {
+  request('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto', function (error, response, html) {
     if(!error && response.statusCode == 200) {
       var $ = cheerio.load(html);
       var reviewsArray = []
