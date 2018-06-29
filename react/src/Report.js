@@ -42,7 +42,7 @@ console.log('in report', this.state)
       <div className="Report">
         <h1>Pai Thai Reviews</h1>
         <ReviewsContainer reviews={allReviews}/>
-        {/* <ReviewsContainer reviews={topReviews}/> */}
+        <ReviewsContainer reviews={topReviews}/>
         <ReviewsContainer reviews={bottomReviews} />
         {/* <OverallSentimentChart reviews={bottomReviews} /> */}
         <br/>
