@@ -24,12 +24,9 @@ class Request extends Component {
         },
         body: JSON.stringify(this.state),
       })
-      // .then(function(res) {
-      //   return res.json()
-      // })
-      // .then(function(jsonData) {
-      //   console.log(jsonData)
-      // })
+      .then(function(res) {
+        return
+      })
     }
   
     render() {

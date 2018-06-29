@@ -33,11 +33,16 @@ console.log('in report', this.state)
     title: 'Top Critisms',
     content: reviews.slice(-3, reviews.length)
   }
+    const allReviews = {
+    title: 'All reviews',
+    content: reviews
+  }
 
     return (
       <div className="Report">
         <h1>Pai Thai Reviews</h1>
-        <ReviewsContainer reviews={topReviews}/>
+        <ReviewsContainer reviews={allReviews}/>
+        {/* <ReviewsContainer reviews={topReviews}/> */}
         <ReviewsContainer reviews={bottomReviews} />
         {/* <OverallSentimentChart reviews={bottomReviews} /> */}
         <br/>
