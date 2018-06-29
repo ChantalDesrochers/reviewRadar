@@ -58,7 +58,7 @@ app.post('/1', (req, res) => {
     })
     res.send('success')
   }
-  var data = sentiment.getData(req.body.url, sendStuff)
+  var data = sentiment.getData(req.body.url1, sendStuff)
 })
 
 
