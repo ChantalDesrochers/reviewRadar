@@ -13,7 +13,7 @@ class Request extends Component {
   
     handleSubmit(event) {
       event.preventDefault();
-      console.log(this.state)
+      // console.log(this.state)
 
       fetch('http://localhost:3001/1', {
         method: 'POST',
@@ -22,7 +22,9 @@ class Request extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(this.state),
-      });
+      }).then(function(res) {
+        console.log(res.json())
+      })
     }
   
     render() {

@@ -44,8 +44,8 @@ app.post('/1', (req, res) => {
   console.log('req body', req.body)
   const sendStuff = (data) =>{
     console.log('in sendStuff');
-    // res.send(JSON.stringify(data))
     console.log(data)
+    res.send(JSON.stringify(data))
   }
   var data = sentiment.getData(req.body.url, sendStuff)
 })
