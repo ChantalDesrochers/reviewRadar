@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import OverallSentimentChart from "./reportPartials/_overallSentimentChart";
+//import OverallSentimentChart from "./reportPartials/_overallSentimentChart";
 import ReviewsContainer from "./reportPartials/_reviewsContainer";
-import SentimentChart from "./reportPartials/_sentimentChart";
+//import SentimentChart from "./reportPartials/_sentimentChart";
 import Ratings from "./ratings.js"
 
 // remove hardcoded reviews after database is online
@@ -9,11 +9,18 @@ class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: Ratings
-  
+   reviews: Ratings
+  //reviews: []
     };
   }
-
+// componentDidMount(){
+//   fetch('http://localhost:3001/report')
+//   .then(result => {
+//     return results.json();
+//   }).then(data => {
+// this.setState({reviews: results})
+//   })
+// }
   render() {
     const { reviews } = this.state;
     const topReviews = {

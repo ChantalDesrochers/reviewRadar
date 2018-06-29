@@ -8,12 +8,23 @@
 }
 
 .App-header {
-  background-color: #289aee;
+  background-color: #C9DDFF;
   height: 150px;
   padding: 20px;
   color: white;
 }
 
+body{
+  text-align: center;
+}
+.form {
+  background-color: #ADACB5;
+  margin-top: 100px;
+  padding:  10px;
+  display: inline-block;
+  
+  width: 400px;
+}
 .App-title {
   font-size: 1.5em;
 }
