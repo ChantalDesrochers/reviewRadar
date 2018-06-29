@@ -30,7 +30,7 @@ app.get('/1', (req, res) => {
     console.log('in sendStuff');
     res.send(JSON.stringify(data))
   }
-  var data = sentiment.getData(sendStuff)
+  var data = sentiment.getData('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto', sendStuff)
   console.log('/1');
   // console.log('before', data)
   // Promise.all(sentiment.getData()).then(responses => res.send(responses))

@@ -62,9 +62,9 @@ const sortResults = (results) => {
 
 // getData()
 
-exports.getData = (cb) => {
+exports.getData = (url, cb) => {
 console.log('in get data')
-  scraper.yelp(addSentiment);
+  scraper.yelp(url, addSentiment);
   returnReviews = cb;
 }
 let returnReviews = (data) => {
