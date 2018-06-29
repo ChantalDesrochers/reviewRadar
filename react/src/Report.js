@@ -9,18 +9,20 @@ class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
-   reviews: Ratings
-  //reviews: []
+   //reviews: Ratings
+  reviews: []
     };
   }
-// componentDidMount(){
-//   fetch('http://localhost:3001/report')
-//   .then(result => {
-//     return results.json();
-//   }).then(data => {
-// this.setState({reviews: results})
-//   })
-// }
+componentDidMount(){
+fetch('http://localhost:3001/1')
+.then(results => { return results.json()  })
+.then(results => {this.setState({reviews: results})
+console.log('in report', this.state)}
+);
+
+   
+ }
+
   render() {
     const { reviews } = this.state;
     const topReviews = {
