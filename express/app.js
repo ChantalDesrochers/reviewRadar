@@ -40,7 +40,8 @@ app.get('/1', (req, res) => {
 });
 
 app.post('/1', (req, res) => {
-  console.log(req.params)
+  console.log('full request', req)
+  console.log('req body', req.body)
   res.send('made it')
 })
 

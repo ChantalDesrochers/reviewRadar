@@ -13,15 +13,15 @@ class Request extends Component {
   
     handleSubmit(event) {
       event.preventDefault();
-      const data = (event.target);
-      const data2 = (event.target.name);
-      // const data = new FormData(event.target);
-      console.log(data)
       console.log(this.state)
 
       fetch('http://localhost:3001/1', {
         method: 'POST',
-        body: this.state,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.state),
       });
     }
   
