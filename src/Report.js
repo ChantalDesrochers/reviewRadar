@@ -13,13 +13,24 @@ class Report extends Component {
   
     };
   }
+
   render() {
     const { reviews } = this.state;
+    const topReviews = {
+      title: 'Top Endorsements',
+      content: reviews.slice(0,3)
+    }
+    const bottomReviews = {
+    title: 'Top Critisms',
+    content: reviews.slice(-3, reviews.length)
+  }
+
     return (
       <div className="Report">
         <h1>Company Report</h1>
-        <ReviewsContainer reviews={reviews} />
-        <OverallSentimentChart reviews={reviews} />
+        <ReviewsContainer reviews={topReviews}/>
+        <ReviewsContainer reviews={bottomReviews} />
+        {/* <OverallSentimentChart reviews={bottomReviews} /> */}
         <br/>
         {/* <SentimentChart reviews={reviews} /> */}
       </div>
