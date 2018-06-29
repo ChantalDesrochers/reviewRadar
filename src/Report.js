@@ -27,7 +27,7 @@ class Report extends Component {
 
     return (
       <div className="Report">
-        <h1>Company Report</h1>
+        <h1>Pai Thai Reviews</h1>
         <ReviewsContainer reviews={topReviews}/>
         <ReviewsContainer reviews={bottomReviews} />
         {/* <OverallSentimentChart reviews={bottomReviews} /> */}

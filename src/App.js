@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Project Title</h1>
+          <h1 className="App-title">Review Radar</h1>
 
         <Link to="/">Login</Link> |
         <Link to="/">Registration</Link> |
