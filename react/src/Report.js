@@ -21,18 +21,19 @@ import red from '@material-ui/core/colors/red';
 // remove hardcoded reviews after database is online
 
 const styles = {
-RightTopSide: {height:'50%'},
-RightBottomSide: {height:'50%'},
+RightTopSide: {height:'69%'},
+RightBottomSide: {height:'35%', marginTop:8},
 RightTopPaper: {height:'100%'},
 RightBottomPaper: {height:'100%'},
 
 AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
 MainTitle: { color: 'black', margin: 'auto' },
 menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
-MainContainer:{marginTop:8},
+MainContainer:{height:'100%', marginTop:8},
   // RightContainer: {marginTop:0},
-  // ReviewPaper: { height: 'calc(100%)', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat' },
-  // LeftContainer: { },
+ReviewPaper: { height:'100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 20,  fontFamily: 'Arial' },
+LeftSide:  {height:'100%'},
+Top: {height:'86vh'}
   // ChartPaper: { height: 'calc(100%)', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
   // NavPaper: { height: 'calc(100%)',  backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
 
@@ -61,11 +62,11 @@ class Report extends Component {
     const { reviews } = this.state;
     const topReviews = {
       title: 'Top Endorsements',
-      content: reviews.slice(0, 3)
+      content: reviews.slice(0, 2)
     }
     const bottomReviews = {
-      title: 'Top Critisms',
-      content: reviews.slice(-3, reviews.length)
+      title: 'Harshest Criticisms',
+      content: reviews.slice(-2, reviews.length)
     }
 
     const { check } = this.state;
@@ -77,7 +78,7 @@ class Report extends Component {
 
     return (
 
-      <div>
+      <div style={styles.Top}>
 
           <AppBar position="static" style={styles.AppBar}>
             <Toolbar>
@@ -93,11 +94,11 @@ class Report extends Component {
           {/* Reviews */}  {/* Left*/}
           <Grid style={styles.LeftSide} item sm={8}>
               <Paper style={styles.ReviewPaper}>
-                <TextContainer className="top-reviews" reviews={topReviews} />
-                <TextContainer className="bottom-reviews" reviews={bottomReviews} />
+                {/* <TextContainer className="top-reviews" reviews={topReviews} />
+                <TextContainer className="bottom-reviews" reviews={bottomReviews} /> */}
               </Paper>  
           </Grid>
-          {/* Right*/}
+        {/* Right*/}
           <Grid style={styles.RightSide} item sm={4}>             
           {/* Chart */}
               <Grid style={styles.RightTopSide} item sm={12}>

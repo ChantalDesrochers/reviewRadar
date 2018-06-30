@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Review from "./_review.js";
-
+import Typography from '@material-ui/core/Typography';
 class TextContainer extends Component {
   render() {
     return (
