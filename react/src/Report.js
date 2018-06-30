@@ -21,8 +21,8 @@ import red from '@material-ui/core/colors/red';
 // remove hardcoded reviews after database is online
 
 const styles = {
-RightTopContainer: {height:'50%'},
-RightBottomContainer: {height:'50%'},
+RightTopSide: {height:'50%'},
+RightBottomSide: {height:'50%'},
 RightTopPaper: {height:'100%'},
 RightBottomPaper: {height:'100%'},
 
@@ -87,25 +87,26 @@ class Report extends Component {
               <Typography variant="display3" style={styles.MainTitle}>Komfort and Kim</Typography>
             </Toolbar>
           </AppBar>
+
          {/* Container Below Top Bar */}
         <Grid container style={styles.MainContainer} spacing={8}>
-          {/* Reviews */}
-          <Grid style={styles.LeftContainer} item sm={8}>
+          {/* Reviews */}  {/* Left*/}
+          <Grid style={styles.LeftSide} item sm={8}>
               <Paper style={styles.ReviewPaper}>
                 <TextContainer className="top-reviews" reviews={topReviews} />
                 <TextContainer className="bottom-reviews" reviews={bottomReviews} />
               </Paper>  
           </Grid>
-
-          <Grid style={styles.RightContainer} item sm={4}>             
+          {/* Right*/}
+          <Grid style={styles.RightSide} item sm={4}>             
           {/* Chart */}
-              <Grid style={styles.RightTopContainer} item sm={12}>
+              <Grid style={styles.RightTopSide} item sm={12}>
                 <Paper style={styles.RightBottomPaper} data-message="chart" onClick={clickHandler} >
                   <ChartContainer />
                 </Paper>
               </Grid>
          {/* Nav */}
-              <Grid style={styles.RightBottomContainer} item sm={12}>
+              <Grid style={styles.RightBottomSide} item sm={12}>
                 <Paper style={styles.RightBottomPaper} >
                   <ChartContainer />
                 </Paper>
