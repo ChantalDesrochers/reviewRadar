@@ -1,60 +1,10 @@
-.App {
-  text-align: center;
-}
-
 
 body{
-  display: flex;
+    background-color:'#ffff00'
 }
-
-.review-container{
-
-background-color: beige;
-
+.company-name{
+    text-align: center;
 }
-.left{
-  background-color: aquamarine;
-  width: 61.8%;
+.review-title{
+    text-align: center;
 }
-.right{
-  background-color: antiquewhite;
-  width: 38.2%;
-}
-
-
-.form {
-  background-color: #ADACB5;
-  margin-top: 100px;
-  padding:  10px;
-  display: inline-block;
-  
-  width: 400px;
-}
-
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #C9DDFF;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-
-
-/* @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-} */

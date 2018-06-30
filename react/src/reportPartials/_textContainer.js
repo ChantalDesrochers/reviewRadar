@@ -5,8 +5,8 @@ class TextContainer extends Component {
   render() {
     console.log(this.props.reviews)
     return (
-      <div className="review-container">
-      <h2>{this.props.reviews.title}</h2>
+      <div >
+      <h2 className="review-title">{this.props.reviews.title}</h2>
         {this.props.reviews.content.map(review => (
           <Review review={review} key={review.id} />
         ))}
