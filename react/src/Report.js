@@ -25,13 +25,16 @@ const darkAccent = '#ffff00'; // #E040FB
 const lightAccent = purple.A200; // #E040FB (alternative method)
 
 const styles = {
-  ReviewPaper: { backgroundColor:'#F0F4C3', padding: 5, marginTop: 2, marginBottom: 2, backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat'},
-  MainTitle: { color: 'black', margin: 'auto'},
+  ReviewPaper: { height: 'calc(100%)', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat' },
+  MainTitle: { color: 'black', margin: 'auto' },
   // ChartPaper: { height: 'calc(50% - 64px)', marginTop:'20%' }
-  ChartPaper: { height: 'calc(100%)', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat',  backgroundColor:'#B3E5FC' },
-  menuButton: {marginLeft: -12, marginRight: 20, root: {flexGrow: 1}, flex: {flex: 1}},
-  AppBar:{ backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat',  backgroundColor:'#B3E5FC'},
-  RightContainer:{ marginTop: 6}
+  ChartPaper: { height: 'calc(140%)', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+  NavPaper: { height: 'calc(60%)', marginTop: 160, backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+  menuButton: { backcolor: "black", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
+  AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+  RightContainer: { marginTop: 6 },
+  LeftContainer: { marginTop: 6 },
+  MainTitle:{}
 }
 class Report extends Component {
   constructor(props) {
@@ -63,49 +66,51 @@ class Report extends Component {
       content: reviews.slice(-3, reviews.length)
     }
 
-    const {check} = this.state;
-    const handleChartClick = () => {
+    const { check } = this.state;
+    const handleChartClick = (trigger) => {
       // this.setState(state => ({ checked: !state.checked }));
 
-      console.log('works');
+      console.log('works', trigger.target.dataset.message);
     };
     return (
-      
+
       <div>
         <div >
           <AppBar position="static" style={styles.AppBar}>
             <Toolbar>
-            <IconButton  style={styles.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-            <Typography variant="display3" style={styles.MainTitle}>Komfort and Kim</Typography>
+              <IconButton style={styles.menuButton} color="inherit" aria-label="Menu">
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="display3" style={styles.MainTitle}>Komfort and Kim</Typography>
 
             </Toolbar>
           </AppBar>
         </div>
-        <Grid container sm={12} spacing={16}>
-          <Grid item sm={8}>
-            <Paper style={styles.ReviewPaper}>
-              <TextContainer className="top-reviews" reviews={topReviews} />
-              <TextContainer className="bottom-reviews" reviews={bottomReviews} />
-            </Paper>
+        <Grid container>
+          <Grid style={styles.LeftContainer} container sm={12} spacing={24}>
+            <Grid item sm={8}>
+              <Paper style={styles.ReviewPaper}>
+                <TextContainer className="top-reviews" reviews={topReviews} />
+                <TextContainer className="bottom-reviews" reviews={bottomReviews} />
+              </Paper>
+
+            </Grid>
+            <Grid style={styles.RightContainer} container sm={4} spacing={24}>
+              <Grid item sm={12}>
+                {/* <Slide direction ="up"> */}
+                <Paper data-message="chart" onClick={handleChartClick} style={styles.ChartPaper}  >
+                  <ChartContainer />
+                </Paper>
+                {/* </Slide> */}
+              </Grid>
+              <Grid item sm={12}>
+                <Paper style={styles.NavPaper}>
+                  <ChartContainer />
+                </Paper>
+              </Grid>
+            </Grid>
 
           </Grid>
-          <Grid style={styles.RightContainer} container sm={4} spacing={16}>
-          <Grid item sm={12}>
-          {/* <Slide direction ="up"> */}
-            <Paper onClick={handleChartClick}  style={styles.ChartPaper}  >
-              <ChartContainer />
-            </Paper>
-            {/* </Slide> */}
-          </Grid>
-          <Grid item sm={12}>
-            <Paper style={styles.ChartPaper}>
-              <ChartContainer />
-            </Paper>
-          </Grid>
-          </Grid>
-
         </Grid>
       </div>
 
