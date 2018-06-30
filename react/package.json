@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^1.3.0",
     "@material-ui/icons": "^1.1.0",
+    "@material/animation": "^0.34.0",
     "@reach/router": "^1.1.1",
     "bootstrap": "^4.1.1",
     "cheerio": "^1.0.0-rc.2",

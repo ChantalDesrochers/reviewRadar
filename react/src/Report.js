@@ -20,22 +20,24 @@ import Slide from '@material-ui/core/Slide';
 import red from '@material-ui/core/colors/red';
 // remove hardcoded reviews after database is online
 
-const primary = '#ffff5a';
-const darkAccent = '#ffff00'; // #E040FB
-const lightAccent = purple.A200; // #E040FB (alternative method)
-
 const styles = {
-  ReviewPaper: { height: 'calc(100%)', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat' },
-  MainTitle: { color: 'black', margin: 'auto' },
-  // ChartPaper: { height: 'calc(50% - 64px)', marginTop:'20%' }
-  ChartPaper: { height: 'calc(140%)', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
-  NavPaper: { height: 'calc(60%)', marginTop: 160, backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
-  menuButton: { backcolor: "black", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
-  AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
-  RightContainer: { marginTop: 6 },
-  LeftContainer: { marginTop: 6 },
-  MainTitle:{}
+RightTopContainer: {height:'50%'},
+RightBottomContainer: {height:'50%'},
+RightTopPaper: {height:'100%'},
+RightBottomPaper: {height:'100%'},
+
+AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+MainTitle: { color: 'black', margin: 'auto' },
+menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
+MainContainer:{marginTop:8},
+  // RightContainer: {marginTop:0},
+  // ReviewPaper: { height: 'calc(100%)', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat' },
+  // LeftContainer: { },
+  // ChartPaper: { height: 'calc(100%)', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+  // NavPaper: { height: 'calc(100%)',  backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+
 }
+
 class Report extends Component {
   constructor(props) {
     super(props);
@@ -67,50 +69,49 @@ class Report extends Component {
     }
 
     const { check } = this.state;
-    const handleChartClick = (trigger) => {
-      // this.setState(state => ({ checked: !state.checked }));
 
+    const clickHandler = (trigger) => {
+      // this.setState(state => ({ checked: !state.checked }));
       console.log('works', trigger.target.dataset.message);
     };
+
     return (
 
       <div>
-        <div >
+
           <AppBar position="static" style={styles.AppBar}>
             <Toolbar>
               <IconButton style={styles.menuButton} color="inherit" aria-label="Menu">
                 <MenuIcon />
               </IconButton>
               <Typography variant="display3" style={styles.MainTitle}>Komfort and Kim</Typography>
-
             </Toolbar>
           </AppBar>
-        </div>
-        <Grid container>
-          <Grid style={styles.LeftContainer} container sm={12} spacing={24}>
-            <Grid item sm={8}>
+         {/* Container Below Top Bar */}
+        <Grid container style={styles.MainContainer} spacing={8}>
+          {/* Reviews */}
+          <Grid style={styles.LeftContainer} item sm={8}>
               <Paper style={styles.ReviewPaper}>
                 <TextContainer className="top-reviews" reviews={topReviews} />
                 <TextContainer className="bottom-reviews" reviews={bottomReviews} />
-              </Paper>
-
-            </Grid>
-            <Grid style={styles.RightContainer} container sm={4} spacing={24}>
-              <Grid item sm={12}>
-                {/* <Slide direction ="up"> */}
-                <Paper data-message="chart" onClick={handleChartClick} style={styles.ChartPaper}  >
-                  <ChartContainer />
-                </Paper>
-                {/* </Slide> */}
-              </Grid>
-              <Grid item sm={12}>
-                <Paper style={styles.NavPaper}>
-                  <ChartContainer />
-                </Paper>
-              </Grid>
-            </Grid>
-
+              </Paper>  
           </Grid>
+
+          <Grid style={styles.RightContainer} item sm={4}>             
+          {/* Chart */}
+              <Grid style={styles.RightTopContainer} item sm={12}>
+                <Paper style={styles.RightBottomPaper} data-message="chart" onClick={clickHandler} >
+                  <ChartContainer />
+                </Paper>
+              </Grid>
+         {/* Nav */}
+              <Grid style={styles.RightBottomContainer} item sm={12}>
+                <Paper style={styles.RightBottomPaper} >
+                  <ChartContainer />
+                </Paper>
+              </Grid>
+
+            </Grid>
         </Grid>
       </div>
 
