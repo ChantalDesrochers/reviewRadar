@@ -2,38 +2,179 @@ const request = require('request');
 const cheerio = require('cheerio');
 const fs = require('fs');
 
+// const Nightmare = require('Nightmare')
+// const Nightmare = require('nightmare');
+const assert = require('assert');
+const express = require('express');
 
-//const Nightmare = require('nightmare');
-//const assert = require('assert');
-//const express = require('express');
+// xvfb-run node scrape.js
 
-
-
-// // var Nightmare = require('nightmare')
+// var Nightmare = require('nightmare')
 // var nightmare = Nightmare({show: true})
+//append to a file or add to array
+var vo = require('vo');
+var Nightmare = require('nightmare');
 
-//var vo = require('vo');
 
-
-// nightmare.goto('https://www.ibiketo.ca/')
+// let nightmare = new Nightmare({
+//   agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
+// })
+// // const selector = 'p'
+// nightmare.goto('https://www.yelp.com/biz/the-burgers-priest-toronto-2')
+// .useragent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36')
 // .wait(3000)
-// .evaluate(function(){
-//   var heads = [];
-//   $('h2').each(function(){
-//     item = $(this).text()
-//     console.log(item)
-//     console.log('hello')
-//     h2s.push(item)
-//   })
-//   return heads
+// .evaluate(() => {
+//   var firstHTML = document.body.innerHTML
+//   console.log('in first evaluate', firstHTML)
+//   return firstHTML
 // })
 // .end()
-// .then(function(result){
-//   for(h2 in result) {
-//     console.log(h2)
-//     console.log(result)
-//   }
-// })
+// .then( (data) => {
+//     console.log('done')
+//   })
+// .catch(function(error) {
+//   console.log(error);
+// });
+
+
+vo(run)(function(err, result) {
+  if (err) throw err;
+});
+
+function* run() {
+  var nightmare = Nightmare()
+  var MAX_PAGE = 4;
+  var currentPage = 0;
+  var nextExists = true;
+  var links = [];
+
+  yield nightmare
+    .goto('https://www.yelp.com/biz/the-burgers-priest-toronto-2')
+    .useragent('Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0 Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0.')
+    .wait(5000)
+
+  nextExists = yield nightmare.visible('a.next');
+
+  while (nextExists && currentPage < MAX_PAGE) {
+    links.push(yield nightmare
+      .evaluate(function() {
+        var p = document.querySelector('p[itemprop="description"]').innerHTML
+        return p;
+      }));
+
+    yield nightmare
+      .click('a.next')
+      .wait(5000)
+
+    currentPage++;
+    nextExists = yield nightmare.visible('a.next');
+  }
+
+  console.log(links);
+  yield nightmare.end();
+}
+
+// var Nightmare = require('nightmare');
+// var vo = require('vo');
+
+// vo(run)(function(err, result) {
+//     if (err) throw err;
+// });
+
+// function* run() {
+//     var nightmare = Nightmare(),
+//         MAX_PAGE = 5,
+//         currentPage = 0,
+//         nextExists = true,
+//         links = [];
+
+
+//     yield nightmare
+//         .goto('https://www.yahoo.com')
+//         .type('.input-query', 'github nightmare')
+//         .click('#search-submit')
+//         .wait('body')
+
+//     nextExists = yield nightmare.visible('.next');
+//     while (nextExists && currentPage < MAX_PAGE) {
+//         links.push(yield nightmare
+//             .evaluate(function() {
+//                 var links = document.querySelectorAll("ol.searchCenterMiddle a");
+//                 return links[0].href;
+//             }));
+
+//         yield nightmare
+//             .click('.next')
+//             .wait('body')
+
+//         currentPage++;
+//         nextExists = yield nightmare.visible('.next');
+//     }
+
+//     console.dir(links);
+//     yield nightmare.end();
+// }
+
+
+
+// vo(run)(function(err, result) {
+//   if (err) throw err;
+// });
+
+// function* run() {
+//   var nightmare = Nightmare()
+//   var MAX_PAGE = 4;
+//   var currentPage = 0;
+//   var nextExists = true;
+//   var reviews = [];
+
+//   yield nightmare
+//     .goto('https://www.yelp.com/biz/the-burgers-priest-toronto-2')
+//     .useragent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36')
+//     .wait('body')
+//     .evaluate(() => {
+//       var pArray = document.querySelectorAll('p')
+//       console.log('evaluate', pArray)
+//     })
+
+//   // nextExists = yield nightmare.visible('a.next');
+
+//   // // while (nextExists && currentPage < MAX_PAGE) {
+  //   console.log('before evaluate')
+  //   reviews.push(yield nightmare
+  //     .evaluate(function() {
+  //       console.log('in evaluate')
+  //       var reviews = document.querySelectorAll('p')
+  //       return reviews[40].textContent;
+  //     }));
+
+  //   yield nightmare
+  //     .click('a.next')
+  //     .wait('body')
+
+  //   currentPage++;
+  //   console.log(currentPage)
+  //   nextExists = yield nightmare.visible('a.next');
+  //   console.log(nextExists)
+  // }
+
+  // console.log(reviews);
+//   yield nightmare.end();
+// }
+// let nightmare = new Nightmare()
+// nightmare
+//   .goto('https://www.ibiketo.ca/')
+//   .evaluate( () => {
+//     return document.body.innerHTML
+//   })
+//   .end()
+//   .then( (data) => {
+//     console.log(data)
+//     console.log("FINISH TEST")
+//   })
+//   .catch( () => {
+//     throw new Error("Failed test run")
+//   })
 
 
 // const Nightmare = require('nightmare')
@@ -137,29 +278,29 @@ const fs = require('fs');
 // traversing the dom using schema instead! it's better
 // reviews stored in array of objects - need to parse the descriptions on conjunctions
 
-exports.yelp = function(cb) {
-  request('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto', function (error, response, html) {
-    if(!error && response.statusCode == 200) {
-      var $ = cheerio.load(html);
-      var reviewsArray = []
-      $('div[itemprop="review"]').each(function(i, el) {
-        var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
-        var authorv = $(this).find('meta[itemprop="author"]').attr('content')
-        var descriptionv = $(this).find('p[itemprop="description"]').text()
-        var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
-        var review = {
-          rating: ratingv,
-          author: authorv,
-          description: descriptionv,
-          datePublished: datePublishedv
-        }
-        reviewsArray.push(review)
-      })
-      cb(reviewsArray);
-    //  console.log(reviewsArray)
-    }
-  })
-}
+// exports.yelp = function(cb) {
+//   request('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto', function (error, response, html) {
+//     if(!error && response.statusCode == 200) {
+//       var $ = cheerio.load(html);
+//       var reviewsArray = []
+//       $('div[itemprop="review"]').each(function(i, el) {
+//         var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
+//         var authorv = $(this).find('meta[itemprop="author"]').attr('content')
+//         var descriptionv = $(this).find('p[itemprop="description"]').text()
+//         var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
+//         var review = {
+//           rating: ratingv,
+//           author: authorv,
+//           description: descriptionv,
+//           datePublished: datePublishedv
+//         }
+//         reviewsArray.push(review)
+//       })
+//       cb(reviewsArray);
+//     //  console.log(reviewsArray)
+//     }
+//   })
+// }
 
 
 
