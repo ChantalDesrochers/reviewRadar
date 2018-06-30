@@ -3,7 +3,6 @@ import Review from "./_review.js";
 
 class TextContainer extends Component {
   render() {
-    console.log(this.props.reviews)
     return (
       <div >
       <h2 className="review-title">{this.props.reviews.title}</h2>
