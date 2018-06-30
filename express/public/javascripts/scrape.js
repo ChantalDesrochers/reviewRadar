@@ -301,8 +301,108 @@ function* run() {
 //     }
 //   })
 // }
+const pageFour = function(reviewsArray) {
+request('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=60', function (error, response, html) {
+    if(!error && response.statusCode == 200) {
+      var $ = cheerio.load(html);
+      $('div[itemprop="review"]').each(function(i, el) {
+        var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
+        var authorv = $(this).find('meta[itemprop="author"]').attr('content')
+        var descriptionv = $(this).find('p[itemprop="description"]').text()
+        var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
+        var review = {
+          rating: ratingv,
+          author: authorv,
+          description: descriptionv,
+          datePublished: datePublishedv
+        }
+        reviewsArray.push(review)
+      })
+      console.log('second function')
+     console.log(reviewsArray)
+     console.log(reviewsArray.length)
+    }
+  })
+}
+const pageThree = function(reviewsArray, cb) {
+request('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=40', function (error, response, html) {
+    if(!error && response.statusCode == 200) {
+      var $ = cheerio.load(html);
+      $('div[itemprop="review"]').each(function(i, el) {
+        var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
+        var authorv = $(this).find('meta[itemprop="author"]').attr('content')
+        var descriptionv = $(this).find('p[itemprop="description"]').text()
+        var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
+        var review = {
+          rating: ratingv,
+          author: authorv,
+          description: descriptionv,
+          datePublished: datePublishedv
+        }
+        reviewsArray.push(review)
+      })
+      console.log('second function')
+     console.log(reviewsArray)
+     console.log(reviewsArray.length)
+     pageFour(reviewsArray)
+    }
+  })
+}
+
+function pageOne(cb) {
+request('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start', function (error, response, html) {
+    if(!error && response.statusCode == 200) {
+      var $ = cheerio.load(html);
+      var reviewsArray = []
+      $('div[itemprop="review"]').each(function(i, el) {
+        var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
+        var authorv = $(this).find('meta[itemprop="author"]').attr('content')
+        var descriptionv = $(this).find('p[itemprop="description"]').text()
+        var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
+        var review = {
+          rating: ratingv,
+          author: authorv,
+          description: descriptionv,
+          datePublished: datePublishedv
+        }
+        reviewsArray.push(review)
+      })
+      // cb(reviewsArray);
+     console.log(reviewsArray)
+     cb(reviewsArray)
+    }
+  })
+}
+const pageTwo = function(reviewsArray, cb) {
+request('https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=20', function (error, response, html) {
+    if(!error && response.statusCode == 200) {
+      var $ = cheerio.load(html);
+      $('div[itemprop="review"]').each(function(i, el) {
+        var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
+        var authorv = $(this).find('meta[itemprop="author"]').attr('content')
+        var descriptionv = $(this).find('p[itemprop="description"]').text()
+        var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
+        var review = {
+          rating: ratingv,
+          author: authorv,
+          description: descriptionv,
+          datePublished: datePublishedv
+        }
+        reviewsArray.push(review)
+      })
+      console.log('second function')
+     console.log(reviewsArray)
+     console.log(reviewsArray.length)
+     pageThree(reviewsArray, cb)
+    }
+  })
+}
 
 
+
+
+
+pageOne(pageTwo)
 
 // tripadvisor scrape - reviews
 // request('https://www.tripadvisor.ca/Restaurant_Review-g155019-d5289181-Reviews-Pai_Northern_Thai_Kitchen-Toronto_Ontario.html', function (error, response, html) {
