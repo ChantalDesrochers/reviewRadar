@@ -111,7 +111,7 @@ clickHandler = (event) => {
           case 'showSentiment':
             this.setState({reviewsToShow:2 })
             this.setState({show:'both' })
-            this.setState({...this.state.leftSide.show = 'sentiment' });
+            this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.displaying = 'sentiment' });
             return
           case 'showKeyword':
