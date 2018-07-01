@@ -63,7 +63,7 @@ const sortResults = (results) => {
 // getData()
 
 exports.getData = (url, cb) => {
-console.log('in get data')
+// console.log('in get data')
   scraper.yelp(url, addSentiment);
   returnReviews = cb;
 }

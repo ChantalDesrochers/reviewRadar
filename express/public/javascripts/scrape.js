@@ -137,6 +137,43 @@ const fs = require('fs');
 // traversing the dom using schema instead! it's better
 // reviews stored in array of objects - need to parse the descriptions on conjunctions
 
+var reviewsArray = []
+
+function yelpRecursion(i, link) {
+  // let url = link + i
+  console.log('started', i)
+  console.log(link + i)
+  let url = link + i
+  // let url = `https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=${i}`
+  request(url, function (error, response, html) {
+      if(!error && response.statusCode == 200) {
+        var $ = cheerio.load(html);
+        $('div[itemprop="review"]').each(function(i, el) {
+          var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
+          var authorv = $(this).find('meta[itemprop="author"]').attr('content')
+          var descriptionv = $(this).find('p[itemprop="description"]').text()
+          var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
+          var review = {
+            rating: ratingv,
+            author: authorv,
+            description: descriptionv,
+            datePublished: datePublishedv
+          }
+          reviewsArray.push(review)
+        })
+      // if (reviewsArray.length <=100 ) {
+        if (i < 60){
+          i += 20
+          yelpRecursion(i, link)
+        } else {
+          console.log(reviewsArray)
+        }
+      }
+    })
+  }
+
+  yelpRecursion(0, 'https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=')
+
 exports.yelp = function(url, cb) {
   request(url, function (error, response, html) {
     if(!error && response.statusCode == 200) {
@@ -160,6 +197,8 @@ exports.yelp = function(url, cb) {
     }
   })
 }
+
+//multiple page recursion
 
 
 
