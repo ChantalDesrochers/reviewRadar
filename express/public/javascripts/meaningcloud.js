@@ -2,16 +2,10 @@ var request = require('request');
 
 const api_key = 'a9a53121a79b11f19ef86092cf29a2a5'
 
-const urlencodedtext = 'Great%20service%2C%20high%20prices%2C%20slightly%20above%20average%20food.%20I%20had%20the%20steak%20and%20eggs%2C%20and%20the%20steak%20was%20a%20little%20over%20cooked%20for%20my%20liking%20(medium%20well).%20The%20eggs%20were%20ok%20but%20nothing%20special%3B%20however%2C%20the%20avocado%20that%20came%20with%20it%20was%20really%20good.%20The%20black%20beans%20that%20came%20with%20it%20were%20cold%3B%20clearly%20by%20design%2C%20but%20it%20surprised%20me%20and%20was%20a%20put%20off.%5Cn%5CnMy%20wife%20had%20the%20avocado%20toast%2C%20after%20they%20told%20us%20they%20had%20just%20run%20out%20of%20the%20protein%20pancakes.%20She%20liked%20the%20toast%20but%20said%20it%20wasn%27t%20anything%20to%20write%20home%20about.%5Cn%5CnWe%20also%20got%20some%20bacon%20to%20split%2C%20which%20was%20reasonably%20priced%20at%20%243%20for%20three%20strips%2C%20but%20the%20bacon%20strips%20were%20pretty%20thin.%20There%20just%20wasn%27t%20a%20lot%20to%20it.%20The%20bone%20broth%20was%20scalding%20hot%2C%20and%20didn%27t%20have%20a%20ton%20of%20flavor%2C%20but%20it%20was%20nice%20and%20warming%20with%20the%20near%20zero%20degree%20(Fahrenheit)%20temperatures%20outside.%5Cn%5CnWe%20grabbed%20some%20small%20desserts%20that%20they%20had%3B%20my%20wife%20had%20the%20collagen%20chocolate%20pudding%20which%20my%20wife%20loved.%20I%20had%20the%20raw%20chocolate%20chip%20cookie%20dough%3B%20it%20was%20very%20dense%20but%20the%20taste%20was%20really%20good.%5Cn%5CnStaff%20was%20really%20nice%20and%20friendly%2C%20and%20it%20was%20great%20to%20find%20some%20healthy%20options%20while%20traveling.%20I%20can%27t%20give%20it%20the%20highest%20marks%2C%20but%20we%20will%20probably%20be%20back%20just%20to%20keep%20having%20healthy%20options%20on%20our%20trip.'
-
-
-
 var options = {
     url: `https://api.meaningcloud.com/topics-2.0?key=${api_key}&lang=en&txt=${urlencodedtext}&tt=c&uw=y&rt=y`,
     method: 'POST'
 };
-
-
 
 function callback(error, response, body) {
   let concepts = []
@@ -30,4 +24,58 @@ function callback(error, response, body) {
     // console.log('body', body);s
 }
 
-request(options, callback);
+// request(options, callback, api_key, urlencodedtext);
+
+inputReviewArray = [
+  {
+  "rating": "4.0",
+  "author": "Ksenja T.",
+  "description":
+    "I tried Impact Kitchen when it first opened via Uber eats. They were still working out a few kinks, especially with regard to portion size, which I found to be too small.\n\nThey have since improved a lot, adding a lot of different menu items and to-go options. Angela runs a tight ship and this is now one of my go-to spots. The only downside is that it is fairly expensive.\n\nMy favorite items on the menu are the winter citrus salad with falafel add-on; chicken bone broth, thai butternut squash soup (delicious!) and the halo power bowl.\n\nThe collagen chocolate pudding is an amazing dessert for when those cravings kick in.",
+  "datePublished": "2017-04-12",
+  "label": "positive",
+  "score": 0.0647312
+},
+{
+  "rating": "5.0",
+  "author": "Jacquie O.",
+  "description":
+    "This place tastes \"healthy\" in the way that means \"fresh\" and not as a euphemism for \"bland\". Ordered a workplace dinner from here on hungrhub. Food arrived on time, of good quality, flavourful and pretty. Prices very reasonable and falafel is even moist!\n\nYum",
+  "datePublished": "2017-11-29",
+  "label": "positive",
+  "score": 0.749361
+},
+{
+  "rating": "3.0",
+  "author": "Ana C.",
+  "description":
+    "Annoyed at the very slow slow service. \nFor the price and location I expect at least a bag and some cutlery.\nI had to ask for a bag, and they didn't bother putting in napkins and cutlery.\n\nI waiting 10 min for an iced americano when there was no one ahead of me. \n\nFor an experience that is set up to be streamline,\nthey need to stop hiring kids and speed things up asap.",
+  "datePublished": "2017-10-06",
+  "label": "negative",
+  "score": -0.38222
+},
+{
+  "rating": "5.0",
+  "author": "Matt B.",
+  "description":
+    "Excellent taco stand with great food to go along with good prices and service.  I found about this place from an article on Blog.To.   I had the Baja fish haddock tacos and they were among the best tacos I had anywhere, and that includes those made in Texas or California.    \n\nThere is very limited seating and it is cash only.    But I am not going to let that cost them a five-star review by making Seven Lives out to be something that it is not.    I would strongly suggest this establishment if you are craving for tacos, enough said.",
+  "datePublished": "2018-06-22",
+  "label": "positive",
+  "score": 0.165046
+},
+{
+  "rating": "5.0",
+  "author": "Aastha S.",
+  "description":
+    "Went here during my first trip to Kensington, and found their tacos to be just pure deliciousness! I tried their daily special - blackened cod with mango/pineapple salsa, and for $7, it was the right proportion and flavours! The only down side is there is always a line-up and barely any space to eat indoors, so we ended up eating on the street. \n\nThe place offers a variety of vegetarian and meat options, and has their own take on the authentic Mexican tacos. Best to park nearby and walk here as part of your Kensington market loop. Also remember to bring cash and they don't accept credit cards! \n\nDefinitely coming back for some more another day!",
+  "datePublished": "2018-06-10",
+  "label": "positive",
+  "score": 0.336056}
+]
+encodedArray = []
+
+inputReviewArray.forEach(function(review)  {
+  encodedArray.push(encodeURI(review.description))
+})
+
+console.log(encodedArray)
