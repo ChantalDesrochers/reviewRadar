@@ -5,12 +5,13 @@ import Fade from '@material-ui/core/Fade';
 
 
  const SentimentsToShow = (whichReviews, clickHandler, topReviews, bottomReviews, fadeBool) =>{
-console.log('in sentiments to show', fadeBool);
+console.log('top', topReviews);
+console.log('bottom', bottomReviews);
      switch (whichReviews){
        case 'both':
        return ( <Fade in={fadeBool}><div><TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews"   />
        <br></br>
-     <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle="negativeReviews"  aria-label="Fade"   />  </div></Fade>  )
+     <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle={"negativeReviews"}  aria-label="Fade"   />  </div></Fade>  )
 
        case 'positive':
        return  <Fade in={fadeBool}><TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews" aria-label="Fade"  /> </Fade>  

@@ -48,6 +48,7 @@ class Report extends Component {
       fadeTracker: {sentiments:true, keywords: false}
       //reviews: []
     };
+ 
   }
   // componentDidMount(){
   // fetch('http://localhost:3001/1')
@@ -58,74 +59,86 @@ class Report extends Component {
 
 
   //  }
+  // const { checked, reviews, leftSide } = this.state;
+  // const {sentiments, keywords} = this.state.fadeTracker;
 
+     
+  
+    LeftSideShow = (event) => {
+      const topReviews = {
+        title: 'Top Endorsements',
+        content: this.state.reviews.slice(0, this.state.leftSide.reviewsToShow)
+      }
+      const bottomReviews = {
+       title: 'Harshest Criticisms',
+      content: this.state.reviews.slice(-(this.state.leftSide.reviewsToShow), this.state.reviews.length)
+       }
+        console.log('called left side show', this.state.leftSide.displaying);
+        switch (this.state.leftSide.displaying) {
+          case 'sentiment':
+            // Is this the correct way to pass the info?
+            // also the 'sentiments' and 'keywords' that are being passed are bools for fading, that needs to be fixed!
+            return SentimentsToShow(this.state.leftSide.show, this.clickHandler, topReviews, bottomReviews, this.state.fadeTracker.sentiments)
+            break;
+          case 'keyword':
+            return KeywordsToShow(this.state.fadeTracker.keywords);
+            break;
+        }
+      }
+      // some sort of functional with a conditional that decides between sentiment adn category
+      //is needed here
+  
+clickHandler = (event) => {
+
+       let  {reviewsToShow, show, displaying}  = this.state.leftSide
+        let clickedItem = event.target.dataset.message;
+        this.fadeHandler(clickedItem);
+        console.log()
+        // if(clickedItem === leftSide.displaying)
+        // {
+        //   return
+        // }
+        switch (clickedItem) {
+          case 'positiveReviews':
+
+            this.setState({reviewsToShow:4})
+            this.setState({reviewsToShow:4})
+            this.setState({show:'positive' })
+            return
+          case 'negativeReviews':
+            this.setState({reviewsToShow:4 })
+            this.setState({show:'negative' })
+            return
+          case 'bottomRight':
+            console.log('bottom right clicked');
+            this.setState({displaying:'keyword' })
+            return
+          case 'showSentiment':
+            this.setState({reviewsToShow:2 })
+            this.setState({show:'both' })
+            this.setState({displaying:'sentiment' });
+            return
+          case 'showKeyword':
+            this.setState({displaying: 'keyword' });
+            return
+        }
+      };
+      //this tracks all fade states
+fadeHandler = (clickedItem) => {
+       console.log('Fade Handler, clicked item', clickedItem);
+        switch(clickedItem){
+          case 'showSentiment':
+          this.setState({...this.state.fadeTracker.sentiments =  !this.state.fadeTracker.sentiments})
+          this.setState({...this.state.fadeTracker.keywords = !this.state.fadeTracker.keywords})
+          break;
+          case 'showKeyword':
+          this.setState({...this.state.fadeTracker.sentiments = !this.state.fadeTracker.sentimentsl})
+          this.setState({...this.state.fadeTracker.keywords =  !this.state.fadeTracker.keywords})
+          break;
+        }
+      };
   render() {
-    const { checked, reviews, leftSide } = this.state;
-const {sentiments, keywords} = this.state.fadeTracker;
-    const topReviews = {
-      title: 'Top Endorsements',
-      content: reviews.slice(0, leftSide.reviewsToShow)
-    }
-    const bottomReviews = {
-      title: 'Harshest Criticisms',
-      content: reviews.slice(-(leftSide.reviewsToShow), reviews.length)
-    }
 
-    const LeftSideShow = (event) => {
-      console.log('called left side show', leftSide.displaying);
-      switch (leftSide.displaying) {
-        case 'sentiment':
-          // Is this the correct way to pass the info?
-          return SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews, sentiments)
-          break;
-        case 'keyword':
-          return KeywordsToShow();
-          break;
-      }
-    }
-    // some sort of functional with a conditional that decides between sentiment adn category
-    //is needed here
-
-    const clickHandler = (event) => {
-      let clickedItem = event.target.dataset.message;
-      fadeHandler(clickedItem);
-      switch (clickedItem) {
-        case 'positiveReviews':
-          this.setState({ ...leftSide.reviewsToShow = 4 })
-          this.setState({ ...leftSide.show = 'positive' })
-          return
-        case 'negativeReviews':
-          this.setState({ ...leftSide.reviewsToShow = 4 })
-          this.setState({ ...leftSide.show = 'negative' })
-          return
-        case 'bottomRight':
-          console.log('bottom right clicked');
-          this.setState({ ...leftSide.displaying = 'keyword' })
-          return
-        case 'showSentiment':
-          this.setState({ ...leftSide.reviewsToShow = 2 })
-          this.setState({ ...leftSide.show = 'both' })
-          this.setState({ ...leftSide.displaying = 'sentiment' });
-          return
-        case 'showKeyword':
-          this.setState({ ...leftSide.displaying = 'keyword' });
-          return
-      }
-    };
-    //this tracks all fade states
-    const fadeHandler = (clickedItem) => {
-     console.log('Fade Handler, clicked item', clickedItem);
-      switch(clickedItem){
-        case 'showSentiment':
-        this.setState({...this.state.fadeTracker.sentiments =  !this.state.fadeTracker.sentiments})
-        this.setState({...this.state.fadeTracker.keywords = !this.state.fadeTracker.keywords})
-        break;
-        case 'showKeyword':
-        this.setState({...this.state.fadeTracker.sentiments = !this.state.fadeTracker.sentimentsl})
-        this.setState({...this.state.fadeTracker.keywords =  !this.state.fadeTracker.keywords})
-        break;
-      }
-    };
     return (
       <div style={styles.Top}>
       
@@ -145,8 +158,8 @@ const {sentiments, keywords} = this.state.fadeTracker;
           
           <Grid style={styles.LeftSide} item sm={8}>
 
-            <Paper style={styles.ReviewPaper} data-message="left" onClick={clickHandler}>
-              {LeftSideShow()}
+            <Paper style={styles.ReviewPaper} data-message="left" onClick={this.clickHandler}>
+              {this.LeftSideShow()}
             </Paper>
 
           </Grid>
@@ -155,7 +168,7 @@ const {sentiments, keywords} = this.state.fadeTracker;
           <Grid style={styles.RightSide} item sm={4}>
             {/* Chart */}
             <Grid style={styles.RightTopSide} item sm={12}>
-              <Paper style={styles.RightBottomPaper} data-message="topRight" onClick={clickHandler} >
+              <Paper style={styles.RightBottomPaper} data-message="topRight" onClick={this.clickHandler} >
                 <ChartContainer />
               </Paper>
             </Grid>
@@ -164,7 +177,7 @@ const {sentiments, keywords} = this.state.fadeTracker;
             <Grid style={styles.RightBottomSide} item sm={12}>
               {/* <Paper style={styles.RightBottomPaper} data-message="bottomRight" onClick={clickHandler}  > */}
               <Paper style={styles.RightBottomPaper} >
-                <BottomRightNav leftSideShow={LeftSideShow} clickHandler={clickHandler} />
+                <BottomRightNav leftSideShow={this.LeftSideShow} clickHandler={this.clickHandler} />
               </Paper>
             </Grid>
           </Grid>
