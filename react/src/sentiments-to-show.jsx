@@ -16,7 +16,7 @@ import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
 
 
- const ReviewsToShow = (whichReviews, clickHandler, topReviews, bottomReviews) =>{
+ const SentimentsToShow = (whichReviews, clickHandler, topReviews, bottomReviews) =>{
       console.log('in reviews to show', whichReviews )
      switch (whichReviews){
        
@@ -36,4 +36,4 @@ import AppBarTexture from './app-bar-image.png';
      }
     }
 
-    export default ReviewsToShow
+    export default SentimentsToShow

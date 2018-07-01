@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
-import ReviewsToShow from './reviews-to-show';
+import SentimentsToShow from './sentiments-to-show';
 import Fade from '@material-ui/core/Fade';
 // remove hardcoded reviews after database is online
 
@@ -117,7 +117,7 @@ class Report extends Component {
           <Grid style={styles.LeftSide} item sm={8}>
          
               <Paper style={styles.ReviewPaper} data-message="left" onClick={clickHandler}>
-              {ReviewsToShow(this.state.leftSide.show, clickHandler, topReviews, bottomReviews)}
+              {SentimentsToShow(this.state.leftSide.show, clickHandler, topReviews, bottomReviews)}
               </Paper>  
           </Grid>
         {/* Right*/}
