@@ -181,56 +181,9 @@ const watsonoutput = {
   "usage": {
     "text_units": 1,
     "text_characters": 1241,
-    "features": 2
+    "features": 1
   },
   "language": "en",
-  "keywords": [ // not as useful
-    {
-      "text": "collagen chocolate pudding",
-      "sentiment": {
-        "score": 0.537467,
-        "label": "positive"
-      },
-      "relevance": 0.98194,
-      "emotion": {
-        "sadness": 0.049596,
-        "joy": 0.804854,
-        "fear": 0.019714,
-        "disgust": 0.046325,
-        "anger": 0.038966
-      }
-    },
-    {
-      "text": "chocolate chip cookie",
-      "sentiment": {
-        "score": -0.393852,
-        "label": "negative"
-      },
-      "relevance": 0.927978,
-      "emotion": {
-        "sadness": 0.115541,
-        "joy": 0.338109,
-        "fear": 0.052589,
-        "disgust": 0.358902,
-        "anger": 0.058309
-      }
-    },
-    {
-      "text": "healthy options",
-      "sentiment": {
-        "score": 0.69108,
-        "label": "positive"
-      },
-      "relevance": 0.900738,
-      "emotion": {
-        "sadness": 0.012216,
-        "joy": 0.91909,
-        "fear": 0.045041,
-        "disgust": 0.001164,
-        "anger": 0.005321
-      }
-    }
-  ],
   "emotion": {
     "targets": [
       {
