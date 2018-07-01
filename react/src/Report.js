@@ -56,49 +56,30 @@ class Report extends Component {
   //  }
 
   render() {
-    const { checked } = this.state;
-    const { reviews } = this.state;
-    const whichReviews = this.state.leftSide.show;
+    const { checked, reviews, leftSide } = this.state;
     const topReviews = {
       title: 'Top Endorsements',
-      content: reviews.slice(0, this.state.leftSide.reviewsToShow)
+      content: reviews.slice(0, leftSide.reviewsToShow)
     }
     const bottomReviews = {
       title: 'Harshest Criticisms',
-      content: reviews.slice(-(this.state.leftSide.reviewsToShow), reviews.length)
+      content: reviews.slice(-(leftSide.reviewsToShow), reviews.length)
     }
 
     const clickHandler = (event) => {
       switch(event.target.dataset.message){
         case 'positiveReviews':
         console.log('positive clicked');
-        this.setState({...this.state.leftSide.reviewsToShow = 4})
-        this.setState({...this.state.leftSide.show= 'positive'})
+        this.setState({...leftSide.reviewsToShow = 4})
+        this.setState({...leftSide.show= 'positive'})
         return
         case 'negativeReviews':
         console.log('negative clicked');
-        this.setState({...this.state.leftSide.reviewsToShow = 4})
-        this.setState({...this.state.leftSide.show= 'negative'})
+        this.setState({...leftSide.reviewsToShow = 4})
+        this.setState({...leftSide.show= 'negative'})
         return
       }
     };
-   
-    // const reviewsToShow = () =>{
-    //   console.log('in reviews to show')
-    //  switch (this.state.leftSide.show){
-       
-    //   case 'both':
-    //    return (<div><TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews" aria-label="Fade"   />
-    //    <br></br>
-    //  <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle="negativeReviews"  aria-label="Fade"   /></div> )
-
-    // case 'positive':
-    //    return <TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews" aria-label="Fade"  /> 
-      
-    //    case 'negative':
-    //    return  <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle="negativeReviews"  aria-label="Fade"  />
-    //  }
-    // }
 
     return (
       <div style={styles.Top}>
@@ -117,7 +98,7 @@ class Report extends Component {
           <Grid style={styles.LeftSide} item sm={8}>
          
               <Paper style={styles.ReviewPaper} data-message="left" onClick={clickHandler}>
-              {SentimentsToShow(this.state.leftSide.show, clickHandler, topReviews, bottomReviews)}
+              {SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews)}
               </Paper>  
           </Grid>
         {/* Right*/}
