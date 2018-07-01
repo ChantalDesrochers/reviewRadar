@@ -22,19 +22,19 @@ import Fade from '@material-ui/core/Fade';
 // remove hardcoded reviews after database is online
 
 const styles = {
-RightTopSide: {height:'69%'},
-RightBottomSide: {height:'35%', marginTop:8},
-RightTopPaper: {height:'100%'},
-RightBottomPaper: {height:'100%'},
+  RightTopSide: { height: '69%' },
+  RightBottomSide: { height: '35%', marginTop: 8 },
+  RightTopPaper: { height: '100%' },
+  RightBottomPaper: { height: '100%' },
 
-AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
-MainTitle: { color: 'black', margin: 'auto' },
-menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
-MainContainer:{height:'100%', marginTop:8},
+  AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+  MainTitle: { color: 'black', margin: 'auto' },
+  menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
+  MainContainer: { height: '100%', marginTop: 8 },
   // RightContainer: {marginTop:0},
-ReviewPaper: { height:'100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 20,  fontFamily: 'Bauhaus' },
-LeftSide:  {height:'100%'},
-Top: {height:'86vh'}
+  ReviewPaper: { height: '100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 20, fontFamily: 'Bauhaus' },
+  LeftSide: { height: '100%' },
+  Top: { height: '86vh' }
   // ChartPaper: { height: 'calc(100%)', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
   // NavPaper: { height: 'calc(100%)',  backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
 
@@ -44,8 +44,8 @@ class Report extends Component {
     super(props);
     this.state = {
       reviews: Ratings,
-      leftSide:{displaying:'sentiment', reviewsToShow: 2, show: 'both'},
-      checked: true
+      leftSide: { displaying: 'sentiment', reviewsToShow: 2, show: 'both' },
+      fadeTracker: {sentiments:true, keywords: false}
       //reviews: []
     };
   }
@@ -61,7 +61,7 @@ class Report extends Component {
 
   render() {
     const { checked, reviews, leftSide } = this.state;
-
+const {sentiments, keywords} = this.state.fadeTracker;
     const topReviews = {
       title: 'Top Endorsements',
       content: reviews.slice(0, leftSide.reviewsToShow)
@@ -73,82 +73,101 @@ class Report extends Component {
 
     const LeftSideShow = (event) => {
       console.log('called left side show', leftSide.displaying);
-      switch (leftSide.displaying){
+      switch (leftSide.displaying) {
         case 'sentiment':
-        // Is this the correct way to pass the info?
-        return SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews)
-        break;
+          // Is this the correct way to pass the info?
+          return SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews, sentiments)
+          break;
         case 'keyword':
-        return KeywordsToShow();
-        break;
+          return KeywordsToShow();
+          break;
       }
     }
     // some sort of functional with a conditional that decides between sentiment adn category
     //is needed here
 
     const clickHandler = (event) => {
-
-      console.log('click handler', event.target.dataset.message);
-      switch(event.target.dataset.message){
+      let clickedItem = event.target.dataset.message;
+      fadeHandler(clickedItem);
+      switch (clickedItem) {
         case 'positiveReviews':
-        this.setState({...leftSide.reviewsToShow = 4})
-        this.setState({...leftSide.show= 'positive'})
-        return
+          this.setState({ ...leftSide.reviewsToShow = 4 })
+          this.setState({ ...leftSide.show = 'positive' })
+          return
         case 'negativeReviews':
-        this.setState({...leftSide.reviewsToShow = 4})
-        this.setState({...leftSide.show= 'negative'})
-        return
+          this.setState({ ...leftSide.reviewsToShow = 4 })
+          this.setState({ ...leftSide.show = 'negative' })
+          return
         case 'bottomRight':
-        console.log('bottom right clicked');
-        this.setState({...leftSide.displaying = 'keyword'})
-        return
+          console.log('bottom right clicked');
+          this.setState({ ...leftSide.displaying = 'keyword' })
+          return
         case 'showSentiment':
-        this.setState({...leftSide.reviewsToShow = 2})
-        this.setState({...leftSide.show= 'both'})
-        this.setState({...leftSide.displaying = 'sentiment'});
-        return
+          this.setState({ ...leftSide.reviewsToShow = 2 })
+          this.setState({ ...leftSide.show = 'both' })
+          this.setState({ ...leftSide.displaying = 'sentiment' });
+          return
         case 'showKeyword':
-        this.setState({...leftSide.displaying = 'keyword'});
-        return
+          this.setState({ ...leftSide.displaying = 'keyword' });
+          return
       }
     };
-
+    //this tracks all fade states
+    const fadeHandler = (clickedItem) => {
+     console.log('Fade Handler, clicked item', clickedItem);
+      switch(clickedItem){
+        case 'showSentiment':
+        this.setState({...this.state.fadeTracker.sentiments =  !this.state.fadeTracker.sentiments})
+        this.setState({...this.state.fadeTracker.keywords = !this.state.fadeTracker.keywords})
+        break;
+        case 'showKeyword':
+        this.setState({...this.state.fadeTracker.sentiments = !this.state.fadeTracker.sentimentsl})
+        this.setState({...this.state.fadeTracker.keywords =  !this.state.fadeTracker.keywords})
+        break;
+      }
+    };
     return (
       <div style={styles.Top}>
-          <AppBar position="static" style={styles.AppBar}>
-            <Toolbar>
-              <IconButton style={styles.menuButton} color="inherit" aria-label="Menu">
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="display3" style={styles.MainTitle}>Komfort and Kim</Typography>
-            </Toolbar>
-          </AppBar>
+      
+        <AppBar position="static" style={styles.AppBar}>
+          <Toolbar>
+            <IconButton style={styles.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="display3" style={styles.MainTitle}>Komfort and Kim</Typography>
+          </Toolbar>
+        </AppBar>
 
-         {/* Container Below Top Bar */}
+        {/* Container Below Top Bar */}
+       
         <Grid container style={styles.MainContainer} spacing={8}>
           {/* Reviews */}  {/* Left*/}
+          
           <Grid style={styles.LeftSide} item sm={8}>
-         
-              <Paper style={styles.ReviewPaper} data-message="left" onClick={clickHandler}>
+
+            <Paper style={styles.ReviewPaper} data-message="left" onClick={clickHandler}>
               {LeftSideShow()}
-              </Paper>  
+            </Paper>
+
           </Grid>
-        {/* Right*/}
-          <Grid style={styles.RightSide} item sm={4}>             
-          {/* Chart */}
-              <Grid style={styles.RightTopSide} item sm={12}>
-                <Paper style={styles.RightBottomPaper} data-message="topRight" onClick={clickHandler} >
-                  <ChartContainer />
-                </Paper>
-              </Grid>
-         {/* Nav */}
-              <Grid style={styles.RightBottomSide} item sm={12}>
-                {/* <Paper style={styles.RightBottomPaper} data-message="bottomRight" onClick={clickHandler}  > */}
-                <Paper style={styles.RightBottomPaper} >
-                  <BottomRightNav leftSideShow={LeftSideShow} clickHandler={clickHandler}/>
-                </Paper>
-              </Grid>
+         
+          {/* Right*/}
+          <Grid style={styles.RightSide} item sm={4}>
+            {/* Chart */}
+            <Grid style={styles.RightTopSide} item sm={12}>
+              <Paper style={styles.RightBottomPaper} data-message="topRight" onClick={clickHandler} >
+                <ChartContainer />
+              </Paper>
             </Grid>
+         
+            {/* Nav */}
+            <Grid style={styles.RightBottomSide} item sm={12}>
+              {/* <Paper style={styles.RightBottomPaper} data-message="bottomRight" onClick={clickHandler}  > */}
+              <Paper style={styles.RightBottomPaper} >
+                <BottomRightNav leftSideShow={LeftSideShow} clickHandler={clickHandler} />
+              </Paper>
+            </Grid>
+          </Grid>
         </Grid>
       </div>
     );

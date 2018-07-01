@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 
 class BottomRightNav extends Component {
     render() {
-        console.log('in bottom right', this.props);
         return (
             <div>
                 <h1>Hey im a nav panel</h1>
