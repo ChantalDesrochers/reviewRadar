@@ -48,7 +48,7 @@ class Report extends Component {
       fadeTracker: {sentiments:true, keywords: false}
       //reviews: []
     };
- 
+ console.log(this.state);
   }
   // componentDidMount(){
   // fetch('http://localhost:3001/1')
@@ -59,10 +59,6 @@ class Report extends Component {
 
 
   //  }
-  // const { checked, reviews, leftSide } = this.state;
-  // const {sentiments, keywords} = this.state.fadeTracker;
-
-     
   
     LeftSideShow = (event) => {
       const topReviews = {
@@ -93,14 +89,13 @@ clickHandler = (event) => {
        let  {reviewsToShow, show, displaying}  = this.state.leftSide
         let clickedItem = event.target.dataset.message;
         this.fadeHandler(clickedItem);
-        console.log()
+        console.log("in click handler:clicked item",  clickedItem)
         // if(clickedItem === leftSide.displaying)
         // {
         //   return
         // }
         switch (clickedItem) {
           case 'positiveReviews':
-
             this.setState({reviewsToShow:4})
             this.setState({reviewsToShow:4})
             this.setState({show:'positive' })
@@ -116,14 +111,19 @@ clickHandler = (event) => {
           case 'showSentiment':
             this.setState({reviewsToShow:2 })
             this.setState({show:'both' })
-            this.setState({displaying:'sentiment' });
+            this.setState({...this.state.leftSide.show = 'sentiment' });
+            this.setState({...this.state.leftSide.displaying = 'sentiment' });
             return
           case 'showKeyword':
-            this.setState({displaying: 'keyword' });
+         
+            this.setState({...this.state.leftSide.displaying = 'keyword' });
+         
             return
         }
+       
       };
       //this tracks all fade states
+
 fadeHandler = (clickedItem) => {
        console.log('Fade Handler, clicked item', clickedItem);
         switch(clickedItem){
