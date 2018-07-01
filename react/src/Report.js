@@ -14,6 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
 import SentimentsToShow from './sentiments-to-show';
+import KeywordsToShow from './keywords-to-show';
 import Fade from '@material-ui/core/Fade';
 // remove hardcoded reviews after database is online
 
@@ -57,6 +58,7 @@ class Report extends Component {
 
   render() {
     const { checked, reviews, leftSide } = this.state;
+
     const topReviews = {
       title: 'Top Endorsements',
       content: reviews.slice(0, leftSide.reviewsToShow)
@@ -66,17 +68,32 @@ class Report extends Component {
       content: reviews.slice(-(leftSide.reviewsToShow), reviews.length)
     }
 
+    const LeftSideShow = () => {
+      switch (leftSide.displaying){
+        case 'sentiment':
+        return SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews)
+        break;
+        case 'keyword':
+        return KeywordsToShow();
+        break;
+      }
+    }
+    // some sort of functional with a conditional that decides between sentiment adn category
+    //is needed here
+
     const clickHandler = (event) => {
       switch(event.target.dataset.message){
         case 'positiveReviews':
-        console.log('positive clicked');
         this.setState({...leftSide.reviewsToShow = 4})
         this.setState({...leftSide.show= 'positive'})
         return
         case 'negativeReviews':
-        console.log('negative clicked');
         this.setState({...leftSide.reviewsToShow = 4})
         this.setState({...leftSide.show= 'negative'})
+        return
+        case 'bottomRight':
+        console.log('bottom right clicked');
+        this.setState({...leftSide.displaying = 'keyword'})
         return
       }
     };
@@ -98,7 +115,10 @@ class Report extends Component {
           <Grid style={styles.LeftSide} item sm={8}>
          
               <Paper style={styles.ReviewPaper} data-message="left" onClick={clickHandler}>
-              {SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews)}
+              {/* There must be a cleaner way, using props or something.. */}
+              {/* {SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews)} */}
+              {/* {KeywordsToShow() */}
+              {LeftSideShow()}
               </Paper>  
           </Grid>
         {/* Right*/}
