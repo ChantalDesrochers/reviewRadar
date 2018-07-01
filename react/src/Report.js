@@ -6,18 +6,15 @@ import Paper from '@material-ui/core/Paper'
 import Ratings from "./ratings.js"
 import ChartContainer from "./reportPartials/_chartContainer";
 import 'typeface-roboto'
-import purple from '@material-ui/core/colors/purple';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
-import Switch from '@material-ui/core/Switch';
-import Slide from '@material-ui/core/Slide';
-import red from '@material-ui/core/colors/red';
+import ReviewsToShow from './reviews-to-show';
+import Fade from '@material-ui/core/Fade';
 // remove hardcoded reviews after database is online
 
 const styles = {
@@ -31,20 +28,20 @@ MainTitle: { color: 'black', margin: 'auto' },
 menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
 MainContainer:{height:'100%', marginTop:8},
   // RightContainer: {marginTop:0},
-ReviewPaper: { height:'100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 20,  fontFamily: 'Arial' },
+ReviewPaper: { height:'100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 20,  fontFamily: 'Bauhaus' },
 LeftSide:  {height:'100%'},
 Top: {height:'86vh'}
   // ChartPaper: { height: 'calc(100%)', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
   // NavPaper: { height: 'calc(100%)',  backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
 
 }
-
 class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: Ratings,
-      chartClicked: false
+      leftSide:{displaying:'sentiment', reviewsToShow: 2, show: 'both'},
+      checked: true
       //reviews: []
     };
   }
@@ -59,27 +56,52 @@ class Report extends Component {
   //  }
 
   render() {
+    const { checked } = this.state;
     const { reviews } = this.state;
+    const whichReviews = this.state.leftSide.show;
     const topReviews = {
       title: 'Top Endorsements',
-      content: reviews.slice(0, 2)
+      content: reviews.slice(0, this.state.leftSide.reviewsToShow)
     }
     const bottomReviews = {
       title: 'Harshest Criticisms',
-      content: reviews.slice(-2, reviews.length)
+      content: reviews.slice(-(this.state.leftSide.reviewsToShow), reviews.length)
     }
 
-    const { check } = this.state;
-
-    const clickHandler = (trigger) => {
-      // this.setState(state => ({ checked: !state.checked }));
-      console.log('works', trigger.target.dataset.message);
+    const clickHandler = (event) => {
+      switch(event.target.dataset.message){
+        case 'positiveReviews':
+        console.log('positive clicked');
+        this.setState({...this.state.leftSide.reviewsToShow = 4})
+        this.setState({...this.state.leftSide.show= 'positive'})
+        return
+        case 'negativeReviews':
+        console.log('negative clicked');
+        this.setState({...this.state.leftSide.reviewsToShow = 4})
+        this.setState({...this.state.leftSide.show= 'negative'})
+        return
+      }
     };
+   
+    // const reviewsToShow = () =>{
+    //   console.log('in reviews to show')
+    //  switch (this.state.leftSide.show){
+       
+    //   case 'both':
+    //    return (<div><TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews" aria-label="Fade"   />
+    //    <br></br>
+    //  <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle="negativeReviews"  aria-label="Fade"   /></div> )
+
+    // case 'positive':
+    //    return <TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews" aria-label="Fade"  /> 
+      
+    //    case 'negative':
+    //    return  <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle="negativeReviews"  aria-label="Fade"  />
+    //  }
+    // }
 
     return (
-
       <div style={styles.Top}>
-
           <AppBar position="static" style={styles.AppBar}>
             <Toolbar>
               <IconButton style={styles.menuButton} color="inherit" aria-label="Menu">
@@ -93,22 +115,22 @@ class Report extends Component {
         <Grid container style={styles.MainContainer} spacing={8}>
           {/* Reviews */}  {/* Left*/}
           <Grid style={styles.LeftSide} item sm={8}>
-              <Paper style={styles.ReviewPaper}>
-                {/* <TextContainer className="top-reviews" reviews={topReviews} />
-                <TextContainer className="bottom-reviews" reviews={bottomReviews} /> */}
+         
+              <Paper style={styles.ReviewPaper} data-message="left" onClick={clickHandler}>
+              {ReviewsToShow(this.state.leftSide.show, clickHandler, topReviews, bottomReviews)}
               </Paper>  
           </Grid>
         {/* Right*/}
           <Grid style={styles.RightSide} item sm={4}>             
           {/* Chart */}
               <Grid style={styles.RightTopSide} item sm={12}>
-                <Paper style={styles.RightBottomPaper} data-message="chart" onClick={clickHandler} >
+                <Paper style={styles.RightBottomPaper} data-message="topRight" onClick={clickHandler} >
                   <ChartContainer />
                 </Paper>
               </Grid>
          {/* Nav */}
               <Grid style={styles.RightBottomSide} item sm={12}>
-                <Paper style={styles.RightBottomPaper} >
+                <Paper style={styles.RightBottomPaper} data-message="bottomRight" onClick={clickHandler}  >
                   <ChartContainer />
                 </Paper>
               </Grid>
@@ -116,11 +138,9 @@ class Report extends Component {
             </Grid>
         </Grid>
       </div>
-
     );
   }
 }
-
 export default withStyles(styles)(Report);
 
 
