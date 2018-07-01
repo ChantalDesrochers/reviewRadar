@@ -10,7 +10,7 @@ import { Router } from "@reach/router";
 class App extends Component {
   render() {
     return (
-      <div id="fakeroot" >
+      <div >
    
         <header className="App-header">
           {/* <h1 className="App-title">Review Radar</h1>

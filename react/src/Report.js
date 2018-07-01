@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import TextContainer from "./reportPartials/_textContainer";
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper'
-import Ratings from "./ratings.js"
+
 import ChartContainer from "./reportPartials/_chartContainer";
 import 'typeface-roboto'
 import { withStyles } from '@material-ui/core/styles';
@@ -13,8 +13,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
+
 import SentimentsToShow from './sentiments-to-show';
 import KeywordsToShow from './keywords-to-show';
+import Ratings from "./ratings.js"
+import BottomRightNav from './BottomRightNav.js';
 import Fade from '@material-ui/core/Fade';
 // remove hardcoded reviews after database is online
 
@@ -68,9 +71,11 @@ class Report extends Component {
       content: reviews.slice(-(leftSide.reviewsToShow), reviews.length)
     }
 
-    const LeftSideShow = () => {
+    const LeftSideShow = (event) => {
+      console.log('called left side show', leftSide.displaying);
       switch (leftSide.displaying){
         case 'sentiment':
+        // Is this the correct way to pass the info?
         return SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews)
         break;
         case 'keyword':
@@ -82,6 +87,8 @@ class Report extends Component {
     //is needed here
 
     const clickHandler = (event) => {
+
+      console.log('click handler', event.target.dataset.message);
       switch(event.target.dataset.message){
         case 'positiveReviews':
         this.setState({...leftSide.reviewsToShow = 4})
@@ -94,6 +101,14 @@ class Report extends Component {
         case 'bottomRight':
         console.log('bottom right clicked');
         this.setState({...leftSide.displaying = 'keyword'})
+        return
+        case 'showSentiment':
+        this.setState({...leftSide.reviewsToShow = 2})
+        this.setState({...leftSide.show= 'both'})
+        this.setState({...leftSide.displaying = 'sentiment'});
+        return
+        case 'showKeyword':
+        this.setState({...leftSide.displaying = 'keyword'});
         return
       }
     };
@@ -115,9 +130,6 @@ class Report extends Component {
           <Grid style={styles.LeftSide} item sm={8}>
          
               <Paper style={styles.ReviewPaper} data-message="left" onClick={clickHandler}>
-              {/* There must be a cleaner way, using props or something.. */}
-              {/* {SentimentsToShow(leftSide.show, clickHandler, topReviews, bottomReviews)} */}
-              {/* {KeywordsToShow() */}
               {LeftSideShow()}
               </Paper>  
           </Grid>
@@ -131,11 +143,11 @@ class Report extends Component {
               </Grid>
          {/* Nav */}
               <Grid style={styles.RightBottomSide} item sm={12}>
-                <Paper style={styles.RightBottomPaper} data-message="bottomRight" onClick={clickHandler}  >
-                  <ChartContainer />
+                {/* <Paper style={styles.RightBottomPaper} data-message="bottomRight" onClick={clickHandler}  > */}
+                <Paper style={styles.RightBottomPaper} >
+                  <BottomRightNav leftSideShow={LeftSideShow} clickHandler={clickHandler}/>
                 </Paper>
               </Grid>
-
             </Grid>
         </Grid>
       </div>
