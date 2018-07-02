@@ -1,45 +1,15 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.company-name{
+    text-align: center;
 }
-
-.App-header {
-  background-color: #C9DDFF;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.review-title{
+    text-align: center;
+    margin-top: 0;
+    background-color:yellowgreen;
 }
-
-body{
-  text-align: center;
+.top{
+    height:'100vh';
 }
-.form {
-  background-color: #ADACB5;
-  margin-top: 100px;
-  padding:  10px;
-  display: inline-block;
+.review{
   
-  width: 400px;
-}
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-.review-Container{
-
-  float: left;
-  width: 25%;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
