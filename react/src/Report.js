@@ -61,23 +61,23 @@ class Report extends Component {
   //  }
   
     LeftSideShow = (event) => {
+      const {reviews, leftSide, fadeTracker} = this.state;
       const topReviews = {
         title: 'Top Endorsements',
-        content: this.state.reviews.slice(0, this.state.leftSide.reviewsToShow)
+        content: reviews.slice(0,leftSide.reviewsToShow)
       }
       const bottomReviews = {
        title: 'Harshest Criticisms',
-      content: this.state.reviews.slice(-(this.state.leftSide.reviewsToShow), this.state.reviews.length)
+      content: reviews.slice(-(leftSide.reviewsToShow), reviews.length)
        }
-        console.log('called left side show', this.state.leftSide.displaying);
-        switch (this.state.leftSide.displaying) {
+        console.log('called left side show', leftSide.displaying);
+        switch (leftSide.displaying) {
           case 'sentiment':
-            // Is this the correct way to pass the info?
-            // also the 'sentiments' and 'keywords' that are being passed are bools for fading, that needs to be fixed!
-            return SentimentsToShow(this.state.leftSide.show, this.clickHandler, topReviews, bottomReviews, this.state.fadeTracker.sentiments)
+            // 'sentiments' and 'keywords' variables that are being passed are bools for fading, that needs to be fixed! names changed!
+            return SentimentsToShow(leftSide.show, this.clickHandler, topReviews, bottomReviews, fadeTracker.sentiments)
             break;
           case 'keyword':
-            return KeywordsToShow(this.state.fadeTracker.keywords);
+            return KeywordsToShow(fadeTracker.keywords);
             break;
         }
       }
@@ -107,7 +107,6 @@ clickHandler = (event) => {
        
       };
       //this tracks all fade states
-
 fadeHandler = (clickedItem) => {
        console.log('Fade Handler, clicked item', clickedItem);
         switch(clickedItem){
@@ -122,7 +121,6 @@ fadeHandler = (clickedItem) => {
         }
       };
   render() {
-
     return (
       <div style={styles.Top}>
       
@@ -142,8 +140,7 @@ fadeHandler = (clickedItem) => {
             <Paper style={styles.ReviewPaper} data-message="left" onClick={this.clickHandler}>
               {this.LeftSideShow()}
             </Paper>
-          </Grid>
-         
+          </Grid>  
           {/* Right*/}
           <Grid style={styles.RightSide} item sm={4}>
             {/* Chart */}
@@ -151,8 +148,7 @@ fadeHandler = (clickedItem) => {
               <Paper style={styles.RightBottomPaper} data-message="topRight" onClick={this.clickHandler} >
                 <ChartContainer />
               </Paper>
-            </Grid>
-         
+            </Grid>    
             {/* Nav */}
             <Grid style={styles.RightBottomSide} item sm={12}>
             {/* Example of how to make the panels clickable */}
