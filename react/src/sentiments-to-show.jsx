@@ -9,15 +9,15 @@ console.log('top', topReviews);
 console.log('bottom', bottomReviews);
      switch (whichReviews){
        case 'both':
-       return ( <Fade in={fadeBool}><div><TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews"   />
+       return ( <Fade in={fadeBool}><div><TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle={topReviews.title} />
        <br></br>
-     <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle={"negativeReviews"}  aria-label="Fade"   />  </div></Fade>  )
+     <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle={bottomReviews.title}  aria-label="Fade"   />  </div></Fade>  )
 
        case 'positive':
-       return  <Fade in={fadeBool}><TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews" aria-label="Fade"  /> </Fade>  
+       return  <TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews" aria-label="Fade"  />
       
        case 'negative':
-       return   <Fade in={fadeBool}><TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle="negativeReviews"  aria-label="Fade"  /></Fade>  
+       return   <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle="negativeReviews"  aria-label="Fade"  />
      }
     }
 

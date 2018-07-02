@@ -81,43 +81,27 @@ class Report extends Component {
             break;
         }
       }
-      // some sort of functional with a conditional that decides between sentiment adn category
-      //is needed here
-  
 clickHandler = (event) => {
-
-       let  {reviewsToShow, show, displaying}  = this.state.leftSide
         let clickedItem = event.target.dataset.message;
         this.fadeHandler(clickedItem);
         console.log("in click handler:clicked item",  clickedItem)
-        // if(clickedItem === leftSide.displaying)
-        // {
-        //   return
-        // }
         switch (clickedItem) {
           case 'positiveReviews':
-            this.setState({reviewsToShow:4})
-            this.setState({reviewsToShow:4})
-            this.setState({show:'positive' })
+          this.setState({...this.state.leftSide.reviewsToShow = 4 })
+          this.setState({...this.state.leftSide.show = 'positive' })
             return
           case 'negativeReviews':
-            this.setState({reviewsToShow:4 })
-            this.setState({show:'negative' })
-            return
-          case 'bottomRight':
-            console.log('bottom right clicked');
-            this.setState({displaying:'keyword' })
+          this.setState({...this.state.leftSide.reviewsToShow = 4 })
+          this.setState({...this.state.leftSide.show = 'negative' })
             return
           case 'showSentiment':
-            this.setState({reviewsToShow:2 })
-            this.setState({show:'both' })
+            this.setState({...this.state.leftSide.reviewsToShow = 2 })
+            this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.displaying = 'sentiment' });
             return
           case 'showKeyword':
-         
             this.setState({...this.state.leftSide.displaying = 'keyword' });
-         
             return
         }
        
@@ -151,17 +135,13 @@ fadeHandler = (clickedItem) => {
           </Toolbar>
         </AppBar>
 
-        {/* Container Below Top Bar */}
-       
+        {/* Container Below Top Bar */} 
         <Grid container style={styles.MainContainer} spacing={8}>
-          {/* Reviews */}  {/* Left*/}
-          
+          {/* Reviews */}  {/* Left*/}        
           <Grid style={styles.LeftSide} item sm={8}>
-
             <Paper style={styles.ReviewPaper} data-message="left" onClick={this.clickHandler}>
               {this.LeftSideShow()}
             </Paper>
-
           </Grid>
          
           {/* Right*/}
@@ -175,6 +155,7 @@ fadeHandler = (clickedItem) => {
          
             {/* Nav */}
             <Grid style={styles.RightBottomSide} item sm={12}>
+            {/* Example of how to make the panels clickable */}
               {/* <Paper style={styles.RightBottomPaper} data-message="bottomRight" onClick={clickHandler}  > */}
               <Paper style={styles.RightBottomPaper} >
                 <BottomRightNav leftSideShow={this.LeftSideShow} clickHandler={this.clickHandler} />
