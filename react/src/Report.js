@@ -111,26 +111,29 @@ class Report extends Component {
     this.setState({ ...this.state.fadeTracker.sentiments = !this.state.fadeTracker.sentiments, ...this.state.fadeTracker.keywords= !this.state.fadeTracker.keywords })
   };
   
-
-  clickHandler = (event) => {
-    this.showState('start of clickHandler')
-    let clickedItem = event.target.dataset.message;
-
-    console.log("clicked item", clickedItem, "leftSide.show", this.state.leftSide.displaying)
-
-    //  the fade handling in sentiment and keyword works but is wonky,, needs elegance
-    // this.toggleFade()
-    switch (clickedItem) {
-      case 'positiveReviews':
+swapReviewsOnAllSentimentChartClick= (focus) =>{
+focus = focus.toLowerCase()
+  console.log('in swap reviews', focus );
+    switch (focus) {
+      case 'positive':
+      console.log('wow im in positive');
         this.setState({ ...this.state.leftSide.reviewsToShow = 4 })
         this.setState({ ...this.state.leftSide.show = 'positive' })
         return
-      case 'negativeReviews':
+      case 'negative':
+      console.log('oh im in negative');
         this.setState({ ...this.state.leftSide.reviewsToShow = 4 })
         this.setState({ ...this.state.leftSide.show = 'negative' })
         return
+    }
 
-
+}
+  clickHandler = (event) => {
+  
+    let clickedItem = event.target.dataset.message;
+    //  the fade handling in sentiment and keyword works but is wonky,, needs elegance
+    // this.toggleFade()
+    switch (clickedItem) {
       case 'sentiment':
         if (this.state.leftSide.displaying === clickedItem && this.state.fadeTracker.sentiments ) return
         console.log('calling show sentiment');
@@ -157,7 +160,6 @@ class Report extends Component {
   };
 
   render() {
-    console.log('in render', this.state);
     return (
       <div style={styles.Top}>
 
@@ -183,7 +185,7 @@ class Report extends Component {
             {/* Chart */}
             <Grid style={styles.RightTopSide} item sm={12}>
               <Paper style={styles.RightBottomPaper} data-message="topRight" onClick={this.clickHandler} >
-                <ChartContainer />
+                <ChartContainer reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
               </Paper>
             </Grid>
             {/* Nav */}
