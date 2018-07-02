@@ -19,18 +19,18 @@ class PieChart extends Component {
     datasets: [{
       data: [],
       backgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56',
-        'red',
-        'green'
+        '#9B59B6',
+        '#2980B9',
+        '#16A085',
+        '#C0392B',
+        '#99A3A4'
       ],
       hoverBackgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56',
-        'red',
-        'green'
+        '#9B59B6',
+        '#2980B9',
+        '#16A085',
+        '#C0392B',
+        '#99A3A4'
       ],
     }]
     }
@@ -41,7 +41,6 @@ componentDidMount() {
 var gettingChartData = () => {
 let dataScores = []
       const reviews = this.state.reviews
-        //console.log('reviews',reviews)
       var veryPositive = 0;
       var positive = 0;
       var neutral = 0
@@ -80,14 +79,11 @@ let dataScores = []
             veryNegative += 1;
             break;
         }
-
         dataScores = [veryPositive, positive, neutral, negative, veryNegative]
       });
-      // console.log(dataScores)
       this.setState({ ...this.state.chartdata.datasets[0].data = dataScores })
 }
 gettingChartData()
-// console.log("datasets", this.state.chartdata.datasets[0].data)
 }
 
 
@@ -109,7 +105,6 @@ console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['d
             <div className="pie-chart">
             <h1>Overall Sentiment</h1>
               <Pie data={this.state.chartdata} getElementsAtEvent={(elem)=>{handleClicktwo(elem)}} ref="myChart"/>
-           {/* <Pie data={this.state.chartdata} ref="myChart"/>*/}
             </div>
         );
     }

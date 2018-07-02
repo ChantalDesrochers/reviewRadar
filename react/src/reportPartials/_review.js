@@ -1,7 +1,7 @@
 import React from "react";
 
 const Review = ({ review }) => (
-  <div className="review" key={review.id}>   
+  <div className="review" key={review.id}>
    <br />
     Description: {review.description}
     <br />
@@ -10,7 +10,7 @@ const Review = ({ review }) => (
     Author: {review.author}
     <br />
     Rating: {review.rating} | Overall: {review.score}
-    <br />   
+    <br />
   </div>
 );
 

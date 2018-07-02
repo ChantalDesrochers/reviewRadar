@@ -6,7 +6,7 @@ class ChartContainer extends Component {
 
         return (
             <div className="chart-container">
-               <div className="chart-name"> Hello</div>
+               <div className="chart-name"></div>
                <PieChart reviews={this.props.reviews}/>
 
         </div>
