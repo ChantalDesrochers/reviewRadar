@@ -65,64 +65,64 @@ class PieChart extends Component {
 }
 }
 
+componentDidMount() {
+var gettingChartData = () => {
+let dataScores = []
+      const reviews = this.state.reviews
+        //console.log('reviews',reviews)
+      var veryPositive = 0;
+      var positive = 0;
+      var neutral = 0
+      var negative = 0
+      var veryNegative = 0
+      reviews.forEach(function(review) {
+        var rounded = parseFloat(review.score.toFixed(1))
+        switch (rounded) {
+          case 0:
+            neutral += 1;
+            break;
+          case 0.1:
+          case 0.2:
+          case 0.3:
+          case 0.4:
+          case 0.6:
+            positive += 1;
+            break;
+          case 0.7:
+          case 0.8:
+          case 0.9:
+          case 1:
+            veryPositive += 1
+          case (-0.5):
+          case (-0.4):
+          case (-0.3):
+          case (-0.2):
+          case (-0.1):
+            negative += 1;
+            break;
+          case (-1):
+          case (-0.9):
+          case (-0.8):
+          case (-0.7):
+          case (-0.6):
+            veryNegative += 1;
+            break;
+        }
 
-// componentDidMount() {
-// var gettingChartData = () => {
-// let dataScores = []
+        dataScores = [veryPositive, positive, neutral, negative, veryNegative]
+      });
+      console.log(dataScores)
+      this.setState({ ...this.state.chartdata.datasets[0].data = dataScores })
+}
+gettingChartData()
+console.log("datasets", this.state.chartdata.datasets[0].data)
+}
 
-//   const reviews = this.state.reviews
-//   //console.log('reviews',reviews)
-//   var veryPositive = 0;
-//   var positive = 0;
-//   var neutral = 0
-//   var negative = 0
-//   var veryNegative = 0
-//   reviews.forEach(function(review) {
-//     var rounded = parseFloat(review.score.toFixed(1))
-//   switch(rounded) {
-//     case 0:
-//     neutral += 1;
-//     break;
-//     case 0.1:
-//     case 0.2:
-//     case 0.3:
-//     case 0.4:
-//     case 0.6:
-//     positive += 1;
-//     break;
-//     case 0.7:
-//     case 0.8:
-//     case 0.9:
-//     case 1:
-//     veryPositive +=1
-//     case (-0.5):
-//     case (-0.4):
-//     case (-0.3):
-//     case (-0.2):
-//     case (-0.1):
-//     negative += 1;
-//     break;
-//     case (-1):
-//     case (-0.9):
-//     case (-0.8):
-//     case (-0.7):
-//     case (-0.6):
-//     veryNegative += 1;
-//     break;
-//   }
 
-//   dataScores = [veryPositive, positive, neutral, negative, veryNegative]
-// });
-// console.log(dataScores)
-// this.setState({
-// chartdata['datasets'][0]['data']: dataScores
-// })
-// }
-// }
 
 render() {
 
-console.log(this.state.chartdata)
+// console.log(this.state.chartdata)
 
 
 
@@ -141,7 +141,7 @@ alert(`You clicked ${label} with a score of ${score}`)
         return (
             <div className="pie-chart">
             <h1>Inside Pie Chart div</h1>
-            <Pie data={data} getElementsAtEvent={handleClicktwo} ref="myChart"/>
+            <Pie data={this.state.chartdata} getElementsAtEvent={handleClicktwo} ref="myChart"/>
             </div>
         );
     }
