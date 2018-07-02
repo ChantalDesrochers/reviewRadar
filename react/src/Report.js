@@ -86,7 +86,7 @@ clickHandler = (event) => {
        
         console.log("clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying )
 
-        //  if(this.state.leftSide.show === click)
+        //  the fade handling in sentiment and keyword works but is wonky,, needs elegance
        
         switch (clickedItem) {
           case 'positiveReviews':
@@ -103,8 +103,9 @@ clickHandler = (event) => {
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.displaying = 'sentiment' });
-          //  this.fadeHandler(clickedItem);
-            this.fadeHandler('keyword');
+            this.fadeHandler(clickedItem);
+            // this.fadeHandler('keyword');
+            this.fadeHandler(clickedItem);
           }
           else(console.log('already in correct state' + "clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying))
    
@@ -112,8 +113,9 @@ clickHandler = (event) => {
           case 'keyword':
           if(this.state.leftSide.displayin  !== clickedItem){
             this.setState({...this.state.leftSide.displaying = 'keyword' });
-        //    this.fadeHandler(clickedItem);
+            this.fadeHandler(clickedItem);
             this.fadeHandler('sentiment');
+            this.fadeHandler(clickedItem);
             ;}
 
             else(console.log('already in correct state', "clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying ))

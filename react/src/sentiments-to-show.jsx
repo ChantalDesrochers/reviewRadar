@@ -13,7 +13,7 @@ console.log('bottom', bottomReviews);
       {/* should we be using break tags? seems hacky */}
        <br>
        </br>
-     <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle={topReviews.title}  aria-label="Fade"   />  </div></Fade>
+     <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle={bottomReviews.title}  aria-label="Fade"   />  </div></Fade>
 
        case 'positive':
        return  <TextContainer className="top-reviews" clickHandler ={clickHandler } reviews={topReviews} dataMessageTitle="positiveReviews" aria-label="Fade"  />
