@@ -7,10 +7,10 @@ class BottomRightNav extends Component {
         return (
             <div>
                 <h1>Hey im a nav panel</h1>
-                <Button variant="outlined" data-message="showSentiment" onClick={this.props.clickHandler}>
+                <Button variant="outlined" data-message="sentiment" onClick={this.props.clickHandler}>
                     Sentiments
                 </Button>
-                <Button variant="outlined" data-message="showKeyword" onClick={this.props.clickHandler}>
+                <Button variant="outlined" data-message="keyword" onClick={this.props.clickHandler}>
                     Keywords
                 </Button>
             </div>

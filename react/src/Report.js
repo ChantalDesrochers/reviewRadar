@@ -84,7 +84,9 @@ class Report extends Component {
 clickHandler = (event) => {
         let clickedItem = event.target.dataset.message;
         this.fadeHandler(clickedItem);
-        console.log("in click handler:clicked item",  clickedItem)
+        console.log("in click handler:clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying )
+
+        //  if(this.state.leftSide.show === click)
         switch (clickedItem) {
           case 'positiveReviews':
           this.setState({...this.state.leftSide.reviewsToShow = 4 })
@@ -94,13 +96,13 @@ clickHandler = (event) => {
           this.setState({...this.state.leftSide.reviewsToShow = 4 })
           this.setState({...this.state.leftSide.show = 'negative' })
             return
-          case 'showSentiment':
+          case 'sentiment':
             this.setState({...this.state.leftSide.reviewsToShow = 2 })
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.displaying = 'sentiment' });
             return
-          case 'showKeyword':
+          case 'keyword':
             this.setState({...this.state.leftSide.displaying = 'keyword' });
             return
         }
@@ -110,11 +112,11 @@ clickHandler = (event) => {
 fadeHandler = (clickedItem) => {
        console.log('Fade Handler, clicked item', clickedItem);
         switch(clickedItem){
-          case 'showSentiment':
+          case 'sentiment':
           this.setState({...this.state.fadeTracker.sentiments =  !this.state.fadeTracker.sentiments})
           this.setState({...this.state.fadeTracker.keywords = !this.state.fadeTracker.keywords})
           break;
-          case 'showKeyword':
+          case 'keyword':
           this.setState({...this.state.fadeTracker.sentiments = !this.state.fadeTracker.sentimentsl})
           this.setState({...this.state.fadeTracker.keywords =  !this.state.fadeTracker.keywords})
           break;
