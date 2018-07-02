@@ -5,7 +5,6 @@ import { defaults } from 'react-chartjs-2';
 
 class PieChart extends Component {
   constructor(props){
-      console.log('calling pie chart');
   super(props);
   this.state = {
     reviews: this.props.reviews,
