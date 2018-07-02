@@ -162,6 +162,7 @@ function yelpRecursion(i, link) {
           reviewsArray.push(review)
         })
       // if (reviewsArray.length <=100 ) {
+        // can scrape and base off of 'div[class="page-of-pages"]' or 'span[itemprop="reviewCount"] innerHTML
         if (i < 60){
           i += 20
           yelpRecursion(i, link)
@@ -173,6 +174,8 @@ function yelpRecursion(i, link) {
   }
 
   yelpRecursion(0, 'https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=')
+
+// page of pages, 
 
 exports.yelp = function(url, cb) {
   request(url, function (error, response, html) {
