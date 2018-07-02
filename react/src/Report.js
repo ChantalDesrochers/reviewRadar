@@ -83,10 +83,11 @@ class Report extends Component {
       }
 clickHandler = (event) => {
         let clickedItem = event.target.dataset.message;
-        this.fadeHandler(clickedItem);
-        console.log("in click handler:clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying )
+       
+        console.log("clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying )
 
         //  if(this.state.leftSide.show === click)
+       
         switch (clickedItem) {
           case 'positiveReviews':
           this.setState({...this.state.leftSide.reviewsToShow = 4 })
@@ -97,13 +98,25 @@ clickHandler = (event) => {
           this.setState({...this.state.leftSide.show = 'negative' })
             return
           case 'sentiment':
+          if(this.state.leftSide.displaying !== clickedItem){
             this.setState({...this.state.leftSide.reviewsToShow = 2 })
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.displaying = 'sentiment' });
+          //  this.fadeHandler(clickedItem);
+            this.fadeHandler('keyword');
+          }
+          else(console.log('already in correct state' + "clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying))
+   
             return
           case 'keyword':
+          if(this.state.leftSide.displayin  !== clickedItem){
             this.setState({...this.state.leftSide.displaying = 'keyword' });
+        //    this.fadeHandler(clickedItem);
+            this.fadeHandler('sentiment');
+            ;}
+
+            else(console.log('already in correct state', "clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying ))
             return
         }
        
