@@ -103,9 +103,9 @@ clickHandler = (event) => {
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.show = 'both' });
             this.setState({...this.state.leftSide.displaying = 'sentiment' });
-            this.fadeHandler(clickedItem);
-            // this.fadeHandler('keyword');
-            this.fadeHandler(clickedItem);
+            // this.fadeHandler(clickedItem);
+             this.fadeHandler('keyword');
+            // this.fadeHandler(clickedItem);
           }
           else(console.log('already in correct state' + "clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying))
    
@@ -116,6 +116,7 @@ clickHandler = (event) => {
             this.fadeHandler(clickedItem);
             this.fadeHandler('sentiment');
             this.fadeHandler(clickedItem);
+            
             ;}
 
             else(console.log('already in correct state', "clicked item",  clickedItem, "leftSide.show", this.state.leftSide.displaying ))
