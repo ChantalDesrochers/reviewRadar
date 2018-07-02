@@ -105,7 +105,7 @@ console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['d
 
         return (
             <div className="pie-chart">
-            <h1>Overall Sentiment</h1>
+            <h1 style={{marginTop:0}}>Overall Sentiment</h1>
               <Pie data={this.state.chartdata} getElementsAtEvent={(elem)=>{handleClicktwo(elem)}} ref="myChart"/>
             </div>
         );

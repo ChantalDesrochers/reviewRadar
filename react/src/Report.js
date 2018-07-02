@@ -20,15 +20,15 @@ import Ratings from "./ratings.js"
 import BottomRightNav from './BottomRightNav.js';
 
 const styles = {
-  RightTopContainer: { height: '69%' },
-  RightBottomContainer: { height: '35%', marginTop: 8 },
+  RightTopContainer: { height: '65%' },
+  RightBottomContainer: { height: '34.5%', marginTop:5},
   RightTopPanel: { height: '100%' },
   RightBottomPanel: { height: '100%' },
   AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
-  LargePanel: { height: '100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 20, fontFamily: 'Bauhaus' },
+  LargePanel: { height: '100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 0, fontFamily: 'Bauhaus' },
   LeftContainer: { height: '100%' },
   Top: { height: '86vh' }
 }
