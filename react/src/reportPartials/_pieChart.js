@@ -1,35 +1,7 @@
 import React, { Component } from "react";
 
 import { Pie } from 'react-chartjs-2';
-
-const data = {
-    labels: [
-      'Very Positive',
-      'Positive',
-      'Neutral',
-      'Negative',
-      'Very Negative'
-    ],
-    datasets: [{
-      data: [300, 50, 100, 200, 23],
-      backgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56',
-        'red',
-        'green'
-      ],
-      hoverBackgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56',
-        'red',
-        'green'
-      ],
-    }]
-    }
-
-
+import { defaults } from 'react-chartjs-2';
 
 class PieChart extends Component {
   constructor(props){
@@ -111,37 +83,33 @@ let dataScores = []
 
         dataScores = [veryPositive, positive, neutral, negative, veryNegative]
       });
-      console.log(dataScores)
+      // console.log(dataScores)
       this.setState({ ...this.state.chartdata.datasets[0].data = dataScores })
 }
 gettingChartData()
-console.log("datasets", this.state.chartdata.datasets[0].data)
+// console.log("datasets", this.state.chartdata.datasets[0].data)
 }
-
 
 
 render() {
 
-// console.log(this.state.chartdata)
-
-
-
 const handleClicktwo = elem => {
+  if (elem[0]) {
+console.log(elem)
 let chartPoints = elem;
 let clickedPointIndex = chartPoints[0]['_index']
 const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
 const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
 console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
 console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
-alert(`You clicked ${label} with a score of ${score}`)
-
-
+ }
  }
 
         return (
             <div className="pie-chart">
-            <h1>Inside Pie Chart div</h1>
-            <Pie data={this.state.chartdata} getElementsAtEvent={handleClicktwo} ref="myChart"/>
+            <h1>Overall Sentiment</h1>
+              <Pie data={this.state.chartdata} getElementsAtEvent={(elem)=>{handleClicktwo(elem)}} ref="myChart"/>
+           {/* <Pie data={this.state.chartdata} ref="myChart"/>*/}
             </div>
         );
     }

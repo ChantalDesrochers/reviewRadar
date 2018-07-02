@@ -157,7 +157,7 @@ fadeHandler = (clickedItem) => {
 
         {/* Container Below Top Bar */}
         <Grid container style={styles.MainContainer} spacing={8}>
-          {/* Reviews */}  {/* Left*/}
+          {/* Reviews */}  {/* Left}*/}
        <Grid style={styles.LeftSide} item sm={8}>
             <Paper style={styles.ReviewPaper} data-message="left" onClick={this.clickHandler}>
               {this.LeftSideShow()}
