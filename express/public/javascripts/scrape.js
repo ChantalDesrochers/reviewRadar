@@ -155,8 +155,10 @@ const yelpRecursion = (i, link, cb) => {
         var descriptionv = $(this).find('p[itemprop="description"]').text()
         var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
         var review = {
+          id: i,
           rating: ratingv,
           author: authorv,
+          origin: 'yelp',
           description: descriptionv,
           datePublished: datePublishedv
         }
@@ -164,22 +166,24 @@ const yelpRecursion = (i, link, cb) => {
       })
       // if (reviewsArray.length <=100 ) {
       // can scrape and base off of 'div[class="page-of-pages"]' or 'span[itemprop="reviewCount"] innerHTML
-      if (i < 100) {
+      if (i < 0) {
         i += 20
         yelpRecursion(i, link, cb)
       } else {
-        console.log('scrapedlength', reviewsArray.length)
+        // console.log('scrapedlength', reviewsArray.length)
+        // console.log('scrapeddata', reviewsArray)
         cb(reviewsArray)
       }
     }
   })
 }
 
+// yelpRecursion(0, 'https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=', function(data){console.log(data)})
+
 module.exports = {
   yelpRecursion: yelpRecursion,
 }
 
-// yelpRecursion(0, 'https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=')
 
 exports.yelp = function (url, cb) {
   request(url, function (error, response, html) {
@@ -192,8 +196,10 @@ exports.yelp = function (url, cb) {
         var descriptionv = $(this).find('p[itemprop="description"]').text()
         var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
         var review = {
+          id: i,
           rating: ratingv,
           author: authorv,
+          origin: 'yelp',
           description: descriptionv,
           datePublished: datePublishedv
         }
