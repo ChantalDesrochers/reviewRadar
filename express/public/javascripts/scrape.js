@@ -180,10 +180,6 @@ const yelpRecursion = (i, link, cb) => {
 
 // yelpRecursion(0, 'https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=', function(data){console.log(data)})
 
-module.exports = {
-  yelpRecursion: yelpRecursion
-}
-
 
 const yelp = function (url, cb) {
   request(url, function (error, response, html) {
@@ -209,6 +205,11 @@ const yelp = function (url, cb) {
       //  console.log(reviewsArray)
     }
   })
+}
+
+module.exports = {
+  yelpRecursion: yelpRecursion,
+  yelp: yelp
 }
 
 

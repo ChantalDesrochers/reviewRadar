@@ -16,11 +16,11 @@ var nlu = new NaturalLanguageUnderstandingV1({
 
 
 // tim's code need refactoring
-const addSentiment = (reviews, cb) => {
+const addSentiment = cb => (reviews) => {
   const go = (reviews, cb, newReviews) => {
     if (reviews.length === 0) {
-      //  console.log('******DONE*******')
-      //  console.log(newReviews)
+       console.log('******DONE*******')
+       console.log(newReviews)
       return cb(newReviews);
     }
 
@@ -46,7 +46,7 @@ const addSentiment = (reviews, cb) => {
     });
   };
 
-  go(reviews, returnReviews, []);
+  go(reviews, cb, []);
 };
 
 // callback is going to be return reviews
@@ -92,16 +92,22 @@ const retrieveSentiment = (review, reviews) => {
   });
 }
 */
+let returnReviews = (data) => {}
+
+
+module.exports = {
+  addSentiment: addSentiment
+}
+
 
 const sortResults = (results) => {
   results.sort((a, b) => b.score - a.score)
 }
 
-exports.getData = (url, cb) => {
+const getData = (url, cb) => {
   console.log('in get data')
   // yelpRecursion(0, url, addSentiment);
   scraper.yelpRecursion(0, url, addSentiment);
   // scraper.yelp(0, url, addSentiment);
   returnReviews = cb;
 }
-let returnReviews = (data) => {}

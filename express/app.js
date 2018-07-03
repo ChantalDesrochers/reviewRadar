@@ -8,7 +8,7 @@ var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var sentiment = require('./public/javascripts/sentimentprocessor.js');
+var controller = require('./public/javascripts/controller.js');
 
 var app = express();
 
@@ -61,7 +61,7 @@ app.post('/1', (req, res) => {
   }
 
   // if (req.body.url1 != '') {
-  var data = sentiment.getData(req.body.url1, sendStuff)
+  var data = controller.getData(req.body.url1, sendStuff)
   // }
 
   // if (req.body.url2 != '') {
