@@ -17,6 +17,7 @@ class NumberOfReviewsOverTime extends Component {
           borderColor: '#E53A27',
           borderCapStyle: 'butt',
           borderDash: [],
+          showLine: false,
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
           pointBorderColor: '#F37162',
@@ -26,10 +27,17 @@ class NumberOfReviewsOverTime extends Component {
           pointHoverBackgroundColor: 'rgba(75,192,192,1)',
           pointHoverBorderColor: 'rgba(220,220,220,1)',
           pointHoverBorderWidth: 2,
-          pointRadius: 1,
+          pointRadius: 3,
           pointHitRadius: 10,
           data: []
         }]
+      },
+      options: {
+        elements: {
+          points: {
+            pointStyle: 'triangle'
+          }
+        }
       }
     }
   }
