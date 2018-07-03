@@ -3,9 +3,9 @@ var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-lan
 let reviewsCount = 0;
 
 var nlu = new NaturalLanguageUnderstandingV1({
-    'username': '35dda7ab-cc58-496a-a867-6a10c67bcf0b',
-    'password': 'gPMONx18l5FZ',
-    'version_date': '2018-03-16'
+  'username': '35dda7ab-cc58-496a-a867-6a10c67bcf0b',
+  'password': 'gPMONx18l5FZ',
+  'version_date': '2018-03-16'
 });
 
 // var parameters = {
@@ -27,7 +27,7 @@ var nlu = new NaturalLanguageUnderstandingV1({
 //       'sentiment': true,
 //       'emotion': true,
 //       'limit': 3
-//     }    
+//     }
 //   }
 // };
 
@@ -48,12 +48,12 @@ var parameters = {
       'sentiment': true,
       'emotion': true,
       'limit': 3
-    }    
+    }
   },
   'return_analyzed_text': true,
 };
 
-nlu.analyze(parameters, function(err, response) {
+nlu.analyze(parameters, function (err, response) {
   if (err)
     console.log('error:', err);
   else
@@ -63,17 +63,17 @@ nlu.analyze(parameters, function(err, response) {
 
 //output
 // {
-  //   "usage": {
-    //     "text_units": 1,
-    //     "text_characters": 1241,
-    //     "features": 4
-    //   },
-    //   "language": "en",
-    //   "keywords": [  // analyzes keywords within a document, does not take parameters
-    //     {
-      //       "text": "collagen chocolate pudding",
-      //       "sentiment": {
-        //         "score": 0.537467,
+//   "usage": {
+//     "text_units": 1,
+//     "text_characters": 1241,
+//     "features": 4
+//   },
+//   "language": "en",
+//   "keywords": [  // analyzes keywords within a document, does not take parameters
+//     {
+//       "text": "collagen chocolate pudding",
+//       "sentiment": {
+//         "score": 0.537467,
 //         "label": "positive"
 //       },
 //       "relevance": 0.98194,
@@ -185,8 +185,7 @@ const watsonoutput = {
   },
   "language": "en",
   "emotion": {
-    "targets": [
-      {
+    "targets": [{
         "text": "eggs",
         "emotion": {
           "sadness": 0.04901,

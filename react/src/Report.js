@@ -21,7 +21,7 @@ import BottomRightNav from './BottomRightNav.js';
 
 const styles = {
   RightTopContainer: { height: '65%' },
-  RightBottomContainer: { height: '34.5%', marginTop:5},
+  RightBottomContainer: { height: '34.5%', marginTop: 5 },
   RightTopPanel: { height: '100%' },
   RightBottomPanel: { height: '100%' },
   AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
@@ -36,20 +36,24 @@ class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: Ratings,
+      // reviews: Ratings,
       leftSide: { displaying: 'sentiment', reviewsToShow: 2, show: 'both' },
-      fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false }
-      //reviews: []
+      fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
+      reviews: []
     };
   }
   //*****************keep this and the above review for when we actually scrape******************
-  // componentDidMount(){
-  // fetch('http://localhost:3001/1')
-  // .then(results => { return results.json()  })
-  // .then(results => {this.setState({reviews: results})
-  // console.log('in report', this.state)}
-  // );
-  //  }
+  componentDidMount() {
+    console.log('fired from report')
+    fetch('http://localhost:3001/1')
+      .then(results => { return results.json() })
+      .then(results => {
+        this.setState({ reviews: results })
+        console.log('in report', this.state)
+        console.log('in report', this.state.reviews)
+      });
+  }
+
   showState = (message) => {
     console.log(message, this.state);
   }

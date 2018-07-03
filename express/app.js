@@ -53,6 +53,7 @@ app.post('/1', (req, res) => {
   console.log('req body', req.body)
   const sendStuff = (data) =>{
     console.log('in sendStuff');
+    console.log(data)
     data.forEach(function(review) {
       reportData.push(review)
     })

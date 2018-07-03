@@ -140,11 +140,11 @@ const fs = require('fs');
 var reviewsArray = []
 
 //multiple page recursion
-function yelpRecursion(i, link) {
+const yelpRecursion = (i, link, cb) => {
   // let url = link + i
   console.log('started', i)
-  console.log(link + i)
-  let url = link + i
+  // console.log(link + '?start=' + i)
+  let url = link + '?start=' + i
   // let url = `https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=${i}`
   request(url, function (error, response, html) {
     if (!error && response.statusCode == 200) {
@@ -164,14 +164,19 @@ function yelpRecursion(i, link) {
       })
       // if (reviewsArray.length <=100 ) {
       // can scrape and base off of 'div[class="page-of-pages"]' or 'span[itemprop="reviewCount"] innerHTML
-      if (i < 60) {
+      if (i < 100) {
         i += 20
-        yelpRecursion(i, link)
+        yelpRecursion(i, link, cb)
       } else {
-        console.log(reviewsArray)
+        console.log('scrapedlength', reviewsArray.length)
+        cb(reviewsArray)
       }
     }
   })
+}
+
+module.exports = {
+  yelpRecursion: yelpRecursion,
 }
 
 // yelpRecursion(0, 'https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=')
@@ -202,29 +207,32 @@ exports.yelp = function (url, cb) {
 
 
 // tripAdvisor scrape ---> need to convert to function
-request('https://www.tripadvisor.ca/Restaurant_Review-g155019-d704408-Reviews-or10-Fresh_On_Spadina-Toronto_Ontario.html', function (error, response, html) {
-  if (!error && response.statusCode == 200) {
-    var $ = cheerio.load(html);
-    var reviewsArray = []
-    var todayDate = new Date().toJSON().slice(0, 10)
-    console.log(todayDate)
-    $('.review').each(function (i, el) {
-      var reviewv = $(this).find('p.partial_entry').text()
-      var ratingv = $(this).find('.ui_bubble_rating').attr('class').replace(/ui_bubble_rating bubble_/g, '')
-      // var datev = $(this).find('.ratingDate').text()
-      var datev = $(this).find('.ratingDate').attr('title')
-      var namev = $(this).find('.scrname').text()
-      review = {
-        rating: ratingv,
-        author: namev,
-        description: reviewv,
-        datePublished: datev
-      }
-      reviewsArray.push(review)
-    })
-    console.log(reviewsArray)
-  }
-});
+function tripAdvisor() {
+  request('https://www.tripadvisor.ca/Restaurant_Review-g155019-d704408-Reviews-or10-Fresh_On_Spadina-Toronto_Ontario.html', function (error, response, html) {
+    if (!error && response.statusCode == 200) {
+      var $ = cheerio.load(html);
+      var reviewsArray = []
+      var todayDate = new Date().toJSON().slice(0, 10)
+      console.log(todayDate)
+      $('.review').each(function (i, el) {
+        var reviewv = $(this).find('p.partial_entry').text()
+        var ratingv = $(this).find('.ui_bubble_rating').attr('class').replace(/ui_bubble_rating bubble_/g, '')
+        // var datev = $(this).find('.ratingDate').text()
+        var datev = $(this).find('.ratingDate').attr('title')
+        var namev = $(this).find('.scrname').text()
+        review = {
+          rating: ratingv,
+          author: namev,
+          description: reviewv,
+          datePublished: datev
+        }
+        reviewsArray.push(review)
+      })
+      console.log(reviewsArray)
+    }
+  });
+}
+
 
 
 

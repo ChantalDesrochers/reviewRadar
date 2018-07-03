@@ -39,6 +39,8 @@ class PieChart extends Component {
 }
 
 componentDidMount() {
+// componentWillMount() {
+  console.log('fired from piechart')
 var gettingChartData = () => {
 let dataScores = []
       const reviews = this.state.reviews
