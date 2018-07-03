@@ -131,14 +131,14 @@ class Report extends Component {
           </Toolbar>
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
-          <Grid style={styles.LeftContainer} item sm={8}>
+          <Grid style={styles.LeftContainer} item sm={7}>
             <Paper id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
             <div >
               {this.LeftSideShow()}
               </div>
             </Paper>
           </Grid>
-          <Grid style={styles.RightContainer} item sm={4}>
+          <Grid style={styles.RightContainer} item sm={5}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
                 <ChartContainer reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
