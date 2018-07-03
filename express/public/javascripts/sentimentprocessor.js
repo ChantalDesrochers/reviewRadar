@@ -14,8 +14,8 @@ const sortResults = results => {
 
 const addSentiment = cb => (reviews) => {
   const go = (reviews, cb, newReviews) => {
-    // if (reviews.length === 0) {
-    if (reviews.length === 15) {
+    if (reviews.length === 0) {
+    // if (reviews.length === 15) {
       //  console.log('******DONE*******')
       // console.log('before sorting', newReviews)
       //  console.log(sortResults(newReviews))

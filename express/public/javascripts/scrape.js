@@ -30,8 +30,6 @@ const yelpRecursion = (i, link, cb) => {
           origin: 'yelp',
           description: descriptionv,
           datePublished: datePublishedv,
-          score: 0, // testdata
-          label: 'neutral', // testdata
         }
         reviewsArray.push(review)
       })

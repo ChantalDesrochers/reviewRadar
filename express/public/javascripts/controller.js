@@ -8,8 +8,9 @@ const sortResults = results => {
 
 const getData = (url, cb) => {
   // console.log("in get data");
-  scraper.yelpRecursion(0, url, cloud.iterateWithDelay(cb)); // 
-  // scraper.yelpRecursion(0, url, watson.addSentiment(cb)); // passing in sendstuff from app
+  // scraper.yelpRecursion(0, url, cloud.iterateWithDelay(cb)); // meaningcloud in isolation
+  // scraper.yelpRecursion(0, url, watson.addSentiment(cb)); // watson in isolation
+  scraper.yelpRecursion(0, url, cloud.iterateWithDelay(watson.addSentiment(cb))); // meaningcloud in isolation
 };
 
 module.exports = {
