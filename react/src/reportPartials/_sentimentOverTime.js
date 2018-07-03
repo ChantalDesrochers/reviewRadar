@@ -28,7 +28,7 @@ class SentimentOverTime extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [65, 59, 80, 81, 56, 55, 40]
+          data: []
         },
         {
           label: 'Positive',
@@ -49,7 +49,7 @@ class SentimentOverTime extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [20, 3, 5, 23, 55, 12, 4]
+          data: []
         }
         ]
       }
@@ -195,6 +195,9 @@ parseSentimentDatabyTime()
 
   render() {
  const handleClick = elem => {
+
+  console.log(elem)
+
 if (elem[0]) {
 console.log(elem)
 let chartPoints = elem;
@@ -202,15 +205,18 @@ let clickedPointIndex = chartPoints[0]['_index']
 const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
 const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
 // const month = chartPoints[0]['config']['data']['labels'][clickedPointIndex]
+// const month = chartPoints[0]['config']['data']['labels'][clickedPointIndex]
+
 // console.log(month)
 console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
 console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
  }
  }
 
+
         return (
         <div className="sentiment-over-time">
-       <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
+       <Line data={this.state.data} onElementsClick={(elem)=>{handleClick(elem)}}/>
         </div>
         );
     }
