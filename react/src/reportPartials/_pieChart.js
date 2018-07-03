@@ -35,6 +35,7 @@ class PieChart extends Component {
       }
     }
   }
+
   parseChartData = () => {
     if (this.state.chartdata.datasets[0].data.length === 0) {
       let veryPositive = 0;
@@ -56,6 +57,7 @@ class PieChart extends Component {
           veryNegative += 1;
         }
       });
+      
       this.setState({ ...this.state.chartdata.datasets[0].data = [veryPositive, positive, neutral, negative, veryNegative] })
     }
   }
