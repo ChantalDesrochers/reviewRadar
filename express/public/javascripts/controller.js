@@ -6,7 +6,7 @@ const sortResults = results => {
 };
 
 const getData = (url, cb) => {
-  console.log("in get data");
+  // console.log("in get data");
   scraper.yelpRecursion(0, url, watson.addSentiment(cb)); // passing in sendstuff from
 };
 

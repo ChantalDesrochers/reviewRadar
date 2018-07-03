@@ -8,16 +8,19 @@ var nlu = new NaturalLanguageUnderstandingV1({
   'version_date': '2018-03-16'
 });
 
+const sortResults = results => {
+  return results.sort((a, b) => b.score - a.score);
+};
 
 const addSentiment = cb => (reviews) => {
   const go = (reviews, cb, newReviews) => {
     // if (reviews.length === 0) {
-    if (reviews.length === 19) {
-       console.log('******DONE*******')
-       console.log(newReviews)
-      return cb(newReviews);
+    if (reviews.length === 15) {
+      //  console.log('******DONE*******')
+      // console.log('before sorting', newReviews)
+      //  console.log(sortResults(newReviews))
+       return cb(sortResults(newReviews))
     }
-
     const head = reviews[0];
     const tail = reviews.slice(1);
 
