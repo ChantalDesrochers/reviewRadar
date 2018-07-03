@@ -39,10 +39,11 @@ app.post('/1', (req, res) => {
   const sendStuff = (data) =>{
     // console.log('in sendStuff');
     // console.log(data)
-    data.forEach(function(review) {
+    data.forEach(function(review, i) {
+      // review.id = i
       reportData.push(review)
     })
-    // res.send('success')
+    res.send('success')
   }
 
   if (req.body.url1 != '') {
@@ -57,7 +58,7 @@ app.post('/1', (req, res) => {
   // var data3 = sentiment.getData(req.body.url3, sendStuff)
   // }
 
-  res.send('success')
+  // res.send('success')
 })
 
 

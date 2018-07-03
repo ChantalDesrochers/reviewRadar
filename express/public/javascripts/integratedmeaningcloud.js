@@ -2,6 +2,7 @@ var request = require("request");
 let reviewsCount = 0;
 
 encodedArray = [];
+let reviews = []
 
 // takes in an argument and checks it for a match against an element of the array
 // element.content is formatted to be used twice, rename with caution
@@ -9,9 +10,11 @@ checkForExisting = match => element => {
   return element.content == match;
 };
 
-parseMC = reviewslength => review => (error, response, body) => {
+
+
+parseMC = (reviewslength, sendstuffcb) => review => (error, response, body) => {
   console.log;
-  review.concepts = [];
+  reviews[review.id].concepts = [];
   let results = JSON.parse(body);
   if (results.status.msg === "OK") {
     results.concept_list.forEach(function (item) {
@@ -19,9 +22,9 @@ parseMC = reviewslength => review => (error, response, body) => {
         // threshold of relevance
         existingIndex = review.concepts.findIndex(checkForExisting(item.form));
         if (existingIndex < 0) {
-          review.concepts.push({
+          reviews[review.id].concepts.push({
             content: item.form,
-            position: review.id
+            // position: review.id
           });
         }
       }
@@ -32,12 +35,16 @@ parseMC = reviewslength => review => (error, response, body) => {
   }
   reviewsCount++;
 
+  // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {
     console.log("now we are done");
-    console.log(reviews);
-    returnReviews(reviews);
+    // console.log(reviews);
+    // returnReviews(reviews); // this is where it should go to watson
+    reviewsCount = 0; // resetting state before next time it's run
+    sentReviews = reviews
+    reviews = []
+    return sendstuffcb(sentReviews)
 
-    reviewsCount = 0;
     // console.log(sortResults(reviews))
     // DONE!
   }
@@ -56,11 +63,13 @@ const requester = (review, cb) => {
 };
 
 // function iterateWithDelay(array) {
-iterateWithDelay = array => {
-  for (let i = 0; i < array.length; i++) {
+  // called function, receiving reviews array from scraper
+iterateWithDelay = sendstuffcb => array => {
+  reviews = array
+  for (let i = 0; i < reviews.length; i++) {
     (function (i) {
       setTimeout(function () {
-        requester(array[i], parseMC(array.length));
+        requester(reviews[i], parseMC(reviews.length, sendstuffcb));
       }, 1500 * i);
     })(i);
   }
