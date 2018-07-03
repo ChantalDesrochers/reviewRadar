@@ -1,10 +1,10 @@
-// const scraper = require('./scrape.js')
+const scraper = require('./scrape.js')
 var fs = require('fs');
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 let reviewsCount = 0;
 var { iterateWithDelay } = require('./integratedmeaningcloud.js');
 var { conceptAggreator } = require('./integratedmeaningcloud.js');
-var { yelpRecursion } = require('./scrape.js').yelpRecursion
+// var { yelpRecursion } = require('./scrape.js').yelpRecursion
 
 
 var nlu = new NaturalLanguageUnderstandingV1({
@@ -98,10 +98,10 @@ const sortResults = (results) => {
 }
 
 exports.getData = (url, cb) => {
-  // console.log('in get data')
-  yelpRecursion(0, url, addSentiment);
-  // scraper.yelpRecursion(0, url, addSentiment);
-  //scraper.yelp(url, iterateWithDelay);
+  console.log('in get data')
+  // yelpRecursion(0, url, addSentiment);
+  scraper.yelpRecursion(0, url, addSentiment);
+  // scraper.yelp(0, url, addSentiment);
   returnReviews = cb;
 }
 let returnReviews = (data) => {}

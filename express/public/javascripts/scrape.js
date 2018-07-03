@@ -181,11 +181,11 @@ const yelpRecursion = (i, link, cb) => {
 // yelpRecursion(0, 'https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=', function(data){console.log(data)})
 
 module.exports = {
-  yelpRecursion: yelpRecursion,
+  yelpRecursion: yelpRecursion
 }
 
 
-exports.yelp = function (url, cb) {
+const yelp = function (url, cb) {
   request(url, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       var $ = cheerio.load(html);

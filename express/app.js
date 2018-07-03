@@ -60,17 +60,17 @@ app.post('/1', (req, res) => {
     // res.send('success')
   }
 
-  if (req.body.url1 != '') {
+  // if (req.body.url1 != '') {
   var data = sentiment.getData(req.body.url1, sendStuff)
-  }
+  // }
 
-  if (req.body.url2 != '') {
-  var data2 = sentiment.getData(req.body.url2, sendStuff)
-  }
+  // if (req.body.url2 != '') {
+  // var data2 = sentiment.getData(req.body.url2, sendStuff)
+  // }
 
-  if (req.body.url3 != '') {
-  var data3 = sentiment.getData(req.body.url3, sendStuff)
-  }
+  // if (req.body.url3 != '') {
+  // var data3 = sentiment.getData(req.body.url3, sendStuff)
+  // }
 
   res.send('success')
 })
