@@ -552,7 +552,7 @@ const inputReviews = [
   }
 ];
 
-checkForExisting = match => element => {
+const checkForExisting = match => element => {
   return element.content == match;
 };
 
@@ -561,7 +561,7 @@ const conceptAggreator = array => {
   array.forEach(function(review) {
     review.concepts.forEach(function(concept) {
       // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
-      existingIndex = allConcepts.findIndex(checkForExisting(concept.content));
+     let existingIndex = allConcepts.findIndex(checkForExisting(concept.content));
       if (existingIndex < 0) {
         allConcepts.push({
           content: concept.content,
@@ -578,7 +578,7 @@ const conceptAggreator = array => {
 //conceptAggreator(noDupeJSON2);
 //console.log(JSON.stringify(allConcepts));
 
-let ReturnConcepts = [
+const ReturnConcepts = [
   {
     content: "food",
     references: [0, 2, 4, 6, 7, 9, 11, 12, 13, 15, 16, 17, 18, 19]
