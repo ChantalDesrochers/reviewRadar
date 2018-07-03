@@ -20,22 +20,20 @@ import KeywordsToShow from './keywords-to-show';
 import Ratings from "./ratings.js"
 import BottomRightNav from './BottomRightNav.js';
 import Colors from './AppColors';
-// const colors = {
-//   RightTopContainerColor:  '# F1FFAF' ,
-//   AppBarColor: '#68A0B2',
-//   PieChartColors: {VeryPositiveColor: '#9B59B6' }
-// }
+import KeywordBarChart from './reportPartials/_barChartKWs';
+import SentimentPieChart from './reportPartials/_pieChart';
+
 const styles = {
   RightTopContainer: { height: '65%' },
   RightBottomContainer: { height: '34.5%', marginTop: 5 },
-  RightTopPanel: { height: '100%', backgroundColor: Colors.RightTopColor},
+  RightTopPanel: { height: '100%', backgroundColor: Colors.RightTopColor },
   RightBottomPanel: { height: '100%', backgroundColor: Colors.RightBottomColor },
   AppBar: { backgroundColor: Colors.AppBarColor },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
   LargePanel: { height: '100%', fontFamily: 'Bauhaus', backgroundColor: Colors.LargePanelColor },
-  ChartContainer:{},
+  ChartContainer: {},
   // backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat',    <=== For adding backgrounds to the panels
 
   // LeftContainer: { height: '100%' , padding:0},
@@ -47,6 +45,7 @@ class Report extends Component {
     super(props);
     this.state = {
       reviews: Ratings,
+      displaying: 'sentiment',
       leftSide: { displaying: 'sentiment', reviewsToShow: 2, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false }
       //reviews: []
@@ -66,8 +65,8 @@ class Report extends Component {
 
   //All 'sides' need to be removed from variables/functions and called ...maybe
   LeftSideShow = (event) => {
-    const { reviews, leftSide, fadeTracker } = this.state;
-    switch (leftSide.displaying) {
+    const { displaying, reviews, leftSide, fadeTracker } = this.state;
+    switch (displaying) {
       case 'sentiment':
         const topReviews = { title: 'Top Endorsements', content: reviews.slice(0, leftSide.reviewsToShow) }
         const bottomReviews = { title: 'Harshest Criticisms', content: reviews.slice(-(leftSide.reviewsToShow), reviews.length) }
@@ -78,6 +77,20 @@ class Report extends Component {
         break;
     }
   }
+  RightSideShow = (event) => {
+    const { displaying, reviews, leftSide, fadeTracker } = this.state;
+    switch (displaying) {
+      case 'sentiment':
+      //  const topReviews = { title: 'Top Endorsements', content: reviews.slice(0, leftSide.reviewsToShow) }
+        //const bottomReviews = { title: 'Harshest Criticisms', content: reviews.slice(-(leftSide.reviewsToShow), reviews.length) }
+        return   <SentimentPieChart reviews={this.state.reviews} pickReviewTypeToDisplay={this. swapReviewsOnAllSentimentChartClick} />
+        break;
+      case 'keyword':
+        return <KeywordBarChart reviews={this.state.reviews} />
+        break;
+    }
+  }
+
 
   toggleFade = () => {
     this.setState({ ...this.state.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool, ...this.state.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool })
@@ -97,6 +110,9 @@ class Report extends Component {
         this.setState({ ...this.state.leftSide.show = 'negative' })
         return
     }
+  }
+
+  swapReviewsOnKeywordChartClick = (focus) => {
 
   }
 
@@ -104,14 +120,14 @@ class Report extends Component {
     // let clickedItem = event.target.dataset.message;
     switch (clickedItem) {
       case 'sentiment':
-        if (this.state.leftSide.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
-        this.setState({ ...this.state.leftSide.reviewsToShow = 2, ...this.state.leftSide.show = 'both', ...this.state.leftSide.displaying = 'sentiment' }, () => {
+        if (this.state.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
+        this.setState({ ...this.state.leftSide.reviewsToShow = 2, ...this.state.leftSide.show = 'both', ...this.state.displaying = 'sentiment' }, () => {
           this.toggleFade();
         });
         return
       case 'keyword':
-        if (this.state.leftSide.displaying === clickedItem && this.state.fadeTracker.keywordFadeBool) return
-        this.setState({ ...this.state.leftSide.displaying = 'keyword' }, () => {
+        if (this.state.displaying === clickedItem && this.state.fadeTracker.keywordFadeBool) return
+        this.setState({ ...this.state.displaying = 'keyword' }, () => {
           this.toggleFade();
         });
         return
@@ -123,9 +139,9 @@ class Report extends Component {
       <div style={styles.Top}>
         <AppBar position="static" style={styles.AppBar}>
           <Toolbar>
-<Tonality/>
+            <Tonality />
             {/* <IconButton style={styles.menuButton} color="inherit" aria-label="Menu"> */}
-              <PlayArrow />
+            <PlayArrow />
             {/* </IconButton> */}
             <Typography variant="display3" style={styles.MainTitle}>Planta</Typography>
           </Toolbar>
@@ -133,15 +149,15 @@ class Report extends Component {
         <Grid container style={styles.MainContainer} spacing={8}>
           <Grid style={styles.LeftContainer} item sm={7}>
             <Paper id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
-            <div >
-              {this.LeftSideShow()}
+              <div >
+                {this.LeftSideShow()}
               </div>
             </Paper>
           </Grid>
           <Grid style={styles.RightContainer} item sm={5}>
             <Grid style={styles.RightTopContainer} item sm={12}>
-              <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-                <ChartContainer reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+              <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >              
+                {this.RightSideShow()}
               </Paper>
             </Grid>
             <Grid style={styles.RightBottomContainer} item sm={12}>
