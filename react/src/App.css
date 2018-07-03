@@ -5,11 +5,14 @@
 .review-title{
     text-align: center;
     margin-top: 0;
-    background-color:yellowgreen;
+    /* background-color:yellowgreen; */
 }
 .top{
     height:'100vh';
 }
-.review{
-  
+.big-chart-container{
+    background-color: blue;
 }
+
+
+ 

@@ -9,9 +9,9 @@ class ChartContainer extends Component {
             <div className="chart-container">
                <div className="chart-name"></div>
                <PieChart reviews={this.props.reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay} />
-               <Button variant="contained" data-message="reset" >
+               {/* <Button variant="contained" data-message="reset" >
                   <Typography> Reset </Typography>
-                </Button>
+                </Button> */}
         </div>
         );
     }

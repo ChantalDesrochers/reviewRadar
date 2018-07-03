@@ -7,9 +7,10 @@ import 'typeface-roboto'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+//import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import { IconButton, AccessAlarm, ThreeDRotation, Accessible, ArrowForward, PlayArrow, Navigation, Tonality } from '@material-ui/icons'
+import SvgIcon from '@material-ui/core/SvgIcon';
 import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
 
@@ -18,19 +19,28 @@ import SentimentsToShow from './sentiments-to-show';
 import KeywordsToShow from './keywords-to-show';
 import Ratings from "./ratings.js"
 import BottomRightNav from './BottomRightNav.js';
-
+import Colors from './AppColors';
+// const colors = {
+//   RightTopContainerColor:  '# F1FFAF' ,
+//   AppBarColor: '#68A0B2',
+//   PieChartColors: {VeryPositiveColor: '#9B59B6' }
+// }
 const styles = {
   RightTopContainer: { height: '65%' },
-  RightBottomContainer: { height: '34.5%', marginTop:5},
-  RightTopPanel: { height: '100%' },
-  RightBottomPanel: { height: '100%' },
-  AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+  RightBottomContainer: { height: '34.5%', marginTop: 5 },
+  RightTopPanel: { height: '100%', backgroundColor: Colors.RightTopColor},
+  RightBottomPanel: { height: '100%', backgroundColor: Colors.RightBottomColor },
+  AppBar: { backgroundColor: Colors.AppBarColor },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
-  LargePanel: { height: '100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 0, fontFamily: 'Bauhaus' },
-  LeftContainer: { height: '100%' },
-  Top: { height: '86vh' }
+  LargePanel: { height: '100%', fontFamily: 'Bauhaus', backgroundColor: Colors.LargePanelColor },
+  ChartContainer:{},
+  // backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat',    <=== For adding backgrounds to the panels
+
+  // LeftContainer: { height: '100%' , padding:0},
+  Top: { height: '86vh' },
+  Paper: { backgroundColor: 'red' }
 }
 class Report extends Component {
   constructor(props) {
@@ -57,7 +67,6 @@ class Report extends Component {
   //All 'sides' need to be removed from variables/functions and called ...maybe
   LeftSideShow = (event) => {
     const { reviews, leftSide, fadeTracker } = this.state;
-
     switch (leftSide.displaying) {
       case 'sentiment':
         const topReviews = { title: 'Top Endorsements', content: reviews.slice(0, leftSide.reviewsToShow) }
@@ -114,16 +123,19 @@ class Report extends Component {
       <div style={styles.Top}>
         <AppBar position="static" style={styles.AppBar}>
           <Toolbar>
-            <IconButton style={styles.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="display3" style={styles.MainTitle}>Komfort and Kim</Typography>
+<Tonality/>
+            {/* <IconButton style={styles.menuButton} color="inherit" aria-label="Menu"> */}
+              <PlayArrow />
+            {/* </IconButton> */}
+            <Typography variant="display3" style={styles.MainTitle}>Planta</Typography>
           </Toolbar>
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
           <Grid style={styles.LeftContainer} item sm={8}>
-            <Paper style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
+            <Paper id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
+            <div >
               {this.LeftSideShow()}
+              </div>
             </Paper>
           </Grid>
           <Grid style={styles.RightContainer} item sm={4}>
