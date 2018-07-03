@@ -49,8 +49,8 @@ class Report extends Component {
       .then(results => { return results.json() })
       .then(results => {
         this.setState({ reviews: results })
-        console.log('in report', this.state)
-        console.log('in report', this.state.reviews)
+        // console.log('in report', this.state)
+        // console.log('in report', this.state.reviews)
       });
   }
 
