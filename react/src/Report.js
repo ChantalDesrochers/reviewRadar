@@ -90,8 +90,9 @@ class Report extends Component {
     }
 
   }
-  clickHandler = (event) => {
-    let clickedItem = event.target.dataset.message;
+
+  clickHandler = (clickedItem) => {
+    // let clickedItem = event.target.dataset.message;
     switch (clickedItem) {
       case 'sentiment':
         if (this.state.leftSide.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
