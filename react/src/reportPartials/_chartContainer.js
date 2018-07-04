@@ -14,10 +14,10 @@ class ChartContainer extends Component {
             <div className="chart-container">
                <div className="chart-name"></div>
                 {/*<KeywordBarChart reviews={this.props.reviews} /> */}
-               {/* <SentimentOverTime reviews={this.props.reviews} /> */}
+               { <SentimentOverTime reviews={this.props.reviews} /> }
                {/* <NumberOfReviewsOverTime reviews={this.props.reviews}/> */}
                 {/*<KeywordsOverTime />*/}
-                <KeywordPolar />
+                {/*<KeywordPolar />*/}
                {/*<PieChart reviews={this.props.reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay} />*/}
 
         </div>

@@ -1,4 +1,4 @@
-const inputReviews = [
+const InputReviews = [
   {
     id: 0,
     rating: "3.0",
@@ -552,27 +552,28 @@ const inputReviews = [
   }
 ];
 
-const checkForExisting = match => element => {
-  return element.content == match;
-};
+module.exports = InputReviews
+// const checkForExisting = match => element => {
+//   return element.content == match;
+// };
 
-const conceptAggreator = array => {
-  let allConcepts = [];
-  array.forEach(function(review) {
-    review.concepts.forEach(function(concept) {
-      // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
-     let existingIndex = allConcepts.findIndex(checkForExisting(concept.content));
-      if (existingIndex < 0) {
-        allConcepts.push({
-          content: concept.content,
-          references: [review.id]
-        });
-      } else {
-        allConcepts[existingIndex].references.push(review.id);
-      }
-    });
-  });
-};
+// const conceptAggreator = array => {
+//   let allConcepts = [];
+//   array.forEach(function(review) {
+//     review.concepts.forEach(function(concept) {
+//       // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
+//      let existingIndex = allConcepts.findIndex(checkForExisting(concept.content));
+//       if (existingIndex < 0) {
+//         allConcepts.push({
+//           content: concept.content,
+//           references: [review.id]
+//         });
+//       } else {
+//         allConcepts[existingIndex].references.push(review.id);
+//       }
+//     });
+//   });
+// };
 
 //function to aggregate results
 //conceptAggreator(noDupeJSON2);
@@ -724,3 +725,4 @@ const conceptAggreator = array => {
 // // returnConcepts.forEach(function(concept) {
 // //   console.log(concept.content, concept.references.length);
 // // });
+
