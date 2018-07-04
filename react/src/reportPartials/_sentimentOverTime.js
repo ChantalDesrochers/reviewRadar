@@ -121,67 +121,67 @@ if (month === "02" && review.label === "positive") {
   february.positive += 1
 }
 if (month === "02" && review.label === "negative") {
-  february.positive += 1
+  february.negative += 1
 }
 if (month === "03" && review.label === "positive") {
   march.positive += 1
 }
 if (month === "03" && review.label === "negative") {
-  march.positive += 1
+  march.negative += 1
 }
 if (month === "04" && review.label === "positive") {
   april.positive += 1
 }
 if (month === "04" && review.label === "negative") {
-  april.positive += 1
+  april.negative += 1
 }
 if (month === "05" && review.label === "positive") {
   may.positive += 1
 }
 if (month === "05" && review.label === "negative") {
-  may.positive += 1
+  may.negative += 1
 }
 if (month === "06" && review.label === "positive") {
   june.positive += 1
 }
 if (month === "06" && review.label === "negative") {
-  june.positive += 1
+  june.negative += 1
 }
 if (month === "07" && review.label === "positive") {
   july.positive += 1
 }
 if (month === "07" && review.label === "negative") {
-  july.positive += 1
+  july.negative += 1
 }
 if (month === "08" && review.label === "positive") {
   august.positive += 1
 }
 if (month === "08" && review.label === "negative") {
-  august.positive += 1
+  august.negative += 1
 }
 if (month === "09" && review.label === "positive") {
   september.positive += 1
 }
 if (month === "09" && review.label === "negative") {
-  september.positive += 1
+  september.negative += 1
 }
 if (month === "10" && review.label === "positive") {
   october.positive += 1
 }
 if (month === "10" && review.label === "negative") {
-  october.positive += 1
+  october.negative += 1
 }
 if (month === "11" && review.label === "positive") {
   november.positive += 1
 }
 if (month === "11" && review.label === "negative") {
-  november.positive += 1
+  november.negative += 1
 }
 if (month === "12" && review.label === "positive") {
   december.positive += 1
 }
 if (month === "12" && review.label === "negative") {
-  december.positive += 1
+  december.negative += 1
 }
 })
 var positive = [january.positive, february.positive, march.positive, april.positive, may.positive, june.positive, july.positive, august.positive, september.positive, october.positive, november.positive, december.positive];

@@ -37,58 +37,35 @@ class PieChart extends Component {
 }
 }
 
-componentDidMount() {
-var gettingChartData = () => {
-let dataScores = []
-      const reviews = this.state.reviews
-      var veryPositive = 0;
-      var positive = 0;
-      var neutral = 0
-      var negative = 0
-      var veryNegative = 0
-      reviews.forEach(function(review) {
+parseChartData = () => {
+    if (this.state.chartdata.datasets[0].data.length === 0) {
+      let veryPositive = 0;
+      let positive = 0;
+      let neutral = 0
+      let negative = 0
+      let veryNegative = 0
+      this.state.reviews.forEach(function (review) {
         var rounded = parseFloat(review.score.toFixed(1))
-        switch (rounded) {
-          case 0:
-            neutral += 1;
-            break;
-          case 0.1:
-          case 0.2:
-          case 0.3:
-          case 0.4:
-          case 0.6:
-            positive += 1;
-            break;
-          case 0.7:
-          case 0.8:
-          case 0.9:
-          case 1:
-            veryPositive += 1
-          case (-0.5):
-          case (-0.4):
-          case (-0.3):
-          case (-0.2):
-          case (-0.1):
-            negative += 1;
-            break;
-          case (-1):
-          case (-0.9):
-          case (-0.8):
-          case (-0.7):
-          case (-0.6):
-            veryNegative += 1;
-            break;
+        if (rounded === 0) {
+          neutral += 1;
+        } else if (rounded > 0 && rounded <= 0.5) {
+          positive += 1;
+        } else if (rounded > 0.5) {
+          veryPositive += 1;
+        } else if (rounded < 0 && rounded >= -0.5) {
+          negative += 1;
+        } else if (rounded < -0.5) {
+          veryNegative += 1;
         }
-        dataScores = [veryPositive, positive, neutral, negative, veryNegative]
       });
-      this.setState({ ...this.state.chartdata.datasets[0].data = dataScores })
-}
-gettingChartData()
-}
+      this.setState({ ...this.state.chartdata.datasets[0].data = [veryPositive, positive, neutral, negative, veryNegative] })
+    }
+  }
+
 
 
 render() {
-
+this.parseChartData();
 const handleClicktwo = elem => {
   if (elem[0]) {
 console.log(elem)

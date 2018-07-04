@@ -18,6 +18,8 @@ import SentimentsToShow from './sentiments-to-show';
 import KeywordsToShow from './keywords-to-show';
 import Ratings from "./ratings.js"
 import BottomRightNav from './BottomRightNav.js';
+import conceptAggreator from './parsingConceptbyMonth';
+import checkForExisting from './parsingConceptbyMonth';
 
 const styles = {
   RightTopContainer: { height: '69%' },
@@ -40,6 +42,8 @@ class Report extends Component {
       leftSide: { displaying: 'sentiment', reviewsToShow: 2, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false }
       //reviews: []
+
+
     };
   }
   //*****************keep this and the above review for when we actually scrape******************

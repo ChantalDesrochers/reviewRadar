@@ -221,7 +221,7 @@ exports.yelp = function(cb) {
 //     console.log(todayDate)
 //     $('.review').each(function(i, el) {
 //       var reviewv = $(this).find('p.partial_entry').text()
-//       var ratingv = $(this).find('.ui_bubble_rating').attr('class')
+//       var ratingv = $(this).find('.ui_bubble_rating').attr('class').replace(/ui_bubble_rating bubble_/g,'')
 //       // var datev = $(this).find('.ratingDate').text()
 //       var datev = $(this).find('.ratingDate').attr('title')
 //       var namev = $(this).find('.scrname').text()
