@@ -8,9 +8,10 @@ var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var sentiment = require('./public/javascripts/sentimentprocessor.js');
+var controller = require('./public/javascripts/controller.js');
 
 var app = express();
+
 
 // view engine setup
 app.use(cors())
@@ -25,20 +26,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.get('/1', (req, res) => {
-  const sendStuff = (data) =>{
-    console.log('in sendStuff');
-    res.send(JSON.stringify(data))
-  }
-  var data = sentiment.getData(sendStuff)
-  console.log('/1');
-  // console.log('before', data)
-  // Promise.all(sentiment.getData()).then(responses => res.send(responses))
- //  res.send(JSON.stringify(data))
-  
-  // console.log('after', data)
 
-});
+var reportData = []
+
+app.get('/1', (req, res) => {
+  res.send(JSON.stringify(reportData))
+})
+
+app.post('/1', (req, res) => {
+  // console.log('full request', req)
+  console.log('req body', req.body)
+  const sendStuff = (data) =>{
+    // console.log('in sendStuff');
+    // console.log(data)
+    data.forEach(function(review, i) {
+      // review.id = i
+      reportData.push(review)
+    })
+    res.send('success')
+  }
+
+  if (req.body.url1 != '') {
+    controller.getData(req.body.url1, sendStuff)
+  }
+
+  // if (req.body.url2 != '') {
+  // var data2 = sentiment.getData(req.body.url2, sendStuff)
+  // }
+
+  // if (req.body.url3 != '') {
+  // var data3 = sentiment.getData(req.body.url3, sendStuff)
+  // }
+
+  // res.send('success')
+})
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
