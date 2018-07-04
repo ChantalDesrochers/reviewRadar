@@ -15,7 +15,7 @@ import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
 
 import SentimentsToShow from './sentiments-to-show';
-import KeywordsToShow from './keywords-to-show';
+import KeywordsToShow from './KeyWordsToShow';
 import Ratings from "./ratings.js"
 import OrganizedConcepts from './reportPartials/organizedConcepts.js';
 import CompletedData from './reportPartials/completedData.js'
@@ -74,7 +74,7 @@ class Report extends Component {
         break;
       case 'keyword':
       console.log('current', this.state.currentTargetedReviews);
-        return KeywordsToShow(fadeTracker.keywordFadeBool, this.state.currentTargetedReviews);
+        return <KeywordsToShow fadeTracker={fadeTracker.keywordFadeBool} currentTargetReviews={this.state.currentTargetedReviews}/>;
         break;
     }
   }
