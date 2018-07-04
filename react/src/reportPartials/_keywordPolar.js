@@ -16,7 +16,9 @@ class KeywordPolar extends Component {
             '#4BC0C0',
             '#FFCE56',
             '#E7E9ED',
-            '#36A2EB'
+            '#36A2EB',
+            '#914CAD',
+            '#4CAD8B'
           ],
           label: 'Review Concepts'
         }],
@@ -30,7 +32,7 @@ var getKWData = () => {
 var sortedArray = this.state.testData.sort(function(a, b) {
     return b.references.length - a.references.length
   });
-var topSeven = sortedArray.slice(0,6)
+var topSeven = sortedArray.slice(0,7)
 var label = []
 var data = []
 topSeven.forEach(function(concept) {

@@ -67,7 +67,7 @@ console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['d
 
 
         return (
-            <div className="pie-chart">
+            <div className="bar-chart">
             <h1>Keyword Frequency</h1>
               <HorizontalBar data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
             </div>
