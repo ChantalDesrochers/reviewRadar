@@ -12,14 +12,21 @@ const sortResults = results => {
   return results.sort((a, b) => b.score - a.score);
 };
 
+const addID = results => {
+  results.forEach(function(review, i) {
+    review.id = i
+  })
+  return results
+}
+
 const addSentiment = cb => (reviews) => {
   const go = (reviews, cb, newReviews) => {
     if (reviews.length === 0) {
     // if (reviews.length === 15) {
       //  console.log('******DONE*******')
       // console.log('before sorting', newReviews)
-      //  console.log(sortResults(newReviews))
-       return cb(sortResults(newReviews))
+      addedIDReviews = addID(sortResults(newReviews))
+      return cb(addedIDReviews)
     }
     const head = reviews[0];
     const tail = reviews.slice(1);

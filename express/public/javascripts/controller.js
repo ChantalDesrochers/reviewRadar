@@ -10,7 +10,7 @@ const getData = (url, cb) => {
   // console.log("in get data");
   // scraper.yelpRecursion(0, url, cloud.iterateWithDelay(cb)); // meaningcloud in isolation
   // scraper.yelpRecursion(0, url, watson.addSentiment(cb)); // watson in isolation
-  scraper.yelpRecursion(0, url, cloud.iterateWithDelay(watson.addSentiment(cb))); // meaningcloud in isolation
+  scraper.yelpRecursion(0, url, cloud.iterateWithDelay(watson.addSentiment(cb))); // yelprecursion, which calls meaningcloud (taking in watson as CB)
 };
 
 module.exports = {

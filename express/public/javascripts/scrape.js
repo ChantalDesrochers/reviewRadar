@@ -24,7 +24,6 @@ const yelpRecursion = (i, link, cb) => {
         var descriptionv = $(this).find('p[itemprop="description"]').text()
         var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
         var review = {
-          id: i,
           rating: ratingv,
           author: authorv,
           origin: 'yelp',
