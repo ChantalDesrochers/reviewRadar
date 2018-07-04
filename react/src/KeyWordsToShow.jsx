@@ -13,32 +13,56 @@ class KeywordsToShow extends Component {
         this.state = {
             indexOfReviewCurrentlyDisplayed: 1
         };
+       
     }
 
+    onComponentMount(){
+       // this.props.clickHandlerForKeyWordBarChart(label);
+      //  this.props.keyworkClickHandler('forward');
+        this.prepareHtml(null, this.props.reviewsToShow);
+
+     
+    }
+    //this is what the buttons call in order to go through the reviews
     changeDisplayedReviews = (direction) => {
-        console.log('direction', direction);
+let lastReviewIndex = this.props.currentTargetReviews.length;
       
         let index = this.state.indexOfReviewCurrentlyDisplayed
         console.log('indexof', index)
-        if (direction === 'forward') {
-        this.setState({indexOfReviewCurrentlyDisplayed:index + 1 })
+        if (direction === 'forward' && index !== lastReviewIndex) {
+        this.setState({indexOfReviewCurrentlyDisplayed: index + 1 })
         }
-        else {
+        else if(direction === 'forward' && index === lastReviewIndex){
+            console.log('no other reviews to see');
+        }
+        else if (direction === 'back' && index !== 1 ) {
             this.setState({indexOfReviewCurrentlyDisplayed:index - 1 })
+        }
+        else if (direction === 'back' && index === 1){
+            console.log('yo you at zero');
+            //this should make the back button disappear
         }
 
     }
-
+  
     prepareHtml = (fadeBool, reviewsToShow) => {
 
-        console.log('all the reviews', reviewsToShow);
-        console.log('revierw to display', reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed));
+
+        if(reviewsToShow.length === 0){
+       //     this is going to be passed to report as a n argument
+       console.log('this . props', this.props)
+            let  r = this.props.organizedConcepts[0].content;
+             this.props.clickHandlerForKeyWordBarChart (r);
+         
+        }
+        else
+        console.log('review to display', reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed));
         let reviewToReturn = (
             <div styles={{ padding: 0 }}>
                 <Grid container spacing={16}>
                     <Grid item sm={12}>
-                        <Typography style={{ textAlign: 'center', padding: 50 }}> {reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed)};
-        let reviewToReturn = (} </Typography>
+                        <Typography style={{ textAlign: 'center', padding: 50 }}> {reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed)}
+                        </Typography>
                     </Grid>
 
                     <Grid item sm={5}>
@@ -46,7 +70,7 @@ class KeywordsToShow extends Component {
 
                     <Grid item sm={1}>
                         <div style={{ textAlign: 'center' }}>
-                            <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
+                            <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('back')} >
                                 <PlayArrow className="icon-flipped" />
 
                             </Button>
@@ -56,7 +80,7 @@ class KeywordsToShow extends Component {
 
                     <Grid item sm={2}>
                         <div style={{ textAlign: 'center' }}>
-                            <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('back')} >
+                            <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
                                 <PlayArrow />
 
                             </Button>
@@ -65,9 +89,8 @@ class KeywordsToShow extends Component {
                     <Grid item sm={4}>
                     </Grid>
                 </Grid>
-
             </div>
-        )
+        )    
         return reviewToReturn
     }
     render() {

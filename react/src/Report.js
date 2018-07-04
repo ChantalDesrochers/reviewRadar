@@ -47,7 +47,9 @@ class Report extends Component {
       displaying: 'sentiment',
       leftSide: { displaying: 'sentiment', reviewsToShow: 2, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
-      currentTargetedReviews: []
+      currentTargetedReviews: [],
+      currentTargetedType: '',
+      specificTargetedReview: ""
       //reviews: []
     };
     console.log(this.state.completedData)
@@ -72,9 +74,8 @@ class Report extends Component {
         const bottomReviews = { title: 'Harshest Criticisms', content: reviews.slice(-(leftSide.reviewsToShow), reviews.length) }
         return SentimentsToShow(leftSide.show, this.clickHandler, topReviews, bottomReviews, fadeTracker.sentimentFadeBool)
         break;
-      case 'keyword':
-      console.log('current', this.state.currentTargetedReviews);
-        return <KeywordsToShow fadeTracker={fadeTracker.keywordFadeBool} currentTargetReviews={this.state.currentTargetedReviews}/>;
+      case 'keyword':      
+        return <KeywordsToShow  clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} fadeTracker={fadeTracker.keywordFadeBool} currentTargetReviews={this.state.currentTargetedReviews} organizedConcepts={this.state.organizedConcepts}/>;
         break;
     }
   }
@@ -86,7 +87,9 @@ class Report extends Component {
         return <SentimentPieChart reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
         break;
       case 'keyword':
-        return <KeywordBarChart organizedConcepts={this.state.organizedConcepts} clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} />
+      //set this so the top keyword is shown first,
+      // this.prepareKeyWordBarChart();
+        return <KeywordBarChart  clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart}keywordClickHandler={this.clickHandlerForKeyWordBarChart} organizedConcepts={this.state.organizedConcepts} clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} />
         break;
     }
   }
@@ -121,24 +124,22 @@ findObjectByKey(array, key, value) {
     return null;
 }
 
-
+prepareKeyWordBarChart = () =>{
+console.log('called prepare chart');
+}
   clickHandlerForKeyWordBarChart = (clickedItem) => {
     console.log('clicked for key word bar chart', clickedItem);
     let finalReviews = [];
+    //this gets the id numbers that show where the target concept(clickedItem) appears
     var references = this.state.organizedConcepts.find(x => x.content === clickedItem).references
-    
+    //this makes an array called finalArrays that contains the text of the targeted reviewa
     for (var i =0; i < references.length; i++){
       finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]).description);
-    
     }
-   
     this.setState({currentTargetedReviews:finalReviews});
     this.render();
     console.log(this.state.currentTargetedReviews);
   }
-
-
-
 
   clickHandler = (clickedItem) => {
     // let clickedItem = event.target.dataset.message;
@@ -146,7 +147,7 @@ findObjectByKey(array, key, value) {
       case 'sentiment':
         if (this.state.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
         this.setState({ ...this.state.leftSide.reviewsToShow = 2, ...this.state.leftSide.show = 'both', ...this.state.displaying = 'sentiment' }, () => {
-          this.toggleFade();
+          this.toggleFade();   
         });
         return
       case 'keyword':
@@ -157,7 +158,6 @@ findObjectByKey(array, key, value) {
         return
     }
   };
-
   render() {
     return (
       <div style={styles.Top}>

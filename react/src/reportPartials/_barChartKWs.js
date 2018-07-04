@@ -57,6 +57,8 @@ class KeywordBarChart extends Component {
         let clickedPointIndex = chartPoints[0]['_index']
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
+        //here i need to send what type to show when first loaded, trigger the button press? organized concpets 
+        //passed instead maybe or search in completed Data in keywords to show?
         this.props.clickHandlerForKeyWordBarChart(label);
       }
     }
