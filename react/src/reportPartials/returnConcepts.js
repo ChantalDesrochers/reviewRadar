@@ -128,7 +128,7 @@ let ReturnConcepts = [
   { content: "garment", references: [17] },
   { content: "Summer", references: [17, 19] },
   { content: "basement", references: [17] },
-  { content: "establishment", references: [17] },
+  { content: "establishment", references: Jan[17] },
   { content: "simile", references: [18] },
   { content: "neighborhood", references: [18, 19] },
   { content: "ethnic", references: [18] },
