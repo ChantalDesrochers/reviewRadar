@@ -18,12 +18,13 @@ const yelpRecursion = (i, link, cb) => {
   request(url, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       var $ = cheerio.load(html);
-      $('div[itemprop="review"]').each(function (i, el) {
+      $('div[itemprop="review"]').each(function (index, el) {
         var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
         var authorv = $(this).find('meta[itemprop="author"]').attr('content')
         var descriptionv = $(this).find('p[itemprop="description"]').text()
         var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
         var review = {
+          id: index + i,
           rating: ratingv,
           author: authorv,
           origin: 'yelp',
@@ -40,6 +41,8 @@ const yelpRecursion = (i, link, cb) => {
       } else {
         // console.log('scrapedlength', reviewsArray.length)
         // console.log('scrapeddata', reviewsArray)
+        // fs.writeFile('data.json', JSON.stringify(reviewsArray))
+        //console.log(reviewsArray)
         cb(reviewsArray)
         reviewsArray = [] // resets reviewsArray between requests
       }

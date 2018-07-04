@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "@reach/router";
 class Request extends Component {
     constructor() {
       super();
@@ -59,6 +59,8 @@ class Request extends Component {
     const thanksPage = (
       <div>
         <h2>Thank you for your request</h2>
+        <br/>
+        <Link to="../report">Your report will be ready here</Link>
       </div>
     )
 

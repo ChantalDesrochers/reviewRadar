@@ -32,7 +32,7 @@ const addSentiment = cb => (reviews) => {
     const tail = reviews.slice(1);
 
     // console.log('head', head)
-    console.log('remaining length', reviews.length)
+    console.log('watson remaining', reviews.length)
 
     const parameters = {
       'text': head.description,

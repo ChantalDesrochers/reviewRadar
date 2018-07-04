@@ -24,7 +24,6 @@ parseMC = (reviewslength, sendstuffcb) => review => (error, response, body) => {
         if (existingIndex < 0) {
           reviews[review.id].concepts.push({
             content: item.form,
-            // position: review.id
           });
         }
       }
@@ -32,8 +31,10 @@ parseMC = (reviewslength, sendstuffcb) => review => (error, response, body) => {
     // console.log(JSON.stringify(inputReviewArray));
   } else {
     console.log("error occured", results.status);
+    reviewslength -= 1
   }
   reviewsCount++;
+  console.log('meaning cloud remaining', reviewslength - reviewsCount)
 
   // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {
@@ -70,7 +71,7 @@ iterateWithDelay = sendstuffcb => array => {
     (function (i) {
       setTimeout(function () {
         requester(reviews[i], parseMC(reviews.length, sendstuffcb));
-      }, 1500 * i);
+      }, 1750 * i);
     })(i);
   }
 };

@@ -3,6 +3,7 @@ import './App.css';
 import Report from './Report.js'
 import RequestForm from './RequestForm.js'
 import Test from './testPage'
+import Landing from './landing.js'
 import Registration from  "./Registration"
 import { Router, Link } from "@reach/router"
 
@@ -25,7 +26,7 @@ class App extends Component {
 
 
         <Router>
-          <Landing path="/" />
+          <Landing path="/"/>
           <Report path="report"/>
           <RequestForm path="request"/>
           <Registration path="registration"/>
