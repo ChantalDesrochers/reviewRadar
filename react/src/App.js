@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div >
    
-        <header className="App-header">
+        {/* <header className="App-header">
           <h1 className="App-title">Review Radar</h1>
 
         <Link to="/">Login/Register</Link> |
@@ -21,11 +21,11 @@ class App extends Component {
         <Link to="report">Reports</Link> | 
         <Link to="test">test</Link>
 
-        </header>
-
+        </header> */}
 
 
         <Router>
+          <Landing path="/" />
           <Report path="report"/>
           <RequestForm path="request"/>
           <Registration path="registration"/>

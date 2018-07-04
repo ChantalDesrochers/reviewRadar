@@ -552,37 +552,65 @@ const InputReviews = [
   }
 ];
 
-let datedReviews = 
-  {
-    Jan: [],
-    Feb: [],
-    Mar: [],
-    Apr: [],
-    May: [],
-    Jun: [],
-    Jul: [],
-    Aug: [],
-    Sep: [],
-    Oct: [],
-    Nov: [],
-    Dec: []
-  };
+let datedReviews = {
+  Jan: [],
+  Feb: [],
+  Mar: [],
+  Apr: [],
+  May: [],
+  Jun: [],
+  Jul: [],
+  Aug: [],
+  Sep: [],
+  Oct: [],
+  Nov: [],
+  Dec: []
+};
 
-function parseReviewsbyDate(reviews) {
+function parseReviewsbyDate(reviews, output) {
   reviews.forEach(function(review) {
     // console.log(review.datePublished.split("-")[1]);
     switch (review.datePublished.split("-")[1]) {
+      case "01":
+        output.Jan.push(review);
+        break;
+      case "02":
+        output.Feb.push(review);
+        break;
+      case "03":
+        output.Mar.push(review);
+        break;
+      case "04":
+        output.Apr.push(review);
+        break;
       case "05":
-        datedReviews.May.push(review);
+        output.May.push(review);
         break;
       case "06":
-        datedReviews.Jun.push(review);
+        output.Jun.push(review);
+        break;
+      case "07":
+        output.Jul.push(review);
+        break;
+      case "08":
+        output.Aug.push(review);
+        break;
+      case "09":
+        output.Sep.push(review);
+        break;
+      case "10":
+        output.Oct.push(review);
+        break;
+      case "11":
+        output.Nov.push(review);
+        break;
+      case "12":
+        output.Dec.push(review);
         break;
     }
   });
 }
 
-parseReviewsbyDate(InputReviews);
 // console.log(datedReviews);
 
 // {jan: [{concept: 'food',occurrenes: 1}, {concept: 'thai',occurrences: 2}],
@@ -604,21 +632,23 @@ const datedAggregator = object => {
     Dec: []
   };
   for (let month in object) {
-    arrayAggregator(object[month], month, returnObj)
+    arrayAggregator(object[month], month, returnObj);
   }
-  return returnObj
-}
+  return returnObj;
+};
 
+// function reused from before, checks if something already exists within an array, and returns the position
 const checkForExisting = match => element => {
   return element.content == match;
 };
-
 
 const arrayAggregator = (array, month, returnObj) => {
   array.forEach(function(review) {
     review.concepts.forEach(function(concept) {
       // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
-     let existingIndex = returnObj[month].findIndex(checkForExisting(concept.content));
+      let existingIndex = returnObj[month].findIndex(
+        checkForExisting(concept.content)
+      );
       if (existingIndex < 0) {
         returnObj[month].push({
           content: concept.content,
@@ -631,7 +661,14 @@ const arrayAggregator = (array, month, returnObj) => {
   });
 };
 
-console.log('made it outside', JSON.stringify(datedAggregator(datedReviews)))
+parseReviewsbyDate(InputReviews, datedReviews); // takes in full array of input reviews and obj to add to
+
+datedAggregator(datedReviews); // 
+
+// console.log(JSON.stringify(datedAggregator(datedReviews))); // 
+
+
+
 
 // console.log('made it outside', returnObj)
 
@@ -640,7 +677,6 @@ console.log('made it outside', JSON.stringify(datedAggregator(datedReviews)))
 // for each concept in the review
 // add to an object w id equal to concept, reference equal to [ id ]
 //   if concept already exists, push to reference list
-
 
 // const ConceptAggreator = array => {
 //   let allConcepts = [];
@@ -660,11 +696,7 @@ console.log('made it outside', JSON.stringify(datedAggregator(datedReviews)))
 //   });
 // };
 
-
 module.exports = InputReviews;
-// const checkForExisting = match => element => {
-//   return element.content == match;
-// };
 
 // const conceptAggreator = array => {
 //   let allConcepts = [];
