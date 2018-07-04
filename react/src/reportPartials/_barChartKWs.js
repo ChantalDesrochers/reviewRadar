@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { HorizontalBar } from 'react-chartjs-2';
-import ReturnConcepts from "./returnConcepts.js";
+import OrganizedConcepts from "./organizedConcepts";
 
 class KeywordBarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: this.props.reviews,
-      testData: ReturnConcepts,
+      testData: OrganizedConcepts,
       data: {
         labels: [],
         datasets: [{
@@ -53,11 +53,11 @@ class KeywordBarChart extends Component {
   render() {
     const handleClick = elem => {
       if (elem[0]) {
-        console.log(elem)
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
+        this.props.clickHandlerForKeyWordBarChart(label);
       }
     }
     return (
@@ -68,3 +68,7 @@ class KeywordBarChart extends Component {
   }
 }
 export default KeywordBarChart;
+
+  // onClick={() => this.props.clickHandler('sentiment')}
+  // componentDidMount() {
+  //   console.log('in component did mount', this.props.clickHandlerForKeyWordBarChart)

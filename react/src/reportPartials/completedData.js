@@ -1,4 +1,4 @@
-const inputReviews = [
+const CompletedData = [
   {
     id: 0,
     rating: "3.0",
@@ -573,7 +573,7 @@ const conceptAggreator = array => {
     });
   });
 };
-
+module.exports = CompletedData;
 //function to aggregate results
 //conceptAggreator(noDupeJSON2);
 //console.log(JSON.stringify(allConcepts));

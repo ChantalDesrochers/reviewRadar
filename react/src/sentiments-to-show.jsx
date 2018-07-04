@@ -11,7 +11,7 @@ const SentimentsToShow = (whichReviews, clickHandler, topReviews, bottomReviews,
    
    
     case 'both':
-      return <Fade in={fadeBool} timeout={500}>
+      return <Fade in={fadeBool} timeout={{enter:500, exit:0}}>
         <div >
           <div style={{padding: 30}}><TextContainer className="top-reviews" clickHandler={clickHandler} reviews={topReviews} dataMessageTitle={topReviews.title} /></div>
           <div style={{padding: 30}}> <TextContainer className="bottom-reviews" reviews={bottomReviews} clickHandler={clickHandler} dataMessageTitle={bottomReviews.title} aria-label="Fade" />  </div> </div></Fade>
