@@ -10,17 +10,35 @@ import { IconButton, AccessAlarm, ThreeDRotation, Accessible, ArrowForward, Play
 class KeywordsToShow extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            indexOfReviewCurrentlyDisplayed: 1
+        };
+    }
+
+    changeDisplayedReviews = (direction) => {
+        console.log('direction', direction);
+      
+        let index = this.state.indexOfReviewCurrentlyDisplayed
+        console.log('indexof', index)
+        if (direction === 'forward') {
+        this.setState({indexOfReviewCurrentlyDisplayed:index + 1 })
+        }
+        else {
+            this.setState({indexOfReviewCurrentlyDisplayed:index - 1 })
+        }
+
     }
 
     prepareHtml = (fadeBool, reviewsToShow) => {
 
         console.log('all the reviews', reviewsToShow);
-        console.log('revierw to display', reviewsToShow.slice(3, 4) );
-        let reviewToReturn =  (
+        console.log('revierw to display', reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed));
+        let reviewToReturn = (
             <div styles={{ padding: 0 }}>
                 <Grid container spacing={16}>
                     <Grid item sm={12}>
-                        <Typography style={{ textAlign: 'center', padding: 50 }}> {reviewsToShow.slice(3, 4)} </Typography>
+                        <Typography style={{ textAlign: 'center', padding: 50 }}> {reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed)};
+        let reviewToReturn = (} </Typography>
                     </Grid>
 
                     <Grid item sm={5}>
@@ -28,7 +46,7 @@ class KeywordsToShow extends Component {
 
                     <Grid item sm={1}>
                         <div style={{ textAlign: 'center' }}>
-                            <Button variant="contained" size="small">
+                            <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
                                 <PlayArrow className="icon-flipped" />
 
                             </Button>
@@ -36,10 +54,9 @@ class KeywordsToShow extends Component {
                     </Grid>
 
 
-
                     <Grid item sm={2}>
                         <div style={{ textAlign: 'center' }}>
-                            <Button variant="contained" size="small">
+                            <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('back')} >
                                 <PlayArrow />
 
                             </Button>
