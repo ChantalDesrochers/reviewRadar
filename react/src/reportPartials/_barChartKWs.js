@@ -44,7 +44,12 @@ topSeven.forEach(function(concept) {
   data.push(concept.references.length)
   label.push(concept.content)
 });
-this.setState({ ...this.state.data.labels = label, ...this.state.data.datasets[0].data = data})
+const kwBarState = {...this.state}
+kwBarState.data.labels = label
+kwBarState.data.datasets[0].data = data
+this.setState({kwBarState})
+console.log('kwBarState', kwBarState)
+// this.setState({ ...this.state.data.labels = label, ...this.state.data.datasets[0].data = data})
 }
 getChartData()
   }

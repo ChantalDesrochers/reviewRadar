@@ -54,6 +54,12 @@ class SentimentOverTime extends Component {
         ]
       }
     }
+    console.log("sentiment over time")
+  }
+
+  componentDidMount(){
+    console.log('in componentDidMount')
+    console.log('state when mounting', this.state.reviews)
   }
 
 componentWillReceiveProps(nextprops) {
@@ -192,7 +198,13 @@ var positive = [january.positive, february.positive, march.positive, april.posit
 var negative = [january.negative, february.negative, march.negative, april.negative, may.negative, june.negative, july.negative, august.negative, september.negative, october.negative, november.negative, december.negative];
 // console.log(positive)
 // console.log(negative)
-this.setState({ ...this.state.data.datasets[0].data = negative, ...this.state.data.datasets[1].data = positive})
+const dataPolarity = {...this.state.data};
+dataPolarity.datasets[0].data = negative;
+dataPolarity.datasets[1].data = positive;
+this.setState({dataPolarity});
+console.log('data negative', {dataPolarity})
+
+// this.setState({ ...this.state.data.datasets[0].data = negative, ...this.state.data.datasets[1].data = positive})
   }
 parseSentimentDatabyTime()
 }

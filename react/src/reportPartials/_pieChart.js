@@ -68,7 +68,12 @@ parseChartData = () => {
           veryNegative += 1;
         }
       });
-      this.setState({ ...this.state.chartdata.datasets[0].data = [veryPositive, positive, neutral, negative, veryNegative] })
+
+      const pieState = {...this.state}
+      pieState.chartdata.datasets[0].data = [veryPositive, positive, neutral, negative, veryNegative]
+      this.setState({pieState})
+      console.log('pie state', pieState)
+      // this.setState({ ...this.state.chartdata.datasets[0].data = [veryPositive, positive, neutral, negative, veryNegative] })
     }
   }
 
