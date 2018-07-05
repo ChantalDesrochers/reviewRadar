@@ -12,6 +12,12 @@ import WatsonBars from "./WatsonBar.js";
 import Date from "./Date.js"
 import NameAndSite from './NameAndSite.js'
 import ReviewNavigationPanel from './ReviewNavigationPanel'
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+reviewText: { overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+  }
+
 class SentimentsToShow extends Component {
     constructor(props) {
         console.log('in sentiments constructor');
@@ -46,8 +52,21 @@ class SentimentsToShow extends Component {
         console.log('index', index);
     }
 
-    textMouse = () => {
-        console.log('testing mouse');
+    mouseController = (message) => {
+        
+        switch (message){
+            case 'enter-review':
+            styles.reviewText =  { overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+            this.forceUpdate();
+            console.log('in enter review', styles);
+            break;
+            case 'exit-review':
+            styles.reviewText =  { overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+            this.forceUpdate();
+            console.log('in exit review', styles);
+            break;
+        }
+        
     }
     prepareHtml = (fadeBool, reviewsToShow) => {
         const index = this.state.indexOfReviewCurrentlyDisplayed;
@@ -95,7 +114,9 @@ class SentimentsToShow extends Component {
                     {/* <div id="ID" onmouseover="this.style.overflow='scroll'"
 onmouseout="this.style.overflow='hidden'" */}
 
-                        <Typography  onMouseOver={() => console.log('enter')} onMouseLeave={this.testMouse} style={{ overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }}> {review}</Typography>
+ {/* onmouseover = "this.style.color = '#000'" 
+            onmouseout  = "this.style.color = '#f00'"> */}
+                        <Typography  onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}> {review}</Typography>
                     </Grid>
 
                 </Grid>
@@ -142,7 +163,7 @@ onmouseout="this.style.overflow='hidden'" */}
         )
     }
 }
-export default SentimentsToShow
+export default withStyles(styles)(SentimentsToShow)
 
 
 
