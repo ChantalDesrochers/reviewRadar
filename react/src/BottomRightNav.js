@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
+// import {Tabs, Tab} from '@material-ui/Tabs';
+// import TabsExampleControlled from './tabNavigation.js';
 
 class BottomRightNav extends Component {
     render() {
@@ -12,6 +14,7 @@ class BottomRightNav extends Component {
                 <Button variant="outlined" data-message="keyword" onClick={this.props.clickHandler}>
                     Keywords
                 </Button>
+                {/*<TabsExampleControlled/>*/}
             </div>
         )
     }

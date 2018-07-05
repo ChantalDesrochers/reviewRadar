@@ -9,7 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-
+// import {Tabs, Tab} from '@material-ui/Tabs';
 import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
 
@@ -46,12 +46,12 @@ class Report extends Component {
   }
   //*****************keep this and the above review for when we actually scrape******************
   componentDidMount() {
-    console.log('fired from report')
+    //console.log('fired from report')
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
         this.setState({ reviews: results })
-        console.log('in report', this.state)
+        console.log('fetched and fired')
         // console.log('in report', this.state.reviews)
       });
   }
@@ -134,7 +134,7 @@ class Report extends Component {
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-                <ChartContainer leftSideState={this.state.leftSide} reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+                <ChartContainer leftside={this.state.leftSide} reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
               </Paper>
             </Grid>
             <Grid style={styles.RightBottomContainer} item sm={12}>
