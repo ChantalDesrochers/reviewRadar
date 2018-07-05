@@ -16,7 +16,7 @@ import AppBarTexture from './app-bar-image.png';
 import ChartContainer from "./reportPartials/_chartContainer";
 import SentimentsToShow from './sentiments-to-show';
 import KeywordsToShow from './keywords-to-show';
-import Ratings from "./ratings.js"
+// import Ratings from "./ratings.js"
 import BottomRightNav from './BottomRightNav.js';
 import conceptAggreator from './parsingConceptbyMonth';
 import checkForExisting from './parsingConceptbyMonth';

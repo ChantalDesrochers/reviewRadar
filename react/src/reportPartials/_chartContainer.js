@@ -56,13 +56,13 @@ clickHandler = (event) => {
 return (
            <div className="chart-container">
 
-             {/*<KeywordsOverTime reviews={this.props.reviews}/>*/}
-             {/*<SentimentBarChartMonth reviews={this.props.reviews} /> */}
-            {/* // <KeywordPolar/> */}
-           {/*  <KeywordBarChart reviews={this.props.reviews} /> */}
-             {/*<SentimentOverTime reviews={this.props.reviews} />*/}
-            <NumberOfReviewsOverTime reviews={this.props.reviews}/>
-            {/*<PieChart reviews={this.props.reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay} />*/}
+             <KeywordsOverTime reviews={this.props.reviews}/>
+             {/* <SentimentBarChartMonth reviews={this.props.reviews} /> */}
+            <KeywordPolar/>
+            <KeywordBarChart reviews={this.props.reviews} />
+             <SentimentOverTime reviews={this.props.reviews} />
+            {/* <NumberOf ReviewsOverTime reviews={this.props.reviews}/> */}
+            <PieChart reviews={this.props.reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay} />
              {/*<Button variant="outlined" data-message="overtime" onClick={this.clickHandler}>*/}
                      {/*See data over time*/}
                {/*</Button>*/}
