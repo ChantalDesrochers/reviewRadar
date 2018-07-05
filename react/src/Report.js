@@ -6,14 +6,6 @@ import Paper from '@material-ui/core/Paper'
 import 'typeface-roboto'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-//import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import { IconButton, AccessAlarm, ThreeDRotation, Accessible, ArrowForward, PlayArrow, Navigation, Tonality } from '@material-ui/icons'
-import SvgIcon from '@material-ui/core/SvgIcon';
-import PaperTexture from './textured-paper.png';
-import AppBarTexture from './app-bar-image.png';
-
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
 import Ratings from "./ratings.js"
@@ -34,8 +26,8 @@ const styles = {
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
-  LargePanel: {position:'relative', height: '100%',marginTop:8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
-  Top: {height: '89vh' },
+  LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
+  Top: { height: '89vh' },
 }
 class Report extends Component {
   constructor(props) {
@@ -48,7 +40,7 @@ class Report extends Component {
       leftSide: { displaying: 'sentiment', reviewsToShow: 1, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentTargetedReviews: [],
-      
+
       currentTargetedType: '',
       specificTargetedReview: "",
       leftShowing: 'text'
@@ -93,26 +85,24 @@ class Report extends Component {
         break;
     }
   }
-
-
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
+    const leftSide = { ...this.state.leftSide };
     console.log('focus is', focus);
     switch (focus) {
       case 'positive':
         console.log('wow im in positive');
-        this.setState({ ...this.state.leftSide.reviewsToShow = 4 })
-        this.setState({ ...this.state.leftSide.show = 'positive' })
+        leftSide.reviewsToShow = 4;
+        leftSide.show = 'positive'
+        this.setState({ leftSide })
         return
       case 'negative':
         console.log('oh im in negative');
-        this.setState({ ...this.state.leftSide.reviewsToShow = 4 })
-        this.setState({ ...this.state.leftSide.show = 'negative' })
+        leftSide.reviewsToShow = 4;
+        leftSide.show = 'negative'
         return
     }
   }
-
-
   clickHandlerForKeyWordBarChart = (clickedItem) => {
     console.log('clicked for key word bar chart', clickedItem);
     let finalReviews = [];
@@ -124,16 +114,15 @@ class Report extends Component {
     }
     this.setState({ currentTargetedReviews: finalReviews });
     this.render();
-    console.log(this.state.currentTargetedReviews);
   }
-
   toggleFade = () => {
+    const newState = { ...this.state }
     console.log('toggle fade called');
-    this.setState({ ...this.state.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool, ...this.state.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool })
-
+    newState.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool;
+    newState.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool;
+    this.setState(newState)
   };
-
-
+  
   findObjectByKey(array, key, value) {
     for (var i = 0; i < array.length; i++) {
       if (array[i][key] === value) {
@@ -142,66 +131,57 @@ class Report extends Component {
     }
     return null;
   }
-
   clickHandler = (clickedItem) => {
-    // let clickedItem = event.target.dataset.message;
+    const newState = { ...this.state }
     switch (clickedItem) {
       case 'sentiment':
+        newState.leftSide.reviewsToShow = 2;
+        newState.leftSide.show = 'both';
+        newState.displaying = 'sentiment';
         if (this.state.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
-        this.setState({ ...this.state.leftSide.reviewsToShow = 2, ...this.state.leftSide.show = 'both', ...this.state.displaying = 'sentiment' }, () => {
+        this.setState(newState, () => {
           this.toggleFade();
         });
         return
       case 'keyword':
+        newState.displaying = 'keyword';
         if (this.state.displaying === clickedItem && this.state.fadeTracker.keywordFadeBool) return
-        this.setState({ ...this.state.displaying = 'keyword' }, () => {
+        this.setState(newState, () => {
           this.toggleFade();
         });
         return
     }
   };
-
   render() {
     return (
       <div style={styles.Top}>
         <AppBar position="static" style={styles.AppBar}>
-          <Toolbar>
-            <Tonality />
-
-            <PlayArrow />
-          
-            <Typography variant="display3" style={styles.MainTitle}>Planta</Typography>
-          </Toolbar>
+          <Typography variant="display3" style={styles.MainTitle}>Planta</Typography>
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
-          <Grid style={styles.LeftContainer} item sm={8}>
-            <Paper id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
-              <div style={{paddingLeft: '50px', paddingRight:'50px', backgroundColor:"white"}} >
-                {this.LeftSideShow()}
+          <Grid item sm={8}>
+            <BottomRightNav leftSideShow={this.LeftSideShow} clickHandler={this.clickHandler} />
+            <Grid style={styles.LeftContainer} item sm={12}>
+              <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
+                <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
+                  {this.LeftSideShow()}
+                </div>
               </div>
-              <div style={{marginLeft:'50px', position:'absolute', bottom: 150, right:'0'}}>
-              <SwapButton />
-            </div>
-            </Paper>
-     
+            </Grid>
           </Grid>
+          <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
+            <SwapButton />
+          </div>
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-               
                 <Grid item>
                   <div className="chart-container">
                     {this.RightSideShow()}
                   </div>
-              
                 </Grid>
-
                 <Grid>
-                 <p>Toggle exists here</p>
-                </Grid>
-
-                <Grid>
-                  <BottomRightNav leftSideShow={this.LeftSideShow} clickHandler={this.clickHandler} />
+                  <p>Toggle exists here</p>
                 </Grid>
               </Paper>
             </Grid>
