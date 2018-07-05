@@ -15,27 +15,29 @@ import LandingContainer from "./landingPartials/_containers";
 
 import Button from "@material-ui/core/Button"; // used to reroute to Registration + Login
 
-const colors = {
+const variables = {
   color1: "lightblue",
-  color2: "#289aee"
+  color2: "#289aee",
+  buttonPadding: "10 px",
+  buttonHeight: 48
 };
 
 const styles = {
+  header: {
+    background: variables.color2,
+    color: "white"
+  },
   register: {
-    background: colors.color2,
-    // borderRadius: 3,
-    border: 0,
+    background: variables.color2,
     color: "white",
-    height: 48,
-    padding: "10 px"
-    //boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
+    height: variables.buttonHeight,
+    padding: variables.buttonPadding
   },
   login: {
-    // borderRadius: 3,
     border: 0,
     color: "grey",
-    height: 48,
-    padding: "10 px"
+    height: variables.buttonHeight,
+    padding: variables.buttonPadding
   },
   label: {
     textTransform: "capitalize"
@@ -53,6 +55,21 @@ function Landing(props) {
 
   return (
     <div>
+      <AppBar
+        position="static"
+        classes={{
+          root: classes.header
+        }}
+      >
+        <Toolbar>
+          <Typography variant="title" color="inherit">
+            [Logo] ReviewRadar
+          </Typography>
+          <Button color="inherit">Login</Button>
+          <Button color="inherit">Register</Button>
+        </Toolbar>
+      </AppBar>
+
       <Typography variant="display3">Welcome to ReviewRadar</Typography>
       <Link to="request" style={{ textDecoration: "none" }}>
         <Button
@@ -74,19 +91,35 @@ function Landing(props) {
           Already Registered
         </Button>
       </Link>
+      <Typography variant="display1" style={{ textAlign: "center" }}>
+        Understanding how your customers feel, while running daily operations can be
+        difficult. <br />We help simplify the process.
+      </Typography>
 
-      <Grid container spacing={24}>
-        <LandingContainer text="container1" img=""/>
-        <LandingContainer text="container2" img=""/>
-        <LandingContainer text="container3"img=""/>
+      <Grid container spacing={40} justify="center">
+        <LandingContainer
+          header="header"
+          img="http://via.placeholder.com/250x300"
+          text="This is container1"while
+        />
+        <LandingContainer
+          header="header"
+          img="http://via.placeholder.com/250x300"
+          text="This is container2"
+        />
+        <LandingContainer
+          header="header"
+          img="http://via.placeholder.com/250x300"
+          text="This is container3"
+        />
       </Grid>
     </div>
   );
 }
 
-Landing.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// Landing.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 export default withStyles(styles)(Landing);
 // class Landing extends Component {
