@@ -89,9 +89,10 @@ class Report extends Component {
     }
   }
   swapReviewsOnAllSentimentChartClick = (focus) => {
+    console.log('focus is', focus);
     focus = focus.toLowerCase()
     const leftSide = { ...this.state.leftSide };
-    console.log('focus is', focus);
+  
     switch (focus) {
       case 'positive':
         console.log('wow im in positive');

@@ -81,7 +81,7 @@ class PieChart extends Component {
     // this.parseChartData();
     const handleClicktwo = elem => {
       if (elem[0]) {
-        console.log(elem)
+        console.log('in pie chart props', this.props)
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
