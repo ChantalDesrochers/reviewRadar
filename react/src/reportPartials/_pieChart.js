@@ -41,8 +41,8 @@ class PieChart extends Component {
     if (this.state.reviews != nextprops.reviews) {
       this.setState({ ...(this.state.reviews = nextprops.reviews) });
     }
-    console.log("next props", nextprops);
-    console.log("state of pie chart", this.state);
+    // console.log("next props", nextprops);
+    // console.log("state of pie chart", this.state);
     this.parseChartData();
 
   }

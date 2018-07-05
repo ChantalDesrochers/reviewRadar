@@ -190,8 +190,8 @@ if (month === "12" && review.label === "negative") {
 })
 var positive = [january.positive, february.positive, march.positive, april.positive, may.positive, june.positive, july.positive, august.positive, september.positive, october.positive, november.positive, december.positive];
 var negative = [january.negative, february.negative, march.negative, april.negative, may.negative, june.negative, july.negative, august.negative, september.negative, october.negative, november.negative, december.negative];
-console.log(positive)
-console.log(negative)
+// console.log(positive)
+// console.log(negative)
 this.setState({ ...this.state.data.datasets[0].data = negative, ...this.state.data.datasets[1].data = positive})
   }
 parseSentimentDatabyTime()

@@ -49,13 +49,13 @@ getKWData()
 render() {
 const handleClick = elem => {
 if (elem[0]) {
-console.log(elem)
+// console.log(elem)
 let chartPoints = elem;
 let clickedPointIndex = chartPoints[0]['_index']
 const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
 const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
-console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
-console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
+// console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+// console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
  }
  }
 

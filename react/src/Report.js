@@ -16,7 +16,7 @@ import AppBarTexture from './app-bar-image.png';
 import ChartContainer from "./reportPartials/_chartContainer";
 import SentimentsToShow from './sentiments-to-show';
 import KeywordsToShow from './keywords-to-show';
-import Ratings from "./ratings.js"
+// import Ratings from "./ratings.js"
 import BottomRightNav from './BottomRightNav.js';
 import conceptAggreator from './parsingConceptbyMonth';
 import checkForExisting from './parsingConceptbyMonth';
@@ -134,7 +134,7 @@ class Report extends Component {
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-                <ChartContainer reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+                <ChartContainer leftSideState={this.state.leftSide} reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
               </Paper>
             </Grid>
             <Grid style={styles.RightBottomContainer} item sm={12}>

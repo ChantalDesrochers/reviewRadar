@@ -132,7 +132,7 @@ class KeywordsOverTime extends Component {
       console.log(topFive)
 
   const labels = topFive.map(x => x.content);
-  console.log(labels)
+  // console.log(labels)
 
   // console.log(this.state.conceptsTime)
 const keywordsPerMonth = {}
@@ -153,9 +153,9 @@ const kwPerMonth = () => {
     if (indexer < 12) {
       indexer += 1
     }
-    console.log('level 2')
+
   }
-  console.log('level 3 - pushing', pushData)
+
   aoa.push(pushData)
   indexer = 0
   })
@@ -169,11 +169,11 @@ this.setState({ ...this.state.data.datasets[0].label = labels[0], ...this.state.
 
     const handleClick = elem => {
       if (elem[0]) {
-        console.log(elem)
+        // console.log(elem)
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-        console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
     }
 
