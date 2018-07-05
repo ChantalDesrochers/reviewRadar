@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Line } from 'react-chartjs-2';
-import ReturnConcepts from "./returnConcepts.js";
-import InputReviews from './conceptData.js'
+import ReturnConcepts from "./organizedConcepts.js";
+import InputReviews from './completedData.js'
 import MonthConceptFrequency from './monthReturnConcepts.js'
 
 

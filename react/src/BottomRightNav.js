@@ -1,23 +1,33 @@
 import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
-// import {Tabs, Tab} from '@material-ui/Tabs';
-// import TabsExampleControlled from './tabNavigation.js';
-
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography';
 class BottomRightNav extends Component {
     render() {
         return (
-            <div>
-                <h1 style={{marginTop:0}}>Hey im a nav panel</h1>
-                <Button variant="outlined" data-message="sentiment" onClick={this.props.clickHandler}>
-                    Sentiments
+                <Grid container spacing={0}>
+                    <Grid item sm={1}>
+                        <Button variant="contained" data-message="sentiment" onClick={() => this.props.clickHandler('sentiment')}>
+                            Sentiments
                 </Button>
-                <Button variant="outlined" data-message="keyword" onClick={this.props.clickHandler}>
-                    Keywords
+                </Grid>
+                    <Grid item sm={1}>
+                        <Button variant="contained" data-message="sentiment" onClick={() => this.props.clickHandler('sentiment')}>
+                            Sentiments
                 </Button>
-                {/*<TabsExampleControlled/>*/}
-            </div>
+                </Grid>
+                    <Grid item sm={1}>
+                        <Button variant="contained" data-message="sentiment" onClick={() => this.props.clickHandler('sentiment')}>
+                            Sentiments
+                </Button>
+                </Grid>
+                    <Grid item sm={1}>
+                        <Button variant="contained" data-message="keyword" onClick={() => this.props.clickHandler('keyword')}>
+                            Keywords
+                        </Button>
+                    </Grid>
+                </Grid>
         )
     }
 }
 export default BottomRightNav
-
