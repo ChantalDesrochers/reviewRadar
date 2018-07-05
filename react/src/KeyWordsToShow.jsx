@@ -12,21 +12,17 @@ class KeywordsToShow extends Component {
         super(props);
         this.state = {
             indexOfReviewCurrentlyDisplayed: 1
-        };
-       
+        };  
     }
-
     onComponentMount(){
        // this.props.clickHandlerForKeyWordBarChart(label);
       //  this.props.keyworkClickHandler('forward');
         this.prepareHtml(null, this.props.reviewsToShow);
 
-     
     }
     //this is what the buttons call in order to go through the reviews
     changeDisplayedReviews = (direction) => {
-let lastReviewIndex = this.props.currentTargetReviews.length;
-      
+        let lastReviewIndex = this.props.currentTargetReviews.length;
         let index = this.state.indexOfReviewCurrentlyDisplayed
         console.log('indexof', index)
         if (direction === 'forward' && index !== lastReviewIndex) {
@@ -46,7 +42,6 @@ let lastReviewIndex = this.props.currentTargetReviews.length;
     }
   
     prepareHtml = (fadeBool, reviewsToShow) => {
-
 
         if(reviewsToShow.length === 0){
        //     this is going to be passed to report as a n argument

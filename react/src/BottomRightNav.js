@@ -6,6 +6,7 @@ class BottomRightNav extends Component {
     render() {
         return (
             <div style={{textAlign: "center"}}>
+            <p> these buttons move down and are tabs</p>
                 <Grid container spacing={8}>
                     <Grid item sm={12}>
                         <Button variant="contained" data-message="sentiment" onClick={() => this.props.clickHandler('sentiment')}>
@@ -15,7 +16,7 @@ class BottomRightNav extends Component {
                     <Grid item sm={12}>
                         <Button variant="contained" data-message="keyword" onClick={() => this.props.clickHandler('keyword')}>
                             Keywords
-                </Button>
+                        </Button>
                     </Grid>
                 </Grid>
             </div>
@@ -23,13 +24,3 @@ class BottomRightNav extends Component {
     }
 }
 export default BottomRightNav
-
-// <Grid container style={styles.MainContainer} spacing={8}>
-// <Grid style={styles.LeftContainer} item sm={8}>
-
-// .center {
-//     margin: auto;
-//     width: 50%;
-//     border: 3px solid green;
-//     padding: 10px;
-// }

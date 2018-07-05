@@ -14,7 +14,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import PaperTexture from './textured-paper.png';
 import AppBarTexture from './app-bar-image.png';
 
-import SentimentsToShow from './sentiments-to-show';
+import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
 import Ratings from "./ratings.js"
 import OrganizedConcepts from './reportPartials/organizedConcepts.js';
@@ -25,16 +25,16 @@ import KeywordBarChart from './reportPartials/_barChartKWs';
 import SentimentPieChart from './reportPartials/_pieChart';
 
 const styles = {
-  RightTopContainer: { height: '65%' },
-  RightBottomContainer: { height: '34.5%', marginTop: 5 },
+  RightTopContainer: { height: '100%' },
+  //  RightBottomContainer: { height: '34.5%', marginTop: 5 },
   RightTopPanel: { height: '100%', backgroundColor: Colors.RightTopColor },
-  RightBottomPanel: { height: '100%', backgroundColor: Colors.RightBottomColor },
+  //RightBottomPanel: { height: '100%', backgroundColor: Colors.RightBottomColor },
   AppBar: { backgroundColor: Colors.AppBarColor },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
-  LargePanel: { height: '100%', fontFamily: 'Bauhaus', backgroundColor: Colors.LargePanelColor },
-  Top: { height: '86vh' },
+  LargePanel: { height: '100%',marginTop:8, fontFamily: 'Bauhaus', backgroundColor: Colors.LargePanelColor },
+  Top: { height: '89vh' },
   Paper: { backgroundColor: 'red' }
 }
 class Report extends Component {
@@ -45,11 +45,12 @@ class Report extends Component {
       organizedConcepts: OrganizedConcepts,
       completedData: CompletedData,
       displaying: 'sentiment',
-      leftSide: { displaying: 'sentiment', reviewsToShow: 2, show: 'both' },
+      leftSide: { displaying: 'sentiment', reviewsToShow: 1, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentTargetedReviews: [],
       currentTargetedType: '',
-      specificTargetedReview: ""
+      specificTargetedReview: "",
+      leftShowing: 'text'
       //reviews: []
     };
     console.log(this.state.completedData)
@@ -68,14 +69,14 @@ class Report extends Component {
 
   LeftSideShow = (event) => {
     const { displaying, reviews, leftSide, fadeTracker } = this.state;
+    console.log('in left side show displaying', displaying);
     switch (displaying) {
       case 'sentiment':
-        const topReviews = { title: 'Top Endorsements', content: reviews.slice(0, leftSide.reviewsToShow) }
-        const bottomReviews = { title: 'Harshest Criticisms', content: reviews.slice(-(leftSide.reviewsToShow), reviews.length) }
-        return SentimentsToShow(leftSide.show, this.clickHandler, topReviews, bottomReviews, fadeTracker.sentimentFadeBool)
+        console.log('in case sentiment');
+        return <SentimentsToShow style={{padding:"4", height:'100%'}}currentTargetReviews={this.state.currentTargetedReviews} completedData={this.state.completedData} />;
         break;
-      case 'keyword':      
-        return <KeywordsToShow  clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} fadeTracker={fadeTracker.keywordFadeBool} currentTargetReviews={this.state.currentTargetedReviews} organizedConcepts={this.state.organizedConcepts}/>;
+      case 'keyword':
+        return <KeywordsToShow clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} fadeTracker={fadeTracker.keywordFadeBool} currentTargetReviews={this.state.currentTargetedReviews} organizedConcepts={this.state.organizedConcepts} />;
         break;
     }
   }
@@ -87,9 +88,7 @@ class Report extends Component {
         return <SentimentPieChart reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
         break;
       case 'keyword':
-      //set this so the top keyword is shown first,
-      // this.prepareKeyWordBarChart();
-        return <KeywordBarChart  clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart}keywordClickHandler={this.clickHandlerForKeyWordBarChart} organizedConcepts={this.state.organizedConcepts} clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} />
+        return <KeywordBarChart clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} keywordClickHandler={this.clickHandlerForKeyWordBarChart} organizedConcepts={this.state.organizedConcepts} clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} />
         break;
     }
   }
@@ -101,6 +100,7 @@ class Report extends Component {
   };
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
+    console.log('focus is', focus);
     switch (focus) {
       case 'positive':
         console.log('wow im in positive');
@@ -115,28 +115,28 @@ class Report extends Component {
     }
   }
 
-findObjectByKey(array, key, value) {
+  findObjectByKey(array, key, value) {
     for (var i = 0; i < array.length; i++) {
-        if (array[i][key] === value) {
-            return array[i];
-        }
+      if (array[i][key] === value) {
+        return array[i];
+      }
     }
     return null;
-}
+  }
 
-prepareKeyWordBarChart = () =>{
-console.log('called prepare chart');
-}
+  prepareKeyWordBarChart = () => {
+    console.log('called prepare chart');
+  }
   clickHandlerForKeyWordBarChart = (clickedItem) => {
     console.log('clicked for key word bar chart', clickedItem);
     let finalReviews = [];
     //this gets the id numbers that show where the target concept(clickedItem) appears
     var references = this.state.organizedConcepts.find(x => x.content === clickedItem).references
     //this makes an array called finalArrays that contains the text of the targeted reviewa
-    for (var i =0; i < references.length; i++){
+    for (var i = 0; i < references.length; i++) {
       finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]).description);
     }
-    this.setState({currentTargetedReviews:finalReviews});
+    this.setState({ currentTargetedReviews: finalReviews });
     this.render();
     console.log(this.state.currentTargetedReviews);
   }
@@ -147,7 +147,7 @@ console.log('called prepare chart');
       case 'sentiment':
         if (this.state.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
         this.setState({ ...this.state.leftSide.reviewsToShow = 2, ...this.state.leftSide.show = 'both', ...this.state.displaying = 'sentiment' }, () => {
-          this.toggleFade();   
+          this.toggleFade();
         });
         return
       case 'keyword':
@@ -164,16 +164,16 @@ console.log('called prepare chart');
         <AppBar position="static" style={styles.AppBar}>
           <Toolbar>
             <Tonality />
-            {/* <IconButton style={styles.menuButton} color="inherit" aria-label="Menu"> */}
+
             <PlayArrow />
-            {/* </IconButton> */}
+          
             <Typography variant="display3" style={styles.MainTitle}>Planta</Typography>
           </Toolbar>
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
           <Grid style={styles.LeftContainer} item sm={7}>
             <Paper id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
-              <div >
+              <div style={{padding:'2'}}>
                 {this.LeftSideShow()}
               </div>
             </Paper>
@@ -181,14 +181,20 @@ console.log('called prepare chart');
           <Grid style={styles.RightContainer} item sm={5}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-                <div className="chart-container">
-                  {this.RightSideShow()}
-                </div>
-              </Paper>
-            </Grid>
-            <Grid style={styles.RightBottomContainer} item sm={12}>
-              <Paper style={styles.RightBottomPanel} >
-                <BottomRightNav leftSideShow={this.LeftSideShow} clickHandler={this.clickHandler} />
+               
+                <Grid item>
+                  <div className="chart-container">
+                    {this.RightSideShow()}
+                  </div>
+                </Grid>
+
+                <Grid>
+                 <p>Toggle exists here</p>
+                </Grid>
+
+                <Grid>
+                  <BottomRightNav leftSideShow={this.LeftSideShow} clickHandler={this.clickHandler} />
+                </Grid>
               </Paper>
             </Grid>
           </Grid>
