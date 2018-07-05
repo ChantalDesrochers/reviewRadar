@@ -9,12 +9,11 @@ class ReviewStars extends Component {
         this.state = {
             rating:this.props.rating
         };
-        console.log(this.state.completedData)
     }
     render() {
         return (
             <Paper>
-              {Array(parseInt(this.props.rating)).fill(<Star />)}
+              {Array(parseInt(this.props.rating)).fill(<Star  />)}
             </Paper>
         );
     }

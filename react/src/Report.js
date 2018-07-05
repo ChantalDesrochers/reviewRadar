@@ -23,6 +23,7 @@ import BottomRightNav from './BottomRightNav.js';
 import Colors from './AppColors';
 import KeywordBarChart from './reportPartials/_barChartKWs';
 import SentimentPieChart from './reportPartials/_pieChart';
+import SwapButton from './SwapButton';
 
 const styles = {
   RightTopContainer: { height: '100%' },
@@ -33,9 +34,8 @@ const styles = {
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
-  LargePanel: { height: '100%',marginTop:8, fontFamily: 'Bauhaus', backgroundColor: Colors.LargePanelColor },
-  Top: { height: '89vh' },
-  Paper: { backgroundColor: 'red' }
+  LargePanel: {position:'relative', height: '100%',marginTop:8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
+  Top: {height: '89vh' },
 }
 class Report extends Component {
   constructor(props) {
@@ -48,6 +48,7 @@ class Report extends Component {
       leftSide: { displaying: 'sentiment', reviewsToShow: 1, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentTargetedReviews: [],
+      
       currentTargetedType: '',
       specificTargetedReview: "",
       leftShowing: 'text'
@@ -63,9 +64,9 @@ class Report extends Component {
   // console.log('in report', this.state)}
   // );
   //  }
-  showState = (message) => {
-    console.log(message, this.state);
-  }
+  // showState = (message) => {
+  //   console.log(message, this.state);
+  // }
 
   LeftSideShow = (event) => {
     const { displaying, reviews, leftSide, fadeTracker } = this.state;
@@ -73,7 +74,7 @@ class Report extends Component {
     switch (displaying) {
       case 'sentiment':
         console.log('in case sentiment');
-        return <SentimentsToShow style={{padding:"4", height:'100%'}}currentTargetReviews={this.state.currentTargetedReviews} completedData={this.state.completedData} />;
+        return <SentimentsToShow currentTargetReviews={this.state.currentTargetedReviews} completedData={this.state.completedData} />;
         break;
       case 'keyword':
         return <KeywordsToShow clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} fadeTracker={fadeTracker.keywordFadeBool} currentTargetReviews={this.state.currentTargetedReviews} organizedConcepts={this.state.organizedConcepts} />;
@@ -93,11 +94,7 @@ class Report extends Component {
     }
   }
 
-  toggleFade = () => {
-    console.log('toggle fade called');
-    this.setState({ ...this.state.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool, ...this.state.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool })
 
-  };
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
     console.log('focus is', focus);
@@ -115,18 +112,7 @@ class Report extends Component {
     }
   }
 
-  findObjectByKey(array, key, value) {
-    for (var i = 0; i < array.length; i++) {
-      if (array[i][key] === value) {
-        return array[i];
-      }
-    }
-    return null;
-  }
 
-  prepareKeyWordBarChart = () => {
-    console.log('called prepare chart');
-  }
   clickHandlerForKeyWordBarChart = (clickedItem) => {
     console.log('clicked for key word bar chart', clickedItem);
     let finalReviews = [];
@@ -139,6 +125,22 @@ class Report extends Component {
     this.setState({ currentTargetedReviews: finalReviews });
     this.render();
     console.log(this.state.currentTargetedReviews);
+  }
+
+  toggleFade = () => {
+    console.log('toggle fade called');
+    this.setState({ ...this.state.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool, ...this.state.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool })
+
+  };
+
+
+  findObjectByKey(array, key, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i][key] === value) {
+        return array[i];
+      }
+    }
+    return null;
   }
 
   clickHandler = (clickedItem) => {
@@ -158,6 +160,7 @@ class Report extends Component {
         return
     }
   };
+
   render() {
     return (
       <div style={styles.Top}>
@@ -171,14 +174,18 @@ class Report extends Component {
           </Toolbar>
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
-          <Grid style={styles.LeftContainer} item sm={7}>
+          <Grid style={styles.LeftContainer} item sm={8}>
             <Paper id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
-              <div style={{padding:'2'}}>
+              <div style={{paddingLeft: '50px', paddingRight:'50px', backgroundColor:"white"}} >
                 {this.LeftSideShow()}
               </div>
+              <div style={{marginLeft:'50px', position:'absolute', bottom: 150, right:'0'}}>
+              <SwapButton />
+            </div>
             </Paper>
+     
           </Grid>
-          <Grid style={styles.RightContainer} item sm={5}>
+          <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
                
@@ -186,6 +193,7 @@ class Report extends Component {
                   <div className="chart-container">
                     {this.RightSideShow()}
                   </div>
+              
                 </Grid>
 
                 <Grid>
