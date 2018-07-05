@@ -5,11 +5,11 @@ import SentimentCharts from '../SentimentCharts';
 // import SentimentBarChartMonth from './_monthSentimentBar.js'
 
 
-const ChartContainer = ({reviews, displaying}) => (
+const ChartContainer = ({reviews, displaying, pickReviewTypeToDisplay}) => (
   
   <div>
     { displaying === "sentiment" ? (
-      <SentimentCharts reviews={reviews}/> ) : (<KeywordCharts reviews={reviews}/> ) }
+      <SentimentCharts pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews}/> ) : (<KeywordCharts reviews={reviews}/> ) }
   </div>
 )
 
