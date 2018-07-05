@@ -41,11 +41,18 @@ class PieChart extends Component {
     if (this.state.reviews != nextprops.reviews) {
       this.setState({ ...(this.state.reviews = nextprops.reviews) });
     }
+
     // console.log("next props", nextprops);
-    // console.log("state of pie chart", this.state);
+
     this.parseChartData();
 
   }
+
+// componentDidMount() {
+//   console.log('pie chart mounted')
+// }
+
+
 
 parseChartData = () => {
     if (this.state.chartdata.datasets[0].data.length === 0) {
