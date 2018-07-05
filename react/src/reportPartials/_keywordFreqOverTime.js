@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Line } from 'react-chartjs-2';
-import ReturnConcepts from "./returnConcepts.js";
-import InputReviews from './conceptData.js'
+import ReturnConcepts from "./organizedConcepts.js";
+import InputReviews from './completedData.js'
 import MonthConceptFrequency from './monthReturnConcepts.js'
 
 
@@ -132,7 +132,7 @@ class KeywordsOverTime extends Component {
       console.log(topFive)
 
   const labels = topFive.map(x => x.content);
-  console.log(labels)
+  // console.log(labels)
 
   // console.log(this.state.conceptsTime)
 const keywordsPerMonth = {}
@@ -153,27 +153,42 @@ const kwPerMonth = () => {
     if (indexer < 12) {
       indexer += 1
     }
-    console.log('level 2')
+
   }
-  console.log('level 3 - pushing', pushData)
+
   aoa.push(pushData)
   indexer = 0
   })
 }
 
 kwPerMonth()
-this.setState({ ...this.state.data.datasets[0].label = labels[0], ...this.state.data.datasets[1].label = labels[1], ...this.state.data.datasets[2].label = labels[2], ...this.state.data.datasets[3].label = labels[3], ...this.state.data.datasets[4].label = labels[4], ...this.state.data.datasets[0].data = aoa[0], ...this.state.data.datasets[1].data = aoa[1], ...this.state.data.datasets[2].data = aoa[2], ...this.state.data.datasets[3].data = aoa[3], ...this.state.data.datasets[4].data = aoa[4]})
+
+const labelsData = {...this.state.data};
+labelsData.datasets[0].label = labels[0];
+labelsData.datasets[1].label = labels[1];
+labelsData.datasets[2].label = labels[2];
+labelsData.datasets[3].label = labels[3];
+labelsData.datasets[4].label = labels[4];
+labelsData.datasets[0].data = aoa[0];
+labelsData.datasets[1].data = aoa[1];
+labelsData.datasets[2].data = aoa[2];
+labelsData.datasets[3].data = aoa[3];
+labelsData.datasets[4].data = aoa[4];
+this.setState({labelsData});
+console.log('labelsData', {labelsData})
+
+// this.setState({ ...this.state.data.datasets[0].label = labels[0], ...this.state.data.datasets[1].label = labels[1], ...this.state.data.datasets[2].label = labels[2], ...this.state.data.datasets[3].label = labels[3], ...this.state.data.datasets[4].label = labels[4], ...this.state.data.datasets[0].data = aoa[0], ...this.state.data.datasets[1].data = aoa[1], ...this.state.data.datasets[2].data = aoa[2], ...this.state.data.datasets[3].data = aoa[3], ...this.state.data.datasets[4].data = aoa[4]})
       }
 
   render() {
 
     const handleClick = elem => {
       if (elem[0]) {
-        console.log(elem)
+        // console.log(elem)
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-        console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
     }
 

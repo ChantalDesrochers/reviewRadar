@@ -1,147 +1,186 @@
 import React, { Component } from "react";
-
+import _ from 'lodash';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper'
 import 'typeface-roboto'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
-import PaperTexture from './textured-paper.png';
-import AppBarTexture from './app-bar-image.png';
-
-import ChartContainer from "./reportPartials/_chartContainer";
-import SentimentsToShow from './sentiments-to-show';
-import KeywordsToShow from './keywords-to-show';
-// import Ratings from "./ratings.js"
+import SentimentsToShow from './SentimentsToShow';
+import KeywordsToShow from './KeyWordsToShow';
+import Ratings from "./ratings.js"
+import OrganizedConcepts from './reportPartials/organizedConcepts.js';
+import CompletedData from './reportPartials/completedData.js'
 import BottomRightNav from './BottomRightNav.js';
+import Colors from './AppColors';
+import KeywordBarChart from './reportPartials/_barChartKWs';
+import SentimentPieChart from './reportPartials/_pieChart';
+import SwapButton from './SwapButton';
+import ChartContainer from "./reportPartials/_chartContainer";
 import conceptAggreator from './parsingConceptbyMonth';
 import checkForExisting from './parsingConceptbyMonth';
 
 const styles = {
-  RightTopContainer: { height: '65%' },
-  RightBottomContainer: { height: '34.5%', marginTop: 5 },
-  RightTopPanel: { height: '100%' },
-  RightBottomPanel: { height: '100%' },
-  AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
+  RightTopContainer: { height: '100%' },
+  //  RightBottomContainer: { height: '34.5%', marginTop: 5 },
+  RightTopPanel: { height: '100%', backgroundColor: Colors.RightTopColor },
+  //RightBottomPanel: { height: '100%', backgroundColor: Colors.RightBottomColor },
+  AppBar: { backgroundColor: Colors.AppBarColor },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
-  LargePanel: { height: '100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 0, fontFamily: 'Bauhaus' },
-  LeftContainer: { height: '100%' },
-  Top: { height: '86vh' }
+  LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
+  Top: { height: '89vh' },
 }
 class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //reviews: Ratings,
-      leftSide: { displaying: 'sentiment', reviewsToShow: 2, show: 'both' },
+      // reviews: Ratings,
+      organizedConcepts: OrganizedConcepts,
+      completedData: CompletedData,
+      displaying: 'sentiment',
+      leftSide: { displaying: 'sentiment', reviewsToShow: 1, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
+      currentTargetedReviews: [],
+
+      currentTargetedType: '',
+      specificTargetedReview: "",
+      leftShowing: 'text',
       reviews: []
     };
+    console.log(this.state.completedData)
   }
-  //*****************keep this and the above review for when we actually scrape******************
+
   componentDidMount() {
-    console.log('fired from report')
+    //console.log('fired from report')
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
         this.setState({ reviews: results })
-        console.log('in report', this.state)
+        console.log('fetched and fired')
         // console.log('in report', this.state.reviews)
       });
   }
 
-  showState = (message) => {
-    console.log(message, this.state);
-  }
-
-  //All 'sides' need to be removed from variables/functions and called ...maybe
   LeftSideShow = (event) => {
-    const { reviews, leftSide, fadeTracker } = this.state;
-
-    switch (leftSide.displaying) {
+    const { displaying, reviews, leftSide, fadeTracker } = this.state;
+    console.log('in left side show displaying', displaying);
+    switch (displaying) {
       case 'sentiment':
-        const topReviews = { title: 'Top Endorsements', content: reviews.slice(0, leftSide.reviewsToShow) }
-        const bottomReviews = { title: 'Harshest Criticisms', content: reviews.slice(-(leftSide.reviewsToShow), reviews.length) }
-        return SentimentsToShow(leftSide.show, this.clickHandler, topReviews, bottomReviews, fadeTracker.sentimentFadeBool)
+        console.log('in case sentiment');
+        return <SentimentsToShow currentTargetReviews={this.state.currentTargetedReviews} completedData={this.state.completedData} />;
         break;
       case 'keyword':
-        return KeywordsToShow(fadeTracker.keywordFadeBool);
+        return <KeywordsToShow clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} fadeTracker={fadeTracker.keywordFadeBool} currentTargetReviews={this.state.currentTargetedReviews} organizedConcepts={this.state.organizedConcepts} />;
         break;
     }
   }
 
-  toggleFade = () => {
-    this.setState({ ...this.state.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool, ...this.state.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool })
-  };
-
+  RightSideShow = (event) => {
+    const { displaying, reviews, leftSide, fadeTracker } = this.state;
+    switch (displaying) {
+      case 'sentiment':
+        return <SentimentPieChart reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+        break;
+      case 'keyword':
+        return <KeywordBarChart clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} keywordClickHandler={this.clickHandlerForKeyWordBarChart} organizedConcepts={this.state.organizedConcepts} clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} />
+        break;
+    }
+  }
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
+    const leftSide = { ...this.state.leftSide };
+    console.log('focus is', focus);
     switch (focus) {
       case 'positive':
         console.log('wow im in positive');
-        this.setState({ ...this.state.leftSide.reviewsToShow = 4 })
-        this.setState({ ...this.state.leftSide.show = 'positive' })
+        leftSide.reviewsToShow = 4;
+        leftSide.show = 'positive'
+        this.setState({ leftSide })
         return
       case 'negative':
         console.log('oh im in negative');
-        this.setState({ ...this.state.leftSide.reviewsToShow = 4 })
-        this.setState({ ...this.state.leftSide.show = 'negative' })
+        leftSide.reviewsToShow = 4;
+        leftSide.show = 'negative'
         return
     }
-
   }
-  clickHandler = (event) => {
-    let clickedItem = event.target.dataset.message;
+  clickHandlerForKeyWordBarChart = (clickedItem) => {
+    console.log('clicked for key word bar chart', clickedItem);
+    let finalReviews = [];
+    //this gets the id numbers that show where the target concept(clickedItem) appears
+    var references = this.state.organizedConcepts.find(x => x.content === clickedItem).references
+    //this makes an array called finalArrays that contains the text of the targeted reviewa
+    for (var i = 0; i < references.length; i++) {
+      finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]).description);
+    }
+    this.setState({ currentTargetedReviews: finalReviews });
+    this.render();
+  }
+  toggleFade = () => {
+    const newState = { ...this.state }
+    console.log('toggle fade called');
+    newState.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool;
+    newState.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool;
+    this.setState(newState)
+  };
+  
+  findObjectByKey(array, key, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i][key] === value) {
+        return array[i];
+      }
+    }
+    return null;
+  }
+  clickHandler = (clickedItem) => {
+    const newState = { ...this.state }
     switch (clickedItem) {
       case 'sentiment':
-        if (this.state.leftSide.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
-        this.setState({ ...this.state.leftSide.reviewsToShow = 2, ...this.state.leftSide.show = 'both', ...this.state.leftSide.displaying = 'sentiment' }, () => {
+        newState.leftSide.reviewsToShow = 2;
+        newState.leftSide.show = 'both';
+        newState.displaying = 'sentiment';
+        if (this.state.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
+        this.setState(newState, () => {
           this.toggleFade();
         });
         return
       case 'keyword':
-        if (this.state.leftSide.displaying === clickedItem && this.state.fadeTracker.keywordFadeBool) return
-        this.setState({ ...this.state.leftSide.displaying = 'keyword' }, () => {
+        newState.displaying = 'keyword';
+        if (this.state.displaying === clickedItem && this.state.fadeTracker.keywordFadeBool) return
+        this.setState(newState, () => {
           this.toggleFade();
         });
         return
     }
   };
-
   render() {
     return (
       <div style={styles.Top}>
         <AppBar position="static" style={styles.AppBar}>
-          <Toolbar>
-            <IconButton style={styles.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="display3" style={styles.MainTitle}>Komfort and Kim</Typography>
-          </Toolbar>
+          <Typography variant="display3" style={styles.MainTitle}>Planta</Typography>
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
-          <Grid style={styles.LeftContainer} item sm={8}>
-            <Paper style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
-              {this.LeftSideShow()}
-            </Paper>
+          <Grid item sm={8}>
+            <BottomRightNav leftSideShow={this.LeftSideShow} clickHandler={this.clickHandler} />
+            <Grid style={styles.LeftContainer} item sm={12}>
+              <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
+                <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
+                  {this.LeftSideShow()}
+                </div>
+              </div>
+            </Grid>
           </Grid>
+          <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
+            <SwapButton />
+          </div>
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-                <ChartContainer reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
-              </Paper>
-            </Grid>
-            <Grid style={styles.RightBottomContainer} item sm={12}>
-              <Paper style={styles.RightBottomPanel} >
-                <BottomRightNav leftSideShow={this.LeftSideShow} clickHandler={this.clickHandler} />
-              </Paper>
-            </Grid>
+              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+               </Paper>
+             </Grid> 
           </Grid>
         </Grid>
       </div>
