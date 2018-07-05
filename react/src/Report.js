@@ -16,6 +16,9 @@ import Colors from './AppColors';
 import KeywordBarChart from './reportPartials/_barChartKWs';
 import SentimentPieChart from './reportPartials/_pieChart';
 import SwapButton from './SwapButton';
+import ChartContainer from "./reportPartials/_chartContainer";
+import conceptAggreator from './parsingConceptbyMonth';
+import checkForExisting from './parsingConceptbyMonth';
 
 const styles = {
   RightTopContainer: { height: '100%' },
@@ -33,7 +36,7 @@ class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: Ratings,
+      // reviews: Ratings,
       organizedConcepts: OrganizedConcepts,
       completedData: CompletedData,
       displaying: 'sentiment',
@@ -43,22 +46,22 @@ class Report extends Component {
 
       currentTargetedType: '',
       specificTargetedReview: "",
-      leftShowing: 'text'
-      //reviews: []
+      leftShowing: 'text',
+      reviews: []
     };
     console.log(this.state.completedData)
   }
-  //*****************keep this and the above review for when we actually scrape******************
-  // componentDidMount(){
-  // fetch('http://localhost:3001/1')
-  // .then(results => { return results.json()  })
-  // .then(results => {this.setState({reviews: results})
-  // console.log('in report', this.state)}
-  // );
-  //  }
-  // showState = (message) => {
-  //   console.log(message, this.state);
-  // }
+
+  componentDidMount() {
+    //console.log('fired from report')
+    fetch('http://localhost:3001/1')
+      .then(results => { return results.json() })
+      .then(results => {
+        this.setState({ reviews: results })
+        console.log('fetched and fired')
+        // console.log('in report', this.state.reviews)
+      });
+  }
 
   LeftSideShow = (event) => {
     const { displaying, reviews, leftSide, fadeTracker } = this.state;
@@ -175,16 +178,9 @@ class Report extends Component {
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-                <Grid item>
-                  <div className="chart-container">
-                    {this.RightSideShow()}
-                  </div>
-                </Grid>
-                <Grid>
-                  <p>Toggle exists here</p>
-                </Grid>
-              </Paper>
-            </Grid>
+              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+               </Paper>
+             </Grid> 
           </Grid>
         </Grid>
       </div>
@@ -192,5 +188,3 @@ class Report extends Component {
   }
 }
 export default withStyles(styles)(Report);
-
-

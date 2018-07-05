@@ -35,6 +35,16 @@ class PieChart extends Component {
     }
   }
 
+  componentWillReceiveProps(nextprops) {
+    if (this.state.reviews != nextprops.reviews) {
+      this.setState({ ...(this.state.reviews = nextprops.reviews) });
+    }
+    // console.log("next props", nextprops);
+    // console.log("state of pie chart", this.state);
+    this.parseChartData();
+
+  }
+
   parseChartData = () => {
     if (this.state.chartdata.datasets[0].data.length === 0) {
       let veryPositive = 0;
@@ -56,27 +66,43 @@ class PieChart extends Component {
           veryNegative += 1;
         }
       });
-      this.setState({ ...this.state.chartdata.datasets[0].data = [veryPositive, positive, neutral, negative, veryNegative] })
+
+      const pieState = { ...this.state }
+      pieState.chartdata.datasets[0].data = [veryPositive, positive, neutral, negative, veryNegative]
+      this.setState({ pieState })
+      console.log('pie state', pieState)
+      // this.setState({ ...this.state.chartdata.datasets[0].data = [veryPositive, positive, neutral, negative, veryNegative] })
     }
   }
 
+
+
   render() {
-    this.parseChartData();
+    // this.parseChartData();
     const handleClicktwo = elem => {
       if (elem[0]) {
+        console.log(elem)
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
         this.props.pickReviewTypeToDisplay(label);
+        console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
     }
+
     return (
       <div className="pie-chart">
-        <h1 style={{ marginTop: 0 }}>Overall Sentiment</h1>
+        <h1>Overall Sentiment</h1>
         <Pie data={this.state.chartdata} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart" />
       </div>
     );
   }
 }
+
+
+
 export default PieChart;
+
+
