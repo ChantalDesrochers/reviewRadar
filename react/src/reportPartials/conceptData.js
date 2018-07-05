@@ -557,6 +557,7 @@ module.exports = InputReviews
 //   return element.content == match;
 // };
 
+
 // const conceptAggreator = array => {
 //   let allConcepts = [];
 //   array.forEach(function(review) {
@@ -725,4 +726,3 @@ module.exports = InputReviews
 // // returnConcepts.forEach(function(concept) {
 // //   console.log(concept.content, concept.references.length);
 // // });
-

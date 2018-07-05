@@ -5,7 +5,7 @@ class BottomRightNav extends Component {
     render() {
         return (
             <div>
-                <h1>Hey im a nav panel</h1>
+                <h1 style={{marginTop:0}}>Hey im a nav panel</h1>
                 <Button variant="outlined" data-message="sentiment" onClick={this.props.clickHandler}>
                     Sentiments
                 </Button>

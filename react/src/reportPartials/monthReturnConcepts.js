@@ -196,5 +196,4 @@ const MonthConceptFrequency = {
   Dec: []
 };
 
-
 module.exports = MonthConceptFrequency

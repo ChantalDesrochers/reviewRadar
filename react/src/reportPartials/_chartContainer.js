@@ -28,30 +28,58 @@ clickHandler = (event) => {
   }
 
     render() {
-      if(this.state.time) {
-        return ( <div>
-          <KeywordsOverTime reviews={this.props.reviews}/>
-                 <Button variant="outlined" data-message="overtime" onClick={this.clickHandler}>
-                    See data over time
-              </Button>
-               <Button variant="outlined" data-message="overall" onClick={this.clickHandler}>
-                    High level Overview
-              </Button>
-              </div>
-             );
-      } else {
-        return ( <div>
-          <KeywordBarChart reviews={this.props.reviews} />
-                 <Button variant="outlined" data-message="overtime" onClick={this.clickHandler}>
-                    See data over time
-              </Button>
-               <Button variant="outlined" data-message="overall" onClick={this.clickHandler}>
-                    High level Overview
-              </Button>
-              </div>
-             );
+//       if(this.state.time) {
+//         return ( <div>
+//           <KeywordsOverTime reviews={this.props.reviews}/>
+//                  <Button variant="outlined" data-message="overtime" onClick={this.clickHandler}>
+//                     See data over time
+//               </Button>
+//                <Button variant="outlined" data-message="overall" onClick={this.clickHandler}>
+//                     High level Overview
+//               </Button>
+//               </div>
+//              );
+//       } else {
+//         return ( <div>
+//           <KeywordBarChart reviews={this.props.reviews} />
+//                  <Button variant="outlined" data-message="overtime" onClick={this.clickHandler}>
+//                     See data over time
+//               </Button>
+//                <Button variant="outlined" data-message="overall" onClick={this.clickHandler}>
+//                     High level Overview
+//               </Button>
+//               </div>
+//              );
+//       }
+// }
+
+return (
+           <div className="chart-container">
+
+             {/*<KeywordsOverTime reviews={this.props.reviews}/>*/}
+             {/*<SentimentBarChartMonth reviews={this.props.reviews} /> */}
+            {/* // <KeywordPolar/> */}
+           {/*  <KeywordBarChart reviews={this.props.reviews} /> */}
+             {/*<SentimentOverTime reviews={this.props.reviews} />*/}
+            <NumberOfReviewsOverTime reviews={this.props.reviews}/>
+            {/*<PieChart reviews={this.props.reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay} />*/}
+             {/*<Button variant="outlined" data-message="overtime" onClick={this.clickHandler}>*/}
+                     {/*See data over time*/}
+               {/*</Button>*/}
+                {/*<Button variant="outlined" data-message="overall" onClick={this.clickHandler}>*/}
+                     {/*High level Overview*/}
+               {/*</Button>*/}
+
+
+        </div>
+        );
       }
-}
+
+
+
+
+
+
 }
 
         // return (

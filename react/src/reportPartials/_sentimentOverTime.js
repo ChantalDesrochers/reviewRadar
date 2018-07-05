@@ -56,8 +56,12 @@ class SentimentOverTime extends Component {
     }
   }
 
+componentWillReceiveProps(nextprops) {
+  if (this.state.reviews != nextprops.reviews) {
+    this.setState({ ...(this.state.reviews = nextprops.reviews) });
+  }
 
-componentDidMount() {
+// componentDidMount() {
 var parseSentimentDatabyTime = () => {
   var january = {
   positive: 0,

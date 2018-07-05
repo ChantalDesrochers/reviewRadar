@@ -37,6 +37,16 @@ class PieChart extends Component {
 }
 }
 
+  componentWillReceiveProps(nextprops) {
+    if (this.state.reviews != nextprops.reviews) {
+      this.setState({ ...(this.state.reviews = nextprops.reviews) });
+    }
+    console.log("next props", nextprops);
+    console.log("state of pie chart", this.state);
+    this.parseChartData();
+
+  }
+
 parseChartData = () => {
     if (this.state.chartdata.datasets[0].data.length === 0) {
       let veryPositive = 0;
@@ -65,7 +75,7 @@ parseChartData = () => {
 
 
 render() {
-this.parseChartData();
+// this.parseChartData();
 const handleClicktwo = elem => {
   if (elem[0]) {
 console.log(elem)
@@ -90,3 +100,5 @@ console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['d
 }
 
 export default PieChart;
+
+

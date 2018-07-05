@@ -22,15 +22,15 @@ import conceptAggreator from './parsingConceptbyMonth';
 import checkForExisting from './parsingConceptbyMonth';
 
 const styles = {
-  RightTopContainer: { height: '69%' },
-  RightBottomContainer: { height: '35%', marginTop: 8 },
+  RightTopContainer: { height: '65%' },
+  RightBottomContainer: { height: '34.5%', marginTop: 5 },
   RightTopPanel: { height: '100%' },
   RightBottomPanel: { height: '100%' },
   AppBar: { backgroundImage: `url(${AppBarTexture})`, backgroundRepeat: 'repeat', backgroundColor: '#B3E5FC' },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
-  LargePanel: { height: '100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 20, fontFamily: 'Bauhaus' },
+  LargePanel: { height: '100%', backgroundColor: '#F0F4C3', backgroundImage: `url(${PaperTexture})`, backgroundRepeat: 'repeat', padding: 0, fontFamily: 'Bauhaus' },
   LeftContainer: { height: '100%' },
   Top: { height: '86vh' }
 }
@@ -38,22 +38,24 @@ class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: Ratings,
+      //reviews: Ratings,
       leftSide: { displaying: 'sentiment', reviewsToShow: 2, show: 'both' },
-      fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false }
-      //reviews: []
-
-
+      fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
+      reviews: []
     };
   }
   //*****************keep this and the above review for when we actually scrape******************
-  // componentDidMount(){
-  // fetch('http://localhost:3001/1')
-  // .then(results => { return results.json()  })
-  // .then(results => {this.setState({reviews: results})
-  // console.log('in report', this.state)}
-  // );
-  //  }
+  componentDidMount() {
+    console.log('fired from report')
+    fetch('http://localhost:3001/1')
+      .then(results => { return results.json() })
+      .then(results => {
+        this.setState({ reviews: results })
+        console.log('in report', this.state)
+        // console.log('in report', this.state.reviews)
+      });
+  }
+
   showState = (message) => {
     console.log(message, this.state);
   }
@@ -147,5 +149,3 @@ class Report extends Component {
   }
 }
 export default withStyles(styles)(Report);
-
-

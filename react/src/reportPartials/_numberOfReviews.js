@@ -34,7 +34,11 @@ class NumberOfReviewsOverTime extends Component {
     }
   }
 
-componentDidMount() {
+componentWillReceiveProps(nextprops) {
+  if (this.state.reviews != nextprops.reviews) {
+    this.setState({ ...(this.state.reviews = nextprops.reviews) });
+  }
+
     var getReviewsPerMonth = () => {
       var reviews = this.state.reviews
       var january = {
