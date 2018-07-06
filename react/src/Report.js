@@ -38,21 +38,22 @@ class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // hardcoded data
       // reviews: Ratings,
-      organizedConcepts: OrganizedConcepts,
+      organizedConcepts: OrganizedConcepts, 
       completedData: CompletedData,
+      //
       displaying: 'sentiment',
       leftSide: { displaying: 'sentiment', reviewsToShow: 1, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentTargetedReviews: [],
-
       currentTargetedType: '',
       specificTargetedReview: "",
       leftShowing: 'text',
+      // live server data
       reviews: [],
       allConcepts: [],
       monthConcepts: [],
-
     };
     // console.log('allconcepts', this.state.allConcepts)
   }
@@ -64,7 +65,7 @@ class Report extends Component {
       .then(results => {
         this.setState({ reviews: results.reviews, allConcepts: results.allConcepts, monthConcepts: results.monthConcepts })
         console.log('fetched and fired')
-        console.log('all concepts after fetch', this.state.allConcepts)
+        // console.log('all concepts after fetch', this.state.allConcepts)
         // console.log('in report', this.state.reviews)
       });
   }
