@@ -19,18 +19,18 @@ class KeywordsOverTime extends Component {
           label: '',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: '#F37162',
-          borderColor: '#E53A27',
+          backgroundColor: '#78C2E2', //label
+          borderColor: '#28ABE3',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: '#F37162',
-          pointBackgroundColor: '#F37162',
+          pointBorderColor: '#28ABE3',
+          pointBackgroundColor: '#28ABE3',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBackgroundColor: '#2083AD',
+          pointHoverBorderColor: '#2083AD',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -39,18 +39,18 @@ class KeywordsOverTime extends Component {
           label: '',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
+          backgroundColor: '#6AD8B2',
+          borderColor: '#1FDA9A',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: '#fff',
+          pointBorderColor: '#1FDA9A',
+          pointBackgroundColor: '#1FDA9A',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBackgroundColor: '#12875E',
+          pointHoverBorderColor: '#12875E',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -60,18 +60,18 @@ class KeywordsOverTime extends Component {
           label: '',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: '#C39BD3',
-          borderColor: '#7D3C98',
+          backgroundColor: '#E8C34A',
+          borderColor: '#E8B71A',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: '#fff',
+          pointBorderColor: '#E8B71A',
+          pointBackgroundColor: '#E8B71A',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBackgroundColor: '#AD8913',
+          pointHoverBorderColor: '#AD8913',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -81,18 +81,18 @@ class KeywordsOverTime extends Component {
           label: '',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: '#C39BD3',
-          borderColor: '#7D3C98',
+          backgroundColor: '#DB5964',
+          borderColor: '#DB3340',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: '#fff',
+          pointBorderColor: '#DB3340',
+          pointBackgroundColor: '#DB3340',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBackgroundColor: '#8E202A',
+          pointHoverBorderColor: '#8E202A',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -101,18 +101,18 @@ class KeywordsOverTime extends Component {
         { label: '',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: '#C39BD3',
-          borderColor: '#7D3C98',
+          backgroundColor: '#F7F0DE',
+          borderColor: '#F7DEA0',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: '#fff',
+          pointBorderColor: '#F7DEA0',
+          pointBackgroundColor: '#F7DEA0',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBackgroundColor: '#D6C08B',
+          pointHoverBorderColor: '#D6C08B',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -178,18 +178,27 @@ console.log('labelsData', {labelsData})
 
     const handleClick = elem => {
       if (elem[0]) {
-        // console.log(elem)
+        console.log(elem)
         let chartPoints = elem;
+
         let clickedPointIndex = chartPoints[0]['_index']
-        const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-        // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        let secondPointIndex = chartPoints[1]['_index']
+        console.log(secondPointIndex)
+        console.log(clickedPointIndex)
+        const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
+        // const concept = chartPoints[0]['_chart']['config']['data']['datasets'][clickedPointIndex]
+        // console.log(chartPoints[0]['_chart']['config']['data']['datasets'][clickedPointIndex]['label'])
+        // console.log("chartPoints - month", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
     }
 
 
         return (
-            <div className="kwFreqOverTimeChart">
-              <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
+            <div className="kwFreqOverTimeChart" style={{"height" : 375}}>
+              <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
+  height={150}
+  options={{
+    maintainAspectRatio: false}}/>
             </div>
         );
      }

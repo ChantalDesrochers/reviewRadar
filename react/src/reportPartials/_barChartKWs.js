@@ -12,11 +12,11 @@ class KeywordBarChart extends Component {
         labels: [],
         datasets: [{
           label: 'Keyword Frequency',
-          backgroundColor: 'rgba(255,99,132,0.2)',
-          borderColor: 'rgba(255,99,132,1)',
+          backgroundColor: '#6EEFC2',
+          borderColor: '#5FD8AE',
           borderWidth: 5,
-          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-          hoverBorderColor: 'rgba(255,99,132,1)',
+          hoverBackgroundColor: '#60F2BF',
+          hoverBorderColor: '#1FDA9A',
           data: []
         }],
         options: {

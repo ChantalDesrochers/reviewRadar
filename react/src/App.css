@@ -1,3 +1,12 @@
+body {
+    background-color: #F7F5EF
+ }
+
+header {
+    height: 170px;
+    background-image: url('https://img.freepik.com/free-vector/abstract-blue-background_1048-1511.jpg?size=338&ext=jpg')
+}
+
 
 .company-name{
     text-align: center;
@@ -5,6 +14,7 @@
 .review-title{
     text-align: center;
     margin-top: 0;
+
     /* background-color:yellowgreen; */
 }
 .top{
@@ -30,5 +40,6 @@
 margin-top:175px;
 }
 
-
- 
+div.MuiPaper-root-17 {
+    margin: 10px;
+}

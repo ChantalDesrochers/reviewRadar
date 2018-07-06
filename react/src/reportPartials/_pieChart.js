@@ -41,18 +41,18 @@ class PieChart extends Component {
         datasets: [{
           data: array,
           backgroundColor: [
-            '#9B59B6',
-            '#2980B9',
-            '#16A085',
-            '#C0392B',
-            '#99A3A4'
+            '#28ABE3',
+            '#1FDA9A',
+            '#F7EAC8',
+            '#DB3340',
+            '#E8B71A'
           ],
           hoverBackgroundColor: [
-            '#9B59B6',
-            '#2980B9',
-            '#16A085',
-            '#C0392B',
-            '#99A3A4'
+            '#78C2E2',
+            '#6AD8B2',
+            '#F7F0DE',
+            '#DB5964',
+            '#E8C34A'
           ],
         }]
     }
@@ -77,6 +77,7 @@ class PieChart extends Component {
 
     return (
       <div className="pie-chart" style={{"height" : 375}}>
+
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
   width={10}
   height={150}
