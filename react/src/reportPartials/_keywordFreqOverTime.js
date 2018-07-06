@@ -124,10 +124,11 @@ class KeywordsOverTime extends Component {
 
 
   componentDidMount() {
-    var sortedArray = this.state.concepts.sort(function(a, b) {
-    return b.references.length - a.references.length
-  });
-      var topFive = sortedArray.slice(0,5)
+  //   var sortedArray = this.state.concepts.sort(function(a, b) {
+  //   return b.references.length - a.references.length
+  // });
+  //     var topFive = sortedArray.slice(0,5)
+      var topFive = this.state.concepts.slice(0,5)
       console.log(topFive)
 
   const labels = topFive.map(x => x.content);

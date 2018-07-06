@@ -1,14 +1,15 @@
-// generic check for existing
+var Ratings = require("./ratings.js");
 
+// generic check for existing
 checkForExisting = match => element => {
-  console.log("passed into match", match);
-  console.log("passed into element", element);
+  // console.log("passed into match", match);
+  // console.log("passed into element", element);
   return element.content == match;
 };
 
-// parses into full object (not separated by month)
-
-conceptAggreator = array => {
+// parses into full object (not separated by month), and sorts by length
+conceptAggregator = array => {
+  let allConcepts = [];
   array.forEach(function(review) {
     review.concepts.forEach(function(concept) {
       // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
@@ -27,8 +28,12 @@ conceptAggreator = array => {
     });
   });
   console.log("concept aggregator done");
-  return allConcepts;
+  return allConcepts.sort(function(a, b) {
+    return b.references.length - a.references.length;
+  });
 };
+
+// console.log(conceptAggregator(Ratings))
 
 // *FUNCTIONS FOR MONTHLY KEYWORD CHART
 // parses entire array into monthly
@@ -87,7 +92,7 @@ function parseReviewsbyDate(reviews) {
         datedReviews.Dec.push(review);
         break;
     }
-  })
+  });
   return datedReviews;
 }
 
@@ -130,16 +135,18 @@ const datedAggregator = object => {
   for (let month in object) {
     arrayAggregator(object[month], month, returnObj);
   }
+  console.log(returnObj);
   return returnObj;
 };
 
+// datedAggregator(parseReviewsbyDate(Ratings))
 
 // functions used to parse from monthly concepts into data sizes for chart
-var kwOverTime = this.state.conceptsTime;
-console.log(kwOverTime);
-let aoa = [];
-let indexer = 0;
+// var kwOverTime = this.state.conceptsTime;
+// console.log(kwOverTime);
 const kwPerMonth = () => {
+  let aoa = [];
+  let indexer = 0;
   labels.forEach(function(label) {
     // for each label
     let pushData = [];
@@ -156,8 +163,13 @@ const kwPerMonth = () => {
         indexer += 1;
       }
     }
-
     aoa.push(pushData);
     indexer = 0;
   });
+  return aoa
 };
+
+module.exports = {
+  conceptAggregator: conceptAggregator,
+  datedAggregator: datedAggregator,
+}

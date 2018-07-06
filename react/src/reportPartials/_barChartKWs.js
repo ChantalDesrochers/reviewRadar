@@ -34,10 +34,11 @@ class KeywordBarChart extends Component {
   componentDidMount() {
     var getChartData = () => {
       console.log('component did mount receiving', this.props.reviews)
-      var sortedArray = this.props.reviews.sort(function (a, b) {
-        return b.references.length - a.references.length
-      });
-      var topSeven = sortedArray.slice(0, 6)
+      // var sortedArray = this.props.reviews.sort(function (a, b) {
+      //   return b.references.length - a.references.length
+      // });
+      // var topSeven = sortedArray.slice(0, 6)
+      var topSeven = this.props.reviews.slice(0, 6)
       var label = []
       var data = []
       topSeven.forEach(function (concept) {
