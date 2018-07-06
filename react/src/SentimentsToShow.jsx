@@ -60,17 +60,14 @@ class SentimentsToShow extends Component {
                     <Grid container spacing={16} style={{ backgroundColor: "white" }} >
                         <Grid item sm={12} style={{ float: 'left', width: "50%" }}>
                             <Paper maxHeight={100}>
-                                <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                    <ReviewStars rating={rating} />
-                                </Grid>
+                                
                                 <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
                                     <Date date={date} />
                                 </Grid>
                             </Paper>
                         </Grid>
                         <Grid item sm={12} >
-                            <div style={{ margin: 'auto' }}>
-                                
+                            <div style={{ margin: 'auto' }}>                            
                                 <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
                                     <NameAndSite name={name} site={site} />
                                 </Grid>
@@ -83,30 +80,6 @@ class SentimentsToShow extends Component {
                         </Grid>
                     </Grid>
                 </div>
-                {/* <div>
-                    <Grid className="buttons" container style={{ marginLeft: '35%', position: 'absolute', top: 450 }}>
-                        <Grid item sm={12}>
-                        </Grid>
-                        <Grid item sm={1}>
-                            <div style={{ textAlign: 'center' }}>
-                                <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
-                                    <LabelOutline className="icon-flipped" />
-                                </Button>
-                            </div>
-                        </Grid>
-                        <Grid item sm={2}>
-                            <div style={{ textAlign: 'center' }}>
-                                <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
-                                    <LabelOutline />
-                                </Button>
-                            </div>
-                        </Grid>
-                        <Grid item sm={4}>
-
-                        </Grid>
-
-                    </Grid>
-                </div> */}
             </div >
         )
         return reviewToReturn

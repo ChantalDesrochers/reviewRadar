@@ -20,6 +20,7 @@ import WatsonBars from './WatsonBar';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import conceptAggreator from './parsingConceptbyMonth';
 import checkForExisting from './parsingConceptbyMonth';
+import ReviewStars from "./ReviewStars";
 
 const styles = {
   RightTopContainer: { height: '100%' },
@@ -34,7 +35,8 @@ const styles = {
   Top: { height: '89vh' },
   TopNavPanel: { float: 'left', padding: 20 },
   TopNavPanelContainer: { backgroundColor: "blue" },
-  WatsonBars: { bottom: 50 }
+  WatsonBars: { bottom: 50 },
+  ReviewStars: { bottom:100 }
 }
 class Report extends Component {
   constructor(props) {
@@ -244,6 +246,7 @@ class Report extends Component {
                   reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} />
               </Paper>
               <div>
+                <ReviewStars style={styles.ReviewStars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview}/>
                 <WatsonBars style={styles.WatsonBars}  currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
               </div>
             </Grid>
