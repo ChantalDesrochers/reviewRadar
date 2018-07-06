@@ -13,6 +13,33 @@ class KeywordCharts extends Component {
     }
   }
 
+  
+  conceptAggreator = array => {
+    const checkForExisting = match => element => {
+      console.log('passed into match', match)
+      console.log('passed into element', element)
+      return element.content == match;
+    };
+    let allConcepts = [];
+    array.forEach(function(review) {
+      review.concepts.forEach(function(concept) {
+        // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
+        console.log('before passing into existing', concept.content)
+        let existingIndex = allConcepts.findIndex(checkForExisting(concept.content));
+        if (existingIndex < 0) {
+          allConcepts.push({
+            content: concept.content,
+            references: [review.id]
+          });
+        } else {
+          allConcepts[existingIndex].references.push(review.id);
+        }
+      })
+    });
+    return allConcepts
+  };
+
+
   handleChartChange = chartName => {
     const resetCharts = {
       showTimeChart: false,
@@ -22,12 +49,14 @@ class KeywordCharts extends Component {
   }
 
   render() {
-    const { reviews } = this.props
+    //const { reviews } = this.props
     const { showOverviewChart, showTimeChart } = this.state
+    // {console.log('in keyword chart, being passed reviews', this.props.reviews)}
+    // {console.log('in keyword chart, being passed reviewtypetodisplay', this.props.reviewTypeToDisplayKW)}
     return (
       <div>
-        { showTimeChart && <KeywordsOverTime reviews={reviews}/> }
-        { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} reviews={reviews} />}
+        { showTimeChart && <KeywordsOverTime reviews={this.props.reviews}/> }
+        { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} reviews={this.conceptAggreator(this.props.reviews)} />}
         <Button
           variant="contained"
           data-message="overtime"

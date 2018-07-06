@@ -33,76 +33,147 @@ Header should be super, super visible. Big font size, clear black or dark color 
 Put your CTA as close to the top as possible so it's read first. Sprinkle CTA's throughout the landing page so the customer will alwasy have an option to buy.
 
 Make it long. Long copy sells. Long landing page sells. */
+const variables = {
+  color1: "lightblue",
+  color2: "#289aee",
+  buttonPadding: "10 px",
+  buttonHeight: 48
+};
 
+const styles = {
+  header: {
+    background: variables.color2,
+    color: "white"
+  },
+  register: {
+    background: variables.color2,
+    color: "white",
+    height: variables.buttonHeight,
+    padding: variables.buttonPadding
+  },
+  login: {
+    border: 0,
+    color: "grey",
+    height: variables.buttonHeight,
+    padding: variables.buttonPadding
+  },
+  label: {
+    textTransform: "capitalize"
+  }
+};
+
+const paper = {
+  padding: 2,
+  textAlign: "center"
+  // color: palette.text.secondary,
+};
 class Request extends Component {
-    constructor() {
-      super();
-      this.state = {
-        name: '',
-        email: '',
-        url1: '',
-        url2: '',
-        url3: '',
-        sent: false
-      }
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleSubmit(event) {
-      event.preventDefault();
-      console.log(this.state)
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      url1: "",
+      url2: "",
+      url3: "",
+      sent: false
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-      fetch('http://localhost:3001/1', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(this.state),
-      })
-      .then(function(res) {
-        return
-      })
-      
-      this.setState({
-        url1: '',
-        url2: '',
-        url3: '',
-        sent: true
-      })
-    }
-  
-    render() {
-      const submitPage = (
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state);
+
+    fetch("http://localhost:3001/1", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then(function(res) {
+      return;
+    });
+
+    this.setState({
+      url1: "",
+      url2: "",
+      url3: "",
+      sent: true
+    });
+  }
+
+  render() {
+    const submitPage = (
       <form className="form" onSubmit={this.handleSubmit}>
-        <label className="form-text" htmlFor="company">Company Name</label>
-        <input id="company" name="company" type="text" onChange={e => this.setState({name: e.target.value})}/>
-        <br/> <br/>
-        <label className="form-text" htmlFor="email">Enter your email</label>
-        <input id="email" name="email" type="email" onChange={e => this.setState({email: e.target.value})}/>
-        <br/> <br/>
-        <label className="form-text" htmlFor="yelp-url">Enter your yelp page</label>
-        <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url1: e.target.value})}/>
-        <br/> <br/>
+        <label className="form-text" htmlFor="company">
+          Company Name
+        </label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          onChange={e => this.setState({ name: e.target.value })}
+        />
+        <br /> <br />
+        <label className="form-text" htmlFor="email">
+          Enter your email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          onChange={e => this.setState({ email: e.target.value })}
+        />
+        <br /> <br />
+        <label className="form-text" htmlFor="yelp-url">
+          Enter your yelp page
+        </label>
+        <input
+          id="yelp-url"
+          name="yelp-url"
+          type="text"
+          onChange={e => this.setState({ url1: e.target.value })}
+        />
+        <br /> <br />
         {/* <label className="form-text" htmlFor="second-url">Enter your second url</label>
         <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url2: e.target.value})}/>
         <br/> <br/>
         <label className="form-text" htmlFor="third-url">Enter your third url</label>
         <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url3: e.target.value})}/>
         <br/> <br/> */}
-
         <button>Get Your Report!</button>
-      </form>)
+      </form>
+    );
 
     const thanksPage = (
       <div>
         <h2>Thank you for your request</h2>
-        <br/>
+        <br />
         <Link to="../report">Your report will be ready here</Link>
       </div>
-    )
+    );
 
-      return this.state.sent ? thanksPage : submitPage ;
-    }
+    return (
+      <div>
+        <AppBar
+          position="static"
+          classes={{
+            root: styles.header
+          }}
+        >
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              [Logo] ReviewRadar
+            </Typography>
+            {/* <Button color="inherit">Login</Button>
+          <Button color="inherit">Register</Button> */}
+          </Toolbar>
+        </AppBar>
+        {this.state.sent ? thanksPage : submitPage} ;
+      </div>
+    );
   }
-  export default Request
+}
+export default Request;

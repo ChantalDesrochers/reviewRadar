@@ -6,7 +6,6 @@ class KeywordBarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: this.props.reviews,
       testData: OrganizedConcepts,
       data: {
         labels: [],
@@ -34,7 +33,8 @@ class KeywordBarChart extends Component {
 
   componentDidMount() {
     var getChartData = () => {
-      var sortedArray = this.state.testData.sort(function (a, b) {
+      console.log('component did mount receiving', this.props.reviews)
+      var sortedArray = this.props.reviews.sort(function (a, b) {
         return b.references.length - a.references.length
       });
       var topSeven = sortedArray.slice(0, 6)

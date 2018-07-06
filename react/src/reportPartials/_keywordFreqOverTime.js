@@ -9,7 +9,6 @@ class KeywordsOverTime extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: this.props.reviews,
       concepts: ReturnConcepts,
       conceptsTime: MonthConceptFrequency,
       data: {

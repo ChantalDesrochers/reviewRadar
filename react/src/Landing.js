@@ -65,8 +65,8 @@ function Landing(props) {
           <Typography variant="title" color="inherit">
             [Logo] ReviewRadar
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button>
+          {/* <Button color="inherit">Login</Button>
+          <Button color="inherit">Register</Button> */}
         </Toolbar>
       </AppBar>
 
