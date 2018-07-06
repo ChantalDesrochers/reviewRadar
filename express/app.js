@@ -55,6 +55,27 @@ conceptAggreator = array => {
   return allConcepts
 };
 
+const datedAggregator = object => {
+  let returnObj = {
+    Jan: [],
+    Feb: [],
+    Mar: [],
+    Apr: [],
+    May: [],
+    Jun: [],
+    Jul: [],
+    Aug: [],
+    Sep: [],
+    Oct: [],
+    Nov: [],
+    Dec: []
+  };
+  for (let month in object) {
+    arrayAggregator(object[month], month, returnObj)
+  }
+  return returnObj
+}
+
 var kwOverTime = this.state.conceptsTime;
 console.log(kwOverTime)
 let aoa = []
