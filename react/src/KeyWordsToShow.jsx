@@ -50,18 +50,36 @@ class KeywordsToShow extends Component {
 
     }
   
+    mouseController = (message) => {
+        switch (message) {
+            case 'enter-review':
+                styles.reviewText = { textOverflow: 'ellipsis', overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+                this.forceUpdate();
+                console.log('in enter review', styles);
+                break;
+            case 'exit-review':
+                styles.reviewText = { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+                this.forceUpdate();
+                console.log('in exit review', styles);
+                break;
+        }
+    }
     prepareHtml = (fadeBool, reviewsToShow) => {
 
         if(reviewsToShow.length === 0){
        //     this is going to be passed to report as a n argument
        console.log('this . props', this.props)
             let  r = this.props.organizedConcepts[0].content;
-             this.props.clickHandlerForKeyWordBarChart (r);
-         
+             this.props.clickHandlerForKeyWordBarChart (r);      
         }
-        else
-        console.log('review to display', reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed));
-        let reviewToReturn = (
+        const index = this.state.indexOfReviewCurrentlyDisplayed;
+        const review = this.props.completedData[index].description;
+        const rating = this.props.completedData[index].rating;
+        const date = this.props.completedData[index].datePublished;
+        const name = this.props.completedData[index].author;
+        const site = "Yelp";
+        const watsonSentiment = this.props.completedData[index].score;
+            let reviewToReturn = (
             <div styles={{ padding: 0 }}>
                 <Grid container spacing={16}>
                     <Grid item sm={12}>
@@ -108,4 +126,4 @@ class KeywordsToShow extends Component {
 
     }
 }
-export default KeywordsToShow
+export default withStyles(styles)(KeywordsToShow)

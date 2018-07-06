@@ -27,11 +27,7 @@ class KeywordCharts extends Component {
     return (
       <div>
         { showTimeChart && <KeywordsOverTime reviews={reviews}/> }
-<<<<<<< HEAD
-        { showOverviewChart && <KeywordBarChart reviews={reviews}  clickHandlerForKeyWordBarChart={this.props.clickHandlerForKeyWordBarChart} />}
-=======
         { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} reviews={reviews} />}
->>>>>>> ebdb0e67901c1c4c8a36c5b95b2f0d040dd975f9
         <Button
           variant="contained"
           data-message="overtime"

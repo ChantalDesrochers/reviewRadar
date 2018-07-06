@@ -19,57 +19,35 @@ const styles = {
 }
 
 class SentimentsToShow extends Component {
-    constructor(props) {
-        console.log('in sentiments constructor');
-        super(props);
-        this.state = {
-            indexOfReviewCurrentlyDisplayed: 1
-        };
-    }
     onComponentMount() {
-        console.log('in sentiment component mount');
         this.prepareHtml(null, this.props.completedData);
         this.state.indexOfReviewCurrentlyDisplayed = this.props.completedData / 2;
 
     }
 
-    changeDisplayedReviews = (direction) => {
-        let lastReviewIndex = this.props.currentTargetReviews.length;
-        let index = this.state.indexOfReviewCurrentlyDisplayed
-        console.log('indexof', index)
-        if (direction === 'forward' && index !== lastReviewIndex) {
-            this.setState({ indexOfReviewCurrentlyDisplayed: index + 1 })
-        }
-        else if (direction === 'forward' && index === lastReviewIndex) {
-            console.log('no other reviews to see');
-        }
-        else if (direction === 'back' && index !== 1) {
-            this.setState({ indexOfReviewCurrentlyDisplayed: index - 1 })
-        }
-        else if (direction === 'back' && index === 1) {
-            console.log('yo you at zero');
-        }
-        console.log('index', index);
-    }
+    // changeDisplayedReviews = (direction) => {
+    //     console.log('in change displayed reviews direction is,', direction);
+    //    this.props.reviewSwitch(direction); 
+    // }
 
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
                 styles.reviewText = { textOverflow: 'ellipsis', overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
                 this.forceUpdate();
-                console.log('in enter review', styles);
+         //       console.log('in enter review', styles);
                 break;
             case 'exit-review':
                 styles.reviewText = { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
                 this.forceUpdate();
-                console.log('in exit review', styles);
+           //     console.log('in exit review', styles);
                 break;
         }
     }
     prepareHtml = (fadeBool, reviewsToShow) => {
 
     //    let {author, datePublished, rating, description} = this.props.completedData[index];
-        const index = this.state.indexOfReviewCurrentlyDisplayed;
+        const index = this.props.visibleReview;
         const review = this.props.completedData[index].description;
         const rating = this.props.completedData[index].rating;
         const date = this.props.completedData[index].datePublished;
@@ -92,9 +70,7 @@ class SentimentsToShow extends Component {
                         </Grid>
                         <Grid item sm={12} >
                             <div style={{ margin: 'auto' }}>
-                                <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                    <WatsonBars watsonRating={watsonSentiment} />
-                                </Grid>
+                                
                                 <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
                                     <NameAndSite name={name} site={site} />
                                 </Grid>
@@ -107,13 +83,13 @@ class SentimentsToShow extends Component {
                         </Grid>
                     </Grid>
                 </div>
-                <div>
+                {/* <div>
                     <Grid className="buttons" container style={{ marginLeft: '35%', position: 'absolute', top: 450 }}>
                         <Grid item sm={12}>
                         </Grid>
                         <Grid item sm={1}>
                             <div style={{ textAlign: 'center' }}>
-                                <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('back')} >
+                                <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
                                     <LabelOutline className="icon-flipped" />
                                 </Button>
                             </div>
@@ -130,7 +106,7 @@ class SentimentsToShow extends Component {
                         </Grid>
 
                     </Grid>
-                </div>
+                </div> */}
             </div >
         )
         return reviewToReturn

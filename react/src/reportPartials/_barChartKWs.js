@@ -66,7 +66,7 @@ class KeywordBarChart extends Component {
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         this.props.reviewTypeToDisplayKW(label)
         const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
-        this.props.clickHandlerForKeyWordBarChart(label);
+        this.props.reviewTypeToDisplayKW(label);
         console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
         console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
