@@ -83,17 +83,19 @@ class Report extends Component {
     }
   }
 
-  RightSideShow = (event) => {
-    const { displaying, reviews, leftSide, fadeTracker } = this.state;
-    switch (displaying) {
-      case 'sentiment':
-        return <SentimentPieChart reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
-        break;
-      case 'keyword':
-        return <KeywordBarChart clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} keywordClickHandler={this.clickHandlerForKeyWordBarChart} organizedConcepts={this.state.organizedConcepts} clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} />
-        break;
-    }
-  }
+  // ******not being used yet******
+  // RightSideShow = (event) => {
+  //   const { displaying, reviews, leftSide, fadeTracker } = this.state;
+  //   switch (displaying) {
+  //     case 'sentiment':
+  //       return <SentimentPieChart reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+  //       break;
+  //     case 'keyword':
+  //       return <KeywordBarChart clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} keywordClickHandler={this.clickHandlerForKeyWordBarChart} organizedConcepts={this.state.organizedConcepts} clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} />
+  //       break;
+  //   }
+  // }
+
   swapReviewsOnAllSentimentChartClick = (focus) => {
     console.log('focus is', focus);
     focus = focus.toLowerCase()
@@ -117,10 +119,10 @@ class Report extends Component {
     console.log('clicked for key word bar chart', clickedItem);
     let finalReviews = [];
     //this gets the id numbers that show where the target concept(clickedItem) appears
-    var references = this.state.organizedConcepts.find(x => x.content === clickedItem).references
+    var references = this.state.allConcepts.find(x => x.content === clickedItem).references
     //this makes an array called finalArrays that contains the text of the targeted reviewa
     for (var i = 0; i < references.length; i++) {
-      finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]).description);
+      finalReviews.push(this.findObjectByKey(this.state.reviews, 'id', references[i]).description);
     }
     this.setState({ currentTargetedReviews: finalReviews });
     this.render();
