@@ -29,10 +29,73 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+checkForExisting = match => element => {
+  console.log('passed into match', match)
+  console.log('passed into element', element)
+  return element.content == match;
+};
+
+conceptAggreator = array => {
+  array.forEach(function(review) {
+    review.concepts.forEach(function(concept) {
+      // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
+      // console.log('before passing into existing', concept.content)
+      let existingIndex = allConcepts.findIndex(checkForExisting(concept.content));
+      if (existingIndex < 0) {
+        allConcepts.push({
+          content: concept.content,
+          references: [review.id]
+        });
+      } else {
+        allConcepts[existingIndex].references.push(review.id);
+      }
+    })
+  });
+  console.log('concept aggregator done')
+  return allConcepts
+};
+
+var kwOverTime = this.state.conceptsTime;
+console.log(kwOverTime)
+let aoa = []
+let indexer = 0
+const kwPerMonth = () => {
+  labels.forEach(function(label) { // for each label
+    let pushData = []
+    pushData = [0,0,0,0,0,0,0,0,0,0,0,0] // creates an array for year
+    for (var month in kwOverTime) {  // for each month in the year object
+      kwOverTime[month].forEach(function(concept) { //for each concept in the month
+        if (label == concept.content) {
+          pushData[indexer] = concept.references.length
+        }
+    })
+    if (indexer < 12) {
+      indexer += 1
+    }
+
+  }
+
+  aoa.push(pushData)
+  indexer = 0
+  })
+}
+
 var reportData = []
 
+let allConcepts = [];
+
+let monthlyConcepts = []
+
+var sentData = {
+  // reviews: reportData // live,
+  reviews: Ratings,
+  allConcepts: conceptAggreator(Ratings),
+  // monthlyKeywords: monthlyConcepts
+}
+
+
 app.get('/1', (req, res) => {
-  res.send(JSON.stringify(Ratings))
+  res.send(JSON.stringify(sentData))
 })
 
 app.post('/1', (req, res) => {
@@ -45,6 +108,7 @@ app.post('/1', (req, res) => {
       // review.id = i
       reportData.push(review)
     })
+    allConcepts = conceptAggreator(data)
     res.send('success')
   }
 
