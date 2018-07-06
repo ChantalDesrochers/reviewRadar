@@ -130,11 +130,7 @@ class KeywordsOverTime extends Component {
   });
       var topFive = sortedArray.slice(0,5)
       console.log(topFive)
-
   const labels = topFive.map(x => x.content);
-  // console.log(labels)
-
-  // console.log(this.state.conceptsTime)
 const keywordsPerMonth = {}
 var kwOverTime = this.state.conceptsTime;
 console.log(kwOverTime)
@@ -153,9 +149,7 @@ const kwPerMonth = () => {
     if (indexer < 12) {
       indexer += 1
     }
-
   }
-
   aoa.push(pushData)
   indexer = 0
   })
@@ -194,7 +188,7 @@ console.log('labelsData', {labelsData})
 
 
         return (
-            <div className="pie-chart">
+            <div className="kwFreqOverTimeChart">
               <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
             </div>
         );

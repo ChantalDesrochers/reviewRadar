@@ -73,21 +73,18 @@ class KeywordBarChart extends Component {
 
 
     return (
-      <div className="bar-chart">
-        <h1>Keyword Frequency</h1>
-        <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }} />
+      <div className="bar-chart" style={{"height" : 375}}>
+
+        <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
+  height={150}
+  options={{
+    maintainAspectRatio: false}}/>
       </div>
     );
   }
-  //   return (
-  //     <div className="pie-chart">
-  //       <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }} />
-  //     </div>
-  //   );
 }
 
 export default KeywordBarChart;
 
-  // onClick={() => this.props.clickHandler('sentiment')}
-  // componentDidMount() {
-  //   console.log('in component did mount', this.props.clickHandlerForKeyWordBarChart)
+
+

@@ -208,8 +208,12 @@ class SentimentOverTime extends Component {
 
 
     return (
-      <div className="sentiment-over-time">
-        <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}}/>
+      <div className="sentiment-over-time" style={{"height" : 375}}>
+        <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}} width={10}
+  height={120}
+  options={{
+    maintainAspectRatio: false
+  }}/>
       </div>
     );
   }
