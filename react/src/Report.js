@@ -8,17 +8,19 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
-//import Ratings from "./ratings.js"
-import OrganizedConcepts from './reportPartials/organizedConcepts.js';
-import CompletedData from './reportPartials/completedData.js'
 import BottomRightNav from './BottomRightNav.js';
 import Colors from './AppColors';
 import KeywordBarChart from './reportPartials/_barChartKWs';
 import SentimentPieChart from './reportPartials/_pieChart';
 import SwapButton from './SwapButton';
 import ChartContainer from "./reportPartials/_chartContainer";
-import conceptAggreator from './parsingConceptbyMonth';
-import checkForExisting from './parsingConceptbyMonth';
+
+// hardcoded reviews
+//import Ratings from "./ratings.js"
+// import OrganizedConcepts from './reportPartials/organizedConcepts.js'; 
+// import CompletedData from './reportPartials/completedData.js'
+import OrganizedConcepts from './reportPartials/organizedConcepts2.js'; // organized by concepts
+import CompletedData from './reportPartials/completedData2.js' // all reviews
 
 const styles = {
   RightTopContainer: { height: '100%' },
@@ -52,7 +54,7 @@ class Report extends Component {
       monthConcepts: [],
 
     };
-    console.log(this.state.completedData)
+    // console.log('allconcepts', this.state.allConcepts)
   }
 
   componentDidMount() {
@@ -62,6 +64,7 @@ class Report extends Component {
       .then(results => {
         this.setState({ reviews: results.reviews, allConcepts: results.allConcepts, monthConcepts: results.monthConcepts })
         console.log('fetched and fired')
+        console.log('all concepts after fetch', this.state.allConcepts)
         // console.log('in report', this.state.reviews)
       });
   }

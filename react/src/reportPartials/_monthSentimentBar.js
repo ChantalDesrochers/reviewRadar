@@ -31,7 +31,7 @@ class SentimentBarChartMonth extends Component {
         options: {
           scales: {
             xAxes: [{
-              stacked: true
+              stacked: true,
               ticks: {
                 min: 0
               }
@@ -41,8 +41,8 @@ class SentimentBarChartMonth extends Component {
     }
   }
 }
-}
-}
+
+
 
 
 
