@@ -139,6 +139,14 @@ class Report extends Component {
     const newState = { ...this.state }
     switch (clickedItem) {
       case 'sentiment':
+      //you need the second this.state.leftSide because this method will overwrite the whole object
+      // so you copy it over one
+        this.setState({...this.state, 
+            leftSide: {
+              ...this.state.leftSide,
+              reviewsToShow: 2,
+              show: 'both'
+            }})
         newState.leftSide.reviewsToShow = 2;
         newState.leftSide.show = 'both';
         newState.displaying = 'sentiment';

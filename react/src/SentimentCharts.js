@@ -23,10 +23,11 @@ class SentimentCharts extends Component {
   render() {
     const { reviews } = this.props
     const { showTimeChart, showOverviewChart } = this.state
+    console.log('state in sentinent charts', this.state)
     return (
       <div>
         { showTimeChart && <SentimentOverTime reviews={reviews} /> }
-        { showOverviewChart &&  <PieChart  reviews={reviews} pickReviewTypeToDisplay= {this.props.pickReviewTypeToDisplay}  />}
+        { showOverviewChart &&  <PieChart  reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
         <Button
           variant="contained"
           data-message="overtime"
