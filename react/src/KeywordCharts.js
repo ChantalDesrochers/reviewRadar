@@ -22,14 +22,14 @@ class KeywordCharts extends Component {
   }
 
   render() {
-    //const { reviews } = this.props
+    //const { allConcepts } = this.props
     const { showOverviewChart, showTimeChart } = this.state
-    {console.log('in keyword chart, being passed reviews (all concepts)', this.props.reviews)}
+    {console.log('in keyword chart, being passed all concepts', this.props.allConcepts)}
     // {console.log('in keyword chart, being passed reviewtypetodisplay', this.props.reviewTypeToDisplayKW)}
     return (
       <div>
-        { showTimeChart && <KeywordsOverTime reviews={this.props.reviews} monthConcepts={this.props.monthConcepts}/> }
-        { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} reviews={this.props.reviews} />}
+        { showTimeChart && <KeywordsOverTime allConcepts={this.props.allConcepts} monthConcepts={this.props.monthConcepts}/> }
+        { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} allConcepts={this.props.allConcepts} />}
         <Button
           variant="contained"
           data-message="overtime"

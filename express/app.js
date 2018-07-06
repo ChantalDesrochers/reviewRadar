@@ -51,7 +51,6 @@ app.post('/1', (req, res) => {
   // console.log('full request', req)
   console.log('req body', req.body)
   const sendStuff = (data) =>{
-    // console.log('in sendStuff');
     // console.log(data)
     data.forEach(function(review, i) {
       // review.id = i
@@ -66,23 +65,19 @@ app.post('/1', (req, res) => {
   }
 
   // if (req.body.url2 != '') {
-  // var data2 = sentiment.getData(req.body.url2, sendStuff)
+  //   var data2 = sentiment.getData(req.body.url2, sendStuff)
   // }
 
   // if (req.body.url3 != '') {
-  // var data3 = sentiment.getData(req.body.url3, sendStuff)
+  //   var data3 = sentiment.getData(req.body.url3, sendStuff)
   // }
-
   // res.send('success')
 })
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-// sentiment.getData()
 
 // error handler
 app.use(function(err, req, res, next) {

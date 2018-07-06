@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
-import Ratings from "./ratings.js"
+//import Ratings from "./ratings.js"
 import OrganizedConcepts from './reportPartials/organizedConcepts.js';
 import CompletedData from './reportPartials/completedData.js'
 import BottomRightNav from './BottomRightNav.js';

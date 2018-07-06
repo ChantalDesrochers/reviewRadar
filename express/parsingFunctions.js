@@ -2,8 +2,6 @@ var Ratings = require("./ratings.js");
 
 // generic check for existing
 checkForExisting = match => element => {
-  // console.log("passed into match", match);
-  // console.log("passed into element", element);
   return element.content == match;
 };
 
@@ -12,8 +10,6 @@ conceptAggregator = array => {
   let allConcepts = [];
   array.forEach(function(review) {
     review.concepts.forEach(function(concept) {
-      // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
-      // console.log('before passing into existing', concept.content)
       let existingIndex = allConcepts.findIndex(
         checkForExisting(concept.content)
       );
@@ -27,13 +23,11 @@ conceptAggregator = array => {
       }
     });
   });
-  console.log("concept aggregator done");
+  console.log("allConceptsReady");
   return allConcepts.sort(function(a, b) {
     return b.references.length - a.references.length;
   });
 };
-
-// console.log(conceptAggregator(Ratings))
 
 // *FUNCTIONS FOR MONTHLY KEYWORD CHART
 // parses entire array into monthly
@@ -53,7 +47,6 @@ function parseReviewsByDate(reviews) {
     Dec: []
   };
   reviews.forEach(function(review) {
-    // console.log(review.datePublished.split("-")[1]);
     switch (review.datePublished.split("-")[1]) {
       case "01":
         datedReviews.Jan.push(review);
@@ -100,7 +93,6 @@ function parseReviewsByDate(reviews) {
 const arrayAggregator = (array, month, returnObj) => {
   array.forEach(function(review) {
     review.concepts.forEach(function(concept) {
-      // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
       let existingIndex = returnObj[month].findIndex(
         checkForExisting(concept.content)
       );
@@ -135,11 +127,9 @@ const datedAggregator = object => {
   for (let month in object) {
     arrayAggregator(object[month], month, returnObj);
   }
-  console.log(returnObj);
+  console.log('monthConcepts ready');
   return returnObj;
 };
-
-// datedAggregator(parseReviewsbyDate(Ratings))
 
 // functions used to parse from monthly concepts into data sizes for chart
 // var kwOverTime = this.state.conceptsTime;
