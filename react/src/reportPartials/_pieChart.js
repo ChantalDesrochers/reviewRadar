@@ -80,9 +80,9 @@ class PieChart extends Component {
         <h1>Overall Sentiment</h1>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
   width={10}
-  height={110}
+  height={200}
   options={{
-    maintainAspectRatio: true
+    maintainAspectRatio: false
   }} />
       </div>
     );
