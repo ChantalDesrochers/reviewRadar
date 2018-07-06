@@ -2,11 +2,21 @@ import React, { Component } from "react";
 import TextContainer from "./reportPartials/_textContainer";
 import 'typeface-roboto'
 import Fade from '@material-ui/core/Fade';
-import { Typography } from "@material-ui/core";
-import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button';
-import { IconButton, AccessAlarm, ThreeDRotation, Accessible, ArrowForward, PlayArrow, Navigation, Tonality } from '@material-ui/icons'
+import Grid from '@material-ui/core/Grid'
+import { IconButton, LabelOutline, ThreeDRotation, Accessible, ArrowForward, PlayArrow, Navigation, Tonality } from '@material-ui/icons'
+import { Typography } from "@material-ui/core";
+import Paper from '@material-ui/core/Paper'
+import ReviewStars from "./ReviewStars.js";
+import WatsonBars from "./WatsonBar.js";
+import Date from "./Date.js"
+import NameAndSite from './NameAndSite.js'
+import ReviewNavigationPanel from './ReviewNavigationPanel'
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = {
+    reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
+}
 class KeywordsToShow extends Component {
     constructor(props) {
         super(props);
@@ -15,8 +25,7 @@ class KeywordsToShow extends Component {
         };  
     }
     onComponentMount(){
-       // this.props.clickHandlerForKeyWordBarChart(label);
-      //  this.props.keyworkClickHandler('forward');
+      console.log('in keyword to show');
         this.prepareHtml(null, this.props.reviewsToShow);
 
     }
