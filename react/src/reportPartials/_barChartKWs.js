@@ -65,6 +65,7 @@ class KeywordBarChart extends Component {
         let clickedPointIndex = chartPoints[0]['_index']
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
+        this.props.clickHandlerForKeyWordBarChart(label);
         console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
         console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }

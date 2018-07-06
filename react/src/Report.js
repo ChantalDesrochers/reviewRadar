@@ -179,7 +179,9 @@ class Report extends Component {
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews} 
+              pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}  
+              clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart } />
                </Paper>
              </Grid> 
           </Grid>
