@@ -92,7 +92,7 @@ class Report extends Component {
     console.log('focus is', focus);
     focus = focus.toLowerCase()
     const leftSide = { ...this.state.leftSide };
-  
+
     switch (focus) {
       case 'positive':
         console.log('wow im in positive');
@@ -126,7 +126,7 @@ class Report extends Component {
     newState.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool;
     this.setState(newState)
   };
-  
+
   findObjectByKey(array, key, value) {
     for (var i = 0; i < array.length; i++) {
       if (array[i][key] === value) {
@@ -179,9 +179,9 @@ class Report extends Component {
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
+              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}/>
                </Paper>
-             </Grid> 
+             </Grid>
           </Grid>
         </Grid>
       </div>
