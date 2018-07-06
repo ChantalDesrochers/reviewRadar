@@ -9,8 +9,8 @@ class KeywordsOverTime extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      concepts: ReturnConcepts,
-      conceptsTime: MonthConceptFrequency,
+      // concepts: ReturnConcepts,
+      // conceptsTime: MonthConceptFrequency,
       data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [
@@ -128,24 +128,24 @@ class KeywordsOverTime extends Component {
   //   return b.references.length - a.references.length
   // });
   //     var topFive = sortedArray.slice(0,5)
-      var topFive = this.state.concepts.slice(0,5)
+      var topFive = this.props.reviews.slice(0,5)
       console.log(topFive)
 
   const labels = topFive.map(x => x.content);
   // console.log(labels)
 
   // console.log(this.state.conceptsTime)
-const keywordsPerMonth = {}
-var kwOverTime = this.state.conceptsTime;
-console.log(kwOverTime)
-let aoa = []
-let indexer = 0
-const kwPerMonth = () => {
+// const keywordsPerMonth = {}
+// var kwOverTime = this.props.monthConcepts;
+// console.log(kwOverTime)
+const kwPerMonth = monthConcepts => {
+  let aoa = []
+  let indexer = 0
   labels.forEach(function(label) { // for each label
     let pushData = []
     pushData = [0,0,0,0,0,0,0,0,0,0,0,0] // creates an array for year
-    for (var month in kwOverTime) {  // for each month in the year object
-      kwOverTime[month].forEach(function(concept) { //for each concept in the month
+    for (var month in monthConcepts) {  // for each month in the year object
+      monthConcepts[month].forEach(function(concept) { //for each concept in the month
         if (label == concept.content) {
           pushData[indexer] = concept.references.length
         }
@@ -153,15 +153,14 @@ const kwPerMonth = () => {
     if (indexer < 12) {
       indexer += 1
     }
-
   }
-
   aoa.push(pushData)
   indexer = 0
   })
+  return aoa
 }
 
-kwPerMonth()
+const aoa = kwPerMonth(this.props.monthConcepts)
 
 const labelsData = {...this.state.data};
 labelsData.datasets[0].label = labels[0];

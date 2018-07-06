@@ -37,7 +37,7 @@ conceptAggregator = array => {
 
 // *FUNCTIONS FOR MONTHLY KEYWORD CHART
 // parses entire array into monthly
-function parseReviewsbyDate(reviews) {
+function parseReviewsByDate(reviews) {
   let datedReviews = {
     Jan: [],
     Feb: [],
@@ -172,4 +172,5 @@ const kwPerMonth = () => {
 module.exports = {
   conceptAggregator: conceptAggregator,
   datedAggregator: datedAggregator,
+  parseReviewsByDate: parseReviewsByDate
 }

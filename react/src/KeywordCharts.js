@@ -28,7 +28,7 @@ class KeywordCharts extends Component {
     // {console.log('in keyword chart, being passed reviewtypetodisplay', this.props.reviewTypeToDisplayKW)}
     return (
       <div>
-        { showTimeChart && <KeywordsOverTime reviews={this.props.reviews}/> }
+        { showTimeChart && <KeywordsOverTime reviews={this.props.reviews} monthConcepts={this.props.monthConcepts}/> }
         { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} reviews={this.props.reviews} />}
         <Button
           variant="contained"

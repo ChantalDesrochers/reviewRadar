@@ -39,7 +39,7 @@ var sentData = {
   // monthConcepts: datedAggregator(parseReviewsbyDate(reportData))
   reviews: Ratings,
   allConcepts: parse.conceptAggregator(Ratings),
-  // monthConcepts: datedAggregator(parseReviewsbyDate(Ratings))
+  monthConcepts: parse.datedAggregator(parse.parseReviewsByDate(Ratings))
 }
 
 

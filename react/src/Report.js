@@ -49,7 +49,7 @@ class Report extends Component {
       leftShowing: 'text',
       reviews: [],
       allConcepts: [],
-      monthlyConcepts: [],
+      monthConcepts: [],
 
     };
     console.log(this.state.completedData)
@@ -60,7 +60,7 @@ class Report extends Component {
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
-        this.setState({ reviews: results.reviews, allConcepts: results.allConcepts })
+        this.setState({ reviews: results.reviews, allConcepts: results.allConcepts, monthConcepts: results.monthConcepts })
         console.log('fetched and fired')
         // console.log('in report', this.state.reviews)
       });
@@ -182,7 +182,7 @@ class Report extends Component {
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
-              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews} allConcepts={this.state.allConcepts} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}/>
+              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews} allConcepts={this.state.allConcepts} monthConcepts={this.state.monthConcepts} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}/>
                </Paper>
              </Grid>
           </Grid>
