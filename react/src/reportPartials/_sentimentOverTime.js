@@ -196,13 +196,18 @@ class SentimentOverTime extends Component {
   render() {
     const handleClick = elem => {
 
-      console.log(elem)
+      console.log('elem', elem)
+      console.log('elem 0', elem[0])
+      console.log('elem 1', elem[1])
 
-      if (elem[0]) {
+      if (elem[0] || elem[1]) {
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
+        // let clickedPointIndexPositive = chartPoints[0]['_index'][['_yScale']['ticks']
+        // let clickedPointIndexNeg = chartPoints[q]['_index']
+        console.log(clickedPointIndex)
         const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-        console.log("month", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        // console.log("month", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
     }
 

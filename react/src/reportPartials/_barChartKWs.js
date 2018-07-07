@@ -31,7 +31,6 @@ class KeywordBarChart extends Component {
       }
     }
   }
-
   componentDidMount() {
     var getChartData = () => {
       var sortedArray = this.state.testData.sort(function (a, b) {
@@ -56,8 +55,6 @@ class KeywordBarChart extends Component {
 
 
   render() {
-
-
     const handleClick = elem => {
       if (elem[0]) {
         console.log(elem)
@@ -66,12 +63,11 @@ class KeywordBarChart extends Component {
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         this.props.reviewTypeToDisplayKW(label)
         const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
+        this.props.reviewTypeToDisplayKW(label);
         console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
         console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
     }
-
-
     return (
       <div className="bar-chart" style={{"height" : 375}}>
 
@@ -85,6 +81,9 @@ class KeywordBarChart extends Component {
 }
 
 export default KeywordBarChart;
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> d6f21483de400a59955ecf6bdc57693c1e30e46c
