@@ -11,7 +11,7 @@ var reviewsArray = []
 //multiple page recursion
 const yelpRecursion = (i, link, cb) => {
   // let url = link + i
-  console.log('started', i)
+  console.log('yelp started', i+20)
   // console.log(link + '?start=' + i)
   let url = link + '?start=' + i
   // let url = `https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=${i}`

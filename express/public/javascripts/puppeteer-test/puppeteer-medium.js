@@ -74,7 +74,7 @@ var review = {
 var globalReviews = [];
 
 async function tripAdvisorPuppet(url, i) {
-  console.log("running", i);
+  console.log("tripadvisor started", i+10);
   url.replace(/Reviews/g, `Reviews-or${i}`);
   const browser = await launch({ headless: true });
   const page = await browser.newPage();
@@ -82,7 +82,7 @@ async function tripAdvisorPuppet(url, i) {
   await page.waitForSelector("h1");
 
   await page.click("p span.ulBlueLinks");
-  await page.waitFor(3000);
+  await page.waitFor(1500);
 
   const reviews = await page.evaluate(() => {
     let array = [];
@@ -109,7 +109,6 @@ async function tripAdvisorPuppet(url, i) {
   reviews.forEach(function(review) {
     globalReviews.push(review);
   });
-  // globalReviews.push(reviews)
 
   await page.close();
   await browser.close();
@@ -118,7 +117,7 @@ async function tripAdvisorPuppet(url, i) {
     i += 10;
     tripAdvisorPuppet(url, i);
   } else {
-    console.log("reviews", reviews);
+    // console.log("reviews", reviews);
     console.log("global reviews", globalReviews);
   }
 }
