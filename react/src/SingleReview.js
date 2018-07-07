@@ -14,16 +14,15 @@ import NameAndSite from './NameAndSite.js'
 import ReviewNavigationPanel from './ReviewNavigationPanel'
 import { withStyles } from '@material-ui/core/styles';
 
+
 const styles = {
     reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
 }
 
 
+class SingleReview extends Component {
 
-
-
-class KeywordsToShow extends Component {
-
+  
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
@@ -38,26 +37,29 @@ class KeywordsToShow extends Component {
                 break;
         }
     }
+    prepareHtml = (fadeBool, reviewsToShow) => {
 
-    prepareHtml = () => {
-        console.log('state is ', this.props.s);
-        let review = this.props.s.currentTargetedReviews[this.props.s.visibleReview].description;
-        let name = this.props.s.currentTargetedReviews[this.props.s.visibleReview].author;
-        let date  =  this.props.s.currentTargetedReviews[this.props.s.visibleReview].datePublished;
+        //    let {author, datePublished, rating, description} = this.props.completedData[index];
+        const index = this.props.s.visibleReview;
+        const review = this.props.s.completedData[index].description;
+        const rating = this.props.s.completedData[index].rating;
+        const date = this.props.s.completedData[index].datePublished;
+        const name = this.props.s.completedData[index].author;
         const site = "Yelp";
-        console.log('review', review);
-        let reviewToReturn = (
+        // const watsonSentiment = this.s.props.completedData[index].score;
+
+        return (
             <div>
                 <div className={'full-cue-card-review'}  >
                     <Grid container spacing={0}>
                         <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
                             <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                <NameAndSite name={name} site={site} /> 
+                                <NameAndSite name={name} site={site} />
                             </Grid>
                         </Grid>
                         <Grid item sm={6} >
                             <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                               <Date date={date} /> 
+                                <Date date={date} />
                             </Grid>
                         </Grid>
                         <Grid item sm={12}  >
@@ -68,44 +70,16 @@ class KeywordsToShow extends Component {
                     </Grid>
                 </div>
             </div >
-        )
-
-        // this.props.clickHandlerForKeyWordBarChart (r);      
-
-        //     const index = this.state.indexOfReviewCurrentlyDisplayed;
-        //     const review = this.props.completedData[index].description;
-        //     const rating = this.props.completedData[index].rating;
-        //     const date = this.props.completedData[index].datePublished;
-        //     const name = this.props.completedData[index].author;
-        //     const site = "Yelp";
-        //     const watsonSentiment = this.props.completedData[index].score;
-        //         let reviewToReturn = (
-        //         <div styles={{ padding: 0 }}>
-        //             <Grid container spacing={16}>
-        //                 <Grid item sm={12}>
-        //                     <Typography style={{ textAlign: 'center', padding: 50 }}> {reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed)}
-        //                     </Typography>
-        //                 </Grid>
-
-        //                 <Grid item sm={5}>
-        //                 </Grid>
-
-        //                 <Grid item sm={1}>
-        //                     <div style={{ textAlign: 'center' }}>
-
-        //     )    
-        return reviewToReturn
+        );
     }
+
     render() {
         return (
-
-            <div style={{ padding: 0 }}>
-                {/* //    {this.prepareHtml(this.props.fadeBool, this.props.currentTargetReviews)} */}
+            <div style={{ padding: 0, height: '100%' }}>
+                {/* {this.prepareHtml(this.props.fadeBool, this.props.currentTargetReviews)} */}
                 {this.prepareHtml()}
             </div>
-
         )
-
     }
 }
-export default withStyles(styles)(KeywordsToShow)
+export default withStyles(styles)(SingleReview)

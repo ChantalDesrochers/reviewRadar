@@ -34,8 +34,9 @@ const styles = {
   MainContainer: { height: '100%', marginTop: 8 },
   LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
   Top: { height: '89vh' },
+ 
   TopNavPanel: { float: 'left', padding: 20 },
-  TopNavPanelContainer: { backgroundColor: "blue" },
+  TopNavPanelContainer: { backgroundColor: "blue" }, 
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom:100 }
 }
@@ -49,11 +50,13 @@ class Report extends Component {
       organizedConcepts: OrganizedConcepts,
       completedData: CompletedData,
       displaying: 'sentiment',
-      leftSide: { displaying: 'sentiment', reviewsToShow: 1, show: 'both' },
+      displayModifier: 'volume',
+      displaySentimentType: '',
+     // leftSide: { displaying: 'sentiment', reviewsToShow: 1, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentTargetedReviews: CompletedData,
       currentWatsonRating: 0,
-      currentTargetedType: '',
+     
       visibleReview: 1,
       leftShowing: 'text',
       keywordChartTarget: ''
@@ -80,7 +83,7 @@ class Report extends Component {
       case 'sentiment':
         return <SentimentsToShow currentTargetReviews={this.state.currentTargetedReviews}
           completedData={this.state.completedData}
-          // reviewSwitch={this.reviewSwitch}
+          s ={this.state}
           visibleReview={this.state.visibleReview} />;
         break;
       case 'keyword':
@@ -111,13 +114,16 @@ class Report extends Component {
     const leftSide = { ...this.state.leftSide };
     switch (focus) {
       case 'positive':
-        leftSide.reviewsToShow = 4;
-        leftSide.show = 'positive'
+      this.setState((prevState) => {
+        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: focus }
+        return newState;
+      })
+        console.log('positive clicked');
         this.setState({ leftSide })
         return
       case 'negative':
-        leftSide.reviewsToShow = 4;
-        leftSide.show = 'negative'
+      //  leftSide.show = 'negative'
+        console.log('negative clicked');
         return
     }
   }
@@ -129,21 +135,14 @@ class Report extends Component {
     //this makes an array called finalArrays that contains the text of the targeted reviewa
     for (var i = 0; i < references.length; i++) {
       // finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]).description);
-
-
-      finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]));
+    finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]));
     }
-    console.log('final reviews', finalReviews)
-    //old way that works
-    // this.setState({ currentTargetedReviews: finalReviews });
-    // this.render();
-    //proper way from david/tim
-  
     this.setState((prevState) => {
       let newState = { ...prevState,  currentTargetedReviews: finalReviews }
       return newState;
     })
   }
+
   reviewSwitch = (changeBy) => {
     if (changeBy === 'forward') {
       this.setState((prevState) => {
@@ -177,22 +176,12 @@ class Report extends Component {
 
 
   clickHandler = (clickedItem) => {
-    console.log('panel clicked, clicked item', clickedItem);
+
     const newState = { ...this.state }
     switch (clickedItem) {
       case 'sentiment':
-        //Menotr Note:  syou need the second this.state.leftSide because this method will overwrite the whole object
-        // so you copy it over one *****the could be refactored and might be wrong******
-        this.setState({ ...this.state,
-          leftSide: {
-            ...this.state.leftSide,
-            reviewsToShow: 2,
-            show: 'both'
-          }
-        })
-        newState.leftSide.reviewsToShow = 2;
-        newState.leftSide.show = 'both';
-        newState.displaying = 'sentiment';
+ 
+         newState.displaying = 'sentiment';
         if (this.state.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
         this.setState(newState, () => {
           this.toggleFade();
@@ -238,13 +227,11 @@ class Report extends Component {
                 </div>
                 <VisibleReviewNavPanel reviewSwitch={this.reviewSwitch}/>         
               </div>
-             
             </Grid>
           </Grid>
           <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
             <SwapButton />
           </div>
-
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
@@ -253,7 +240,7 @@ class Report extends Component {
                   reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} />
               </Paper>
               <div>
-               {/* <ReviewStars style={styles.ReviewStars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/> */}
+              <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
                 <WatsonBars style={styles.WatsonBars}  s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />  
               </div>
             </Grid>

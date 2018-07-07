@@ -13,6 +13,8 @@ import Date from "./Date.js"
 import NameAndSite from './NameAndSite.js'
 import ReviewNavigationPanel from './ReviewNavigationPanel'
 import { withStyles } from '@material-ui/core/styles';
+import SingleReview from './SingleReview.js';
+import AllOfSentimentType from './AllOfSentimentType.js';
 
 const styles = {
     reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
@@ -45,45 +47,22 @@ class SentimentsToShow extends Component {
         }
     }
     prepareHtml = (fadeBool, reviewsToShow) => {
+        console.log('displayModifier', this.props.s.displayModifier);
 
-        //    let {author, datePublished, rating, description} = this.props.completedData[index];
-        const index = this.props.visibleReview;
-        const review = this.props.completedData[index].description;
-        const rating = this.props.completedData[index].rating;
-        const date = this.props.completedData[index].datePublished;
-        const name = this.props.completedData[index].author;
-        const site = "Yelp";
-        const watsonSentiment = this.props.completedData[index].score;
-        let reviewToReturn = (
-            <div>
-                <div className={'full-cue-card-review'}  >
-                    <Grid container spacing={0}>
-                        <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
-                            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                <NameAndSite name={name} site={site} />
-                            </Grid>
-                        </Grid>
-                        <Grid item sm={6} >
-                            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                <Date date={date} />
-                            </Grid>
-                        </Grid>
-                        <Grid item sm={12}  >
-                            <Typography onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}>
-                                {review}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </div>
-            </div >
-        )
-        return reviewToReturn
+        if (this.props.s.displayModifier === "volume") {
+            console.log('modifier is set to volume')
+            return <SingleReview s={this.props.s} />
+        }
+        else if (this.props.s.displayModifier === "volumeBySentiment"){
+            console.log('in specific sentiment')
+            return <AllOfSentimentType/>
+        }
     }
 
     render() {
         return (
             <div style={{ padding: 0, height: '100%' }}>
-                {/* {this.prepareHtml(this.props.fadeBool, this.props.currentTargetReviews)} */}
+
                 {this.prepareHtml()}
             </div>
         )
