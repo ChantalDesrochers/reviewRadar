@@ -23,7 +23,7 @@ class SingleReview extends Component {
                 //     console.log('in exit review', styles);
                 break;
         }
-    }
+    }           
     prepareHtml = (fadeBool, reviewsToShow) => {
         const index = this.props.s.visibleReview;
         const review = this.props.s.reviews[index].description;

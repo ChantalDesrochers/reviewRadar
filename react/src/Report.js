@@ -21,7 +21,7 @@ import ReviewStars from "./ReviewStars";
 // hardcoded data
 // import Ratings from "./ratings.js"
 // import OrganizedConcepts from './reportPartials/organizedConcepts.js';
-import CompletedData from './reportPartials/completedData.js'
+// import CompletedData from './reportPartials/completedData.js'
 
 const styles = {
   RightTopContainer: { height: '100%' },
