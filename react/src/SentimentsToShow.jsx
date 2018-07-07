@@ -53,19 +53,31 @@ class SentimentsToShow extends Component {
             console.log('modifier is set to volume')
             return <SingleReview s={this.props.s} />
         }
-        else if (this.props.s.displayModifier === "volumeBySentiment"){
-            console.log('in specific sentiment')
-            return <AllOfSentimentType/>
+        else if (this.props.s.displayModifier === "volumeBySentiment") {
+            
+            let sentiment = this.props.s.displaySentimentType;
+            console.log('in specific sentiment, which is', sentiment)
+            let finalReviews = [];
+
+            console.log('completedData',  this.props.s.completedData);
+            //this gets the id numbers that show where the target concept(clickedItem) appears
+            var watsonLabel = this.props.s.completedData.find(x => x.label === this.props.s.displaySentimentType)
+            console.log('the reviews to display', watsonLabel.length);
+            //this makes an array called finalArrays that contains the text of the targeted reviewa
+            // for (var i = 0; i < watsonLabel.length; i++) {
+            //     // finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]).description);
+            //     finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]));
+            //     return <AllOfSentimentType />
+            // }
         }
     }
+        render() {
+            return (
+                <div style={{ padding: 0, height: '100%' }}>
 
-    render() {
-        return (
-            <div style={{ padding: 0, height: '100%' }}>
-
-                {this.prepareHtml()}
-            </div>
-        )
+                    {this.prepareHtml()}
+                </div>
+            )
+        }
     }
-}
-export default withStyles(styles)(SentimentsToShow)
+    export default withStyles(styles)(SentimentsToShow)
