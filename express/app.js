@@ -34,9 +34,11 @@ app.use('/users', usersRouter);
 var reportData = []
 
 var sentData = {
-  // reviews: reportData // live,
-  // allConcepts: conceptAggregator(reportData),
-  // monthConcepts: datedAggregator(parseReviewsbyDate(reportData))
+  //live
+  reviewsL: reportData, //
+  allConceptsL: parse.conceptAggregator(reportData),
+  monthConceptsL: parse.datedAggregator(parse.parseReviewsByDate(reportData)),
+  //hardcoded
   reviews: Ratings,
   allConcepts: parse.conceptAggregator(Ratings),
   monthConcepts: parse.datedAggregator(parse.parseReviewsByDate(Ratings))
@@ -51,7 +53,7 @@ app.post('/1', (req, res) => {
   // console.log('full request', req)
   console.log('req body', req.body)
   const sendStuff = (data) =>{
-    // console.log(data)
+    console.log('updated labels', JSON.stringify(data))
     data.forEach(function(review, i) {
       // review.id = i
       reportData.push(review)

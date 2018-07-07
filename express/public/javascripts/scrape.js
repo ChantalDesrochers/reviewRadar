@@ -10,7 +10,7 @@ const launch = require("puppeteer").launch;
 var reviewsArray = []
 
 //multiple page recursion
-const yelpRecursion = (i, link, cb) => {
+const yelpRecursion = (link, i, cb) => {
   // let url = link + i
   console.log('Yelp scraping started', i+20)
   // console.log(link + '?start=' + i)
@@ -35,8 +35,9 @@ const yelpRecursion = (i, link, cb) => {
       })
       if (i < 0) {
         i += 20
-        yelpRecursion(i, link, cb)
+        yelpRecursion(link, i, cb)
       } else {
+        console.log('yelp scraping completed', reviewsArray.length)
         cb(reviewsArray)
         // reviewsArray = [] // resets reviewsArray between requests
       }
@@ -44,9 +45,9 @@ const yelpRecursion = (i, link, cb) => {
   })
 }
 
-async function tripAdvisorRecursion(url, i) {
+async function tripAdvisorRecursion(link, i, cb) {
   console.log("tripadvisor started", i+10);
-  url.replace(/Reviews/g, `Reviews-or${i}`);
+  url = link.replace(/Reviews/g, `Reviews-or${i}`);
   const browser = await launch({ headless: true });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "networkidle2" });
@@ -54,6 +55,29 @@ async function tripAdvisorRecursion(url, i) {
 
   await page.click("p span.ulBlueLinks");
   await page.waitFor(1500);
+
+  // const reviews = await page.evaluate(() => {
+  //   let array = [];
+  //   let divArray = document.querySelectorAll("div.reviewSelector");
+  //   for (var element of divArray) {
+  //     let rating = element
+  //       .querySelector(".rating")
+  //       .childNodes[0].className.replace(/ui_bubble_rating bubble_/g, "")
+  //       .replace(0, ".0");
+  //     let author = element.querySelector("span.scrname").textContent;
+  //     let description = element.querySelector("p.partial_entry").textContent;
+  //     let datePublished = element.querySelector(".ratingDate").title;
+  //     array.push({
+  //       // id: reviewsArray.length, // ***just added
+  //       rating: rating,
+  //       author: author,
+  //       origin: "tripAdvisor",
+  //       description: description,
+  //       datePublished: datePublished
+  //     });
+  //   }
+  //   return array;
+  // });
 
   const reviews = await page.evaluate(() => {
     let array = [];
@@ -67,7 +91,6 @@ async function tripAdvisorRecursion(url, i) {
       let description = element.querySelector("p.partial_entry").textContent;
       let datePublished = element.querySelector(".ratingDate").title;
       array.push({
-        // id: reviewsArray.length, // ***just added
         rating: rating,
         author: author,
         origin: "tripAdvisor",
@@ -78,6 +101,7 @@ async function tripAdvisorRecursion(url, i) {
     return array;
   });
 
+
   reviews.forEach(function(review) {
     // review.id = reviewsArray.length
     // reviewsArray.push(review);
@@ -87,19 +111,21 @@ async function tripAdvisorRecursion(url, i) {
   await page.close();
   await browser.close();
 
-  if (i < 20) {
+  if (i < 10) {
     i += 10;
-    tripAdvisorRecursion(url, i);
+    tripAdvisorRecursion(link, i, cb);
   } else {
     // console.log("reviews", reviews);
-    console.log("global reviews", reviewsArray);
+    // console.log("global reviews", reviewsArray);
+    console.log('tripAdvisor scraping completed', reviewsArray.length)
+    cb(reviewsArray)
   }
 }
 
-tripAdvisorRecursion(
-  "https://www.tripadvisor.ca/Restaurant_Review-g155019-d704408-Reviews-Fresh_On_Spadina-Toronto_Ontario.html",
-  0
-);
+// tripAdvisorRecursion(
+//   "https://www.tripadvisor.ca/Restaurant_Review-g155019-d704408-Reviews-Fresh_On_Spadina-Toronto_Ontario.html",
+//   0, null
+// );
 
 module.exports = {
   yelpRecursion: yelpRecursion,

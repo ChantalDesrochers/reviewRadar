@@ -85,16 +85,18 @@ class Request extends Component {
     event.preventDefault();
     console.log(this.state);
 
-    fetch("http://localhost:3001/1", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(this.state)
-    }).then(function(res) {
-      return;
-    });
+    if (this.state.sent === false) {
+      fetch("http://localhost:3001/1", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state)
+      }).then(function(res) {
+        return;
+      });
+    }
 
     this.setState({
       url1: "",
@@ -171,7 +173,7 @@ class Request extends Component {
           <Button color="inherit">Register</Button> */}
           </Toolbar>
         </AppBar>
-        {this.state.sent ? thanksPage : submitPage} ;
+        {this.state.sent ? thanksPage : submitPage}
       </div>
     );
   }
