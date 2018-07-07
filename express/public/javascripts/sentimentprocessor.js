@@ -22,7 +22,6 @@ const addID = results => {
 const addSentiment = cb => (reviews) => {
   const go = (reviews, cb, newReviews) => {
     if (reviews.length === 0) {
-    // if (reviews.length === 15) {
       //  console.log('******DONE*******')
       // console.log('before sorting', newReviews)
       addedIDReviews = addID(sortResults(newReviews))
@@ -43,7 +42,18 @@ const addSentiment = cb => (reviews) => {
 
     nlu.analyze(parameters, (err, response) => {
       if (err) return console.log('error:', err);
-      head.label = response.sentiment.document.label;
+      if (response.sentiment.document.score > 0.5 ) {
+        head.label = 'very positive'
+      } else if (response.sentiment.document.score > 0 ) {
+        head.label = 'positive'
+      } else if (response.sentiment.document.score === 0 ) {
+        head.label = 'neutral'
+      } else if (response.sentiment.document.score >= -0.5 ) {
+        head.label = 'negative'
+      } else if (response.sentiment.document.score < -0.5 ) {
+        head.label = 'very negative'
+      }
+      // head.label = response.sentiment.document.label;
       head.score = response.sentiment.document.score;
       // console.log(head);
       go(tail, cb, newReviews.concat(head));

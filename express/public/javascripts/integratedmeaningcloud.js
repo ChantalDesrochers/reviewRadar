@@ -18,7 +18,7 @@ parseMC = (reviewslength, sendstuffcb) => review => (error, response, body) => {
   let results = JSON.parse(body);
   if (results.status.msg === "OK") {
     results.concept_list.forEach(function (item) {
-      if (item.relevance > 0) {
+      if (item.relevance > 40) {
         // threshold of relevance
         existingIndex = review.concepts.findIndex(checkForExisting(item.form));
         if (existingIndex < 0) {
@@ -38,7 +38,7 @@ parseMC = (reviewslength, sendstuffcb) => review => (error, response, body) => {
 
   // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {
-    console.log("now we are done");
+    console.log("MeaningCloud analysis complete");
     // console.log(reviews);
     // returnReviews(reviews); // this is where it should go to watson
     reviewsCount = 0; // resetting state before next time it's run
