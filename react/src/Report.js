@@ -47,10 +47,10 @@ class Report extends Component {
     this.state = {
       companyName:'Planta',
       // hardcoded data----------
+      // organizedConcepts: OrganizedConcepts, 
       // reviews: Ratings,
-      organizedConcepts: OrganizedConcepts, 
-      completedData: CompletedData,
-      currentTargetedReviews: CompletedData,
+      // completedData: CompletedData,
+      // currentTargetedReviews: CompletedData,
       // -------------------------
       displaying: 'sentiment',
       displayModifier: 'volume',
@@ -62,7 +62,7 @@ class Report extends Component {
       keywordChartTarget: '',
       // live server data
       reviews: [], // all reviews
-      allConcepts: [], // reviews parsed into concepts
+      organizedConcepts: [], // reviews parsed into concepts
       monthConcepts: [], // reviews parsed into monthly concept data
     };
   }
@@ -72,9 +72,9 @@ class Report extends Component {
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
-        this.setState({ reviews: results.reviews, allConcepts: results.allConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
+        this.setState({ reviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
         console.log('fetched and fired')
-        // console.log('all concepts after fetch', this.state.allConcepts)
+        // console.log('all concepts after fetch', this.state.organizedConcepts)
         // console.log('in report', this.state.reviews)
       });
 
@@ -224,7 +224,7 @@ topNavClickHandler = (clickedItem) => {
                 <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
                   pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
                   reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} 
-                  allConcepts={this.state.allConcepts}
+                  organizedConcepts={this.state.organizedConcepts}
                   monthConcepts={this.state.monthConcepts}
                   />
               </Paper>

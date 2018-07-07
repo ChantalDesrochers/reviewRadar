@@ -25,7 +25,7 @@ class KeywordCharts extends Component {
 
 
   render() {
-    //const { allConcepts } = this.props
+    //const { organizedConcepts } = this.props
     const { showOverviewChart, showTimeChart } = this.state
     const buttonStyle = {
       margin: 30,
@@ -37,12 +37,12 @@ class KeywordCharts extends Component {
       background: '#E8D28B',
       color: 'black'
     }
-    {console.log('in keyword chart, being passed all concepts', this.props.allConcepts)}
+    {console.log('in keyword chart, being passed all concepts', this.props.organizedConcepts)}
     // {console.log('in keyword chart, being passed reviewtypetodisplay', this.props.reviewTypeToDisplayKW)}
     return (
       <div>
-        { showTimeChart && <KeywordsOverTime allConcepts={this.props.allConcepts} monthConcepts={this.props.monthConcepts}/> }
-        { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} allConcepts={this.props.allConcepts} />}
+        { showTimeChart && <KeywordsOverTime organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> }
+        { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />}
         <Button
           variant="contained"
           data-message="overtime"

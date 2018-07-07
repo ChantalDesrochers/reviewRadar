@@ -14,8 +14,8 @@ class KeywordsOverTime extends Component {
     };
   }
 
-  kwPerMonth = (allConcepts, monthConcepts) => {
-    var topFive = allConcepts.slice(0, 5);
+  kwPerMonth = (organizedConcepts, monthConcepts) => {
+    var topFive = organizedConcepts.slice(0, 5);
     const labels = topFive.map(x => x.content);
     let aoa = [];
     let indexer = 0;
@@ -180,7 +180,7 @@ class KeywordsOverTime extends Component {
     return (
       <div className="kwFreqOverTimeChart" style={{"height" : 375}}>
       <Line
-          data={this.kwPerMonth(this.props.allConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
+          data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
           height={150}
           options={{
             maintainAspectRatio: false}}/>

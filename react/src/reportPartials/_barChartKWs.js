@@ -78,7 +78,7 @@ class KeywordBarChart extends Component {
 
         <h1>Keyword Frequency</h1>
         <HorizontalBar
-          data={this.getChartData(this.props.allConcepts)}
+          data={this.getChartData(this.props.organizedConcepts)}
           getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
   height={150}
   options={{
