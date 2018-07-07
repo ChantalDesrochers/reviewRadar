@@ -19,9 +19,9 @@ import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
 
 // hardcoded data
-import Ratings from "./ratings.js"
-import OrganizedConcepts from './reportPartials/organizedConcepts.js';
-import CompletedData from './reportPartials/completedData.js'
+// import Ratings from "./ratings.js"
+// import OrganizedConcepts from './reportPartials/organizedConcepts.js';
+// import CompletedData from './reportPartials/completedData.js'
 
 const styles = {
   RightTopContainer: { height: '100%' },
@@ -132,7 +132,7 @@ class Report extends Component {
     let finalReviews = [];
     var references = this.state.organizedConcepts.find(x => x.content === clickedItem).references
     for (var i = 0; i < references.length; i++) {
-    finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]));
+    finalReviews.push(this.findObjectByKey(this.state.reviews, 'id', references[i]));
     }
     this.setState((prevState) => {
       let newState = { ...prevState,  currentTargetedReviews: finalReviews }

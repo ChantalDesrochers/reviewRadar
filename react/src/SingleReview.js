@@ -26,10 +26,10 @@ class SingleReview extends Component {
     }
     prepareHtml = (fadeBool, reviewsToShow) => {
         const index = this.props.s.visibleReview;
-        const review = this.props.s.completedData[index].description;
-        const rating = this.props.s.completedData[index].rating;
-        const date = this.props.s.completedData[index].datePublished;
-        const name = this.props.s.completedData[index].author;
+        const review = this.props.s.reviews[index].description;
+        const rating = this.props.s.reviews[index].rating;
+        const date = this.props.s.reviews[index].datePublished;
+        const name = this.props.s.reviews[index].author;
         const site = "Yelp";
         return (
             <div>
