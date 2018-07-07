@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
-import Ratings from "./ratings.js"
+// import Ratings from "./ratings.js"
 import OrganizedConcepts from './reportPartials/organizedConcepts.js';
 import CompletedData from './reportPartials/completedData.js'
 import Colors from './AppColors';
@@ -46,7 +46,7 @@ class Report extends Component {
     super(props);
     this.state = {
       companyName:'Planta',
-      reviews: Ratings,
+      // reviews: Ratings,
       organizedConcepts: OrganizedConcepts,
       completedData: CompletedData,
       displaying: 'sentiment',
@@ -57,23 +57,23 @@ class Report extends Component {
       currentWatsonRating: 0,
       visibleReview: 1,
       leftShowing: 'text',
-      keywordChartTarget: ''
-      // reviews: []
+      keywordChartTarget: '',
+      reviews: []
     };
   }
 
-  // componentDidMount() {
-  //   //console.log('fired from report')
-  //   fetch('http://localhost:3001/1')
-  //     .then(results => { return results.json() })
-  //     .then(results => {
-  //       this.setState({ reviews: results })
-  //       console.log('fetched and fired')
-  //       // console.log('in report', this.state.reviews)
-  //     });
+  componentDidMount() {
+    //console.log('fired from report')
+    fetch('http://localhost:3001/1')
+      .then(results => { return results.json() })
+      .then(results => {
+        this.setState({ reviews: results })
+        console.log('fetched and fired')
+        // console.log('in report', this.state.reviews)
+      });
 
-  //   console.log('component did mount current target', this.state.currentTargetedReviews);
-  // }
+    console.log('component did mount current target', this.state.currentTargetedReviews);
+  }
 
   LeftSideShow = (event) => {
     const { displaying, reviews, leftSide, fadeTracker } = this.state;

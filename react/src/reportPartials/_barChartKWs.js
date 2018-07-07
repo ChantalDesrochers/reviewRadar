@@ -81,9 +81,4 @@ class KeywordBarChart extends Component {
 }
 
 export default KeywordBarChart;
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> d6f21483de400a59955ecf6bdc57693c1e30e46c
