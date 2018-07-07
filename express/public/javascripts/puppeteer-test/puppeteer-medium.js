@@ -61,42 +61,99 @@ function tripAdvisor() {
   );
 }
 
+/*
+var review = {
+  id: index + i,
+  rating: ratingv,
+  author: authorv,
+  origin: 'yelp',
+  description: descriptionv,
+  datePublished: datePublishedv,
+}
+*/
+
 async function tripAdvisorPuppet(url) {
-  const browser = await launch({ headless: false });
+  const browser = await launch({ headless: true });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "networkidle2" });
   await page.waitForSelector("h1");
-  await page.evaluate(() => (window.map = new Map()));
-  const mapPrototype = await page.evaluateHandle(() => Map.prototype);
-  let array = []
+  // await page.evaluate(() => (window.map = new Map()));
+  // const mapPrototype = await page.evaluateHandle(() => Map.prototype);
+
+  // if "span.ulBlueLinks" text is More, then click it
+  // <span class="taLnk ulBlueLinks" onclick="widgetEvCall('handlers.clickExpand',event,this);">More</span>
+  // <span class="taLnk ulBlueLinks" onclick="widgetEvCall('handlers.clickCollapse',event,this);">Show less</span>
+
+  // const more = await page.evaluate(() => {
+  //   let array = [];
+  //   let moreArray = document.querySelectorAll(".ulBlueLinks");
+  //   for (var element of moreArray) {
+  //     // Loop through each proudct
+  //     if (element.innerText == "More") {
+  //       array.push(element.innerText); // Select the title
+  //     }
+  //   }
+  //   return array;
+  // });
+
+  // console.log("all more", more);
 
   const reviews = await page.evaluate(() => {
-    
-    // const reviewsArray = document.querySelectorAll("div.review-container");
-    const reviewsArray = Array.from(document.querySelectorAll('div.review-container'));
-    reviewsArray.forEach(function(item) {
-      array.push(document.querySelector("h1.header").textContent.trim())
-    });
-    // return reviewsArray.map(p => p.partialentry.innerHTML)
+    let array = [];
+    let reviewsArray = document.querySelectorAll("div.reviewSelector");
+    for (var element of reviewsArray) {
+      let rating = element.querySelector('.rating').childNodes[0].className.replace(/ui_bubble_rating bubble_/g, '').replace(0, '.0')
+      let author = element.querySelector("span.scrname").textContent;
+      let description = element.querySelector("p.partial_entry").textContent;
+      let datePublished = element.querySelector(".ratingDate").title;
+      array.push({
+        rating: rating,
+        author: author,
+        origin: "tripAdvisor",
+        description: description,
+        datePublished: datePublished,
+      });
+    }
+    return array;
   });
+
+  // var ratingv = $(this).find('.ui_bubble_rating').attr('class').replace(/ui_bubble_rating bubble_/g, '')
 
   console.log("all reviews", reviews);
 
-  console.log(array)
+  // const reviews = await page.evaluate(() => {
+  //   // const reviewsArray = document.querySelectorAll("div.review-container");
+  //   let array = [];
+  //   const reviewsArray = Array.from(
+  //     document.querySelectorAll("div.review-container")
+  //   );
+  //   reviewsArray.forEach(function(item) {
+  //     array.push({
+  //       title: document.querySelector("h1.header").textContent.trim(),
+  //       origin: 'tripAdvisor',
+  //       full: item
+  //     })
+  //   });
+  //   // return reviewsArray.map(p => p.partialentry.innerHTML)
+  //   return array
+  // });
+
+  // console.log("all reviews", reviews);
+
   //   for (let storyLink of storyLinks) {
   //     await page.goto(storyLink)
   //     const screen = await page.screenshot();
   //     await expect(screen).toMatchImageSnapshot();
   // };
 
-  dataArray = [];
-  (".review-container");
-  const data = await page.evaluate(() => ({
-    title: document.querySelector("h1.header").textContent.trim()
-  }));
+  // dataArray = [];
+  // (".review-container");
+  // const data = await page.evaluate(() => ({
+  //   title: document.querySelector("h1.header").textContent.trim()
+  // }));
 
   await page.close();
-  console.log(data);
+  // console.log(data);
   // other actions...
   await browser.close();
 }
