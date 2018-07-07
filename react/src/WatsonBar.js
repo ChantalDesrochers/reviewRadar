@@ -6,6 +6,7 @@ class WatsonBar extends Component {
 
   parseSentimentData = () => {
     let rating = this.props.currentTargetedReviews[this.props.visibleReview].score
+   // let review = this.props.s.currentTargetedReviews[this.props.visibleReview].score;
 
     var rounded = rating.toFixed(1)
     if (rounded === 0) {
@@ -23,8 +24,10 @@ class WatsonBar extends Component {
 
   render() {
     const finalRating = this.parseSentimentData(this.props.watsonRating);
+    console.log('final rating', finalRating);
     return (
       <Paper>{Array(parseInt(finalRating)).fill(<Favorite />)}</Paper>
+      
     );
   }
 }

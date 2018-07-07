@@ -17,109 +17,88 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
     reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
 }
+
+
+
+
+
 class KeywordsToShow extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            indexOfReviewCurrentlyDisplayed: 1
-        };  
-    }
-    onComponentMount(){
-      console.log('in keyword to show');
-        this.prepareHtml(null, this.props.reviewsToShow);
 
-    }
-    //this is what the buttons call in order to go through the reviews
-    changeDisplayedReviews = (direction) => {
-        let lastReviewIndex = this.props.currentTargetReviews.length;
-        let index = this.state.indexOfReviewCurrentlyDisplayed
-        console.log('indexof', index)
-        if (direction === 'forward' && index !== lastReviewIndex) {
-        this.setState({indexOfReviewCurrentlyDisplayed: index + 1 })
-        }
-        else if(direction === 'forward' && index === lastReviewIndex){
-            console.log('no other reviews to see');
-        }
-        else if (direction === 'back' && index !== 1 ) {
-            this.setState({indexOfReviewCurrentlyDisplayed:index - 1 })
-        }
-        else if (direction === 'back' && index === 1){
-            console.log('yo you at zero');
-            //this should make the back button disappear
-        }
-
-    }
-  
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
                 styles.reviewText = { textOverflow: 'ellipsis', overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
                 this.forceUpdate();
-                console.log('in enter review', styles);
+                //       console.log('in enter review', styles);
                 break;
             case 'exit-review':
                 styles.reviewText = { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
                 this.forceUpdate();
-                console.log('in exit review', styles);
+                //     console.log('in exit review', styles);
                 break;
         }
     }
-    prepareHtml = (fadeBool, reviewsToShow) => {
 
-        if(reviewsToShow.length === 0){
-       //     this is going to be passed to report as a n argument
-       console.log('this . props', this.props)
-            let  r = this.props.organizedConcepts[0].content;
-             this.props.clickHandlerForKeyWordBarChart (r);      
-        }
-        const index = this.state.indexOfReviewCurrentlyDisplayed;
-        const review = this.props.completedData[index].description;
-        const rating = this.props.completedData[index].rating;
-        const date = this.props.completedData[index].datePublished;
-        const name = this.props.completedData[index].author;
-        const site = "Yelp";
-        const watsonSentiment = this.props.completedData[index].score;
-            let reviewToReturn = (
-            <div styles={{ padding: 0 }}>
-                <Grid container spacing={16}>
-                    <Grid item sm={12}>
-                        <Typography style={{ textAlign: 'center', padding: 50 }}> {reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed)}
-                        </Typography>
+    prepareHtml = () => {
+        console.log('state is ', this.props.s);
+        let review = this.props.s.currentTargetedReviews[this.props.s.visibleReview].description;
+        console.log('review', review);
+        let reviewToReturn = (
+            <div>
+                <div className={'full-cue-card-review'}  >
+                    <Grid container spacing={0}>
+                        <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
+                            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                                {/* <NameAndSite name={name} site={site} /> */}
+                            </Grid>
+                        </Grid>
+                        <Grid item sm={6} >
+                            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                                {/* <Date date={date} /> */}
+                            </Grid>
+                        </Grid>
+                        <Grid item sm={12}  >
+                            <Typography onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}>
+                                {review}
+                            </Typography>
+                        </Grid>
                     </Grid>
+                </div>
+            </div >
+        )
 
-                    <Grid item sm={5}>
-                    </Grid>
+        // this.props.clickHandlerForKeyWordBarChart (r);      
 
-                    <Grid item sm={1}>
-                        <div style={{ textAlign: 'center' }}>
-                            <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('back')} >
-                                <PlayArrow className="icon-flipped" />
+        //     const index = this.state.indexOfReviewCurrentlyDisplayed;
+        //     const review = this.props.completedData[index].description;
+        //     const rating = this.props.completedData[index].rating;
+        //     const date = this.props.completedData[index].datePublished;
+        //     const name = this.props.completedData[index].author;
+        //     const site = "Yelp";
+        //     const watsonSentiment = this.props.completedData[index].score;
+        //         let reviewToReturn = (
+        //         <div styles={{ padding: 0 }}>
+        //             <Grid container spacing={16}>
+        //                 <Grid item sm={12}>
+        //                     <Typography style={{ textAlign: 'center', padding: 50 }}> {reviewsToShow.slice(this.state.indexOfReviewCurrentlyDisplayed - 1, this.state.indexOfReviewCurrentlyDisplayed)}
+        //                     </Typography>
+        //                 </Grid>
 
-                            </Button>
-                        </div>
-                    </Grid>
+        //                 <Grid item sm={5}>
+        //                 </Grid>
 
+        //                 <Grid item sm={1}>
+        //                     <div style={{ textAlign: 'center' }}>
 
-                    <Grid item sm={2}>
-                        <div style={{ textAlign: 'center' }}>
-                            <Button variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
-                                <PlayArrow />
-
-                            </Button>
-                        </div>
-                    </Grid>
-                    <Grid item sm={4}>
-                    </Grid>
-                </Grid>
-            </div>
-        )    
+        //     )    
         return reviewToReturn
     }
     render() {
         return (
 
             <div style={{ padding: 0 }}>
-                {this.prepareHtml(this.props.fadeBool, this.props.currentTargetReviews)}
+                {/* //    {this.prepareHtml(this.props.fadeBool, this.props.currentTargetReviews)} */}
+                {this.prepareHtml()}
             </div>
 
         )

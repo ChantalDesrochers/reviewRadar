@@ -19,11 +19,11 @@ const styles = {
 }
 
 class SentimentsToShow extends Component {
-    onComponentMount() {
-        this.prepareHtml(null, this.props.completedData);
-        this.state.indexOfReviewCurrentlyDisplayed = this.props.completedData / 2;
+    // onComponentMount() {
+    //     this.prepareHtml(null, this.props.completedData);
+    //     this.state.indexOfReviewCurrentlyDisplayed = this.props.completedData / 2;
 
-    }
+    // }
 
     // changeDisplayedReviews = (direction) => {
     //     console.log('in change displayed reviews direction is,', direction);
@@ -35,18 +35,18 @@ class SentimentsToShow extends Component {
             case 'enter-review':
                 styles.reviewText = { textOverflow: 'ellipsis', overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
                 this.forceUpdate();
-         //       console.log('in enter review', styles);
+                //       console.log('in enter review', styles);
                 break;
             case 'exit-review':
                 styles.reviewText = { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
                 this.forceUpdate();
-           //     console.log('in exit review', styles);
+                //     console.log('in exit review', styles);
                 break;
         }
     }
     prepareHtml = (fadeBool, reviewsToShow) => {
 
-    //    let {author, datePublished, rating, description} = this.props.completedData[index];
+        //    let {author, datePublished, rating, description} = this.props.completedData[index];
         const index = this.props.visibleReview;
         const review = this.props.completedData[index].description;
         const rating = this.props.completedData[index].rating;
@@ -57,21 +57,16 @@ class SentimentsToShow extends Component {
         let reviewToReturn = (
             <div>
                 <div className={'full-cue-card-review'}  >
-                    <Grid container spacing={16} style={{ backgroundColor: "white" }} >
-                        <Grid item sm={12} style={{ float: 'left', width: "50%" }}>
-                            <Paper maxHeight={100}>
-                                
-                                <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                    <Date date={date} />
-                                </Grid>
-                            </Paper>
+                    <Grid container spacing={0}>
+                        <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
+                            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                                <NameAndSite name={name} site={site} />
+                            </Grid>
                         </Grid>
-                        <Grid item sm={12} >
-                            <div style={{ margin: 'auto' }}>                            
-                                <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                    <NameAndSite name={name} site={site} />
-                                </Grid>
-                            </div>
+                        <Grid item sm={6} >
+                            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                                <Date date={date} />
+                            </Grid>
                         </Grid>
                         <Grid item sm={12}  >
                             <Typography onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}>
