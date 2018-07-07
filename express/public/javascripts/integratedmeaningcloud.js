@@ -1,7 +1,6 @@
 var request = require("request");
 let reviewsCount = 0;
 
-encodedArray = [];
 let reviews = []
 
 // takes in an argument and checks it for a match against an element of the array
@@ -80,7 +79,6 @@ const conceptAggreator = array => {
   let allConcepts = [];
   array.forEach(function (review) {
     review.concepts.forEach(function (concept) {
-      // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
       existingIndex = allConcepts.findIndex(checkForExisting(concept.content));
       if (existingIndex < 0) {
         allConcepts.push({
@@ -93,8 +91,6 @@ const conceptAggreator = array => {
     });
   });
 };
-
-// conceptAggreator(noDupeJSON2);
 
 module.exports = {
   iterateWithDelay: iterateWithDelay,

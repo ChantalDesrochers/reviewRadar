@@ -53,7 +53,7 @@ app.post('/1', (req, res) => {
   // console.log('full request', req)
   console.log('req body', req.body)
   const sendStuff = (data) =>{
-    console.log('updated labels', JSON.stringify(data))
+    console.log('data added to object', JSON.stringify(data))
     data.forEach(function(review, i) {
       // review.id = i
       reportData.push(review)

@@ -56,29 +56,6 @@ async function tripAdvisorRecursion(link, i, cb) {
   await page.click("p span.ulBlueLinks");
   await page.waitFor(1500);
 
-  // const reviews = await page.evaluate(() => {
-  //   let array = [];
-  //   let divArray = document.querySelectorAll("div.reviewSelector");
-  //   for (var element of divArray) {
-  //     let rating = element
-  //       .querySelector(".rating")
-  //       .childNodes[0].className.replace(/ui_bubble_rating bubble_/g, "")
-  //       .replace(0, ".0");
-  //     let author = element.querySelector("span.scrname").textContent;
-  //     let description = element.querySelector("p.partial_entry").textContent;
-  //     let datePublished = element.querySelector(".ratingDate").title;
-  //     array.push({
-  //       // id: reviewsArray.length, // ***just added
-  //       rating: rating,
-  //       author: author,
-  //       origin: "tripAdvisor",
-  //       description: description,
-  //       datePublished: datePublished
-  //     });
-  //   }
-  //   return array;
-  // });
-
   const reviews = await page.evaluate(() => {
     let array = [];
     let divArray = document.querySelectorAll("div.reviewSelector");
@@ -111,7 +88,7 @@ async function tripAdvisorRecursion(link, i, cb) {
   await page.close();
   await browser.close();
 
-  if (i < 0) {
+  if (i < 20) {
     i += 10;
     tripAdvisorRecursion(link, i, cb);
   } else {
