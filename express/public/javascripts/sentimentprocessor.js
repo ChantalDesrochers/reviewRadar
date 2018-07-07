@@ -22,9 +22,9 @@ const addID = results => {
 const addSentiment = cb => (reviews) => {
   const go = (reviews, cb, newReviews) => {
     if (reviews.length === 0) {
-    // if (reviews.length === 15) {
       //  console.log('******DONE*******')
       // console.log('before sorting', newReviews)
+      console.log('Watson analysis complete')
       addedIDReviews = addID(sortResults(newReviews))
       return cb(addedIDReviews)
     }
@@ -32,19 +32,36 @@ const addSentiment = cb => (reviews) => {
     const tail = reviews.slice(1);
 
     // console.log('head', head)
-    console.log('watson remaining', reviews.length)
+    console.log('Watson remaining', reviews.length)
+
+    // const contentTarget = head.concepts.map(x => x.content)
 
     const parameters = {
       'text': head.description,
       'features': {
         'sentiment': {},
+        // 'emotion': {
+        //   'targets':  head.concepts.map(x => x.content)
+        // }
       }
     }
 
     nlu.analyze(parameters, (err, response) => {
       if (err) return console.log('error:', err);
-      head.label = response.sentiment.document.label;
+      if (response.sentiment.document.score > 0.5 ) {
+        head.label = 'very positive'
+      } else if (response.sentiment.document.score > 0 ) {
+        head.label = 'positive'
+      } else if (response.sentiment.document.score === 0 ) {
+        head.label = 'neutral'
+      } else if (response.sentiment.document.score >= -0.5 ) {
+        head.label = 'negative'
+      } else if (response.sentiment.document.score < -0.5 ) {
+        head.label = 'very negative'
+      }
+      // head.label = response.sentiment.document.label;
       head.score = response.sentiment.document.score;
+      // console.log(JSON.stringify(response))
       // console.log(head);
       go(tail, cb, newReviews.concat(head));
     });

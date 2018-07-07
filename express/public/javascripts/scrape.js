@@ -1,6 +1,7 @@
 const request = require('request');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const launch = require("puppeteer").launch;
 
 //const Nightmare = require('nightmare');
 //const assert = require('assert');
@@ -9,48 +10,104 @@ const fs = require('fs');
 var reviewsArray = []
 
 //multiple page recursion
-const yelpRecursion = (i, link, cb) => {
+const yelpRecursion = (link, i, cb) => {
   // let url = link + i
-  console.log('started', i)
+  console.log('Yelp scraping started', i+20)
   // console.log(link + '?start=' + i)
   let url = link + '?start=' + i
-  // let url = `https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=${i}`
   request(url, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       var $ = cheerio.load(html);
       $('div[itemprop="review"]').each(function (index, el) {
-        var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
-        var authorv = $(this).find('meta[itemprop="author"]').attr('content')
-        var descriptionv = $(this).find('p[itemprop="description"]').text()
-        var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
+        // var ratingv = $(this).find('meta[itemprop="ratingValue"]').attr('content')
+        // var authorv = $(this).find('meta[itemprop="author"]').attr('content')
+        // var descriptionv = $(this).find('p[itemprop="description"]').text()
+        // var datePublishedv = $(this).find('meta[itemprop="datePublished"]').attr('content')
         var review = {
-          id: index + i,
-          rating: ratingv,
-          author: authorv,
-          origin: 'yelp',
-          description: descriptionv,
-          datePublished: datePublishedv,
+          id: reviewsArray.length,
+          rating: $(this).find('meta[itemprop="ratingValue"]').attr('content'),
+          author: $(this).find('meta[itemprop="author"]').attr('content'),
+          origin: 'Yelp',
+          description: $(this).find('p[itemprop="description"]').text(),
+          datePublished: $(this).find('meta[itemprop="datePublished"]').attr('content'),
         }
         reviewsArray.push(review)
       })
-      // if (reviewsArray.length <=100 ) {
-      // can scrape and base off of 'div[class="page-of-pages"]' or 'span[itemprop="reviewCount"] innerHTML
       if (i < 0) {
         i += 20
-        yelpRecursion(i, link, cb)
+        yelpRecursion(link, i, cb)
       } else {
-        // console.log('scrapedlength', reviewsArray.length)
-        // console.log('scrapeddata', reviewsArray)
-        // fs.writeFile('data.json', JSON.stringify(reviewsArray))
-        //console.log(reviewsArray)
+        console.log('Yelp scraping completed', reviewsArray.length)
         cb(reviewsArray)
-        reviewsArray = [] // resets reviewsArray between requests
+        // reviewsArray = [] // resets reviewsArray between requests
       }
     }
   })
 }
 
-// yelpRecursion(0, 'https://www.yelp.ca/biz/seven-lives-tacos-y-mariscos-toronto?start=', function(data){console.log(data)})
+async function tripAdvisorRecursion(link, i, cb) {
+  console.log("tripadvisor started", i+10);
+  url = link.replace(/Reviews/g, `Reviews-or${i}`);
+  const browser = await launch({ headless: true });
+  const page = await browser.newPage();
+  await page.goto(url, { waitUntil: "networkidle2" });
+  await page.waitForSelector("h1");
+
+  await page.click("p span.ulBlueLinks");
+  await page.waitFor(1500);
+
+  const reviews = await page.evaluate(() => {
+    let array = [];
+    let divArray = document.querySelectorAll("div.reviewSelector");
+    for (var element of divArray) {
+      let rating = element
+        .querySelector(".rating")
+        .childNodes[0].className.replace(/ui_bubble_rating bubble_/g, "")
+        .replace(0, ".0");
+      let author = element.querySelector("span.scrname").textContent;
+      let description = element.querySelector("p.partial_entry").textContent;
+      let datePublished = element.querySelector(".ratingDate").title;
+      array.push({
+        rating: rating,
+        author: author,
+        origin: "TripAdvisor",
+        description: description,
+        datePublished: datePublished
+      });
+    }
+    return array;
+  });
+
+
+  reviews.forEach(function(review) {
+    // review.id = reviewsArray.length
+    // reviewsArray.push(review);
+    reviewsArray.push({id: reviewsArray.length, ...review}); // ***just changed
+  });
+
+  await page.close();
+  await browser.close();
+
+  if (i < 20) {
+    i += 10;
+    tripAdvisorRecursion(link, i, cb);
+  } else {
+    // console.log("reviews", reviews);
+    // console.log("global reviews", reviewsArray);
+    console.log('TripAdvisor scraping completed', reviewsArray.length)
+    cb(reviewsArray)
+  }
+}
+
+// tripAdvisorRecursion(
+//   "https://www.tripadvisor.ca/Restaurant_Review-g155019-d704408-Reviews-Fresh_On_Spadina-Toronto_Ontario.html",
+//   0, null
+// );
+
+module.exports = {
+  yelpRecursion: yelpRecursion,
+  tripAdvisorRecursion: tripAdvisorRecursion,
+}
 
 const yelp = function (url, cb) {
   request(url, function (error, response, html) {
@@ -103,10 +160,4 @@ function tripAdvisor() {
       console.log(reviewsArray)
     }
   });
-}
-
-module.exports = {
-  yelpRecursion: yelpRecursion,
-  yelp: yelp,
-  tripAdvisor: tripAdvisor
 }

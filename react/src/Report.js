@@ -7,9 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
-// import Ratings from "./ratings.js"
-import OrganizedConcepts from './reportPartials/organizedConcepts.js';
-import CompletedData from './reportPartials/completedData.js'
 import Colors from './AppColors';
 import KeywordBarChart from './reportPartials/_barChartKWs';
 import SentimentPieChart from './reportPartials/_pieChart';
@@ -19,9 +16,12 @@ import TopNavPanels from "./TopNavPanels.js";
 import TopNavPanel from "./TopNavPanel.js";
 import WatsonBars from './WatsonBar';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
-import conceptAggreator from './parsingConceptbyMonth';
-import checkForExisting from './parsingConceptbyMonth';
 import ReviewStars from "./ReviewStars";
+
+// hardcoded data
+// import Ratings from "./ratings.js"
+// import OrganizedConcepts from './reportPartials/organizedConcepts.js';
+// import CompletedData from './reportPartials/completedData.js'
 
 const styles = {
   RightTopContainer: { height: '100%' },
@@ -46,19 +46,25 @@ class Report extends Component {
     super(props);
     this.state = {
       companyName:'Planta',
+      // hardcoded data----------
+      // organizedConcepts: OrganizedConcepts, 
       // reviews: Ratings,
-      organizedConcepts: OrganizedConcepts,
-      completedData: CompletedData,
+      // completedData: CompletedData,
+      // currentTargetedReviews: CompletedData,
+      // -------------------------
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
-      currentTargetedReviews: CompletedData,
       currentWatsonRating: 0,
       visibleReview: 1,
       leftShowing: 'text',
       keywordChartTarget: '',
-      reviews: []
+      // live server data
+      loading: true,
+      reviews: [], // all reviews
+      organizedConcepts: [], // reviews parsed into concepts
+      monthConcepts: [], // reviews parsed into monthly concept data
     };
   }
 
@@ -67,8 +73,9 @@ class Report extends Component {
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
-        this.setState({ reviews: results })
+        this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
         console.log('fetched and fired')
+        // console.log('all concepts after fetch', this.state.organizedConcepts)
         // console.log('in report', this.state.reviews)
       });
 
@@ -126,7 +133,7 @@ class Report extends Component {
     let finalReviews = [];
     var references = this.state.organizedConcepts.find(x => x.content === clickedItem).references
     for (var i = 0; i < references.length; i++) {
-    finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]));
+    finalReviews.push(this.findObjectByKey(this.state.reviews, 'id', references[i]));
     }
     this.setState((prevState) => {
       let newState = { ...prevState,  currentTargetedReviews: finalReviews }
@@ -174,7 +181,7 @@ topNavClickHandler = (clickedItem) => {
       case 'sentiment':
          newState.displaying = 'sentiment';
         this.setState((prevState) => {
-          let newState = { ...prevState,  displaying: 'sentiment',  currentTargetedReviews: CompletedData, visibleReview:1,  }
+          let newState = { ...prevState,  displaying: 'sentiment',  currentTargetedReviews: this.state.reviews, visibleReview:1,  }
           return newState;
         })
         return
@@ -193,9 +200,10 @@ topNavClickHandler = (clickedItem) => {
     console.log('state', this.state)
     const watsonIndex = this.state.visibleReview;
     return (
+       this.state.loading ? (<div> Loading </div>) : (
       <div style={styles.Top}>
         <AppBar position="static" style={styles.AppBar}>
-          <Typography variant="display3" style={styles.MainTitle}>Planta</Typography>
+          <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
           <Grid item sm={8}>
@@ -217,9 +225,13 @@ topNavClickHandler = (clickedItem) => {
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
                 <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
                   pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
-                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} />
+                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} 
+                  organizedConcepts={this.state.organizedConcepts}
+                  monthConcepts={this.state.monthConcepts}
+                  />
               </Paper>
               <div>
+              {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}
               <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
                 <WatsonBars style={styles.WatsonBars}  s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
               </div>
@@ -228,7 +240,7 @@ topNavClickHandler = (clickedItem) => {
             </Grid>
           </Grid>
         </Grid>
-      </div>
+      </div>)
     );
   }
 }
