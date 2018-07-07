@@ -7,9 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
-import Ratings from "./ratings.js"
-import OrganizedConcepts from './reportPartials/organizedConcepts.js';
-import CompletedData from './reportPartials/completedData.js'
 import Colors from './AppColors';
 import KeywordBarChart from './reportPartials/_barChartKWs';
 import SentimentPieChart from './reportPartials/_pieChart';
@@ -20,6 +17,11 @@ import TopNavPanel from "./TopNavPanel.js";
 import WatsonBars from './WatsonBar';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
+
+// hardcoded data
+import Ratings from "./ratings.js"
+import OrganizedConcepts from './reportPartials/organizedConcepts.js';
+import CompletedData from './reportPartials/completedData.js'
 
 const styles = {
   RightTopContainer: { height: '100%' },
@@ -44,23 +46,24 @@ class Report extends Component {
     super(props);
     this.state = {
       companyName:'Planta',
+      // hardcoded data----------
       // reviews: Ratings,
       organizedConcepts: OrganizedConcepts, 
       completedData: CompletedData,
-      //
+      currentTargetedReviews: CompletedData,
+      // -------------------------
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
-      currentTargetedReviews: CompletedData,
       currentWatsonRating: 0,
       visibleReview: 1,
       leftShowing: 'text',
       keywordChartTarget: '',
       // live server data
-      reviews: [],
-      allConcepts: [],
-      monthConcepts: [],
+      reviews: [], // all reviews
+      allConcepts: [], // reviews parsed into concepts
+      monthConcepts: [], // reviews parsed into monthly concept data
     };
   }
 
@@ -69,7 +72,7 @@ class Report extends Component {
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
-        this.setState({ reviews: results.reviews, allConcepts: results.allConcepts, monthConcepts: results.monthConcepts })
+        this.setState({ reviews: results.reviews, allConcepts: results.allConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
         console.log('fetched and fired')
         // console.log('all concepts after fetch', this.state.allConcepts)
         // console.log('in report', this.state.reviews)
@@ -198,7 +201,7 @@ topNavClickHandler = (clickedItem) => {
     return (
       <div style={styles.Top}>
         <AppBar position="static" style={styles.AppBar}>
-          <Typography variant="display3" style={styles.MainTitle}>Planta</Typography>
+          <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
           <Grid item sm={8}>
