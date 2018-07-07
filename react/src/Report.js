@@ -21,7 +21,7 @@ import ReviewStars from "./ReviewStars";
 // hardcoded data
 // import Ratings from "./ratings.js"
 // import OrganizedConcepts from './reportPartials/organizedConcepts.js';
-// import CompletedData from './reportPartials/completedData.js'
+import CompletedData from './reportPartials/completedData.js'
 
 const styles = {
   RightTopContainer: { height: '100%' },
@@ -61,6 +61,7 @@ class Report extends Component {
       leftShowing: 'text',
       keywordChartTarget: '',
       // live server data
+      loading: true,
       reviews: [], // all reviews
       organizedConcepts: [], // reviews parsed into concepts
       monthConcepts: [], // reviews parsed into monthly concept data
@@ -72,7 +73,7 @@ class Report extends Component {
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
-        this.setState({ reviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
+        this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
         console.log('fetched and fired')
         // console.log('all concepts after fetch', this.state.organizedConcepts)
         // console.log('in report', this.state.reviews)
@@ -180,7 +181,7 @@ topNavClickHandler = (clickedItem) => {
       case 'sentiment':
          newState.displaying = 'sentiment';
         this.setState((prevState) => {
-          let newState = { ...prevState,  displaying: 'sentiment',  currentTargetedReviews: CompletedData, visibleReview:1,  }
+          let newState = { ...prevState,  displaying: 'sentiment',  currentTargetedReviews: this.state.reviews, visibleReview:1,  }
           return newState;
         })
         return
@@ -199,6 +200,7 @@ topNavClickHandler = (clickedItem) => {
     console.log('state', this.state)
     const watsonIndex = this.state.visibleReview;
     return (
+       this.state.loading ? (<div> Loading </div>) : (
       <div style={styles.Top}>
         <AppBar position="static" style={styles.AppBar}>
           <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
@@ -229,6 +231,7 @@ topNavClickHandler = (clickedItem) => {
                   />
               </Paper>
               <div>
+              {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}
               <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
                 <WatsonBars style={styles.WatsonBars}  s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
               </div>
@@ -237,7 +240,7 @@ topNavClickHandler = (clickedItem) => {
             </Grid>
           </Grid>
         </Grid>
-      </div>
+      </div>)
     );
   }
 }
