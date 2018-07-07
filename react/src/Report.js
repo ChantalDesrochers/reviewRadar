@@ -115,14 +115,17 @@ class Report extends Component {
     switch (focus) {
       case 'positive':
       this.setState((prevState) => {
-        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: focus }
+        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'positive'}
         return newState;
       })
         console.log('positive clicked');
-        this.setState({ leftSide })
+        // this.setState({ leftSide })
         return
       case 'negative':
-      //  leftSide.show = 'negative'
+      this.setState((prevState) => {
+        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'negative'}
+        return newState;
+      })
         console.log('negative clicked');
         return
     }
@@ -143,7 +146,12 @@ class Report extends Component {
     })
   }
 
+  //arrow key handler?
   reviewSwitch = (changeBy) => {
+    //find current index
+    console.log('state', this.state)
+    // console.log("current index, visible review", visibleReview);
+
     if (changeBy === 'forward') {
       this.setState((prevState) => {
         let newState = { ...prevState, visibleReview: prevState.visibleReview + 1 }
@@ -174,7 +182,7 @@ class Report extends Component {
     return null;
   }
 
-
+//this is for the top nav panels should be renamed
   clickHandler = (clickedItem) => {
 
     const newState = { ...this.state }
@@ -183,19 +191,16 @@ class Report extends Component {
  
          newState.displaying = 'sentiment';
         if (this.state.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
-        this.setState(newState, () => {
-          this.toggleFade();
-        });
+        this.setState((prevState) => {
+          let newState = { ...prevState,  currentTargetedReviews: CompletedData, visibleReview:1,  }
+          return newState;
+        })
         return
-
       case 'keyword':  
         newState.displaying = 'keyword';
         // if (this.state.displaying !== clickedItem)
         console.log('in keyword');
         this.setState((prevState)  => {
-
-  //  this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content)
-
           let newState = {...prevState, displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content}
         // this.toggleFade();
           return newState
@@ -211,6 +216,7 @@ class Report extends Component {
 
   };
   render() {
+    console.log('state', this.state)
     const watsonIndex = this.state.visibleReview;
     return (
       <div style={styles.Top}>

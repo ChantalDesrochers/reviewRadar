@@ -54,30 +54,40 @@ class SentimentsToShow extends Component {
             return <SingleReview s={this.props.s} />
         }
         else if (this.props.s.displayModifier === "volumeBySentiment") {
-            
-            let sentiment = this.props.s.displaySentimentType;
-            console.log('in specific sentiment, which is', sentiment)
+    
             let finalReviews = [];
-
-            console.log('completedData',  this.props.s.completedData);
-            //this gets the id numbers that show where the target concept(clickedItem) appears
-            var watsonLabel = this.props.s.completedData.find(x => x.label === this.props.s.displaySentimentType)
-            console.log('the reviews to display', watsonLabel.length);
-            //this makes an array called finalArrays that contains the text of the targeted reviewa
-            // for (var i = 0; i < watsonLabel.length; i++) {
-            //     // finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]).description);
-            //     finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]));
-            //     return <AllOfSentimentType />
-            // }
+            finalReviews = this.props.s.completedData.filter(review => review.label === this.props.s.displaySentimentType).map(review => (
+                <p> {review.description} </p>
+              ))        
+   
+            return  finalReviews
         }
     }
-        render() {
-            return (
-                <div style={{ padding: 0, height: '100%' }}>
+    render() {
+        return (
+            <div style={{ padding: 0, height: '100%' }}>
 
-                    {this.prepareHtml()}
-                </div>
-            )
-        }
+                {this.prepareHtml()}
+            </div>
+        )
     }
-    export default withStyles(styles)(SentimentsToShow)
+}
+export default withStyles(styles)(SentimentsToShow)
+
+
+//     let sentiment = this.props.s.displaySentimentType;
+//     console.log('in specific sentiment, which is', sentiment)
+//     let finalReviews = [];
+
+//     console.log('completedData', this.props.s.completedData);
+//     //this gets the id numbers that show where the target concept(clickedItem) appears\
+
+//     console.log('this is what x is,', this.props.s.completedData.label)
+
+//     for (var i = 0; i < this.props.s.completedData.length; i++) {
+//         console.log('each entry', this.props.s.completedData[i].label);
+//         if (this.props.s.completedData[i].label === this.props.s.displaySentimentType) {
+// console.log('match');
+//         }
+//     }
+// }
