@@ -4,16 +4,10 @@ import { Star } from '@material-ui/icons'
 class ReviewStars extends Component {
 
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            rating:this.props.rating
-        };
-    }
     render() {
         return (
             <Paper>
-              {Array(parseInt(this.props.rating)).fill(<Star  />)}
+                {Array(parseInt(this.props.s.currentTargetedReviews[this.props.s.visibleReview].rating)).fill(<Star />)}
             </Paper>
         );
     }

@@ -12,11 +12,11 @@ class KeywordBarChart extends Component {
         labels: [],
         datasets: [{
           label: 'Keyword Frequency',
-          backgroundColor: 'rgba(255,99,132,0.2)',
-          borderColor: 'rgba(255,99,132,1)',
+          backgroundColor: '#6EEFC2',
+          borderColor: '#5FD8AE',
           borderWidth: 5,
-          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-          hoverBorderColor: 'rgba(255,99,132,1)',
+          hoverBackgroundColor: '#60F2BF',
+          hoverBorderColor: '#1FDA9A',
           data: []
         }],
         options: {
@@ -31,7 +31,6 @@ class KeywordBarChart extends Component {
       }
     }
   }
-
   componentDidMount() {
     var getChartData = () => {
       var sortedArray = this.state.testData.sort(function (a, b) {
@@ -56,8 +55,6 @@ class KeywordBarChart extends Component {
 
 
   render() {
-
-
     const handleClick = elem => {
       if (elem[0]) {
         console.log(elem)
@@ -66,28 +63,22 @@ class KeywordBarChart extends Component {
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         this.props.reviewTypeToDisplayKW(label)
         const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
+        this.props.reviewTypeToDisplayKW(label);
         console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
         console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
     }
-
-
     return (
-      <div className="bar-chart">
-        <h1>Keyword Frequency</h1>
-        <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }} />
+      <div className="bar-chart" style={{"height" : 375}}>
+
+        <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
+  height={150}
+  options={{
+    maintainAspectRatio: false}}/>
       </div>
     );
   }
-  //   return (
-  //     <div className="pie-chart">
-  //       <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }} />
-  //     </div>
-  //   );
 }
 
 export default KeywordBarChart;
 
-  // onClick={() => this.props.clickHandler('sentiment')}
-  // componentDidMount() {
-  //   console.log('in component did mount', this.props.clickHandlerForKeyWordBarChart)

@@ -147,47 +147,47 @@ class SentimentOverTime extends Component {
   return {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     datasets: [
-      {
-        label: 'Negative',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: '#F37162',
-        borderColor: '#E53A27',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: '#F37162',
-        pointBackgroundColor: '#F37162',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: negative
-      },
-      {
+    {
         label: 'Positive',
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: '#8FD8BE',
+        borderColor: '#1FDA9A',
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(75,192,192,1)',
-        pointBackgroundColor: '#fff',
+        pointBorderColor: '#1FDA9A',
+        pointBackgroundColor: '#1FDA9A',
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBackgroundColor: '#149367',
+        pointHoverBorderColor: '#149367',
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
         data: positive
+      },
+      {
+        label: 'Negative',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: '#ED6F79',
+        borderColor: '#DB3340',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: '#B72A36',
+        pointBackgroundColor: '#B72A36',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#B72A36',
+        pointHoverBorderColor: '#B72A36',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: negative
       }
     ]
   };
@@ -196,20 +196,29 @@ class SentimentOverTime extends Component {
   render() {
     const handleClick = elem => {
 
-      console.log(elem)
+      console.log('elem', elem)
+      console.log('elem 0', elem[0])
+      console.log('elem 1', elem[1])
 
-      if (elem[0]) {
+      if (elem[0] || elem[1]) {
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
+        // let clickedPointIndexPositive = chartPoints[0]['_index'][['_yScale']['ticks']
+        // let clickedPointIndexNeg = chartPoints[q]['_index']
+        console.log(clickedPointIndex)
         const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-        console.log("month", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        // console.log("month", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
     }
 
 
     return (
-      <div className="sentiment-over-time">
-        <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}}/>
+      <div className="sentiment-over-time" style={{"height" : 375}}>
+        <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}} width={10}
+  height={120}
+  options={{
+    maintainAspectRatio: false
+  }}/>
       </div>
     );
   }

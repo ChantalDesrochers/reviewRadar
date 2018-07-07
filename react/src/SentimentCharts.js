@@ -24,21 +24,34 @@ class SentimentCharts extends Component {
     const { reviews } = this.props
     const { showTimeChart, showOverviewChart } = this.state
     console.log('state in sentinent charts', this.state)
+    const buttonStyle = {
+      margin: 30,
+      background: '#DBA2A7',
+      color: 'white'
+    }
+
+     const buttonStyleTwo = {
+      background: '#DBA2A7',
+      color: 'white'
+    }
+
     return (
       <div>
         { showTimeChart && <SentimentOverTime reviews={reviews} /> }
         { showOverviewChart &&  <PieChart  reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
         <Button
-          variant="contained"
+          variant="outlined"
           data-message="overtime"
           onClick={() => this.handleChartChange('showTimeChart')}
+          style={buttonStyle}
         >
-          See data over time
+          trends over time
         </Button>
         <Button
           variant="outlined"
           data-message="overall"
           onClick={() => this.handleChartChange('showOverviewChart')}
+          style={buttonStyleTwo}
         >
           High level Overview
         </Button>
