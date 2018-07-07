@@ -63,14 +63,17 @@ app.post('/1', (req, res) => {
   }
 
   if (req.body.url1 != '') {
+    console.log('url1 triggered')
     controller.getData(req.body.url1, sendStuff)
   }
 
-  // if (req.body.url2 != '') {
-  //   var data2 = sentiment.getData(req.body.url2, sendStuff)
-  // }
+  if (req.body.url2 != '') {
+    console.log('url2 triggered')
+    controller.getData(req.body.url2, sendStuff)
+  }
 
   // if (req.body.url3 != '') {
+  //   console.log('url3 triggered')    
   //   var data3 = sentiment.getData(req.body.url3, sendStuff)
   // }
   // res.send('success')

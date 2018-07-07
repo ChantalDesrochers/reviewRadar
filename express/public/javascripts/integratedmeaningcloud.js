@@ -34,7 +34,7 @@ parseMC = (reviewslength, sendstuffcb) => review => (error, response, body) => {
     reviewslength -= 1
   }
   reviewsCount++;
-  console.log('meaning cloud remaining', reviewslength - reviewsCount)
+  console.log('MeaningCloud remaining', reviewslength - reviewsCount)
 
   // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {

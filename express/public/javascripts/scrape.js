@@ -27,7 +27,7 @@ const yelpRecursion = (link, i, cb) => {
           id: reviewsArray.length,
           rating: $(this).find('meta[itemprop="ratingValue"]').attr('content'),
           author: $(this).find('meta[itemprop="author"]').attr('content'),
-          origin: 'yelp',
+          origin: 'Yelp',
           description: $(this).find('p[itemprop="description"]').text(),
           datePublished: $(this).find('meta[itemprop="datePublished"]').attr('content'),
         }
@@ -37,7 +37,7 @@ const yelpRecursion = (link, i, cb) => {
         i += 20
         yelpRecursion(link, i, cb)
       } else {
-        console.log('yelp scraping completed', reviewsArray.length)
+        console.log('Yelp scraping completed', reviewsArray.length)
         cb(reviewsArray)
         // reviewsArray = [] // resets reviewsArray between requests
       }
@@ -93,7 +93,7 @@ async function tripAdvisorRecursion(link, i, cb) {
       array.push({
         rating: rating,
         author: author,
-        origin: "tripAdvisor",
+        origin: "TripAdvisor",
         description: description,
         datePublished: datePublished
       });
@@ -111,13 +111,13 @@ async function tripAdvisorRecursion(link, i, cb) {
   await page.close();
   await browser.close();
 
-  if (i < 10) {
+  if (i < 0) {
     i += 10;
     tripAdvisorRecursion(link, i, cb);
   } else {
     // console.log("reviews", reviews);
     // console.log("global reviews", reviewsArray);
-    console.log('tripAdvisor scraping completed', reviewsArray.length)
+    console.log('TripAdvisor scraping completed', reviewsArray.length)
     cb(reviewsArray)
   }
 }
