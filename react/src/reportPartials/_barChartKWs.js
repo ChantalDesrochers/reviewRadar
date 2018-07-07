@@ -31,7 +31,6 @@ class KeywordBarChart extends Component {
       }
     }
   }
-
   componentDidMount() {
     var getChartData = () => {
       var sortedArray = this.state.testData.sort(function (a, b) {
@@ -56,8 +55,6 @@ class KeywordBarChart extends Component {
 
 
   render() {
-
-
     const handleClick = elem => {
       if (elem[0]) {
         console.log(elem)
@@ -71,8 +68,6 @@ class KeywordBarChart extends Component {
         console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
     }
-
-
     return (
       <div className="bar-chart">
         <h1>Keyword Frequency</h1>
@@ -80,15 +75,6 @@ class KeywordBarChart extends Component {
       </div>
     );
   }
-  //   return (
-  //     <div className="pie-chart">
-  //       <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }} />
-  //     </div>
-  //   );
 }
 
 export default KeywordBarChart;
-
-  // onClick={() => this.props.clickHandler('sentiment')}
-  // componentDidMount() {
-  //   console.log('in component did mount', this.props.clickHandlerForKeyWordBarChart)

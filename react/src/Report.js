@@ -52,11 +52,9 @@ class Report extends Component {
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
-     // leftSide: { displaying: 'sentiment', reviewsToShow: 1, show: 'both' },
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentTargetedReviews: CompletedData,
       currentWatsonRating: 0,
-     
       visibleReview: 1,
       leftShowing: 'text',
       keywordChartTarget: ''
@@ -81,17 +79,10 @@ class Report extends Component {
     const { displaying, reviews, leftSide, fadeTracker } = this.state;
     switch (displaying) {
       case 'sentiment':
-        return <SentimentsToShow currentTargetReviews={this.state.currentTargetedReviews}
-          completedData={this.state.completedData}
-          s ={this.state}
-          visibleReview={this.state.visibleReview} />;
+        return <SentimentsToShow s ={this.state}/>
         break;
       case 'keyword':
-        return <KeywordsToShow clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart}
-          fadeTracker={fadeTracker.keywordFadeBool} 
-          currentTargetReviews={this.state.currentTargetedReviews}
-
-          s ={this.state}/>;
+        return <KeywordsToShow s ={this.state}/>;
         break;
     }
   }
@@ -104,7 +95,6 @@ class Report extends Component {
         return <SentimentPieChart reviews={this.state.reviews} pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick} />
         break;
       case 'keyword':
-
         return <KeywordBarChart clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} keywordClickHandler={this.clickHandlerForKeyWordBarChart} organizedConcepts={this.state.organizedConcepts} clickHandlerForKeyWordBarChart={this.clickHandlerForKeyWordBarChart} />
         break;
     }
@@ -130,14 +120,12 @@ class Report extends Component {
         return
     }
   }
+
   clickHandlerForKeyWordBarChart = (clickedItem) => {
     console.log('clicked for key word bar chart', clickedItem);
-    let finalReviews = [];
-    //this gets the id numbers that show where the target concept(clickedItem) appears
+    let finalReviews = []; 
     var references = this.state.organizedConcepts.find(x => x.content === clickedItem).references
-    //this makes an array called finalArrays that contains the text of the targeted reviewa
     for (var i = 0; i < references.length; i++) {
-      // finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]).description);
     finalReviews.push(this.findObjectByKey(this.state.completedData, 'id', references[i]));
     }
     this.setState((prevState) => {
@@ -146,12 +134,9 @@ class Report extends Component {
     })
   }
 
-  //arrow key handler?
+  //arrow key handler
   reviewSwitch = (changeBy) => {
-    //find current index
     console.log('state', this.state)
-    // console.log("current index, visible review", visibleReview);
-
     if (changeBy === 'forward') {
       this.setState((prevState) => {
         let newState = { ...prevState, visibleReview: prevState.visibleReview + 1 }
@@ -165,6 +150,7 @@ class Report extends Component {
       })
     }
   }
+  //not in use but needed for future reference
   toggleFade = () => {
     const newState = { ...this.state }
     console.log('toggle fade called');
@@ -173,6 +159,7 @@ class Report extends Component {
     this.setState(newState)
   };
 
+  //this is old but still in use, I think it is doing what the filter.map stuff is doing elsewhere
   findObjectByKey(array, key, value) {
     for (var i = 0; i < array.length; i++) {
       if (array[i][key] === value) {
@@ -181,25 +168,18 @@ class Report extends Component {
     }
     return null;
   }
-
-//this is for the top nav panels should be renamed
-  clickHandler = (clickedItem) => {
-
+topNavClickHandler = (clickedItem) => {
     const newState = { ...this.state }
     switch (clickedItem) {
       case 'sentiment':
- 
          newState.displaying = 'sentiment';
-        if (this.state.displaying === clickedItem && this.state.fadeTracker.sentimentFadeBool) return
         this.setState((prevState) => {
-          let newState = { ...prevState,  currentTargetedReviews: CompletedData, visibleReview:1,  }
+          let newState = { ...prevState,  displaying: 'sentiment',  currentTargetedReviews: CompletedData, visibleReview:1,  }
           return newState;
         })
         return
       case 'keyword':  
         newState.displaying = 'keyword';
-        // if (this.state.displaying !== clickedItem)
-        console.log('in keyword');
         this.setState((prevState)  => {
           let newState = {...prevState, displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content}
         // this.toggleFade();
@@ -207,12 +187,6 @@ class Report extends Component {
         });
       this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
     }
-
-  //   this.setState((prevState) => {
-  //     let newState = { ...prevState, visibleReview: prevState.visibleReview - 1 }
-  //     return newState;
-  //   })
-  // }
 
   };
   render() {
@@ -225,9 +199,9 @@ class Report extends Component {
         </AppBar>
         <Grid container style={styles.MainContainer} spacing={8}>
           <Grid item sm={8}>
-            <TopNavPanels clickHandler={this.clickHandler} />
+            <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
             <Grid style={styles.LeftContainer} item sm={12}>
-              <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.clickHandler}>
+              <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
                 <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
                   {this.LeftSideShow()}
                 </div>
@@ -240,7 +214,7 @@ class Report extends Component {
           </div>
           <Grid style={styles.RightContainer} item sm={4}>
             <Grid style={styles.RightTopContainer} item sm={12}>
-              <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.clickHandler} >
+              <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
                 <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
                   pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
                   reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} />
