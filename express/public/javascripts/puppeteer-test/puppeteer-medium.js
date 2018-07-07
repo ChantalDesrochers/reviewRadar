@@ -84,25 +84,33 @@ async function tripAdvisorPuppet(url) {
   // <span class="taLnk ulBlueLinks" onclick="widgetEvCall('handlers.clickExpand',event,this);">More</span>
   // <span class="taLnk ulBlueLinks" onclick="widgetEvCall('handlers.clickCollapse',event,this);">Show less</span>
 
-  // const more = await page.evaluate(() => {
-  //   let array = [];
-  //   let moreArray = document.querySelectorAll(".ulBlueLinks");
-  //   for (var element of moreArray) {
-  //     // Loop through each proudct
-  //     if (element.innerText == "More") {
-  //       array.push(element.innerText); // Select the title
-  //     }
-  //   }
-  //   return array;
-  // });
 
-  // console.log("all more", more);
+  await page.click("p span.ulBlueLinks")
+  await page.waitFor(3000)
+
+  const more = await page.evaluate(() => {
+    let array = [];
+    let moreArray = document.querySelectorAll("p span.ulBlueLinks");
+    for (var element of moreArray) {
+      // Loop through each proudct
+      if (element.innerText == "More") {
+        array.push(element.innerText); // Select the title
+      }
+    }
+    return array;
+  });
+
+  console.log("all more", more);
 
   const reviews = await page.evaluate(() => {
+
     let array = [];
     let reviewsArray = document.querySelectorAll("div.reviewSelector");
     for (var element of reviewsArray) {
-      let rating = element.querySelector('.rating').childNodes[0].className.replace(/ui_bubble_rating bubble_/g, '').replace(0, '.0')
+      let rating = element
+        .querySelector(".rating")
+        .childNodes[0].className.replace(/ui_bubble_rating bubble_/g, "")
+        .replace(0, ".0");
       let author = element.querySelector("span.scrname").textContent;
       let description = element.querySelector("p.partial_entry").textContent;
       let datePublished = element.querySelector(".ratingDate").title;
@@ -111,15 +119,15 @@ async function tripAdvisorPuppet(url) {
         author: author,
         origin: "tripAdvisor",
         description: description,
-        datePublished: datePublished,
+        datePublished: datePublished
       });
     }
     return array;
   });
 
+  console.log("all reviews", reviews);
   // var ratingv = $(this).find('.ui_bubble_rating').attr('class').replace(/ui_bubble_rating bubble_/g, '')
 
-  console.log("all reviews", reviews);
 
   // const reviews = await page.evaluate(() => {
   //   // const reviewsArray = document.querySelectorAll("div.review-container");
@@ -152,9 +160,9 @@ async function tripAdvisorPuppet(url) {
   //   title: document.querySelector("h1.header").textContent.trim()
   // }));
 
-  await page.close();
   // console.log(data);
   // other actions...
+  await page.close();
   await browser.close();
 }
 
