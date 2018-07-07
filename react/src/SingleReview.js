@@ -9,8 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
     reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
 }
-
-class KeywordsToShow extends Component {
+class SingleReview extends Component {
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
@@ -25,25 +24,25 @@ class KeywordsToShow extends Component {
                 break;
         }
     }
-    prepareHtml = () => {
-        console.log('state is ', this.props.s);
-        let review = this.props.s.currentTargetedReviews[this.props.s.visibleReview].description;
-        let name = this.props.s.currentTargetedReviews[this.props.s.visibleReview].author;
-        let date  =  this.props.s.currentTargetedReviews[this.props.s.visibleReview].datePublished;
+    prepareHtml = (fadeBool, reviewsToShow) => {
+        const index = this.props.s.visibleReview;
+        const review = this.props.s.completedData[index].description;
+        const rating = this.props.s.completedData[index].rating;
+        const date = this.props.s.completedData[index].datePublished;
+        const name = this.props.s.completedData[index].author;
         const site = "Yelp";
-        console.log('review', review);
-        let reviewToReturn = (
+        return (
             <div>
                 <div className={'full-cue-card-review'}  >
                     <Grid container spacing={0}>
                         <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
                             <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                <NameAndSite name={name} site={site} /> 
+                                <NameAndSite name={name} site={site} />
                             </Grid>
                         </Grid>
                         <Grid item sm={6} >
                             <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                               <Date date={date} /> 
+                                <Date date={date} />
                             </Grid>
                         </Grid>
                         <Grid item sm={12}  >
@@ -54,15 +53,14 @@ class KeywordsToShow extends Component {
                     </Grid>
                 </div>
             </div >
-        )
-        return reviewToReturn
+        );
     }
     render() {
         return (
-            <div style={{ padding: 0 }}>
+            <div style={{ padding: 0, height: '100%' }}>
                 {this.prepareHtml()}
             </div>
         )
     }
 }
-export default withStyles(styles)(KeywordsToShow)
+export default withStyles(styles)(SingleReview)

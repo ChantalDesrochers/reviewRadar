@@ -18,12 +18,12 @@ class KeywordBarChart extends Component {
       labels: label,
       datasets: [
         {
-          label: "Keyword Frequency",
-          backgroundColor: "rgba(255,99,132,0.2)",
-          borderColor: "rgba(255,99,132,1)",
+          label: 'Keyword Frequency',
+          backgroundColor: '#6EEFC2',
+          borderColor: '#5FD8AE',
           borderWidth: 5,
-          hoverBackgroundColor: "rgba(255,99,132,0.4)",
-          hoverBorderColor: "rgba(255,99,132,1)",
+          hoverBackgroundColor: '#60F2BF',
+          hoverBorderColor: '#1FDA9A',
           data: data
         }
       ],
@@ -72,14 +72,17 @@ class KeywordBarChart extends Component {
     };
 
     return (
-      <div className="bar-chart">
+      <div className="bar-chart" style={{"height" : 375}}>
+      
+      
+
         <h1>Keyword Frequency</h1>
         <HorizontalBar
           data={this.getChartData(this.props.allConcepts)}
-          getElementsAtEvent={elem => {
-            handleClick(elem);
-          }}
-        />
+          getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
+  height={150}
+  options={{
+    maintainAspectRatio: false}}/>
       </div>
     );
   }

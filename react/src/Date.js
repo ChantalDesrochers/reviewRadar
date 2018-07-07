@@ -6,7 +6,7 @@ class Date extends Component {
     render() {
 
         return (
-            <Paper style={{lineHeight:'29px'}} >{this.props.date}</Paper>
+            <div style={{fontStyle: 'italic', fontSize:'1.2rem', lineHeight:'29px'}} >{this.props.date}</div>
 
         );
     }

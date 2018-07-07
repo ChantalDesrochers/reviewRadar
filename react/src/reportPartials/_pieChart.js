@@ -13,7 +13,6 @@ class PieChart extends Component {
       let neutral = 0
       let negative = 0
       let veryNegative = 0
-      console.log('inside parsechartdata', reviews)
       reviews.forEach(function (review) {
         var rounded = parseFloat(review.score.toFixed(1))
         if (rounded === 0) {
@@ -41,18 +40,18 @@ class PieChart extends Component {
         datasets: [{
           data: array,
           backgroundColor: [
-            '#9B59B6',
-            '#2980B9',
-            '#16A085',
-            '#C0392B',
-            '#99A3A4'
+            '#28ABE3',
+            '#1FDA9A',
+            '#F7EAC8',
+            '#DB3340',
+            '#E8B71A'
           ],
           hoverBackgroundColor: [
-            '#9B59B6',
-            '#2980B9',
-            '#16A085',
-            '#C0392B',
-            '#99A3A4'
+            '#78C2E2',
+            '#6AD8B2',
+            '#F7F0DE',
+            '#DB5964',
+            '#E8C34A'
           ],
         }]
     }
@@ -64,21 +63,23 @@ class PieChart extends Component {
     // this.parseChartData();
     const handleClicktwo = elem => {
       if (elem[0]) {
-        console.log('in pie chart props', this.props)
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
         this.props.pickReviewTypeToDisplay(label);
-        console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
-        console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
     }
 
     return (
-      <div className="pie-chart">
-        <h1>Overall Sentiment</h1>
-        <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart" />
+      <div className="pie-chart" style={{"height" : 375}}>
+
+        <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
+  width={10}
+  height={150}
+  options={{
+    maintainAspectRatio: false
+  }} />
       </div>
     );
   }

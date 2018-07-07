@@ -4,6 +4,7 @@ import KeywordBarChart from './reportPartials/_barChartKWs'
 import KeywordsOverTime from './reportPartials/_keywordFreqOverTime'
 import Button from '@material-ui/core/Button';
 
+
 class KeywordCharts extends Component {
   constructor(props) {
     super(props)
@@ -21,9 +22,21 @@ class KeywordCharts extends Component {
     this.setState({...resetCharts, [chartName]: true})
   }
 
+
+
   render() {
     //const { allConcepts } = this.props
     const { showOverviewChart, showTimeChart } = this.state
+    const buttonStyle = {
+      margin: 30,
+      background: '#E8B71A',
+      color: 'white'
+    }
+
+     const buttonStyleTwo = {
+      background: '#E8D28B',
+      color: 'black'
+    }
     {console.log('in keyword chart, being passed all concepts', this.props.allConcepts)}
     // {console.log('in keyword chart, being passed reviewtypetodisplay', this.props.reviewTypeToDisplayKW)}
     return (
@@ -34,13 +47,15 @@ class KeywordCharts extends Component {
           variant="contained"
           data-message="overtime"
           onClick={() => this.handleChartChange('showTimeChart')}
+          style={buttonStyle}
         >
-          See data over time
+          trends over time
         </Button>
         <Button
-          variant="outlined"
+          variant="contained"
           data-message="overall"
           onClick={() => this.handleChartChange('showOverviewChart')}
+          style={buttonStyleTwo}
         >
           High level Overview
         </Button>
