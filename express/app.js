@@ -35,6 +35,7 @@ var reportData = []
 
 var sentData = {
   //live
+  name: '',
   reviewsL: reportData, //
   allConceptsL: parse.conceptAggregator(reportData),
   monthConceptsL: parse.datedAggregator(parse.parseReviewsByDate(reportData)),
@@ -52,6 +53,7 @@ app.get('/1', (req, res) => {
 app.post('/1', (req, res) => {
   // console.log('full request', req)
   console.log('req body', req.body)
+  sentData.name = req.body.name
   const sendStuff = (data) =>{
     console.log('data added to object', JSON.stringify(data))
     data.forEach(function(review, i) {
