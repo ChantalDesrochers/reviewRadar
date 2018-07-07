@@ -71,39 +71,20 @@ var review = {
   datePublished: datePublishedv,
 }
 */
+var globalReviews = [];
 
-async function tripAdvisorPuppet(url) {
+async function tripAdvisorPuppet(url, i) {
+  console.log("running", i);
+  url.replace(/Reviews/g, `Reviews-or${i}`);
   const browser = await launch({ headless: true });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "networkidle2" });
   await page.waitForSelector("h1");
-  // await page.evaluate(() => (window.map = new Map()));
-  // const mapPrototype = await page.evaluateHandle(() => Map.prototype);
 
-  // if "span.ulBlueLinks" text is More, then click it
-  // <span class="taLnk ulBlueLinks" onclick="widgetEvCall('handlers.clickExpand',event,this);">More</span>
-  // <span class="taLnk ulBlueLinks" onclick="widgetEvCall('handlers.clickCollapse',event,this);">Show less</span>
-
-
-  await page.click("p span.ulBlueLinks")
-  await page.waitFor(3000)
-
-  const more = await page.evaluate(() => {
-    let array = [];
-    let moreArray = document.querySelectorAll("p span.ulBlueLinks");
-    for (var element of moreArray) {
-      // Loop through each proudct
-      if (element.innerText == "More") {
-        array.push(element.innerText); // Select the title
-      }
-    }
-    return array;
-  });
-
-  console.log("all more", more);
+  await page.click("p span.ulBlueLinks");
+  await page.waitFor(3000);
 
   const reviews = await page.evaluate(() => {
-
     let array = [];
     let reviewsArray = document.querySelectorAll("div.reviewSelector");
     for (var element of reviewsArray) {
@@ -125,47 +106,24 @@ async function tripAdvisorPuppet(url) {
     return array;
   });
 
-  console.log("all reviews", reviews);
-  // var ratingv = $(this).find('.ui_bubble_rating').attr('class').replace(/ui_bubble_rating bubble_/g, '')
+  reviews.forEach(function(review) {
+    globalReviews.push(review);
+  });
+  // globalReviews.push(reviews)
 
-
-  // const reviews = await page.evaluate(() => {
-  //   // const reviewsArray = document.querySelectorAll("div.review-container");
-  //   let array = [];
-  //   const reviewsArray = Array.from(
-  //     document.querySelectorAll("div.review-container")
-  //   );
-  //   reviewsArray.forEach(function(item) {
-  //     array.push({
-  //       title: document.querySelector("h1.header").textContent.trim(),
-  //       origin: 'tripAdvisor',
-  //       full: item
-  //     })
-  //   });
-  //   // return reviewsArray.map(p => p.partialentry.innerHTML)
-  //   return array
-  // });
-
-  // console.log("all reviews", reviews);
-
-  //   for (let storyLink of storyLinks) {
-  //     await page.goto(storyLink)
-  //     const screen = await page.screenshot();
-  //     await expect(screen).toMatchImageSnapshot();
-  // };
-
-  // dataArray = [];
-  // (".review-container");
-  // const data = await page.evaluate(() => ({
-  //   title: document.querySelector("h1.header").textContent.trim()
-  // }));
-
-  // console.log(data);
-  // other actions...
   await page.close();
   await browser.close();
+
+  if (i < 40) {
+    i += 10;
+    tripAdvisorPuppet(url, i);
+  } else {
+    console.log("reviews", reviews);
+    console.log("global reviews", globalReviews);
+  }
 }
 
 tripAdvisorPuppet(
-  "https://www.tripadvisor.ca/Restaurant_Review-g155019-d704408-Reviews-or20-Fresh_On_Spadina-Toronto_Ontario.html"
+  "https://www.tripadvisor.ca/Restaurant_Review-g155019-d704408-Reviews-Fresh_On_Spadina-Toronto_Ontario.html",
+  0
 );
