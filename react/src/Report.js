@@ -301,11 +301,10 @@ class Report extends Component {
                   monthConcepts={this.state.monthConcepts}/>
 
               </Paper>
-              <div>
+              </Grid>
               {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}
               <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
                 <WatsonBars style={styles.WatsonBars}  s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
-              </div>
             </Grid>
             {/* SWAP BUTTON */}
             <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
@@ -325,7 +324,7 @@ class Report extends Component {
               {/* <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
               </Grid> */}
             </Grid>
-          </Grid>
+    
 
         </div>)
     );

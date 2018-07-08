@@ -4,7 +4,7 @@ import { Pie } from 'react-chartjs-2';
 class PieChart extends Component {
   prepareHtml = (handleClicktwo) => {
 
-    if (this.props.dataFocus === 'review') {
+    if (this.props.s.dataFocus === 'review') {
       return <div className="pie-chart" style={{height:375}}>
 
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
@@ -15,7 +15,7 @@ class PieChart extends Component {
           }} />
       </div>
     }
-    else if (this.props.dataFocus === 'chart') {
+    else if (this.props.s.dataFocus === 'chart') {
       return <div className="pie-chart" style={{height:550}}>
 
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
