@@ -7,7 +7,7 @@ import NumberOfReviewsOverTime from './reportPartials/_numberOfReviews'
 import SentimentBarChartMonth from './reportPartials/_monthSentimentBar'
 import PieSentimentYelp from './reportPartials/_sentimentYelp'
 import PieSentimentTripAdvisor from './reportPartials/_sentimentTripAdvisor'
-import TripAdvisorKWChart from './reportPartials/_kwFrequencyTripAdvisor'
+// import TripAdvisorKWChart from './reportPartials/_kwFrequencyTripAdvisor'
 
 class ChartsToShow extends Component {
     render() {
@@ -15,7 +15,7 @@ class ChartsToShow extends Component {
         console.log('reviews', this.props.s.reviews)
         return (
             <div style={{ padding: 0, marginTop:'50px'}}>
-            <TripAdvisorKWChart organizedConcepts={this.props.s.organizedConcepts}/>
+            {/*<TripAdvisorKWChart organizedConcepts={this.props.s.organizedConcepts}/>*/}
             <SentimentBarChartMonth reviews={this.props.s.reviews}/>
              <KeywordPolar style={{margin:'100px'}} />
              <NumberOfReviewsOverTime reviews={this.props.s.reviews} />
