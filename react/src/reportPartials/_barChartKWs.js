@@ -12,7 +12,7 @@ class KeywordBarChart extends Component {
         labels: [],
         datasets: [{
           label: 'Keyword Frequency',
-          backgroundColor: '#6EEFC2',
+          backgroundColor: ['#6EEFC2', '#6EEFC2', 'blue', 'red', 'green', 'yellow'],
           borderColor: '#5FD8AE',
           borderWidth: 5,
           hoverBackgroundColor: '#60F2BF',
@@ -31,6 +31,7 @@ class KeywordBarChart extends Component {
       }
     }
   }
+
   componentDidMount() {
     var getChartData = () => {
       var sortedArray = this.state.testData.sort(function (a, b) {
@@ -53,17 +54,28 @@ class KeywordBarChart extends Component {
     getChartData()
   }
 
+updateColour = (color) => {
+  color = 'red'
+}
 
   render() {
+
     const handleClick = elem => {
       if (elem[0]) {
-        console.log(elem)
+        console.log('elem', elem)
+        console.log('color', elem[0]['_model']['backgroundColor'])
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
+        console.log('dataset index', chartPoints[0]._datasetIndex)
+        // var colourProp = elem[0]['_chart']['config']['data']['datasets'][0]['backgroundColor'][clickedPointIndex]
+        var colourProptest = elem[0]['_chart']['config']['data']['datasets'][0]['backgroundColor']
+        this.updateColour(colourProptest)
+        console.log('colorbefore', colourProptest)
+        // colourProptest = 'red'
+        console.log('colorafter', colourProptest)
+        console.log("clickedpoint", clickedPointIndex)
         const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         this.props.reviewTypeToDisplayKW(label)
-        const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
-        this.props.reviewTypeToDisplayKW(label);
         console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
         console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
@@ -97,7 +109,8 @@ class KeywordBarChart extends Component {
   options={{
     maintainAspectRatio: false}}
     options={chartyOptions}
-   />
+    ref="myChart"
+    redraw/>
       </div>
     );
   }

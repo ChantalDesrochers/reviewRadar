@@ -6,10 +6,10 @@ import SentimentCharts from '../SentimentCharts';
 
 
 
-const ChartContainer = ({reviews, displaying, pickReviewTypeToDisplay, reviewTypeToDisplayKW, changeSentimentDisplayModifier}) => (
+const ChartContainer = ({reviews, displaying, pickReviewTypeToDisplay, reviewTypeToDisplayKW, changeSentimentDisplayModifier, clickHandlerForSentimentTimeChart}) => (
   <div>
     { displaying === "sentiment" ? (
-      <SentimentCharts pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews} changeSentimentDisplayModifier={changeSentimentDisplayModifier}/> ) : (<KeywordCharts reviews={reviews} reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
+      <SentimentCharts pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews} changeSentimentDisplayModifier={changeSentimentDisplayModifier} clickHandlerForSentimentTimeChart={clickHandlerForSentimentTimeChart}/> ) : (<KeywordCharts reviews={reviews} reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
   </div>
 )
 

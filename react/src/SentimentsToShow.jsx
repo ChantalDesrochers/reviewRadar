@@ -55,8 +55,21 @@ class SentimentsToShow extends Component {
             </div>))
            return (
             <div style={{marginTop:'100px'}}>
-            <h2>Top Five Reviews</h2>
+            <h2>Five Most Recent Reviews</h2>
             {recentReviews}
+            </div>
+            )
+    } else if (this.props.s.displayModifier === "timebymonth") {
+        const reviews = this.props.s.currentTargetedReviews
+        let monthReviews = reviews.map(review => (
+            <div>
+            <h2>{review.datePublished.toString().substring(0,14)}</h2>
+            <p>{review.description}</p>
+            </div>))
+           return (
+            <div style={{marginTop:'100px'}}>
+            <h2>{reviews[0].datePublished.toString().substring(4,7)} Reviews</h2>
+            {monthReviews}
             </div>
             )
     }

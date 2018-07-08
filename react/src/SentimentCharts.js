@@ -38,7 +38,7 @@ class SentimentCharts extends Component {
 
     return (
       <div>
-        { showTimeChart && <SentimentOverTime reviews={reviews} /> }
+        { showTimeChart && <SentimentOverTime reviews={reviews} clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart}/> }
         { showOverviewChart &&  <PieChart  reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
         <Button
           variant="outlined"

@@ -138,6 +138,22 @@ class Report extends Component {
     })
   }
 
+  clickHandlerForSentimentTimeChart = (clickedMonth) => {
+    console.log('clicked month on sentiment chart', clickedMonth)
+    let month = clickedMonth.substring(0,3)
+    let dAlteredArray = this.state.reviews.map(review =>
+            ({...review, datePublished: new Date(review.datePublished)})
+           )
+    console.log(dAlteredArray)
+    let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
+    console.log(monthReviews)
+    this.setState((prevState) => {
+      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'sentiment'}
+      return newState;
+    })
+  }
+
+
   //arrow key handler
   reviewSwitch = (changeBy) => {
     console.log('state', this.state)
@@ -238,7 +254,8 @@ topNavClickHandler = (clickedItem) => {
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
                 <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
                   pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
-                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} changeSentimentDisplayModifier={this.changeSentimentDisplayModifier} />
+                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+                  clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}/>
               </Paper>
               <div>
               <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
