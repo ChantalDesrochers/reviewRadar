@@ -8,10 +8,8 @@ class KeywordsOverTime extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // reviews: this.props.reviews,
-      // concepts: ReturnConcepts,
-      // conceptsTime: MonthConceptFrequency
-    };
+    }
+
   }
 
   kwPerMonth = (organizedConcepts, monthConcepts) => {
@@ -176,17 +174,39 @@ class KeywordsOverTime extends Component {
           ];
         // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
-    };
-    return (
-      <div className="kwFreqOverTimeChart" style={{"height" : 375}}>
-      <Line
-          data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
-          height={150}
-          options={{
-            maintainAspectRatio: false}}/>
-      </div>
-    );
+
+    }
+
+     const chartyOptions = {
+        scales: {
+          xAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20
+        }
+      }
+    }
+
+
+        return (
+            <div className="kwFreqOverTimeChart" style={{"height" : 450}}>
+              <Line data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
+  height={10}
+  options={{
+    maintainAspectRatio: false}}
+    options={chartyOptions}/>
+            </div>
+        );
+     }
+
   }
-}
+
+
 
 export default KeywordsOverTime;

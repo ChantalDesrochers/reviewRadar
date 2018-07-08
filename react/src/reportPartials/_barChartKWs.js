@@ -19,7 +19,7 @@ class KeywordBarChart extends Component {
       datasets: [
         {
           label: 'Keyword Frequency',
-          backgroundColor: '#6EEFC2',
+          backgroundColor: ['#6EEFC2', '#6EEFC2', 'blue', 'red', 'green', 'yellow'],
           borderColor: '#5FD8AE',
           borderWidth: 5,
           hoverBackgroundColor: '#60F2BF',
@@ -32,57 +32,76 @@ class KeywordBarChart extends Component {
           xAxes: [
             {
               ticks: {
-                min: 0
+                fontSize: 30
               }
             }
           ]
         }
       }
-    };
-  };
+    }
+  }
+
+
+updateColour = (color) => {
+  color = 'red'
+}
+
 
   render() {
+
     const handleClick = elem => {
       if (elem[0]) {
-        console.log(elem);
+
+        console.log('elem', elem)
+        console.log('color', elem[0]['_model']['backgroundColor'])
         let chartPoints = elem;
-        let clickedPointIndex = chartPoints[0]["_index"];
-        const label =
-          chartPoints[0]["_chart"]["config"]["data"]["labels"][
-            clickedPointIndex
-          ];
-        this.props.reviewTypeToDisplayKW(label);
-        const score =
-          chartPoints[0]["_chart"]["config"]["data"]["datasets"][0]["data"][
-            clickedPointIndex
-          ];
-        console.log(
-          "chartPoints - label",
-          chartPoints[0]["_chart"]["config"]["data"]["labels"][
-            clickedPointIndex
-          ]
-        );
-        console.log(
-          "chartPoints - score",
-          chartPoints[0]["_chart"]["config"]["data"]["datasets"][0]["data"][
-            clickedPointIndex
-          ]
-        );
+        let clickedPointIndex = chartPoints[0]['_index']
+        console.log('dataset index', chartPoints[0]._datasetIndex)
+        // var colourProp = elem[0]['_chart']['config']['data']['datasets'][0]['backgroundColor'][clickedPointIndex]
+        var colourProptest = elem[0]['_chart']['config']['data']['datasets'][0]['backgroundColor']
+        this.updateColour(colourProptest)
+        console.log('colorbefore', colourProptest)
+        // colourProptest = 'red'
+        console.log('colorafter', colourProptest)
+        console.log("clickedpoint", clickedPointIndex)
+        const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
+        this.props.reviewTypeToDisplayKW(label)
+        console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
-    };
+    }
+
+  const chartyOptions = {
+        scales: {
+          yAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20
+        }
+      },
+      barThickness: 15
+    }
+
+
 
     return (
-      <div className="bar-chart" style={{"height" : 375}}>
-      
-      
+      <div className="bar-chart" style={{"height" : 450}}>
 
-        <h1>Keyword Frequency</h1>
-        <HorizontalBar
-          data={this.getChartData(this.props.organizedConcepts)}
-          getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
-  height={150}
+        <HorizontalBar data={this.getChartData(this.props.organizedConcepts)} getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
+  height={10}
+  height={10}
+
   options={{
-    maintainAspectRatio: false}}/>
+    maintainAspectRatio: false}}
+    options={chartyOptions}
+    ref="myChart"
+    redraw/>
       </div>
     );
   }
