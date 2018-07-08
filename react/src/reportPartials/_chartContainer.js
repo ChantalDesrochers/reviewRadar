@@ -5,14 +5,11 @@ import SentimentCharts from '../SentimentCharts';
 // import SentimentBarChartMonth from './_monthSentimentBar.js'
 
 
-
-
-
-const ChartContainer = ({reviews, displaying, pickReviewTypeToDisplay, reviewTypeToDisplayKW, changeSentimentDisplayModifier, clickHandlerForSentimentTimeChart, organizedConcepts, monthConcepts, clickHandlerForKeywordTimeChart}) => (
+const ChartContainer = ({s, clickHandlerForKeywordTimeChart, reviews, displaying, pickReviewTypeToDisplay,  clickHandlerForSentimentTimeChart, changeSentimentDisplayModifier, reviewTypeToDisplayKW, organizedConcepts, monthConcepts}) => (
   <div>
     { displaying === "sentiment" ? (
-      <SentimentCharts pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews} changeSentimentDisplayModifier={changeSentimentDisplayModifier} clickHandlerForSentimentTimeChart={clickHandlerForSentimentTimeChart}/> ) : (<KeywordCharts reviews={reviews} organizedConcepts={organizedConcepts} monthConcepts={monthConcepts} reviewTypeToDisplayKW={reviewTypeToDisplayKW} clickHandlerForKeywordTimeChart={clickHandlerForKeywordTimeChart}/> ) }
-
+      <SentimentCharts s={s}  clickHandlerForSentimentTimeChart={clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={changeSentimentDisplayModifier} pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews}/> ) :
+       (<KeywordCharts clickHandlerForKeywordTimeChart={clickHandlerForKeywordTimeChart} organizedConcepts={organizedConcepts} monthConcepts={monthConcepts} s={s}  reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
   </div>
 )
 

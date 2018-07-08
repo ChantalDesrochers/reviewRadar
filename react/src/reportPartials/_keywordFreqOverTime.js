@@ -173,8 +173,8 @@ class KeywordsOverTime extends Component {
             clickedPointIndex
           ];
           const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-          console.log(month)
-          this.props.clickHandlerForKeywordTimeChart(month)
+         console.log(month)
+         this.props.clickHandlerForKeywordTimeChart(month)
         // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
 
