@@ -103,17 +103,17 @@ function Landing(props) {
           <LandingContainer
             header="header"
             img="http://via.placeholder.com/250x300"
-            text="This is container1"
+            text="All your reviews in one place..."
           />
           <LandingContainer
             header="header"
             img="http://via.placeholder.com/250x300"
-            text="This is container2"
+            text="Parsed by machine learning..."
           />
           <LandingContainer
             header="header"
             img="http://via.placeholder.com/250x300"
-            text="This is container3"
+            text="Meaningfully displayed"
           />
         </Grid>
       </div>
