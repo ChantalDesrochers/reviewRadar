@@ -8,7 +8,7 @@ import { LabelOutline } from '@material-ui/icons'
  let styles = {
    
     buttonContainerForModifierVolumeFocusReview: { marginLeft: '35%', position: 'absolute', top: 450, backgroundColor: 'blue' },
-    buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 800}
+    buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 600, float: 'left'}
  }
 
 class VisibleReviewNavPanel extends Component {
@@ -35,22 +35,23 @@ class VisibleReviewNavPanel extends Component {
             </Grid>)
         }
         else if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'chart'){
-            return (<Grid className="buttons" style={styles.buttonContainerForModifierVolumeFocusChart}>
-            <Grid item sm={2}>
-                <div style={{ textAlign: 'center' }}>
-                    <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
+            // return (<div style={styles.buttonContainerForModifierVolumeFocusChart}>
+         return (
+         <div style={styles.buttonContainerForModifierVolumeFocusChart}>
+         <Grid container >
+                <Grid item sm={6}>
+                    <Button style={{ backgroundColor: 'green' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
                         <LabelOutline className="icon-flipped" />
                     </Button>
-                </div>
-            </Grid>
-            <Grid item sm={2}>
-                <div style={{ textAlign: 'center' }}>
+                </Grid>
+            
+                <Grid item sm={6}>
                     <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
                         <LabelOutline />
                     </Button>
-                </div>
-            </Grid>
-        </Grid>)
+               </Grid>
+        </Grid>
+        </div>)
         }
         else if (this.props.s.displayModifier === 'volumeBySentiment') {
             return <p> volume by sentiment needs down arrow </p>

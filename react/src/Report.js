@@ -126,11 +126,11 @@ class Report extends Component {
       switch (displaying) {
         case 'sentiment':
           return <div><SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
-            <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} /></div>
+          </div>
           break;
         case 'keyword':
           return <div> <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
-          <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} /></div>
+         </div>
           break;
       }
 
@@ -213,9 +213,7 @@ class Report extends Component {
     let dAlteredArray = this.state.reviews.map(review =>
       ({ ...review, datePublished: new Date(review.datePublished) })
     )
-    console.log(dAlteredArray)
     let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
-    console.log(monthReviews)
     this.setState((prevState) => {
       let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'keyword' }
       return newState;
