@@ -12,12 +12,13 @@ class SentimentCharts extends Component {
     }
   }
 
-  handleChartChange = chartName => {
+  handleChartChange = (chartName, displayModifier) => {
     const resetCharts = {
       showTimeChart: false,
       showOverviewChart: false
     }
     this.setState({...resetCharts, [chartName]: true})
+    this.props.changeSentimentDisplayModifier(displayModifier)
   }
 
   render() {
@@ -37,12 +38,12 @@ class SentimentCharts extends Component {
 
     return (
       <div>
-        { showTimeChart && <SentimentOverTime reviews={reviews} /> }
+        { showTimeChart && <SentimentOverTime reviews={reviews} clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart}/> }
         { showOverviewChart &&  <PieChart  reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
         <Button
           variant="outlined"
           data-message="overtime"
-          onClick={() => this.handleChartChange('showTimeChart')}
+          onClick={() => this.handleChartChange('showTimeChart', 'time')}
           style={buttonStyle}
         >
           trends over time
@@ -50,7 +51,7 @@ class SentimentCharts extends Component {
         <Button
           variant="outlined"
           data-message="overall"
-          onClick={() => this.handleChartChange('showOverviewChart')}
+          onClick={() => this.handleChartChange('showOverviewChart', 'volume')}
           style={buttonStyleTwo}
         >
           High level Overview

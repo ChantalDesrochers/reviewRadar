@@ -7,6 +7,11 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
+
+import ChartsToShow from './ChartsToShow';
+// import Ratings from "./ratings.js"
+import OrganizedConcepts from './reportPartials/organizedConcepts.js';
+import CompletedData from './reportPartials/completedData.js'
 import Colors from './AppColors';
 import KeywordBarChart from './reportPartials/_barChartKWs';
 import SentimentPieChart from './reportPartials/_pieChart';
@@ -47,7 +52,9 @@ class Report extends Component {
     this.state = {
       companyName:'Planta',
       // hardcoded data----------
-      // organizedConcepts: OrganizedConcepts, 
+
+      // organizedConcepts: OrganizedConcepts,
+
       // reviews: Ratings,
       // completedData: CompletedData,
       // currentTargetedReviews: CompletedData,
@@ -92,6 +99,9 @@ class Report extends Component {
         break;
       case 'keyword':
         return <KeywordsToShow s ={this.state}/>;
+        break;
+      case 'chart':
+        return <ChartsToShow s = {this.state}/>
         break;
     }
   }
@@ -143,6 +153,22 @@ class Report extends Component {
     })
   }
 
+  clickHandlerForSentimentTimeChart = (clickedMonth) => {
+    console.log('clicked month on sentiment chart', clickedMonth)
+    let month = clickedMonth.substring(0,3)
+    let dAlteredArray = this.state.reviews.map(review =>
+            ({...review, datePublished: new Date(review.datePublished)})
+           )
+    console.log(dAlteredArray)
+    let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
+    console.log(monthReviews)
+    this.setState((prevState) => {
+      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'sentiment'}
+      return newState;
+    })
+  }
+
+
   //arrow key handler
   reviewSwitch = (changeBy) => {
     console.log('state', this.state)
@@ -159,6 +185,16 @@ class Report extends Component {
       })
     }
   }
+
+  changeSentimentDisplayModifier = (displayModifier) => {
+    this.setState((prevState) => {
+      let newState = {...prevState,
+        displayModifier: displayModifier
+      }
+      return newState;
+    })
+  }
+
   //not in use but needed for future reference
   toggleFade = () => {
     const newState = { ...this.state }
@@ -177,6 +213,7 @@ class Report extends Component {
     }
     return null;
   }
+
 topNavClickHandler = (clickedItem) => {
     const newState = { ...this.state }
     switch (clickedItem) {
@@ -188,16 +225,22 @@ topNavClickHandler = (clickedItem) => {
         })
         return
       case 'keyword':
-        newState.displaying = 'keyword';
+        newState.displaying = 'keyword'; //seting new state here or below?
         this.setState((prevState)  => {
           let newState = {...prevState, displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content}
         // this.toggleFade();
           return newState
         });
-      this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
+        this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
+        break;
+        case 'charts': //added chart state handle
+        this.setState((prevState) => {
+          let newState = {...prevState, displaying: 'chart'}
+          return newState;
+          console.log('state', this.state)
+        })
     }
-
-  };
+  }
   render() {
     console.log('state', this.state)
     const watsonIndex = this.state.visibleReview;
@@ -227,10 +270,11 @@ topNavClickHandler = (clickedItem) => {
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
                 <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
                   pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
-                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} 
+                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+                  clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
                   organizedConcepts={this.state.organizedConcepts}
-                  monthConcepts={this.state.monthConcepts}
-                  />
+                  monthConcepts={this.state.monthConcepts}/>
+
               </Paper>
               <div>
               {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}

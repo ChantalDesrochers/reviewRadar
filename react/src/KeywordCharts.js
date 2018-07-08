@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-
 import KeywordBarChart from './reportPartials/_barChartKWs'
 import KeywordsOverTime from './reportPartials/_keywordFreqOverTime'
 import Button from '@material-ui/core/Button';
@@ -25,7 +24,10 @@ class KeywordCharts extends Component {
 
 
   render() {
-    //const { organizedConcepts } = this.props
+
+    const { reviews } = this.props
+
+
     const { showOverviewChart, showTimeChart } = this.state
     const buttonStyle = {
       margin: 30,

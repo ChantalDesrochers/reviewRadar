@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReturnConcepts from "./returnConcepts.js";
+import organizedConcepts from "./organizedConcepts.js";
 import { Polar } from 'react-chartjs-2';
 
 class KeywordPolar extends Component {
@@ -7,7 +7,7 @@ class KeywordPolar extends Component {
     super(props);
     this.state = {
       reviews: this.props.reviews,
-      testData: ReturnConcepts,
+      testData: organizedConcepts,
       data: {
         datasets: [{
           data: [],
@@ -60,7 +60,7 @@ const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][
  }
 
         return (
-            <div className="pie-chart">
+            <div className="polar-chart" style={{margin:'100px'}}>
               <Polar data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
             </div>
         );
