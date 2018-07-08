@@ -26,6 +26,20 @@ class KeywordsToShow extends Component {
         }
     }
     prepareHtml = () => {
+        if (this.props.s.displayModifier === "timebymonth") {
+        const reviews = this.props.s.currentTargetedReviews
+        let monthReviews = reviews.map(review => (
+            <div>
+            <h2>{review.datePublished.toString().substring(0,15)}</h2>
+            <p>{review.description}</p>
+            </div>))
+           return (
+            <div style={{marginTop:'100px'}}>
+            <h2>{reviews[0].datePublished.toString().substring(4,7)} Reviews</h2>
+            {monthReviews}
+            </div>
+            )
+    } else {
         console.log('state is ', this.props.s);
         let review = this.props.s.currentTargetedReviews[this.props.s.visibleReview].description;
         let name = this.props.s.currentTargetedReviews[this.props.s.visibleReview].author;
@@ -38,12 +52,12 @@ class KeywordsToShow extends Component {
                     <Grid container spacing={0}>
                         <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
                             <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                <NameAndSite name={name} site={site} /> 
+                                <NameAndSite name={name} site={site} />
                             </Grid>
                         </Grid>
                         <Grid item sm={6} >
                             <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                               <Date date={date} /> 
+                               <Date date={date} />
                             </Grid>
                         </Grid>
                         <Grid item sm={12}  >
@@ -57,6 +71,7 @@ class KeywordsToShow extends Component {
         )
         return reviewToReturn
     }
+}
     render() {
         return (
             <div style={{ padding: 0 }}>

@@ -50,7 +50,7 @@ class SentimentsToShow extends Component {
            let recentReviews = sortedDate.slice(0,5)
            recentReviews = recentReviews.map(review => (
             <div>
-            <h2>{review.datePublished.toString().substring(0,14)}</h2>
+            <h2>{review.datePublished.toString().substring(0,15)}</h2>
             <p>{review.description}</p>
             </div>))
            return (
@@ -63,7 +63,7 @@ class SentimentsToShow extends Component {
         const reviews = this.props.s.currentTargetedReviews
         let monthReviews = reviews.map(review => (
             <div>
-            <h2>{review.datePublished.toString().substring(0,14)}</h2>
+            <h2>{review.datePublished.toString().substring(0,15)}</h2>
             <p>{review.description}</p>
             </div>))
            return (
