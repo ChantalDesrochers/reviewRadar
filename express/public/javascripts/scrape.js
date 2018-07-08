@@ -48,7 +48,7 @@ const yelpRecursion = (link, i, cb, link2) => {
         }
         reviewsArray.push(review)
       })
-      if (i < 0) {
+      if (i < 80) {
         i += 20
         yelpRecursion(link, i, cb, link2)
       } else {
@@ -123,7 +123,7 @@ async function tripAdvisorRecursion(link, i, cb) {
   await page.close();
   await browser.close();
 
-  if (i < 0) {
+  if (i < 90) {
     i += 10;
     tripAdvisorRecursion(link, i, cb);
   } else {
