@@ -8,6 +8,12 @@
       "Well certainly not a stylish japanese restaurant...but what a great surprise...good food variety in a cahotic festive contest! To repeat!",
     datePublished: "2018-07-4",
     summary: "Well certainly not a stylish japanese restaurant.",
+    concepts: [
+      { content: "Japanese" },
+      { content: "restaurant" },
+      { content: "food" },
+      { content: "contest" }
+    ],
     label: "very positive",
     score: 0.950395
   },
@@ -20,6 +26,12 @@
       "A proper Izakaya. Always a warm Japanese welcome. Food is tapas style and a huge selection of drinks.",
     datePublished: "2018-06-30",
     summary: "Always a warm Japanese welcome.",
+    concepts: [
+      { content: "Japanese" },
+      { content: "food" },
+      { content: "selection" },
+      { content: "beverage" }
+    ],
     label: "very positive",
     score: 0.888326
   },
@@ -33,6 +45,24 @@
     datePublished: "2018-07-06",
     summary:
       "Coolest, funnest place ever, Kinka replicates the liveliness and atmosphere of a traditional Izakaya in Japan very well, the staff greets you on entry and exit, all the staff is extraordinarily friendly, the service is quick, and the food was amazing.",
+    concepts: [
+      { content: "atmosphere" },
+      { content: "salmon" },
+      { content: "food" },
+      { content: "staff" },
+      { content: "ice cream" },
+      { content: "friendly" },
+      { content: "service" },
+      { content: "exit" },
+      { content: "chicken" },
+      { content: "entry" },
+      { content: "sesame" },
+      { content: "Japanese" },
+      { content: "restaurant" },
+      { content: "solid" },
+      { content: "complaint" },
+      { content: "place" }
+    ],
     label: "very positive",
     score: 0.874856
   },
@@ -46,6 +76,14 @@
     datePublished: "2018-02-4",
     summary:
       "You should know that the restaurant is very loud because the food servers greet everyone who enters the restaurant by yelling at the top of their lungs, and whenever a table orders sake, a group of the servers go to the table, yell and pound on the table with their hands.",
+    concepts: [
+      { content: "food" },
+      { content: "restaurant" },
+      { content: "sashimi" },
+      { content: "lung" },
+      { content: "group" },
+      { content: "place" }
+    ],
     label: "very positive",
     score: 0.870484
   },
@@ -58,6 +96,7 @@
       "Kinka is a great fun place to visit and dine! All the staff are great and serving with smile! Food was great as well, the portion is quite big I would say!\nIt is a noise place but fun to be in sometime!",
     datePublished: "2018-03-7",
     summary: "Food was great as well, the portion is quite big I would say!",
+    concepts: [{ content: "staff" }, { content: "food" }, { content: "noise" }],
     label: "very positive",
     score: 0.838095
   },
@@ -71,6 +110,7 @@
     datePublished: "2018-01-22",
     summary:
       "Really enjoyed the food and would recommend but it was super noisy.",
+    concepts: [{ content: "food" }, { content: "friend" }],
     label: "very positive",
     score: 0.835631
   },
@@ -84,6 +124,21 @@
     datePublished: "2018-04-03",
     summary:
       "If you're not a fan of the volume, fortunately they also have a patio that is much quieter.",
+    concepts: [
+      { content: "fan" },
+      { content: "waiter" },
+      { content: "meat" },
+      { content: "chicken" },
+      { content: "volume" },
+      { content: "amateur" },
+      { content: "people" },
+      { content: "atmosphere" },
+      { content: "kind" },
+      { content: "kitchen" },
+      { content: "customer" },
+      { content: "noise" },
+      { content: "staff" }
+    ],
     label: "very positive",
     score: 0.819663
   },
@@ -97,6 +152,20 @@
     datePublished: "2018-03-26",
     summary:
       "My boyfriend really enjoyed the ramen and said it was comparable to Sensotei.",
+    concepts: [
+      { content: "boyfriend" },
+      { content: "cheese" },
+      { content: "mussel" },
+      { content: "corner" },
+      { content: "lunch" },
+      { content: "sushi" },
+      { content: "special" },
+      { content: "sashimi" },
+      { content: "snack" },
+      { content: "environment" },
+      { content: "service" },
+      { content: "waiter" }
+    ],
     label: "very positive",
     score: 0.800807
   },
@@ -109,6 +178,12 @@
       "Really taste good. Some dishes are creative. The almond dessert is strongly recommended if you are almond lover.",
     datePublished: "2018-07-05",
     summary: "Some dishes are creative.",
+    concepts: [
+      { content: "almond" },
+      { content: "creative" },
+      { content: "dessert" },
+      { content: "lover" }
+    ],
     label: "very positive",
     score: 0.70155
   },
@@ -122,6 +197,19 @@
     datePublished: "2018-04-28",
     summary:
       "Came here for lunch and got an amazing negi-toro don with soup and salad for only 11!",
+    concepts: [
+      { content: "$" },
+      { content: "lunch" },
+      { content: "soup" },
+      { content: "salad" },
+      { content: "fatty" },
+      { content: "onion" },
+      { content: "recommended" },
+      { content: "service" },
+      { content: "bomb" },
+      { content: "welcome" },
+      { content: "staff" }
+    ],
     label: "very positive",
     score: 0.6392
   },
@@ -134,6 +222,20 @@
       "Highly recommend making a reservation for Kinka! It's incredible Japanese food, the flavors were Umani Central.\n\nWe ordered a few things to try from the menu, the standout dishes were the Karaage and the Seared Tuna. Runner up is the Yakiudon. I suggest you go with 3 - 4 people, so you can order a few items to try. They do offer \"lunch sets\", which are a great variety, but if you want to try more than .a few items, fo with friends.\n\nThe staff is super nice and the even though we came at the end of lunch, you can feel that it's a very lively place.\n\nPro Tip: be careful when eating the takoyaki balls, they will burn your mouth if you don't let them cool down. seriously super hot!! They were great but I did burn the roof of my mouth.",
     datePublished: "2018-06-10",
     summary: "They were great but I did burn the roof of my mouth!",
+    concepts: [
+      { content: "lunch" },
+      { content: "mouth" },
+      { content: "Japanese" },
+      { content: "food" },
+      { content: "runner" },
+      { content: "messenger" },
+      { content: "people" },
+      { content: "set" },
+      { content: "staff" },
+      { content: "place" },
+      { content: "ball" },
+      { content: "roof" }
+    ],
     label: "very positive",
     score: 0.582569
   },
@@ -147,6 +249,31 @@
     datePublished: "2018-02-17",
     summary:
       "We shared the kinoko bibimbap, chicken karaage, hotate scallops, takoyaki, and salmon tataki.",
+    concepts: [
+      { content: "star" },
+      { content: "beverage" },
+      { content: "salmon" },
+      { content: "garlic" },
+      { content: "stone" },
+      { content: "calculus" },
+      { content: "hobby" },
+      { content: "scallop" },
+      { content: "cheese" },
+      { content: "chip" },
+      { content: "place" },
+      { content: "friend" },
+      { content: "food" },
+      { content: "service" },
+      { content: "rice" },
+      { content: "interior" },
+      { content: "mushroom" },
+      { content: "chicken" },
+      { content: "cocktail" },
+      { content: "meal" },
+      { content: "enthusiastic" },
+      { content: "atmosphere" },
+      { content: "lighting" }
+    ],
     label: "very positive",
     score: 0.567525
   },
@@ -159,6 +286,18 @@
       "Loud, over the time, exciting, amazing restaurant. The atmosphere will get you in the mood for great food and cold drinks. Expertly prepared Japanese dishes with a tapas style service.If you are in Toronto don't miss this one. Just book a reservation online as this place gets busy. Now I have to go to Japan.",
     datePublished: "2018-01-21",
     summary: "Expertly prepared Japanese dishes with a tapas style service.",
+    concepts: [
+      { content: "restaurant" },
+      { content: "atmosphere" },
+      { content: "mood" },
+      { content: "food" },
+      { content: "cold" },
+      { content: "beverage" },
+      { content: "Japanese" },
+      { content: "service" },
+      { content: "online" },
+      { content: "place" }
+    ],
     label: "very positive",
     score: 0.531706
   },
@@ -172,6 +311,16 @@
     datePublished: "2018-04-07",
     summary:
       "I had their salmon don lunch set, which comes with a side salad and a miso soup.",
+    concepts: [
+      { content: "lunch" },
+      { content: "side" },
+      { content: "salmon" },
+      { content: "set" },
+      { content: "$" },
+      { content: "rice" },
+      { content: "soup" },
+      { content: "salad" }
+    ],
     label: "very positive",
     score: 0.531367
   },
@@ -185,6 +334,16 @@
     datePublished: "2018-04-7",
     summary:
       "The lunch sets are a fantastic deal – you get a rice bowl with a side salad and a miso soup for $10 ($11 if you get the salmon).",
+    concepts: [
+      { content: "lunch" },
+      { content: "side" },
+      { content: "salmon" },
+      { content: "set" },
+      { content: "$" },
+      { content: "rice" },
+      { content: "soup" },
+      { content: "salad" }
+    ],
     label: "very positive",
     score: 0.530924
   },
@@ -197,6 +356,20 @@
       "House music blaring and people yelling in Japanese hahaha fells like being club. Do a round of shots with your group and they will count you down. The food is cooked fresh to order right in view and it's delicious. The cold tapas are fantastic if you are a sushi fan. Excellent customer service. Took a little time to get a table but food came out fast and was worth it. ",
     datePublished: "2018-04-21",
     summary: "The cold tapas are fantastic if you are a sushi fan.",
+    concepts: [
+      { content: "food" },
+      { content: "home" },
+      { content: "music" },
+      { content: "people" },
+      { content: "Japanese" },
+      { content: "club" },
+      { content: "group" },
+      { content: "sushi" },
+      { content: "fan" },
+      { content: "amateur" },
+      { content: "customer" },
+      { content: "service" }
+    ],
     label: "very positive",
     score: 0.530883
   },
@@ -209,6 +382,21 @@
       "We came around 6pm on a Friday. As soon as I walked in, this place reminded me of Guu. Even the specials menu had the same font as a Guu I've previously visited. \n\nWe started off with a pitcher of Sapporo and ordered a bunch of Japanese tapas, mostly fried. \ntakowasabi - marinated octopus w/ wasabi stem. the wasabi is incredibly intense, be careful of having too much in one bite unless you love that refreshing wasabi feeling.\ntakoyaki \nokonomiyaki\nFried brie - for cheese lovers\nScallops - not as good as the Guu in Vancouver since it was smaller and less flavorful. still good value imo.\nkaraage\ndeep fried calamari \n\nBeer paired well with all the fried foods, so I'd highly recommend that. Had a festive time here with the good company, drinks, and food. 2 hour seating maximum in case you have too much fun.",
     datePublished: "2018-05-06",
     summary: "Fried brie - for cheese lovers.",
+    concepts: [
+      { content: "food" },
+      { content: "special" },
+      { content: "jug" },
+      { content: "Japanese" },
+      { content: "octopus" },
+      { content: "watt" },
+      { content: "cheese" },
+      { content: "lover" },
+      { content: "scallop" },
+      { content: "calamari" },
+      { content: "ale" },
+      { content: "fried" },
+      { content: "company" }
+    ],
     label: "very positive",
     score: 0.529297
   },
@@ -222,6 +410,7 @@
     datePublished: "2018-06-25",
     summary:
       "90): a little disappointed in this dish as the kalbi flavor wasn't very strong.",
+    concepts: [{ content: "$" }],
     label: "positive",
     score: 0.416385
   },
@@ -235,6 +424,28 @@
     datePublished: "2018-05-27",
     summary:
       "We got the sashimi salad, salmon tataki (so good we ordered another round), gyu carpaccio, the spicy tuna, gyoza, Octopus balls, kakimayo oysters (we ordered a second round of those too.",
+    concepts: [
+      { content: "oyster" },
+      { content: "hip hop" },
+      { content: "world" },
+      { content: "kind" },
+      { content: "ball" },
+      { content: "octopus" },
+      { content: "carpaccio" },
+      { content: "salmon" },
+      { content: "salad" },
+      { content: "sashimi" },
+      { content: "friend" },
+      { content: "food" },
+      { content: "syrup" },
+      { content: "wine" },
+      { content: "plum" },
+      { content: "friendly" },
+      { content: "service" },
+      { content: "forest" },
+      { content: "design" },
+      { content: "place" }
+    ],
     label: "positive",
     score: 0.398666
   },
@@ -248,6 +459,19 @@
     datePublished: "2018-07-05",
     summary:
       "Came here with a group of 4 without knowing what to expect but was blown away.",
+    concepts: [
+      { content: "favorite" },
+      { content: "tavern" },
+      { content: "restaurant" },
+      { content: "group" },
+      { content: "atmosphere" },
+      { content: "bomb" },
+      { content: "people" },
+      { content: "food" },
+      { content: "oyster" },
+      { content: "salmon" },
+      { content: "family" }
+    ],
     label: "positive",
     score: 0.383818
   },
@@ -261,6 +485,14 @@
     datePublished: "2018-07-02",
     summary:
       "The food is sort of overpriced for the majority of the items, considering I felt the quality or complexity wasn't there.",
+    concepts: [
+      { content: "environment" },
+      { content: "food" },
+      { content: "staff" },
+      { content: "kind" },
+      { content: "doomed" },
+      { content: "people" }
+    ],
     label: "positive",
     score: 0.256043
   },
@@ -274,6 +506,7 @@
     datePublished: "2018-03-17",
     summary:
       "I ordered the salmon don, which came with three pieces of flame torched salmon, and chopped pieces of salmon marinated with soy sauce.",
+    concepts: [{ content: "salmon" }],
     label: "positive",
     score: 0.133088
   },
@@ -287,6 +520,22 @@
     datePublished: "2018-05-14",
     summary:
       "Great place for groups as the dishes are smaller and meant for sharing so you are able to try a lot of different things.",
+    concepts: [
+      { content: "cheese" },
+      { content: "restaurant" },
+      { content: "Japanese" },
+      { content: "food" },
+      { content: "place" },
+      { content: "group" },
+      { content: "people" },
+      { content: "prawn" },
+      { content: "chicken" },
+      { content: "bake" },
+      { content: "oyster" },
+      { content: "cocktail" },
+      { content: "samurai" },
+      { content: "Samurai" }
+    ],
     label: "positive",
     score: 0.106973
   },
@@ -300,6 +549,18 @@
     datePublished: "2018-04-10",
     summary:
       "A lot of the seating is communal but we were lucky to grab a table for two fairly easily on a Saturday night.",
+    concepts: [
+      { content: "salmon" },
+      { content: "introvert" },
+      { content: "noise" },
+      { content: "Japanese" },
+      { content: "food" },
+      { content: "street" },
+      { content: "plow" },
+      { content: "sashimi" },
+      { content: "watt" },
+      { content: "garlic" }
+    ],
     label: "positive",
     score: 0.0930651
   },
@@ -313,6 +574,26 @@
     datePublished: "2017-12-11",
     summary:
       "As you walk into this restaurant the chefs shout out their hellos in Japanese and this continues throughout the evening so not a great place for conversations or in my case catching up with my brothers and their family.",
+    concepts: [
+      { content: "chicken" },
+      { content: "stone" },
+      { content: "calculus" },
+      { content: "alga" },
+      { content: "cheese" },
+      { content: "mushroom" },
+      { content: "rice" },
+      { content: "plant" },
+      { content: "vegetable" },
+      { content: "restaurant" },
+      { content: "prawn" },
+      { content: "tempura" },
+      { content: "sushi" },
+      { content: "bean" },
+      { content: "haricot bean" },
+      { content: "food" },
+      { content: "family" },
+      { content: "brother" }
+    ],
     label: "neutral",
     score: 0
   },
@@ -326,6 +607,15 @@
     datePublished: "2018-07-07",
     summary:
       "Now we go for beers and good japanese bar dishes which are always excellent but on the more expensive side every once in a while.",
+    concepts: [
+      { content: "hip" },
+      { content: "line" },
+      { content: "ale" },
+      { content: "Japanese" },
+      { content: "compass" },
+      { content: "tavern" },
+      { content: "side" }
+    ],
     label: "negative",
     score: -0.0780643
   },
@@ -339,6 +629,7 @@
     datePublished: "2018-04-3",
     summary:
       "I liked this place so much, I went here two nights in a row during my short visit in Toronto.",
+    concepts: [{ content: "place" }, { content: "worker" }],
     label: "negative",
     score: -0.0897565
   },
@@ -352,6 +643,20 @@
     datePublished: "2018-01-1",
     summary:
       "The gimmick is that the servers shout in Japanese whenever someone comes through the door, leaves, places an order, there's an order up, or gets a sake bomb.",
+    concepts: [
+      { content: "place" },
+      { content: "oyster" },
+      { content: "kind" },
+      { content: "food" },
+      { content: "atmosphere" },
+      { content: "side" },
+      { content: "cabbage" },
+      { content: "person" },
+      { content: "bomb" },
+      { content: "Japanese" },
+      { content: "noise" },
+      { content: "group" }
+    ],
     label: "negative",
     score: -0.228766
   },
@@ -365,6 +670,24 @@
     datePublished: "2018-05-06",
     summary:
       "The ambience is full of people screaming at the top of their lungs and drumming, which was pretty annoying if you're trying to talk at all.",
+    concepts: [
+      { content: "fried" },
+      { content: "restaurant" },
+      { content: "group" },
+      { content: "limit" },
+      { content: "environment" },
+      { content: "home" },
+      { content: "service" },
+      { content: "pumpkin" },
+      { content: "average" },
+      { content: "standard" },
+      { content: "food" },
+      { content: "staff" },
+      { content: "area" },
+      { content: "Summer" },
+      { content: "lung" },
+      { content: "people" }
+    ],
     label: "negative",
     score: -0.258188
   },
@@ -377,6 +700,17 @@
       "Maybe I should have read the other reviews more carefully. But I do regret going here for dinner. The place was REALLY noisy. Loud clubbing music, loud chanting of service crew all the time. After eating, my eats were overwhelmed. I thought I almost had heart attack at some occasions during dinner\nMaybe it suits some other folks but definitely not me!\n\nThey earned two stars on the food. Food was good but not the environment, at least not for me",
     datePublished: "2018-07-07",
     summary: "Loud clubbing music, loud chanting of service crew all the time.",
+    concepts: [
+      { content: "dinner" },
+      { content: "food" },
+      { content: "myocardial infarction" },
+      { content: "place" },
+      { content: "music" },
+      { content: "service" },
+      { content: "occasion" },
+      { content: "star" },
+      { content: "environment" }
+    ],
     label: "negative",
     score: -0.447042
   }

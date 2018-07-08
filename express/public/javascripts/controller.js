@@ -14,8 +14,9 @@ const getData = (url, cb) => {
   // scraper.yelpRecursion(url, 0, watson.addSentiment(cb)); // watson in isolation
   if (Array.isArray(url)) {
     console.log('it is an array')
-    scraper.yelpRecursion(url[0], 0, summarycloud.summaryWithDelay(watson.addSentiment(cb)), url[1]) // summary in isolation
+    // scraper.yelpRecursion(url[0], 0, summarycloud.summaryWithDelay(watson.addSentiment(cb)), url[1]) // summary in isolation
     // scraper.yelpRecursion(url[0], 0, conceptcloud.conceptWithDelay(watson.addSentiment(cb)), url[1]) // concept in isolation
+    scraper.yelpRecursion(url[0], 0, summarycloud.summaryWithDelay(conceptcloud.conceptWithDelay(watson.addSentiment(cb))), url[1]) // summary in isolation
   } else { 
   scraper.yelpRecursion(url, 0, cloud.iterateWithDelay(watson.addSentiment(cb)), null); // yelprecursion, which calls meaningcloud (taking in watson as CB)
   }

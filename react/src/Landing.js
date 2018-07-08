@@ -104,7 +104,6 @@ function Landing(props) {
             header="header"
             img="http://via.placeholder.com/250x300"
             text="This is container1"
-            while
           />
           <LandingContainer
             header="header"
