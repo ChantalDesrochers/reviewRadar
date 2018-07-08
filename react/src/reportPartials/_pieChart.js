@@ -3,30 +3,29 @@ import { Pie } from 'react-chartjs-2';
 
 class PieChart extends Component {
   prepareHtml = (handleClicktwo) => {
-
+    console.log('inside pie chart', this.props.s.dataFocus)
     if (this.props.s.dataFocus === 'review') {
-      return <div className="pie-chart" style={{height:375}}>
-
+      return (<div className="pie-chart" style={{height:375}}>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}
           options={{
             maintainAspectRatio: false
           }} />
-      </div>
+      </div>)
     }
     else if (this.props.s.dataFocus === 'chart') {
-      return <div className="pie-chart" style={{height:550}}>
-
+      return (<div className="pie-chart" style={{height:550}}>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}
           options={{
             maintainAspectRatio: false
           }} />
-      </div>
+      </div>)
     }
   }
+
   parseChartData = (reviews) => {
     let veryPositive = 0;
     let positive = 0;

@@ -70,9 +70,8 @@ class Report extends Component {
       .then(results => {
         this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
         // this.setState({ loading: false, reviews: results.reviewsL, currentTargetedReviews: results.reviewsL, organizedConcepts: results.organizedConceptsL, monthConcepts: results.monthConceptsL, companyName: results.name })
-       
       });
-      };
+    };
 
   swapDisplaySides = () => {
     if (this.state.dataFocus === 'review') {
@@ -101,9 +100,9 @@ class Report extends Component {
           return <div><KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
-          case 'chart':
-          return <ChartsToShow s ={this.state}/>
-          break;
+        // case 'chart':
+        //   return <ChartsToShow s ={this.state}/>
+        //   break;
       }
     }
     else if (this.state.dataFocus === 'chart') {
@@ -183,8 +182,8 @@ class Report extends Component {
   clickHandlerForSentimentTimeChart = (clickedMonth) => {
     let month = clickedMonth.substring(0,3)
     let dAlteredArray = this.state.reviews.map(review =>
-            ({...review, datePublished: new Date(review.datePublished)})
-           )
+      ({...review, datePublished: new Date(review.datePublished)})
+    )
     let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
     this.setState((prevState) => {
       let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'sentiment'}
@@ -255,14 +254,14 @@ class Report extends Component {
         });
         this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
         break;
-        case 'charts': //added chart state handle
+      case 'charts': //added chart state handle
         this.setState((prevState) => {
-          let newState = {...prevState, displaying: 'chart'}
-          return newState;
-          console.log('state', this.state)
-        })
+        let newState = {...prevState, displaying: 'chart'}
+        return newState;
+      })
     }
   }
+
   render() {
     console.log('state', this.state)
     const watsonIndex = this.state.visibleReview;
@@ -273,61 +272,68 @@ class Report extends Component {
           <AppBar position="static" style={styles.AppBar}>
             <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
           </AppBar>
-          {/* LEFT SIDE */}
-          <Grid container style={styles.MainContainer} spacing={8}>
-            <Grid item sm={8}>
-              <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
-              <Grid style={styles.LeftContainer} item sm={12}>
-                <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
-                  <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }}>
-                    {this.LeftSideShow()}
-                  </div>
+        {/* LEFT SIDE */}
+        <Grid container style={styles.MainContainer} spacing={8}>
+          <Grid item sm={8}>
+            <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
+            <Grid style={styles.LeftContainer} item sm={12}>
+              <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
+                <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }}>
+                  {this.LeftSideShow()}
                 </div>
-                <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch}/>
-              </Grid>
+              </div>
+              <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch}/>
             </Grid>
           </Grid>
+        </Grid>
+        <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
+          <SwapButton />
+        </div>
+        <Grid style={styles.RightContainer} item sm={4}>
+          <Grid style={styles.RightTopContainer} item sm={12}>
+            <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
+            {/* <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+              pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
+              reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
+              organizedConcepts={this.state.organizedConcepts}
+              monthConcepts={this.state.monthConcepts}
+              s = {this.state}/> */}
+              <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+                pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
+                reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+                clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
+                organizedConcepts={this.state.organizedConcepts}
+                monthConcepts={this.state.monthConcepts}
+                s={this.state}/>
+            </Paper>
+            {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}
+            <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
+            <WatsonBars style={styles.WatsonBars}  s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+            </Grid>
+          </Grid>
+          {/* SWAP BUTTON */}
           <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
-            <SwapButton />
+            <SwapButton swapDisplaySides={this.swapDisplaySides} />
           </div>
-          <Grid style={styles.RightContainer} item sm={4}>
-            <Grid style={styles.RightTopContainer} item sm={12}>
-              <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
-                <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
-                  pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
-                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
-                  clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
-                  organizedConcepts={this.state.organizedConcepts}
-                  monthConcepts={this.state.monthConcepts}/>
-
+          {/* RIGHT SIDE */}
+          <Grid item sm={4} >
+            <Grid item sm={12}  >
+              <Paper onClick={this.topNavClickHandler} >
+                {this.RightSideShow()}
               </Paper>
-              </Grid>
-              {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}
-              <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
-                <WatsonBars style={styles.WatsonBars}  s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+              <div>
+              <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
+              <WatsonBars style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+              </div>
             </Grid>
-            {/* SWAP BUTTON */}
-            <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
-              <SwapButton swapDisplaySides={this.swapDisplaySides} />
-            </div>
-            {/* RIGHT SIDE */}
-            <Grid item sm={4} >
-              <Grid item sm={12}  >
-                <Paper onClick={this.topNavClickHandler} >
-                  {this.RightSideShow()}
-                </Paper>
-                <div>
-                  <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
-                  <WatsonBars style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
-                </div>
-              </Grid>
-              {/* <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-              </Grid> */}
-            </Grid>
+            {/* <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+            </Grid> */}
+          </Grid>
     
 
         </div>)
     );
   }
 }
+
 export default withStyles(styles)(Report);

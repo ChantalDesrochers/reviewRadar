@@ -34,7 +34,7 @@ class SentimentCharts extends Component {
       background: '#DBA2A7',
       color: 'white'
     }
-//console.log('sentiment charts state.dataFocus', this.props.s.dataFocus);
+console.log('sentiment charts state.dataFocus', this.props.s.dataFocus);
     return (
       <div>
         { showTimeChart && <SentimentOverTime dataFocus={this.props.dataFocus} s={this.props.s} reviews={reviews} clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart}/> }

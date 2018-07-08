@@ -15,7 +15,7 @@ class ChartsToShow extends Component {
             <SentimentBarChartMonth reviews={this.props.s.reviews}/>
              <KeywordPolar style={{margin:'100px'}} />
              <NumberOfReviewsOverTime reviews={this.props.s.reviews} />
-             <PieChart reviews={this.props.s.reviews} style={{margin:'50px'}}/>
+             <PieChart s={this.props.s} reviews={this.props.s.reviews} style={{margin:'50px'}}/>
             </div>
         )
     }
