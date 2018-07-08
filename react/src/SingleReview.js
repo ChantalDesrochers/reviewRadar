@@ -7,7 +7,7 @@ import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-    reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
+    reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block', backgroundColor: ' #f7eac8'}
 }
 class SingleReview extends Component {
     mouseController = (message) => {

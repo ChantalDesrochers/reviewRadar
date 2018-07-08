@@ -5,7 +5,7 @@ import { Typography } from "@material-ui/core";
 import Date from "./Date.js"
 import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
-
+import VisibleReviewNavPanel  from './VisibleReviewNavPanel'
 const styles = {
     reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
 }

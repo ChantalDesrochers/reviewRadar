@@ -3,11 +3,12 @@ import 'typeface-roboto'
 import { withStyles } from '@material-ui/core/styles';
 import SingleReview from './SingleReview.js';
 import { Typography } from "@material-ui/core";
+import VisibleReviewNavPanel from "./VisibleReviewNavPanel"
 
 const styles = {
     reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
     multipleReviewsText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
-    multipleReviewsContainer: { marginTop:25, whiteSpace: 'nowrap', overflow:'hidden', textOverflow:'ellipsis'}
+    multipleReviewsContainer: { marginTop: 25, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }
 }
 class SentimentsToShow extends Component {
     mouseController = (message) => {
@@ -34,14 +35,19 @@ class SentimentsToShow extends Component {
                         {review.description}
                     </Typography>
                 </div>
+
             ))
             return finalReviews
         }
     }
     render() {
         return (
-            <div style={{ padding: 0, marginTop: '150px' }}>
-                {this.prepareHtml()}
+            <div>
+                <div style={{ backgroundColor: ' #f7eac8', padding: 0, marginTop: '150px' }}>
+                    {this.prepareHtml()}
+                   
+                </div>
+               
             </div>
         )
     }
