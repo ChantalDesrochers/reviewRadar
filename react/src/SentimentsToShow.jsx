@@ -25,6 +25,8 @@ class SentimentsToShow extends Component {
         }
     }
     prepareHtml = (fadeBool) => {
+
+
         if (this.props.s.displayModifier === "volume") {
             if (this.props.s.dataFocus === "review") {
                 return <div style={styles.reviewTextModifierVolumeFocusReview}><SingleReview style={styles.review} s={this.props.s} /></div>
@@ -33,6 +35,7 @@ class SentimentsToShow extends Component {
                 return <div><SingleReview s={this.props.s} /></div>
             }
         }
+
         else if (this.props.s.displayModifier === "volumeBySentiment") {
             let finalReviews = [];
             finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(0, 5).map(review => (
@@ -41,10 +44,45 @@ class SentimentsToShow extends Component {
                         {review.description}
                     </Typography>
                 </div>
-
             ))
             return finalReviews
         }
+
+        else if (this.props.s.displayModifier === "time") {
+            let reviews = this.props.s.reviews
+            let dAlteredArray = reviews.map(review =>
+                ({ ...review, datePublished: new Date(review.datePublished) })
+            )
+            const sortedDate = dAlteredArray.sort(function (a, b) {
+                return b.datePublished - a.datePublished
+            })
+            let recentReviews = sortedDate.slice(0, 5)
+            recentReviews = recentReviews.map(review => (
+                <div>
+                    <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+                    <p>{review.description}</p>
+                </div>))
+            return (
+                <div style={{ marginTop: '100px' }}>
+                    <h2>Five Most Recent Reviews</h2>
+                    {recentReviews}
+                </div>
+            )
+        }
+        else if (this.props.s.displayModifier === "timebymonth") {
+            const reviews = this.props.s.currentTargetedReviews
+            let monthReviews = reviews.map(review => (
+                <div>
+                <h2>{review.datePublished.toString().substring(0,15)}</h2>
+                <p>{review.description}</p>
+                </div>))
+               return (
+                <div style={{marginTop:'100px'}}>
+                <h2>{reviews[0].datePublished.toString().substring(4,7)} Reviews</h2>
+                {monthReviews}
+                </div>
+                )
+            }
     }
     render() {
         return (

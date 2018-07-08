@@ -208,6 +208,7 @@ class SentimentOverTime extends Component {
         console.log(clickedPointIndex)
         const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
         // console.log("month", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        this.props.clickHandlerForSentimentTimeChart(month);
       }
     }
 

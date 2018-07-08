@@ -17,6 +17,7 @@ import TopNavPanel from "./TopNavPanel.js";
 import WatsonBars from './WatsonBar';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
+import ChartsToShow from "./ChartsToShow.js"
 
 const styles = {
   AppBar: { backgroundColor: Colors.AppBarColor },
@@ -34,7 +35,7 @@ const styles = {
   ChartOnLeftSide: { marginTop: 100 },
   ChartOnRightSide: {},
   ReviewNavButtonsOnLeftSide: { marginLeft: '35%', backgroundColor: 'blue' },
-  ReviewNavButtonsOnRightSide : {}
+  ReviewNavButtonsOnRightSide: {}
 }
 class Report extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class Report extends Component {
   swapDisplaySides = () => {
     if (this.state.dataFocus === 'review') {
       this.setState((prevState) => {
-        let newState = { ...prevState, dataFocus: 'chart'}
+        let newState = { ...prevState, dataFocus: 'chart' }
         return newState;
       })
     }
@@ -90,11 +91,14 @@ class Report extends Component {
       switch (displaying) {
         case 'sentiment':
           return <div><SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
-          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
+            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
         case 'keyword':
           return <div><KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
+          break;
+        case 'chart':
+          return <ChartsToShow s={this.state} />
           break;
       }
 
@@ -105,7 +109,10 @@ class Report extends Component {
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
         organizedConcepts={this.state.organizedConcepts}
         monthConcepts={this.state.monthConcepts}
-        s = {this.state}
+        changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+        clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
+        clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
+        s={this.state}
       />
       </div>
     }
@@ -119,23 +126,25 @@ class Report extends Component {
       switch (displaying) {
         case 'sentiment':
           return <div><SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
-          <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} /></div>
+            <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
         case 'keyword':
-          return<div> <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
+          return <div> <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
           <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
       }
 
     }
     else if (this.state.dataFocus === 'review') {
-
       return <div style={styles.ChartOnRightSide}><ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
         pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
         organizedConcepts={this.state.organizedConcepts}
         monthConcepts={this.state.monthConcepts}
-        s = {this.state}
+        changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+        clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
+        clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
+        s={this.state}
       />
       </div>
     }
@@ -162,6 +171,29 @@ class Report extends Component {
     }
   }
 
+
+  changeSentimentDisplayModifier = (displayModifier) => {
+    this.setState((prevState) => {
+      let newState = {
+        ...prevState,
+        displayModifier: displayModifier
+      }
+      return newState;
+    })
+  }
+
+  clickHandlerForSentimentTimeChart = (clickedMonth) => {
+    let month = clickedMonth.substring(0, 3)
+    let dAlteredArray = this.state.reviews.map(review =>
+      ({ ...review, datePublished: new Date(review.datePublished) })
+    )
+    let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
+    this.setState((prevState) => {
+      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'sentiment' }
+      return newState;
+    })
+  }
+
   clickHandlerForKeyWordBarChart = (clickedItem) => {
     console.log('clicked for key word bar chart', clickedItem);
     let finalReviews = [];
@@ -171,6 +203,21 @@ class Report extends Component {
     }
     this.setState((prevState) => {
       let newState = { ...prevState, currentTargetedReviews: finalReviews }
+      return newState;
+    })
+  }
+
+  clickHandlerForKeywordTimeChart = (clickedMonth) => {
+    console.log('clicked month on sentiment chart', clickedMonth)
+    let month = clickedMonth.substring(0, 3)
+    let dAlteredArray = this.state.reviews.map(review =>
+      ({ ...review, datePublished: new Date(review.datePublished) })
+    )
+    console.log(dAlteredArray)
+    let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
+    console.log(monthReviews)
+    this.setState((prevState) => {
+      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'keyword' }
       return newState;
     })
   }
@@ -219,7 +266,7 @@ class Report extends Component {
           let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', currentTargetedReviews: this.state.reviews, visibleReview: 1, }
           return newState;
         })
-        return
+        break;
       case 'keyword':
         newState.displaying = 'keyword';
         this.setState((prevState) => {
@@ -227,6 +274,12 @@ class Report extends Component {
           // this.toggleFade();
           return newState
         });
+        break;
+      case 'charts': //added chart state handle
+        this.setState((prevState) => {
+          let newState = { ...prevState, displaying: 'chart' }
+          return newState;
+        })
         this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
     }
   };
@@ -236,7 +289,7 @@ class Report extends Component {
     return (
       this.state.loading ? (<div> Loading </div>) : (
         <div style={styles.Top}>
-      {/* TOP BANNER BAR */}
+          {/* TOP BANNER BAR */}
           <AppBar position="static" style={styles.AppBar}>
             <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
           </AppBar>
