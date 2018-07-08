@@ -214,13 +214,32 @@ class SentimentOverTime extends Component {
     }
 
 
+    const chartyOptions = {
+        scales: {
+          xAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20
+        }
+      }
+    }
+
+
+
     return (
-      <div className="sentiment-over-time" style={{"height" : 375}}>
+      <div className="sentiment-over-time" style={{"height" : 450}}>
         <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}} width={10}
-  height={120}
+  height={10}
   options={{
     maintainAspectRatio: false
-  }}/>
+  }}
+  options={chartyOptions}/>
       </div>
     );
   }

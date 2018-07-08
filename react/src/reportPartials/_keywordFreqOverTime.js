@@ -192,13 +192,30 @@ console.log('labelsData', {labelsData})
       }
     }
 
+     const chartyOptions = {
+        scales: {
+          xAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20
+        }
+      }
+    }
+
 
         return (
-            <div className="kwFreqOverTimeChart" style={{"height" : 375}}>
+            <div className="kwFreqOverTimeChart" style={{"height" : 450}}>
               <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
-  height={150}
+  height={10}
   options={{
-    maintainAspectRatio: false}}/>
+    maintainAspectRatio: false}}
+    options={chartyOptions}/>
             </div>
         );
      }
