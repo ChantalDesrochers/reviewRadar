@@ -29,6 +29,7 @@ import ReviewStars from "./ReviewStars";
 // import CompletedData from './reportPartials/completedData.js'
 
 const styles = {
+  
   RightTopContainer: { height: '100%' },
   //  RightBottomContainer: { height: '34.5%', marginTop: 5 },
   RightTopPanel: { height: '100%', backgroundColor: Colors.RightTopColor },
