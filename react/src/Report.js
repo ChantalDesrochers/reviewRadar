@@ -80,8 +80,8 @@ class Report extends Component {
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
-        // this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
-        this.setState({ loading: false, reviews: results.reviewsL, currentTargetedReviews: results.reviewsL, organizedConcepts: results.organizedConceptsL, monthConcepts: results.monthConceptsL, companyName: results.name })
+        this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
+        // this.setState({ loading: false, reviews: results.reviewsL, currentTargetedReviews: results.reviewsL, organizedConcepts: results.organizedConceptsL, monthConcepts: results.monthConceptsL, companyName: results.name })
         // console.log('this state from live', this.state)
         console.log('fetched and fired')
         // console.log('all concepts after fetch', this.state.organizedConcepts)

@@ -55,7 +55,6 @@ function Landing(props) {
 
   return (
     <div>
-      <div >
         <AppBar
           position="static"
           classes={{
@@ -92,8 +91,6 @@ function Landing(props) {
             Already Registered
           </Button>
         </Link>
-      </div>
-      <div>
         <Typography variant="display1" style={{ textAlign: "center" }}>
           Understanding how your customers feel, while running daily operations
           can be difficult. <br />We help simplify the process.
@@ -116,7 +113,6 @@ function Landing(props) {
             text="Meaningfully displayed"
           />
         </Grid>
-      </div>
     </div>
   );
 }
