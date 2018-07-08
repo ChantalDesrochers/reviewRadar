@@ -6,17 +6,12 @@ import Button from '@material-ui/core/Button';
 
 class SwapButton extends Component {
 
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            rating:this.props.rating
-        };
-    }
+    
     render() {
+        console.log('ion swap button my props are:', this.props)
         return (
             <div>
-          <Button variant="fab" color="primary" className="swap-button">
+          <Button variant="fab" color="primary" className="swap-button" onClick={() => this.props.swapDisplaySides()}>
         <SwapHoriz />
       </Button>
           </div>

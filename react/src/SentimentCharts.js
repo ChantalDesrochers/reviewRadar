@@ -12,6 +12,7 @@ class SentimentCharts extends Component {
     }
   }
 
+
   handleChartChange = (chartName, displayModifier) => {
     const resetCharts = {
       showTimeChart: false,
@@ -21,10 +22,11 @@ class SentimentCharts extends Component {
     this.props.changeSentimentDisplayModifier(displayModifier)
   }
 
+
+
   render() {
     const { reviews } = this.props
     const { showTimeChart, showOverviewChart } = this.state
-    console.log('state in sentinent charts', this.state)
     const buttonStyle = {
       margin: 30,
       background: '#DBA2A7',
@@ -38,8 +40,8 @@ class SentimentCharts extends Component {
 
     return (
       <div>
-        { showTimeChart && <SentimentOverTime reviews={reviews} clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart}/> }
-        { showOverviewChart &&  <PieChart  reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
+        { showTimeChart && <SentimentOverTime clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} s={this.props.s} reviews={reviews} /> }
+        { showOverviewChart &&  <PieChart s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
         <Button
           variant="outlined"
           data-message="overtime"

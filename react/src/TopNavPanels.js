@@ -7,10 +7,10 @@ const styles ={
 }
 class TopNavPanels extends Component {
     render() {
-        return (
+        return (   
                 <Grid item sm={8}>
                     <Grid item sm={3} style={styles.TopNavPanel}>
-                        <TopNavPanel destination={"charts"} title={"All The Data"} topNavClickHandler={this.props.topNavClickHandler} />
+                        <TopNavPanel destination={"charts"} title={"Chart Land"} topNavClickHandler={this.props.topNavClickHandler} />
                     </Grid>
                     <Grid item sm={3} style={styles.TopNavPanel}>
                         <TopNavPanel destination={"keyword"} title={"What Customers Mentioned"} topNavClickHandler={this.props.topNavClickHandler} />
