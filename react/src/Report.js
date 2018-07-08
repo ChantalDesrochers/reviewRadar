@@ -289,15 +289,15 @@ class Report extends Component {
         <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
           <SwapButton />
         </div>
-        <Grid style={styles.RightContainer} item sm={4}>
+        {/* <Grid style={styles.RightContainer} item sm={4}>
           <Grid style={styles.RightTopContainer} item sm={12}>
             <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
-            {/* <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+            <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
               pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
               reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
               organizedConcepts={this.state.organizedConcepts}
               monthConcepts={this.state.monthConcepts}
-              s = {this.state}/> */}
+              s = {this.state}/>
               <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
                 pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
                 reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
@@ -306,11 +306,11 @@ class Report extends Component {
                 monthConcepts={this.state.monthConcepts}
                 s={this.state}/>
             </Paper>
-            {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}
+            <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} />
             <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
             <WatsonBars style={styles.WatsonBars}  s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
-            </Grid>
           </Grid>
+          </Grid> */}
           {/* SWAP BUTTON */}
           <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
             <SwapButton swapDisplaySides={this.swapDisplaySides} />
