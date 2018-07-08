@@ -95,7 +95,6 @@ class PieChart extends Component {
   options={{
     maintainAspectRatio: false,
   }}
-  fontSize={200}
   options={chartOptions} />
       </div>
     );

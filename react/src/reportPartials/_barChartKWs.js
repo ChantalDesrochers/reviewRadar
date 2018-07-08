@@ -21,9 +21,9 @@ class KeywordBarChart extends Component {
         }],
         options: {
           scales: {
-            xAxes: [{
+            yAxes: [{
               ticks: {
-                min: 0
+                fontSize: 30
               }
             }]
           }
@@ -68,13 +68,36 @@ class KeywordBarChart extends Component {
         console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
       }
     }
+
+  const chartyOptions = {
+        scales: {
+          yAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20
+        }
+      },
+      barThickness: 15
+    }
+
+
+
     return (
-      <div className="bar-chart" style={{"height" : 375}}>
+      <div className="bar-chart" style={{"height" : 450}}>
 
         <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
-  height={150}
+  height={10}
+
   options={{
-    maintainAspectRatio: false}}/>
+    maintainAspectRatio: false}}
+    options={chartyOptions}
+   />
       </div>
     );
   }
