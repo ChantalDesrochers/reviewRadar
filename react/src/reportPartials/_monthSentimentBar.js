@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {Bar} from 'react-chartjs-2';
 
-
 class SentimentBarChartMonth extends Component {
   constructor(props) {
     super(props);

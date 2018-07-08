@@ -24,7 +24,6 @@ class SentimentCharts extends Component {
   render() {
     const { reviews } = this.props
     const { showTimeChart, showOverviewChart } = this.state
-    console.log('state in sentinent charts', this.state)
     const buttonStyle = {
       margin: 30,
       background: '#DBA2A7',
@@ -35,11 +34,11 @@ class SentimentCharts extends Component {
       background: '#DBA2A7',
       color: 'white'
     }
-
+//console.log('sentiment charts state.dataFocus', this.props.s.dataFocus);
     return (
       <div>
-        { showTimeChart && <SentimentOverTime reviews={reviews} clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart}/> }
-        { showOverviewChart &&  <PieChart  reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
+        { showTimeChart && <SentimentOverTime dataFocus={this.props.dataFocus} s={this.props.s} reviews={reviews} clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart}/> }
+        { showOverviewChart &&  <PieChart dataFocus={this.props.dataFocus} s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
         <Button
           variant="outlined"
           data-message="overtime"

@@ -23,7 +23,6 @@ class WatsonBar extends Component {
 
   render() {
     const finalRating = this.parseSentimentData(this.props.watsonRating);
-    console.log('final rating', finalRating);
     return (
       <Paper>{Array(parseInt(finalRating)).fill(<Favorite />)}</Paper>
       

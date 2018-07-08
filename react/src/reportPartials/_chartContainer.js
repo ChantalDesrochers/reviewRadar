@@ -8,10 +8,10 @@ import SentimentCharts from '../SentimentCharts';
 
 
 
-const ChartContainer = ({reviews, displaying, pickReviewTypeToDisplay, reviewTypeToDisplayKW, changeSentimentDisplayModifier, clickHandlerForSentimentTimeChart, organizedConcepts, monthConcepts}) => (
+const ChartContainer = ({s, dataFocus, reviews, displaying, pickReviewTypeToDisplay, reviewTypeToDisplayKW, changeSentimentDisplayModifier, clickHandlerForSentimentTimeChart, organizedConcepts, monthConcepts}) => (
   <div>
     { displaying === "sentiment" ? (
-      <SentimentCharts pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews} changeSentimentDisplayModifier={changeSentimentDisplayModifier} clickHandlerForSentimentTimeChart={clickHandlerForSentimentTimeChart}/> ) : (<KeywordCharts reviews={reviews} organizedConcepts={organizedConcepts} monthConcepts={monthConcepts} reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
+      <SentimentCharts s={s} dataFocus={dataFocus} pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews} changeSentimentDisplayModifier={changeSentimentDisplayModifier} clickHandlerForSentimentTimeChart={clickHandlerForSentimentTimeChart}/> ) : (<KeywordCharts s={s} reviews={reviews} organizedConcepts={organizedConcepts} monthConcepts={monthConcepts} reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
 
   </div>
 )

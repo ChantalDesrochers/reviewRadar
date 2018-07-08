@@ -93,9 +93,10 @@ updateColour = (color) => {
     return (
       <div className="bar-chart" style={{"height" : 450}}>
 
-        <HorizontalBar data={this.getChartData(this.props.organizedConcepts)} getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
-  height={10}
-  height={10}
+        <HorizontalBar data={this.getChartData(this.props.organizedConcepts)} getElementsAtEvent={(elem) => { handleClick(elem) }}    
+        width={10}
+        height={10}
+  
 
   options={{
     maintainAspectRatio: false}}
