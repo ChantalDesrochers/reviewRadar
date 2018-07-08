@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-
 import KeywordBarChart from './reportPartials/_barChartKWs'
 import KeywordsOverTime from './reportPartials/_keywordFreqOverTime'
 import Button from '@material-ui/core/Button';
@@ -25,12 +24,8 @@ class KeywordCharts extends Component {
 
 
   render() {
-
-
-//toggle feature
-//add icons to buttons?
-
     const { reviews } = this.props
+
     const { showOverviewChart, showTimeChart } = this.state
     const buttonStyle = {
       margin: 30,
@@ -42,10 +37,12 @@ class KeywordCharts extends Component {
       background: '#E8D28B',
       color: 'black'
     }
+    {console.log('in keyword chart, being passed all concepts', this.props.organizedConcepts)}
+    // {console.log('in keyword chart, being passed reviewtypetodisplay', this.props.reviewTypeToDisplayKW)}
     return (
       <div>
-        { showTimeChart && <KeywordsOverTime reviews={reviews}/> }
-        { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} reviews={reviews} />}
+        { showTimeChart && <KeywordsOverTime organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> }
+        { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />}
         <Button
           variant="contained"
           data-message="overtime"

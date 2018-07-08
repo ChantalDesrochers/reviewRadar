@@ -1,7 +1,6 @@
 var request = require("request");
 let reviewsCount = 0;
 
-encodedArray = [];
 let reviews = []
 
 // takes in an argument and checks it for a match against an element of the array
@@ -18,7 +17,7 @@ parseMC = (reviewslength, sendstuffcb) => review => (error, response, body) => {
   let results = JSON.parse(body);
   if (results.status.msg === "OK") {
     results.concept_list.forEach(function (item) {
-      if (item.relevance > 0) {
+      if (item.relevance > 40) {
         // threshold of relevance
         existingIndex = review.concepts.findIndex(checkForExisting(item.form));
         if (existingIndex < 0) {
@@ -34,11 +33,11 @@ parseMC = (reviewslength, sendstuffcb) => review => (error, response, body) => {
     reviewslength -= 1
   }
   reviewsCount++;
-  console.log('meaning cloud remaining', reviewslength - reviewsCount)
+  console.log('MeaningCloud remaining', reviewslength - reviewsCount)
 
   // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {
-    console.log("now we are done");
+    console.log("MeaningCloud analysis complete");
     // console.log(reviews);
     // returnReviews(reviews); // this is where it should go to watson
     reviewsCount = 0; // resetting state before next time it's run
@@ -80,7 +79,6 @@ const conceptAggreator = array => {
   let allConcepts = [];
   array.forEach(function (review) {
     review.concepts.forEach(function (concept) {
-      // console.log(allConcepts.findIndex(checkForExisting(concept.content)));
       existingIndex = allConcepts.findIndex(checkForExisting(concept.content));
       if (existingIndex < 0) {
         allConcepts.push({
@@ -93,8 +91,6 @@ const conceptAggreator = array => {
     });
   });
 };
-
-// conceptAggreator(noDupeJSON2);
 
 module.exports = {
   iterateWithDelay: iterateWithDelay,

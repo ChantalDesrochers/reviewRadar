@@ -13,6 +13,7 @@ var controller = require('./public/javascripts/controller.js');
 var app = express();
 
 var Ratings = require("./ratings.js")
+var parse = require("./parsingFunctions.js")
 
 
 // view engine setup
@@ -29,47 +30,61 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
 var reportData = []
 
+var sentData = {
+  //live
+  name: 'Planta (from express)',
+  reviewsL: reportData, //
+  organizedConceptsL: parse.conceptAggregator(reportData),
+  monthConceptsL: parse.datedAggregator(parse.parseReviewsByDate(reportData)),
+  //hardcoded
+  reviews: Ratings,
+  organizedConcepts: parse.conceptAggregator(Ratings),
+  monthConcepts: parse.datedAggregator(parse.parseReviewsByDate(Ratings))
+}
+
+
 app.get('/1', (req, res) => {
-  res.send(JSON.stringify(Ratings))
+  res.send(JSON.stringify(sentData))
 })
 
 app.post('/1', (req, res) => {
   // console.log('full request', req)
   console.log('req body', req.body)
+  sentData.name = req.body.name
   const sendStuff = (data) =>{
-    // console.log('in sendStuff');
-    // console.log(data)
+    console.log('data added to object', JSON.stringify(data))
     data.forEach(function(review, i) {
       // review.id = i
       reportData.push(review)
     })
+    // allConcepts = conceptAggregator(data)
     res.send('success')
   }
 
   if (req.body.url1 != '') {
+    console.log('url1 triggered')
     controller.getData(req.body.url1, sendStuff)
   }
 
-  // if (req.body.url2 != '') {
-  // var data2 = sentiment.getData(req.body.url2, sendStuff)
-  // }
+  if (req.body.url2 != '') {
+    console.log('url2 triggered')
+    controller.getData(req.body.url2, sendStuff)
+  }
 
   // if (req.body.url3 != '') {
-  // var data3 = sentiment.getData(req.body.url3, sendStuff)
+  //   console.log('url3 triggered')    
+  //   var data3 = sentiment.getData(req.body.url3, sendStuff)
   // }
-
   // res.send('success')
 })
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-// sentiment.getData()
 
 // error handler
 app.use(function(err, req, res, next) {

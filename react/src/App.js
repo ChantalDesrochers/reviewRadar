@@ -3,7 +3,7 @@ import './App.css';
 import Report from './Report.js'
 import RequestForm from './RequestForm.js'
 import Test from './testPage'
-import Landing from './landing.js'
+import Landing from './Landing.js'
 import Registration from  "./Registration"
 import { Router, Link } from "@reach/router"
 

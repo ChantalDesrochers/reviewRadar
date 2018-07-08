@@ -1,62 +1,51 @@
 import React, { Component } from "react";
-import { HorizontalBar } from 'react-chartjs-2';
-import OrganizedConcepts from "./organizedConcepts";
+import { HorizontalBar } from "react-chartjs-2";
 
 class KeywordBarChart extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      reviews: this.props.reviews,
-      testData: OrganizedConcepts,
-      data: {
-        labels: [],
-        datasets: [{
+  }
+
+  getChartData = returnConcepts => {
+    var topSeven = returnConcepts.slice(0, 6);
+    var label = [];
+    var data = [];
+    topSeven.forEach(function(concept) {
+      data.push(concept.references.length);
+      label.push(concept.content);
+    });
+    return {
+      labels: label,
+      datasets: [
+        {
           label: 'Keyword Frequency',
           backgroundColor: ['#6EEFC2', '#6EEFC2', 'blue', 'red', 'green', 'yellow'],
           borderColor: '#5FD8AE',
           borderWidth: 5,
           hoverBackgroundColor: '#60F2BF',
           hoverBorderColor: '#1FDA9A',
-          data: []
-        }],
-        options: {
-          scales: {
-            yAxes: [{
+          data: data
+        }
+      ],
+      options: {
+        scales: {
+          xAxes: [
+            {
               ticks: {
                 fontSize: 30
               }
-            }]
-          }
+            }
+          ]
         }
       }
     }
   }
 
-  componentDidMount() {
-    var getChartData = () => {
-      var sortedArray = this.state.testData.sort(function (a, b) {
-        return b.references.length - a.references.length
-      });
-      var topSeven = sortedArray.slice(0, 6)
-      var label = []
-      var data = []
-      topSeven.forEach(function (concept) {
-        data.push(concept.references.length)
-        label.push(concept.content)
-      });
-      const kwBarState = { ...this.state }
-      kwBarState.data.labels = label
-      kwBarState.data.datasets[0].data = data
-      this.setState({ kwBarState })
-      console.log('kwBarState', kwBarState)
-      // this.setState({ ...this.state.data.labels = label, ...this.state.data.datasets[0].data = data})
-    }
-    getChartData()
-  }
 
 updateColour = (color) => {
   color = 'red'
 }
+
 
   render() {
 
@@ -103,9 +92,9 @@ updateColour = (color) => {
     return (
       <div className="bar-chart" style={{"height" : 450}}>
 
-        <HorizontalBar data={this.state.data} getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
+        <HorizontalBar data={this.getChartData(this.props.organizedConcepts)} getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
   height={10}
-
+  height={10}
   options={{
     maintainAspectRatio: false}}
     options={chartyOptions}
@@ -117,4 +106,3 @@ updateColour = (color) => {
 }
 
 export default KeywordBarChart;
-

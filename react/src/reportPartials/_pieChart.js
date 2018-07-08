@@ -104,5 +104,3 @@ class PieChart extends Component {
 
 
 export default PieChart;
-
-

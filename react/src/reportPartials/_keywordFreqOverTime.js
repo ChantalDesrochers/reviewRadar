@@ -1,22 +1,58 @@
 import React, { Component } from "react";
-import { Line } from 'react-chartjs-2';
-import ReturnConcepts from "./organizedConcepts.js";
-import InputReviews from './completedData.js'
-import MonthConceptFrequency from './monthReturnConcepts.js'
-
+import { Line } from "react-chartjs-2";
+// import ReturnConcepts from "./organizedConcepts.js";
+// import InputReviews from "./completedData.js";
+// import MonthConceptFrequency from "./monthReturnConcepts.js";
 
 class KeywordsOverTime extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: this.props.reviews,
-      concepts: ReturnConcepts,
-      conceptsTime: MonthConceptFrequency,
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [
+    }
+  }
+
+  kwPerMonth = (organizedConcepts, monthConcepts) => {
+    var topFive = organizedConcepts.slice(0, 5);
+    const labels = topFive.map(x => x.content);
+    let aoa = [];
+    let indexer = 0;
+    labels.forEach(function(label) {
+      // for each label
+      let pushData = [];
+      pushData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // creates an array for year
+      for (var month in monthConcepts) {
+        // for each month in the year object
+        monthConcepts[month].forEach(function(concept) {
+          //for each concept in the month
+          if (label == concept.content) {
+            pushData[indexer] = concept.references.length;
+          }
+        });
+        if (indexer < 12) {
+          indexer += 1;
+        }
+      }
+      aoa.push(pushData);
+      indexer = 0;
+    });
+    return {
+      labels: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      datasets: [
         {
-          label: '',
+          label: labels[0],
           fill: false,
           lineTension: 0.1,
           backgroundColor: '#78C2E2', //label
@@ -34,9 +70,10 @@ class KeywordsOverTime extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: []        },
+          data: aoa[0]
+        },
         {
-          label: '',
+          label: labels[1],
           fill: false,
           lineTension: 0.1,
           backgroundColor: '#6AD8B2',
@@ -54,10 +91,10 @@ class KeywordsOverTime extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: []
+          data: aoa[1]
         },
-         {
-          label: '',
+        {
+          label: labels[2],
           fill: false,
           lineTension: 0.1,
           backgroundColor: '#E8C34A',
@@ -75,10 +112,10 @@ class KeywordsOverTime extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: []
+          data: aoa[2]
         },
         {
-          label: '',
+          label: labels[3],
           fill: false,
           lineTension: 0.1,
           backgroundColor: '#DB5964',
@@ -96,9 +133,10 @@ class KeywordsOverTime extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: []
+          data: aoa[3]
         },
-        { label: '',
+        {
+          label: labels[4],
           fill: false,
           lineTension: 0.1,
           backgroundColor: '#F7F0DE',
@@ -116,80 +154,26 @@ class KeywordsOverTime extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: []
+          data: aoa[4]
         }
-        ]
-      }
-    }
-  }
-
-
-  componentDidMount() {
-    var sortedArray = this.state.concepts.sort(function(a, b) {
-    return b.references.length - a.references.length
-  });
-      var topFive = sortedArray.slice(0,5)
-      console.log(topFive)
-  const labels = topFive.map(x => x.content);
-const keywordsPerMonth = {}
-var kwOverTime = this.state.conceptsTime;
-console.log(kwOverTime)
-let aoa = []
-let indexer = 0
-const kwPerMonth = () => {
-  labels.forEach(function(label) { // for each label
-    let pushData = []
-    pushData = [0,0,0,0,0,0,0,0,0,0,0,0] // creates an array for year
-    for (var month in kwOverTime) {  // for each month in the year object
-      kwOverTime[month].forEach(function(concept) { //for each concept in the month
-        if (label == concept.content) {
-          pushData[indexer] = concept.references.length
-        }
-    })
-    if (indexer < 12) {
-      indexer += 1
-    }
-  }
-  aoa.push(pushData)
-  indexer = 0
-  })
-}
-
-kwPerMonth()
-
-const labelsData = {...this.state.data};
-labelsData.datasets[0].label = labels[0];
-labelsData.datasets[1].label = labels[1];
-labelsData.datasets[2].label = labels[2];
-labelsData.datasets[3].label = labels[3];
-labelsData.datasets[4].label = labels[4];
-labelsData.datasets[0].data = aoa[0];
-labelsData.datasets[1].data = aoa[1];
-labelsData.datasets[2].data = aoa[2];
-labelsData.datasets[3].data = aoa[3];
-labelsData.datasets[4].data = aoa[4];
-this.setState({labelsData});
-console.log('labelsData', {labelsData})
-
-// this.setState({ ...this.state.data.datasets[0].label = labels[0], ...this.state.data.datasets[1].label = labels[1], ...this.state.data.datasets[2].label = labels[2], ...this.state.data.datasets[3].label = labels[3], ...this.state.data.datasets[4].label = labels[4], ...this.state.data.datasets[0].data = aoa[0], ...this.state.data.datasets[1].data = aoa[1], ...this.state.data.datasets[2].data = aoa[2], ...this.state.data.datasets[3].data = aoa[3], ...this.state.data.datasets[4].data = aoa[4]})
-      }
+      ]
+    };
+  };
+  // this.setState({ ...this.state.data.datasets[0].label = labels[0], ...this.state.data.datasets[1].label = labels[1], ...this.state.data.datasets[2].label = labels[2], ...this.state.data.datasets[3].label = labels[3], ...this.state.data.datasets[4].label = labels[4], ...this.state.data.datasets[0].data = aoa[0], ...this.state.data.datasets[1].data = aoa[1], ...this.state.data.datasets[2].data = aoa[2], ...this.state.data.datasets[3].data = aoa[3], ...this.state.data.datasets[4].data = aoa[4]})
 
   render() {
-
     const handleClick = elem => {
       if (elem[0]) {
         console.log(elem)
         let chartPoints = elem;
-
-        let clickedPointIndex = chartPoints[0]['_index']
-        let secondPointIndex = chartPoints[1]['_index']
-        console.log(secondPointIndex)
-        console.log(clickedPointIndex)
-        const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-        // const concept = chartPoints[0]['_chart']['config']['data']['datasets'][clickedPointIndex]
-        // console.log(chartPoints[0]['_chart']['config']['data']['datasets'][clickedPointIndex]['label'])
-        // console.log("chartPoints - month", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+        let clickedPointIndex = chartPoints[0]["_index"];
+        const label =
+          chartPoints[0]["_chart"]["config"]["data"]["labels"][
+            clickedPointIndex
+          ];
+        // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
+
     }
 
      const chartyOptions = {
@@ -211,7 +195,7 @@ console.log('labelsData', {labelsData})
 
         return (
             <div className="kwFreqOverTimeChart" style={{"height" : 450}}>
-              <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
+              <Line data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
   height={10}
   options={{
     maintainAspectRatio: false}}
@@ -221,4 +205,5 @@ console.log('labelsData', {labelsData})
      }
   }
 
- export default KeywordsOverTime;
+
+export default KeywordsOverTime;

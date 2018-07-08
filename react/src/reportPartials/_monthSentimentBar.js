@@ -7,6 +7,7 @@ class SentimentBarChartMonth extends Component {
     super(props);
   }
 
+
   parseSentimentDatabyMonth = (reviews) => {
       var january = {
         positive: 0,

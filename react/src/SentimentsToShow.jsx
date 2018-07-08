@@ -31,7 +31,7 @@ class SentimentsToShow extends Component {
         else if (this.props.s.displayModifier === "volumeBySentiment") {
 
             let finalReviews = [];
-            finalReviews = this.props.s.completedData.filter(review => review.label === this.props.s.displaySentimentType).map(review => (
+            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).map(review => (
                 <div style={{height:'500px'}}>
                 <p> {review.description} </p>
                 </div>
