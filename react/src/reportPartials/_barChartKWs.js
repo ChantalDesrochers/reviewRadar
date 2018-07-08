@@ -7,6 +7,7 @@ class KeywordBarChart extends Component {
   }
 
   getChartData = returnConcepts => {
+    var colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
     var topSeven = returnConcepts.slice(0, 6);
     var label = [];
     var data = [];
@@ -16,42 +17,34 @@ class KeywordBarChart extends Component {
     });
     return {
       labels: label,
-      datasets: [
-        {
-          label: 'Keyword Frequency',
-          backgroundColor: ['#6EEFC2', '#6EEFC2', 'blue', 'red', 'green', 'yellow'],
-          borderColor: '#5FD8AE',
-          borderWidth: 5,
-          hoverBackgroundColor: '#60F2BF',
-          hoverBorderColor: '#1FDA9A',
-          data: data
-        }
-      ],
+      datasets: [{
+        label: 'Keyword Frequency',
+        backgroundColor: colors,
+        borderColor: '#5FD8AE',
+        borderWidth: 5,
+        hoverBackgroundColor: colors,
+        hoverBorderColor: '#1FDA9A',
+        data: data
+      }],
       options: {
         scales: {
-          xAxes: [
-            {
-              ticks: {
-                fontSize: 30
-              }
+          xAxes: [{
+            ticks: {
+              fontSize: 30
             }
-          ]
+          }]
+
         }
       }
     }
   }
 
 
-updateColour = (color) => {
-  color = 'red'
-}
-
-
   render() {
 
     const handleClick = elem => {
-      if (elem[0]) {
 
+      if (elem[0]) {
         console.log('elem', elem)
         console.log('color', elem[0]['_model']['backgroundColor'])
         let chartPoints = elem;
@@ -59,7 +52,7 @@ updateColour = (color) => {
         console.log('dataset index', chartPoints[0]._datasetIndex)
         // var colourProp = elem[0]['_chart']['config']['data']['datasets'][0]['backgroundColor'][clickedPointIndex]
         var colourProptest = elem[0]['_chart']['config']['data']['datasets'][0]['backgroundColor']
-        this.updateColour(colourProptest)
+
         console.log('colorbefore', colourProptest)
         // colourProptest = 'red'
         console.log('colorafter', colourProptest)
@@ -85,8 +78,36 @@ updateColour = (color) => {
           fontSize: 20
         }
       },
-      barThickness: 15
-    }
+      barThickness: 15,
+      getElementAtEvent: function(evt, elements) {
+          var datasetIndex;
+          var dataset;
+          var colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
+
+          if (elements.length) {
+            var index = elements[0]._index;
+            datasetIndex = elements[0]._datasetIndex;
+            alert('this click is working?')
+            // Reset old state
+            dataset = this.data.datasets[datasetIndex];
+            dataset.backgroundColor = colors.slice();
+            dataset.hoverBackgroundColor = colors.slice();
+
+            dataset.backgroundColor[index] = 'red'; // click color
+            dataset.hoverBackgroundColor[index] = 'red';
+          } else {
+            // remove hover styles
+            for (datasetIndex = 0; datasetIndex < this.data.datasets.length; ++datasetIndex) {
+              dataset = this.data.datasets[datasetIndex];
+              dataset.backgroundColor = colors.slice();
+              dataset.hoverBackgroundColor = colors.slice();
+            }
+          }
+
+          this.update();
+        }
+      }
+
 
 
 
@@ -95,13 +116,11 @@ updateColour = (color) => {
 
         <HorizontalBar data={this.getChartData(this.props.organizedConcepts)} getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
   height={10}
-  height={10}
-
   options={{
     maintainAspectRatio: false}}
     options={chartyOptions}
     ref="myChart"
-    redraw/>
+    />
       </div>
     );
   }

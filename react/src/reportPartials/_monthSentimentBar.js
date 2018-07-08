@@ -142,16 +142,16 @@ class SentimentBarChartMonth extends Component {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
               label: 'Positive',
-              backgroundColor: 'blue',
-              borderColor: 'rgba(255,99,132,1)',
+              backgroundColor: '#1FDA9A',
+              borderColor: '#1FDA9A',
               borderWidth: 1,
               hoverBackgroundColor: 'rgba(255,99,132,0.4)',
               hoverBorderColor: 'rgba(255,99,132,1)',
               data: positive
             }, {
               label: 'Negative',
-              backgroundColor: 'rgba(255,99,132,0.2)',
-              borderColor: 'rgba(255,99,132,1)',
+              backgroundColor: '#DB3340',
+              borderColor: '#DB3340',
               borderWidth: 1,
               hoverBackgroundColor: 'rgba(255,99,132,0.4)',
               hoverBorderColor: 'rgba(255,99,132,1)',

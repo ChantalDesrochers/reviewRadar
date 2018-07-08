@@ -5,6 +5,7 @@ import KeywordPolar from './reportPartials/_keywordPolar'
 import PieChart from './reportPartials/_pieChart'
 import NumberOfReviewsOverTime from './reportPartials/_numberOfReviews'
 import SentimentBarChartMonth from './reportPartials/_monthSentimentBar'
+import PieSentimentYelp from './reportPartials/_sentimentYelp'
 
 class ChartsToShow extends Component {
     render() {
@@ -16,6 +17,7 @@ class ChartsToShow extends Component {
              <KeywordPolar style={{margin:'100px'}} />
              <NumberOfReviewsOverTime reviews={this.props.s.reviews} />
              <PieChart reviews={this.props.s.reviews} style={{margin:'50px'}}/>
+             <PieSentimentYelp reviews={this.props.s.reviews} style={{margin:'50px'}}/>
             </div>
         )
     }
