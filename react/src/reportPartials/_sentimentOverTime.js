@@ -205,8 +205,10 @@ class SentimentOverTime extends Component {
         let clickedPointIndex = chartPoints[0]['_index']
         // let clickedPointIndexPositive = chartPoints[0]['_index'][['_yScale']['ticks']
         // let clickedPointIndexNeg = chartPoints[q]['_index']
+
         console.log(clickedPointIndex)
         const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
+
         // console.log("month", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
     }

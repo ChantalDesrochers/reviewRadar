@@ -8,6 +8,7 @@ const styles = {
     reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
 }
 class SentimentsToShow extends Component {
+    //should we remove forced updates?
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
@@ -28,16 +29,38 @@ class SentimentsToShow extends Component {
             return <SingleReview s={this.props.s} />
         }
         else if (this.props.s.displayModifier === "volumeBySentiment") {
-    
+
             let finalReviews = [];
             finalReviews = this.props.s.completedData.filter(review => review.label === this.props.s.displaySentimentType).map(review => (
                 <div style={{height:'500px'}}>
                 <p> {review.description} </p>
                 </div>
-              ))        
+              ))
             return  finalReviews
-        }
+
+        } else if (this.props.s.displayModifier === "time") {
+            let reviews = this.props.s.reviews
+            let dAlteredArray = reviews.map(review =>
+            ({...review, datePublished: new Date(review.datePublished)})
+           )
+           const sortedDate = dAlteredArray.sort(function (a, b) {
+           return b.datePublished - a.datePublished
+      })
+           console.log("sorted", sortedDate)
+           let recentReviews = sortedDate.slice(0,5)
+           recentReviews = recentReviews.map(review => (
+            <div>
+            <h2>{review.datePublished.toString().substring(0,14)}</h2>
+            <p>{review.description}</p>
+            </div>))
+           return (
+            <div style={{marginTop:'100px'}}>
+            <h2>Top Five Reviews</h2>
+            {recentReviews}
+            </div>
+            )
     }
+}
     render() {
         return (
             <div style={{ padding: 0, marginTop:'50px'}}>

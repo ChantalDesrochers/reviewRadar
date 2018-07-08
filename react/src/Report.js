@@ -150,6 +150,16 @@ class Report extends Component {
       })
     }
   }
+
+  changeSentimentDisplayModifier = (displayModifier) => {
+    this.setState((prevState) => {
+      let newState = {...prevState,
+        displayModifier: displayModifier
+      }
+      return newState;
+    })
+  }
+
   //not in use but needed for future reference
   toggleFade = () => {
     const newState = { ...this.state }
@@ -217,7 +227,7 @@ topNavClickHandler = (clickedItem) => {
               <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
                 <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
                   pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
-                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} />
+                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} changeSentimentDisplayModifier={this.changeSentimentDisplayModifier} />
               </Paper>
               <div>
               <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
