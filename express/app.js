@@ -45,7 +45,6 @@ var sentData = {
   monthConcepts: parse.datedAggregator(parse.parseReviewsByDate(Ratings))
 }
 
-
 app.get('/1', (req, res) => {
   res.send(JSON.stringify(sentData))
 })
@@ -60,25 +59,28 @@ app.post('/1', (req, res) => {
       // review.id = i
       reportData.push(review)
     })
-    // allConcepts = conceptAggregator(data)
-    res.send('success')
+    // runs parse again after receiving the data
+    sentData.organizedConceptsL = parse.conceptAggregator(reportData)
+    sentData.monthConceptsL = parse.datedAggregator(parse.parseReviewsByDate(reportData))
+    // <--- this is when mailer should fire
+    // res.send('success')
   }
 
-  if (req.body.url1 != '') {
-    console.log('url1 triggered')
-    controller.getData(req.body.url1, sendStuff)
-  }
-
+  
   if (req.body.url2 != '') {
     console.log('url2 triggered')
-    controller.getData(req.body.url2, sendStuff)
+    controller.getData([req.body.url1, req.body.url2], sendStuff)
+  }
+  else if (req.body.url1 != '') {
+    console.log('url1 triggered')
+    controller.getData(req.body.url1, sendStuff)
   }
 
   // if (req.body.url3 != '') {
   //   console.log('url3 triggered')    
   //   var data3 = sentiment.getData(req.body.url3, sendStuff)
   // }
-  // res.send('success')
+  res.send('success')
 })
 
 // catch 404 and forward to error handler

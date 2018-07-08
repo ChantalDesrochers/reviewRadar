@@ -130,7 +130,7 @@ class Request extends Component {
         />
         <br /> <br />
         <label className="form-text" htmlFor="yelp-url">
-          Enter your yelp page
+          Enter your Yelp page
         </label>
         <input
           id="yelp-url"
@@ -139,10 +139,10 @@ class Request extends Component {
           onChange={e => this.setState({ url1: e.target.value })}
         />
         <br /> <br />
-        {/* <label className="form-text" htmlFor="second-url">Enter your second url</label>
+        <label className="form-text" htmlFor="second-url">Enter your TripAdvisor page</label>
         <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url2: e.target.value})}/>
         <br/> <br/>
-        <label className="form-text" htmlFor="third-url">Enter your third url</label>
+        {/* <label className="form-text" htmlFor="third-url">Enter your third url</label>
         <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url3: e.target.value})}/>
         <br/> <br/> */}
         <button>Get Your Report!</button>

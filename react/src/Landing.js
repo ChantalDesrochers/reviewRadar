@@ -55,64 +55,69 @@ function Landing(props) {
 
   return (
     <div>
-      <AppBar
-        position="static"
-        classes={{
-          root: classes.header
-        }}
-      >
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            [Logo] ReviewRadar
-          </Typography>
-          {/* <Button color="inherit">Login</Button>
+      <div >
+        <AppBar
+          position="static"
+          classes={{
+            root: classes.header
+          }}
+        >
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              [Logo] ReviewRadar
+            </Typography>
+            {/* <Button color="inherit">Login</Button>
           <Button color="inherit">Register</Button> */}
-        </Toolbar>
-      </AppBar>
+          </Toolbar>
+        </AppBar>
 
-      <Typography variant="display3">Welcome to ReviewRadar</Typography>
-      <Link to="request" style={{ textDecoration: "none" }}>
-        <Button
-          classes={{
-            root: classes.register, // class name, e.g. `classes-nesting-root-x`
-            label: classes.label // class name, e.g. `classes-nesting-label-x`
-          }}
-        >
-          Get your request
-        </Button>
-      </Link>
-      <Link to="report" style={{ textDecoration: "none" }}>
-        <Button
-          classes={{
-            root: classes.login, // class name, e.g. `classes-nesting-root-x`
-            label: classes.label // class name, e.g. `classes-nesting-label-x`
-          }}
-        >
-          Already Registered
-        </Button>
-      </Link>
-      <Typography variant="display1" style={{ textAlign: "center" }}>
-        Understanding how your customers feel, while running daily operations can be
-        difficult. <br />We help simplify the process.
-      </Typography>
+        <Typography variant="display3">Welcome to ReviewRadar</Typography>
+        <Link to="request" style={{ textDecoration: "none" }}>
+          <Button
+            classes={{
+              root: classes.register, // class name, e.g. `classes-nesting-root-x`
+              label: classes.label // class name, e.g. `classes-nesting-label-x`
+            }}
+          >
+            Get your request
+          </Button>
+        </Link>
+        <Link to="report" style={{ textDecoration: "none" }}>
+          <Button
+            classes={{
+              root: classes.login, // class name, e.g. `classes-nesting-root-x`
+              label: classes.label // class name, e.g. `classes-nesting-label-x`
+            }}
+          >
+            Already Registered
+          </Button>
+        </Link>
+      </div>
+      <div>
+        <Typography variant="display1" style={{ textAlign: "center" }}>
+          Understanding how your customers feel, while running daily operations
+          can be difficult. <br />We help simplify the process.
+        </Typography>
 
-      <Grid container spacing={40} justify="center">
-        <LandingContainer
-          header="header"
-          img="http://via.placeholder.com/250x300"
-          text="This is container1"while
-        />
-        <LandingContainer
-          header="header"
-          img="http://via.placeholder.com/250x300"
-          text="This is container2"
-        />
-        <LandingContainer
-          header="header"
-          img="http://via.placeholder.com/250x300"
-          text="This is container3"
-        />
-      </Grid>
+        <Grid container spacing={40} justify="center">
+          <LandingContainer
+            header="header"
+            img="http://via.placeholder.com/250x300"
+            text="This is container1"
+            while
+          />
+          <LandingContainer
+            header="header"
+            img="http://via.placeholder.com/250x300"
+            text="This is container2"
+          />
+          <LandingContainer
+            header="header"
+            img="http://via.placeholder.com/250x300"
+            text="This is container3"
+          />
+        </Grid>
+      </div>
     </div>
   );
 }
