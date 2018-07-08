@@ -38,23 +38,20 @@ const styles = {
   TopNavPanel: { float: 'left', padding: 20 },
   TopNavPanelContainer: { backgroundColor: "blue" },
   WatsonBars: { bottom: 50 },
-  ReviewStars: { bottom:100 }
+  ReviewStars: { bottom: 100 }
 }
 class Report extends Component {
   constructor(props) {
 
     super(props);
     this.state = {
-      companyName:'Planta',
-      // hardcoded data----------
-      // organizedConcepts: OrganizedConcepts, 
-      // reviews: Ratings,
-      // completedData: CompletedData,
-      // currentTargetedReviews: CompletedData,
-      // -------------------------
+      dataFocus: 'review',
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
+
+      companyName: 'Planta',
+
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
       visibleReview: 1,
@@ -65,33 +62,59 @@ class Report extends Component {
       reviews: [], // all reviews
       organizedConcepts: [], // reviews parsed into concepts
       monthConcepts: [], // reviews parsed into monthly concept data
+
+
     };
   }
 
   componentDidMount() {
-    //console.log('fired from report')
     fetch('http://localhost:3001/1')
       .then(results => { return results.json() })
       .then(results => {
         this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
-        console.log('fetched and fired')
-        // console.log('all concepts after fetch', this.state.organizedConcepts)
-        // console.log('in report', this.state.reviews)
-      });
 
-    console.log('component did mount current target', this.state.currentTargetedReviews);
+      });
   }
 
+  swapDisplaySides = () => {
+
+    if (this.state.dataFocus === 'review') {
+      this.setState((prevState) => {
+        let newState = { ...prevState, dataFocus: 'chart' }
+        return newState;
+      })
+    }
+    else if (this.state.dataFocus === 'chart') {
+      this.setState((prevState) => {
+        let newState = { ...prevState, dataFocus: 'review' }
+        return newState;
+      })
+    }
+  }
   LeftSideShow = (event) => {
     const { displaying, reviews, leftSide, fadeTracker } = this.state;
-    switch (displaying) {
-      case 'sentiment':
-        return <SentimentsToShow s ={this.state}/>
-        break;
-      case 'keyword':
-        return <KeywordsToShow s ={this.state}/>;
-        break;
+
+    if(this.state.dataFocus === 'review')
+    {
+      switch (displaying) {
+        case 'sentiment':
+          return <SentimentsToShow s={this.state} />
+          break;
+        case 'keyword':
+          return <KeywordsToShow s={this.state} />;
+          break;
+      }
+
     }
+    else if (this.state.dataFocus === 'chart'){
+    return  <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+      pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
+      reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
+      organizedConcepts={this.state.organizedConcepts}
+      monthConcepts={this.state.monthConcepts}
+    />
+    }
+ 
   }
 
   //has chart container supplanted this?
@@ -111,18 +134,18 @@ class Report extends Component {
     const leftSide = { ...this.state.leftSide };
     switch (focus) {
       case 'positive':
-      this.setState((prevState) => {
-        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'positive'}
-        return newState;
-      })
+        this.setState((prevState) => {
+          let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'positive' }
+          return newState;
+        })
         console.log('positive clicked');
         // this.setState({ leftSide })
         return
       case 'negative':
-      this.setState((prevState) => {
-        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'negative'}
-        return newState;
-      })
+        this.setState((prevState) => {
+          let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'negative' }
+          return newState;
+        })
         console.log('negative clicked');
         return
     }
@@ -133,17 +156,16 @@ class Report extends Component {
     let finalReviews = [];
     var references = this.state.organizedConcepts.find(x => x.content === clickedItem).references
     for (var i = 0; i < references.length; i++) {
-    finalReviews.push(this.findObjectByKey(this.state.reviews, 'id', references[i]));
+      finalReviews.push(this.findObjectByKey(this.state.reviews, 'id', references[i]));
     }
     this.setState((prevState) => {
-      let newState = { ...prevState,  currentTargetedReviews: finalReviews }
+      let newState = { ...prevState, currentTargetedReviews: finalReviews }
       return newState;
     })
   }
 
   //arrow key handler
   reviewSwitch = (changeBy) => {
-    console.log('state', this.state)
     if (changeBy === 'forward') {
       this.setState((prevState) => {
         let newState = { ...prevState, visibleReview: prevState.visibleReview + 1 }
@@ -157,6 +179,7 @@ class Report extends Component {
       })
     }
   }
+
   //not in use but needed for future reference
   toggleFade = () => {
     const newState = { ...this.state }
@@ -175,72 +198,71 @@ class Report extends Component {
     }
     return null;
   }
-topNavClickHandler = (clickedItem) => {
+  topNavClickHandler = (clickedItem) => {
     const newState = { ...this.state }
     switch (clickedItem) {
       case 'sentiment':
-         newState.displaying = 'sentiment';
+        newState.displaying = 'sentiment';
         this.setState((prevState) => {
-          let newState = { ...prevState,  displaying: 'sentiment',  currentTargetedReviews: this.state.reviews, visibleReview:1,  }
+          let newState = { ...prevState, displaying: 'sentiment', currentTargetedReviews: this.state.reviews, visibleReview: 1, }
           return newState;
         })
         return
       case 'keyword':
         newState.displaying = 'keyword';
-        this.setState((prevState)  => {
-          let newState = {...prevState, displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content}
-        // this.toggleFade();
+        this.setState((prevState) => {
+          let newState = { ...prevState, displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content }
+          // this.toggleFade();
           return newState
         });
-      this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
+        this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
     }
-
   };
   render() {
     console.log('state', this.state)
     const watsonIndex = this.state.visibleReview;
     return (
-       this.state.loading ? (<div> Loading </div>) : (
-      <div style={styles.Top}>
-        <AppBar position="static" style={styles.AppBar}>
-          <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
-        </AppBar>
-        <Grid container style={styles.MainContainer} spacing={8}>
-          <Grid item sm={8}>
-            <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
-            <Grid style={styles.LeftContainer} item sm={12}>
-              <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
-                <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
-                  {this.LeftSideShow()}
+      this.state.loading ? (<div> Loading </div>) : (
+        <div style={styles.Top}>
+          <AppBar position="static" style={styles.AppBar}>
+            <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
+          </AppBar>
+          <Grid container style={styles.MainContainer} spacing={8}>
+            <Grid item sm={8}>
+              <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
+              <Grid style={styles.LeftContainer} item sm={12}>
+                <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
+                  <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
+                    {this.LeftSideShow()}
+                  </div>
+                  <VisibleReviewNavPanel reviewSwitch={this.reviewSwitch} />
                 </div>
-                <VisibleReviewNavPanel reviewSwitch={this.reviewSwitch}/>
-              </div>
+              </Grid>
             </Grid>
-          </Grid>
-          <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
-            <SwapButton />
-          </div>
-          <Grid style={styles.RightContainer} item sm={4}>
-            <Grid style={styles.RightTopContainer} item sm={12}>
-              <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
-                <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
-                  pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
-                  reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart} 
-                  organizedConcepts={this.state.organizedConcepts}
-                  monthConcepts={this.state.monthConcepts}
+            <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
+              <SwapButton swapDisplaySides={this.swapDisplaySides} />
+            </div>
+            <Grid style={styles.RightContainer} item sm={4}>
+              <Grid style={styles.RightTopContainer} item sm={12}>
+                <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
+                  <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+                    pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
+                    reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
+                    organizedConcepts={this.state.organizedConcepts}
+                    monthConcepts={this.state.monthConcepts}
                   />
-              </Paper>
-              <div>
-              {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}
-              <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]}/>
-                <WatsonBars style={styles.WatsonBars}  s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
-              </div>
-            </Grid>
-            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                </Paper>
+                <div>
+                  {/* <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} /> */}
+                  <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
+                  <WatsonBars style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+                </div>
+              </Grid>
+              <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </div>)
+        </div>)
     );
   }
 }

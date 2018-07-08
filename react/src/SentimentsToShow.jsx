@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import 'typeface-roboto'
 import { withStyles } from '@material-ui/core/styles';
 import SingleReview from './SingleReview.js';
-
+import { Typography } from "@material-ui/core";
 
 const styles = {
-    reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
+    reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
+    multipleReviewsText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
+    multipleReviewsContainer: { marginTop:25, whiteSpace: 'nowrap', overflow:'hidden', textOverflow:'ellipsis'}
 }
 class SentimentsToShow extends Component {
     mouseController = (message) => {
@@ -20,31 +22,28 @@ class SentimentsToShow extends Component {
                 break;
         }
     }
-    prepareHtml = (fadeBool, reviewsToShow) => {
-        console.log('displayModifier', this.props.s.displayModifier);
-
+    prepareHtml = (fadeBool) => {
         if (this.props.s.displayModifier === "volume") {
-            console.log('modifier is set to volume')
             return <SingleReview s={this.props.s} />
         }
         else if (this.props.s.displayModifier === "volumeBySentiment") {
-    
             let finalReviews = [];
-            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).map(review => (
-                <div style={{height:'500px'}}>
-                <p> {review.description} </p>
+            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(0, 5).map(review => (
+                <div style={styles.multipleReviewsContainer}>
+                    <Typography style={styles.multipleReviewsText}>
+                        {review.description}
+                    </Typography>
                 </div>
-              ))        
-            return  finalReviews
+            ))
+            return finalReviews
         }
     }
     render() {
         return (
-            <div style={{ padding: 0, marginTop:'50px'}}>
+            <div style={{ padding: 0, marginTop: '150px' }}>
                 {this.prepareHtml()}
             </div>
         )
     }
 }
-
 export default withStyles(styles)(SentimentsToShow)
