@@ -30,30 +30,37 @@ class PieChart extends Component {
       const array = [veryPositive, positive, neutral, negative, veryNegative]
     // }
     return {
-        labels: [
-          'Very Positive',
-          'Positive',
-          'Neutral',
-          'Negative',
-          'Very Negative'
+      labels: [
+        'Very Positive',
+        'Positive',
+        'Neutral',
+        'Negative',
+        'Very Negative'
+      ],
+      datasets: [{
+        data: array,
+        backgroundColor: [
+          '#28ABE3',
+          '#1FDA9A',
+          '#F7EAC8',
+          '#DB3340',
+          '#E8B71A'
         ],
-        datasets: [{
-          data: array,
-          backgroundColor: [
-            '#28ABE3',
-            '#1FDA9A',
-            '#F7EAC8',
-            '#DB3340',
-            '#E8B71A'
-          ],
-          hoverBackgroundColor: [
-            '#78C2E2',
-            '#6AD8B2',
-            '#F7F0DE',
-            '#DB5964',
-            '#E8C34A'
-          ],
-        }]
+        hoverBackgroundColor: [
+          '#78C2E2',
+          '#6AD8B2',
+          '#F7F0DE',
+          '#DB5964',
+          '#E8C34A'
+        ],
+      }],
+      options: {
+        legend: {
+          labels: {
+            fontSize: 50
+          }
+        }
+      }
     }
   }
 
@@ -71,15 +78,25 @@ class PieChart extends Component {
       }
     }
 
+    const chartOptions = {
+      legend: {
+        labels: {
+          fontSize: 20
+        }
+      }
+    }
+
     return (
-      <div className="pie-chart" style={{"height" : 375}}>
+      <div className="pie-chart" style={{"height" : 450}}>
 
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
-  width={10}
-  height={150}
+  width={5}
+  height={5}
   options={{
-    maintainAspectRatio: false
-  }} />
+    maintainAspectRatio: false,
+  }}
+  fontSize={200}
+  options={chartOptions} />
       </div>
     );
   }
