@@ -1,5 +1,5 @@
 body {
-    background-color: #F7F5EF
+    background-color:'white'
  }
 
 header {
@@ -36,17 +36,17 @@ header {
     transform: scaleX(-1);
 }
 
-.full-cue-card-review{
-margin-top:175px;
-}
+/* .full-cue-card-review{
+
+} */
 
 
 div.MuiPaper-root-17 {
     margin: 10px;
 }
 
-.top-panels{
+/* .top-panels{
     background-color: antiquewhite;
-}
+} */
 
 

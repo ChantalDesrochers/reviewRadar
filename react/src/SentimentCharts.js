@@ -36,8 +36,8 @@ class SentimentCharts extends Component {
 
     return (
       <div>
-        { showTimeChart && <SentimentOverTime reviews={reviews} /> }
-        { showOverviewChart &&  <PieChart  reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
+        { showTimeChart && <SentimentOverTime s={this.props.s} reviews={reviews} /> }
+        { showOverviewChart &&  <PieChart s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
         <Button
           variant="outlined"
           data-message="overtime"

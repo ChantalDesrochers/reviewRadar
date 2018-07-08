@@ -6,26 +6,32 @@ import { Typography } from "@material-ui/core";
 import VisibleReviewNavPanel from "./VisibleReviewNavPanel"
 
 const styles = {
-    reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
+    reviewTextModifierVolumeFocusReview: { marginTop: '200px' },
+    review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
     multipleReviewsText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
-    multipleReviewsContainer: { marginTop: 25, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }
+    multipleReviewsContainer: { marginTop: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }
 }
 class SentimentsToShow extends Component {
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
-                styles.reviewText = { textOverflow: 'ellipsis', overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+                styles.review = { textOverflow: 'ellipsis', overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
                 this.forceUpdate();
                 break;
             case 'exit-review':
-                styles.reviewText = { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+                styles.review = { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
                 this.forceUpdate();
                 break;
         }
     }
     prepareHtml = (fadeBool) => {
         if (this.props.s.displayModifier === "volume") {
-            return <SingleReview s={this.props.s} />
+            if (this.props.s.dataFocus === "review") {
+                return <div style={styles.reviewTextModifierVolumeFocusReview}><SingleReview style={styles.review} s={this.props.s} /></div>
+            }
+            else if (this.props.s.dataFocus === "chart") {
+                return <div><SingleReview s={this.props.s} /></div>
+            }
         }
         else if (this.props.s.displayModifier === "volumeBySentiment") {
             let finalReviews = [];
@@ -43,11 +49,11 @@ class SentimentsToShow extends Component {
     render() {
         return (
             <div>
-                <div style={{ backgroundColor: ' #f7eac8', padding: 0, marginTop: '150px' }}>
+                <div>
                     {this.prepareHtml()}
-                   
+                    <VisibleReviewNavPanel s={this.props.s} reviewSwitch={this.props.reviewSwitch} />
                 </div>
-               
+
             </div>
         )
     }

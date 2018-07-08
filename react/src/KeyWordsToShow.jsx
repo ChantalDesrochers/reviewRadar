@@ -7,7 +7,9 @@ import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 import VisibleReviewNavPanel  from './VisibleReviewNavPanel'
 const styles = {
-    reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' }
+    reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
+    reviewTextModifierVolumeFocusReview: { marginTop: '200px' },
+    reviewTextModifierVolumeFocusChart: { marginTop: '0' }
 }
 
 class KeywordsToShow extends Component {
@@ -31,31 +33,57 @@ class KeywordsToShow extends Component {
         let name = this.props.s.currentTargetedReviews[this.props.s.visibleReview].author;
         let date  =  this.props.s.currentTargetedReviews[this.props.s.visibleReview].datePublished;
         const site = "Yelp";
-        console.log('review', review);
-        let reviewToReturn = (
-            <div>
-                <div className={'full-cue-card-review'}  >
-                    <Grid container spacing={0}>
-                        <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
-                            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                <NameAndSite name={name} site={site} /> 
-                            </Grid>
-                        </Grid>
-                        <Grid item sm={6} >
-                            <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                               <Date date={date} /> 
-                            </Grid>
-                        </Grid>
-                        <Grid item sm={12}  >
-                            <Typography onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}>
-                                {review}
-                            </Typography>
+        console.log('state', this.props.s);
+
+        if (this.props.s.displayModifier === "volume"){
+            if (this.props.s.dataFocus === "review"){
+
+               return <div style={styles.reviewTextModifierVolumeFocusReview} >
+                <Grid container spacing={0}>
+                    <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
+                        <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                            <NameAndSite name={name} site={site} /> 
                         </Grid>
                     </Grid>
-                </div>
-            </div >
-        )
-        return reviewToReturn
+                    <Grid item sm={6} >
+                        <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                           <Date date={date} /> 
+                        </Grid>
+                    </Grid>
+                    <Grid item sm={12}  >
+                        <Typography onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}>
+                            {review}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </div>
+            }
+            else if (this.props.s.dataFocus === "chart")
+            {
+console.log('asdas');
+
+              return  <div style={styles.reviewTextModifierVolumeFocusChart} >
+                <Grid container spacing={0}>
+                <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
+                    <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                        <NameAndSite name={name} site={site} /> 
+                    </Grid>
+                </Grid>
+                <Grid item sm={6} >
+                    <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+                       <Date date={date} /> 
+                    </Grid>
+                </Grid>
+                <Grid item sm={12}  >
+                    <Typography onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}>
+                        {review}
+                    </Typography>
+                </Grid>
+            </Grid>
+        </div>
+            }
+        }
+ 
     }
     render() {
         return (

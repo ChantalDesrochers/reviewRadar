@@ -18,22 +18,13 @@ import WatsonBars from './WatsonBar';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
 
-// hardcoded data
-// import Ratings from "./ratings.js"
-// import OrganizedConcepts from './reportPartials/organizedConcepts.js';
-// import CompletedData from './reportPartials/completedData.js'
-
 const styles = {
-  RightTopContainer: { height: '100%' },
-  //  RightBottomContainer: { height: '34.5%', marginTop: 5 },
-  RightTopPanel: { height: '100%', backgroundColor: Colors.RightTopColor },
-  //RightBottomPanel: { height: '100%', backgroundColor: Colors.RightBottomColor },
   AppBar: { backgroundColor: Colors.AppBarColor },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
   LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
-  Top: { height: '89vh' },
+  // Top: { height: '89vh' },
 
   TopNavPanel: { float: 'left', padding: 20 },
   TopNavPanelContainer: { backgroundColor: "blue" },
@@ -42,7 +33,7 @@ const styles = {
 
   ChartOnLeftSide: { marginTop: 100 },
   ChartOnRightSide: {},
-  ReviewNavButtonsOnLeftSide: { marginLeft: '35%', position: 'absolute', top: 450, backgroundColor: 'blue' },
+  ReviewNavButtonsOnLeftSide: { marginLeft: '35%', backgroundColor: 'blue' },
   ReviewNavButtonsOnRightSide : {}
 }
 class Report extends Component {
@@ -54,9 +45,7 @@ class Report extends Component {
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
-
       companyName: 'Planta',
-
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
       visibleReview: 1,
@@ -82,7 +71,6 @@ class Report extends Component {
   }
 
   swapDisplaySides = () => {
-
     if (this.state.dataFocus === 'review') {
       this.setState((prevState) => {
         let newState = { ...prevState, dataFocus: 'chart'}
@@ -98,7 +86,6 @@ class Report extends Component {
   }
   LeftSideShow = (event) => {
     const { displaying, reviews, leftSide, fadeTracker } = this.state;
-
     if (this.state.dataFocus === 'review') {
       switch (displaying) {
         case 'sentiment':
@@ -113,12 +100,12 @@ class Report extends Component {
 
     }
     else if (this.state.dataFocus === 'chart') {
-
       return <div style={styles.ChartOnLeftSide}><ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
         pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
         organizedConcepts={this.state.organizedConcepts}
         monthConcepts={this.state.monthConcepts}
+        s = {this.state}
       />
       </div>
     }
@@ -148,6 +135,7 @@ class Report extends Component {
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
         organizedConcepts={this.state.organizedConcepts}
         monthConcepts={this.state.monthConcepts}
+        s = {this.state}
       />
       </div>
     }
@@ -269,9 +257,9 @@ class Report extends Component {
               <SwapButton swapDisplaySides={this.swapDisplaySides} />
             </div>
             {/* RIGHT SIDE */}
-            <Grid style={styles.RightContainer} item sm={4}>
-              <Grid style={styles.RightTopContainer} item sm={12}>
-                <Paper style={styles.RightTopPanel} data-message="topRight" onClick={this.topNavClickHandler} >
+            <Grid item sm={4} >
+              <Grid item sm={12}  >
+                <Paper onClick={this.topNavClickHandler} >
                   {this.RightSideShow()}
                 </Paper>
                 <div>
@@ -279,8 +267,8 @@ class Report extends Component {
                   <WatsonBars style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
                 </div>
               </Grid>
-              <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-              </Grid>
+              {/* <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
+              </Grid> */}
             </Grid>
           </Grid>
 

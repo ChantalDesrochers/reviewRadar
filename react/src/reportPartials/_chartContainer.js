@@ -6,10 +6,10 @@ import SentimentCharts from '../SentimentCharts';
 
 
 
-const ChartContainer = ({reviews, displaying, pickReviewTypeToDisplay, reviewTypeToDisplayKW, organizedConcepts, monthConcepts}) => (
+const ChartContainer = ({s, reviews, displaying, pickReviewTypeToDisplay, reviewTypeToDisplayKW, organizedConcepts, monthConcepts}) => (
   <div>
     { displaying === "sentiment" ? (
-      <SentimentCharts pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews}/> ) : (<KeywordCharts organizedConcepts={organizedConcepts} monthConcepts={monthConcepts} reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
+      <SentimentCharts s={s} pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews}/> ) : (<KeywordCharts organizedConcepts={organizedConcepts} monthConcepts={monthConcepts} s={s}  reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
   </div>
 )
 
