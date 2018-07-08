@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
+import ChartsToShow from './ChartsToShow';
 // import Ratings from "./ratings.js"
 import OrganizedConcepts from './reportPartials/organizedConcepts.js';
 import CompletedData from './reportPartials/completedData.js'
@@ -83,6 +84,9 @@ class Report extends Component {
         break;
       case 'keyword':
         return <KeywordsToShow s ={this.state}/>;
+        break;
+      case 'chart':
+        return <ChartsToShow s = {this.state}/>
         break;
     }
   }
@@ -178,6 +182,7 @@ class Report extends Component {
     }
     return null;
   }
+
 topNavClickHandler = (clickedItem) => {
     const newState = { ...this.state }
     switch (clickedItem) {
@@ -189,16 +194,22 @@ topNavClickHandler = (clickedItem) => {
         })
         return
       case 'keyword':
-        newState.displaying = 'keyword';
+        newState.displaying = 'keyword'; //seting new state here or below?
         this.setState((prevState)  => {
           let newState = {...prevState, displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content}
         // this.toggleFade();
           return newState
         });
-      this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
+        this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
+        break;
+        case 'charts': //added chart state handle
+        this.setState((prevState) => {
+          let newState = {...prevState, displaying: 'chart'}
+          return newState;
+          console.log('state', this.state)
+        })
     }
-
-  };
+  }
   render() {
     console.log('state', this.state)
     const watsonIndex = this.state.visibleReview;

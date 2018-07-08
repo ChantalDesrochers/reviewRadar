@@ -34,13 +34,8 @@ class NumberOfReviewsOverTime extends Component {
     }
   }
 
-componentWillReceiveProps(nextprops) {
-  if (this.state.reviews != nextprops.reviews) {
-    this.setState({ ...(this.state.reviews = nextprops.reviews) });
-  }
 
-    var getReviewsPerMonth = () => {
-      var reviews = this.state.reviews
+getReviewsPerMonth = (reviews) => {
       var january = {
         count: 0
       }
@@ -118,12 +113,31 @@ componentWillReceiveProps(nextprops) {
 
       })
       var count = [january.count, february.count, march.count, april.count, may.count, june.count, july.count, august.count, september.count, october.count, november.count, december.count];
-      this.setState({...this.state.data.datasets[0].data = count})
-
-    }
-
-getReviewsPerMonth()
-
+     return {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+        {
+          label: 'Number of Reviews Generated Monthly',
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: '#F37162',
+          borderColor: '#E53A27',
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: '#F37162',
+          pointBackgroundColor: '#F37162',
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: count
+        }]
+     }
 }
 
   render() {
@@ -142,7 +156,7 @@ getReviewsPerMonth()
 
         return (
             <div className="pie-chart">
-              <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
+              <Line data={this.getReviewsPerMonth(this.props.reviews)} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
             </div>
         );
     }

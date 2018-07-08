@@ -27,7 +27,6 @@ class KeywordCharts extends Component {
   render() {
 
 
-//button should not be outlined when on that part
 //toggle feature
 //add icons to buttons?
 
