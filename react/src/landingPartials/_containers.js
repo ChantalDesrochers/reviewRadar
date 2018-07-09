@@ -10,7 +10,7 @@ class LandingContainer extends Component {
       <Grid item xs={2}>
         <Paper style={{ textAlign: "center",  }}>
         {/* <img src={ require('./images/image1.jpg') } /> */}
-        <img src={this.props.img} />
+        {/* <img src={this.props.img} /> */}
         <Typography>{this.props.header}</Typography>
         <Typography>{this.props.text}</Typography>
         </Paper>
