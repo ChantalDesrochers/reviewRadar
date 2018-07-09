@@ -19,7 +19,6 @@ class KeywordCharts extends Component {
       showTimeChart: false,
       showOverviewChart: false
     }
-
     if (displayModifier === 'volume'){
     //   this.setState({currentTargetedReviews: this.state.initialState})
       this.props.reviewTypeToDisplayKW(this.props.s.organizedConcepts[0].content)

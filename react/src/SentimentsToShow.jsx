@@ -12,7 +12,6 @@ const styles = {
 
     review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
     multipleReviewsText: {  maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
-
     multipleReviewsContainer: { marginTop:'50px'}
 }
 class SentimentsToShow extends Component {
@@ -53,20 +52,7 @@ class SentimentsToShow extends Component {
         }
 
         else if (this.props.s.displayModifier === "time") {
-            let reviews = this.props.s.reviews
-            let dAlteredArray = reviews.map(review =>
-                ({ ...review, datePublished: new Date(review.datePublished) })
-            )
-            console.log('dAlteredArray', dAlteredArray)
-            const sortedDate = dAlteredArray.sort(function (a, b) {
-                return b.datePublished - a.datePublished
-            })
-            let recentReviews = sortedDate.slice(0, 5)
-            recentReviews = recentReviews.map(review => (
-                <div>
-                    <h2>{review.datePublished.toString().substring(0, 15)}</h2>
-                    <p>{review.description}</p>
-                </div>))
+            let recentReviews = this.props.dateParsingReviews()
             return (
                 <div style={{ marginTop: '100px' }}>
                     {recentReviews}

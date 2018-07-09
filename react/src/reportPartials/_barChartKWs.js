@@ -5,9 +5,15 @@ import 'typeface-roboto'
 class KeywordBarChart extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      colors: ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2'],
+      borderColors: ['#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE']
+    }
   }
-
+  
   getChartData = returnConcepts => {
+    var colors = this.state.colors
+    var borderColors = this.state.borderColors
     var topSeven = returnConcepts.slice(0, 6);
     var label = [];
     var data = [];
@@ -20,10 +26,10 @@ class KeywordBarChart extends Component {
       datasets: [
         {
           label: 'Keyword Frequency',
-          backgroundColor: '#6EEFC2',
-          borderColor: '#5FD8AE',
+          backgroundColor: colors,
+          borderColor: borderColors,
           borderWidth: 5,
-          hoverBackgroundColor: '#60F2BF',
+          hoverBackgroundColor: colors,
           hoverBorderColor: '#1FDA9A',
           data: data
         }
@@ -48,6 +54,18 @@ class KeywordBarChart extends Component {
         console.log(elem);
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]["_index"];
+        console.log('clickedPointIndex is', clickedPointIndex)
+
+        var colourProptest = elem[0]['_chart']['config']['data']['datasets'][0]['backgroundColor'][clickedPointIndex]
+        // console.log('colorbefore', colourProptest)
+        // *** fix state set
+        // *** fix color choices
+        // *** fix top keyword frequency color
+        this.state.colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
+        this.state.borderColors = ['#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE']
+        this.state.colors[clickedPointIndex] = 'red'
+        this.state.borderColors[clickedPointIndex] = 'red'
+
         const label =
           chartPoints[0]["_chart"]["config"]["data"]["labels"][
             clickedPointIndex
