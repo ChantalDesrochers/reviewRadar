@@ -8,6 +8,13 @@ class PieChart extends Component {
   }
 
   prepareHtml = (handleClicktwo) => {
+     const chartOptions = {
+      legend: {
+        labels: {
+          fontSize: 20
+        }
+      }
+    }
 
     if (this.props.s.dataFocus === 'review') {
       return <div className="pie-chart" style={{height:375}}>
@@ -17,7 +24,8 @@ class PieChart extends Component {
           height={10}
           options={{
             maintainAspectRatio: false
-          }} />
+          }}
+           options={chartOptions}/>
       </div>
     }
     else if (this.props.s.dataFocus === 'chart') {
@@ -28,7 +36,8 @@ class PieChart extends Component {
           height={10}
           options={{
             maintainAspectRatio: false
-          }} />
+          }}
+           options={chartOptions} />
       </div>
     }
   }
@@ -96,10 +105,18 @@ class PieChart extends Component {
       }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d9eeacff309db55073e046e8916d60620c3c9af6
     return (<div>
       {this.prepareHtml(handleClicktwo)}
     </div>
     )
+<<<<<<< HEAD
+=======
+
+>>>>>>> d9eeacff309db55073e046e8916d60620c3c9af6
   }
 }
 

@@ -102,6 +102,7 @@ class KeywordsToShow extends Component {
             }
         }
     }
+
     render() {
         return (
             <div style={{ padding: 0 }}>

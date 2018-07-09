@@ -4270,5 +4270,4 @@ let Ratings = [
   }
 ];
 
-
 module.exports = Ratings;
