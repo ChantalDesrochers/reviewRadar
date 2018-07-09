@@ -40,8 +40,8 @@ class SentimentCharts extends Component {
 
     return (
       <div style={{textAlign:'center'}}>
-        { showTimeChart && <SentimentOverTime clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} s={this.props.s} reviews={reviews} /> }
-        { showOverviewChart &&  <PieChart s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
+        { (this.props.s.displayModifier === 'time' || this.props.s.displayModifier === 'timebymonth') && <SentimentOverTime clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} s={this.props.s} reviews={reviews} /> }
+        { (this.props.s.displayModifier === 'volume' || this.props.s.displayModifier === 'volumeBySentiment') &&  <PieChart s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} />}
        
         <Button
           variant="outlined"

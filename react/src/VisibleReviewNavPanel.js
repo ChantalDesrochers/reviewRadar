@@ -86,4 +86,3 @@ class VisibleReviewNavPanel extends Component {
     }
 }
 export default withStyles(styles)(VisibleReviewNavPanel);
-
