@@ -54,7 +54,7 @@ class KeywordsToShow extends Component {
             let review = this.props.s.currentTargetedReviews[this.props.s.visibleReview].description;
             let name = this.props.s.currentTargetedReviews[this.props.s.visibleReview].author;
             let date = this.props.s.currentTargetedReviews[this.props.s.visibleReview].datePublished;
-            const site = "Yelp";
+            let site = this.props.s.currentTargetedReviews[this.props.s.visibleReview].origin;
             if (this.props.s.displayModifier === "volume") {
                 if (this.props.s.dataFocus === "review") {
 
