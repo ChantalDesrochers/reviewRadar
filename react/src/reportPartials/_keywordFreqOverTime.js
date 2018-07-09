@@ -199,19 +199,19 @@ const chartyOptions = {
       }
     }
 
-const chartTitles = {
+    const chartTitles = {
   fontSize: 30,
-  fontFamily: 'arial'
+  fontFamily: 'arial',
+  padding: 0,
+  margin: 0
 }
-
-
 
     return (
       <div className="kwFreqOverTimeChart" style={{"height" : 450}}>
       <h3 style={chartTitles}>Topics mentioned over time</h3>
       <Line
           data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
-          height={10}
+          height={7}
           options={{
             maintainAspectRatio: false}}
             options={chartyOptions}/>

@@ -119,7 +119,9 @@ const chartyOptions = {
 
   const chartTitles = {
   fontSize: 30,
-  fontFamily: 'arial'
+  fontFamily: 'arial',
+  padding: 0,
+  margin: 0
 }
 
 
@@ -130,7 +132,7 @@ const chartyOptions = {
         <HorizontalBar
           data={this.getChartData(this.props.organizedConcepts)}
           getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
-  height={10}
+  height={7}
   options={{
     maintainAspectRatio: false}}
     options={chartyOptions}

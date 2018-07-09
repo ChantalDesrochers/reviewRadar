@@ -119,6 +119,7 @@ class Report extends Component {
         changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
         clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
         clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
+        changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
         s={this.state}
       />
       </div>
@@ -148,6 +149,7 @@ class Report extends Component {
         organizedConcepts={this.state.organizedConcepts}
         monthConcepts={this.state.monthConcepts}
         changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+        changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
         clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
         clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
         s={this.state}
@@ -187,6 +189,20 @@ class Report extends Component {
       return newState;
     })
   }
+
+changeKeywordDisplayModifier = (displayModifier) => {
+    this.setState((prevState) => {
+      let newState = {
+        ...prevState,
+        displayModifier: displayModifier,
+        visibleReview: 0,
+      }
+      return newState;
+    })
+}
+
+
+
 
   clickHandlerForSentimentTimeChart = (clickedMonth) => {
     let month = clickedMonth.substring(0, 3)

@@ -10,9 +10,11 @@ class PieChart extends Component {
   }
 
   prepareHtml = (handleClicktwo) => {
-    const chartTitles = {
+     const chartTitles = {
   fontSize: 30,
-  fontFamily: 'arial'
+  fontFamily: 'arial',
+  padding: 0,
+  margin: 0
 }
       const chartOptions = {
       legend: {
@@ -26,17 +28,17 @@ class PieChart extends Component {
       return <div className="pie-chart" style={{height:450}}>
         <h3 style={chartTitles}>How your patrons are feeling</h3>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
-          width={10}
-          height={10}
+          width={1}
+          height={1}
           options={{
-            maintainAspectRatio: false
+            maintainAspectRatio: true
           }}
           options={chartOptions} />
       </div>
     }
     else if (this.props.s.dataFocus === 'chart') {
       return <div className="pie-chart" style={{height:550}}>
-       <h3>How your patrons are feeling</h3>
+       <h3 style={chartTitles}>How your patrons are feeling</h3>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}

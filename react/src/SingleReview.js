@@ -42,7 +42,7 @@ class SingleReview extends Component {
                         </Grid>
                         <Grid item sm={6} >
                             <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                <Date date={date} />
+                                <Date style={{ float: 'right'}} date={date} />
                             </Grid>
                         </Grid>
                         <Grid item sm={12}  >

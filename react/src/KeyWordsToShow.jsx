@@ -41,6 +41,26 @@ class KeywordsToShow extends Component {
                     {monthReviews}
                 </div>
             )
+        } else if (this.props.s.displayModifier === 'time') {
+            console.log("keywords to show", this.props.s)
+            let reviews = this.props.s.reviews
+            let dAlteredArray = reviews.map(review =>
+                ({ ...review, datePublished: new Date(review.datePublished) })
+            )
+            const sortedDate = dAlteredArray.sort(function (a, b) {
+                return b.datePublished - a.datePublished
+            })
+            let recentReviews = sortedDate.slice(0, 5)
+            recentReviews = recentReviews.map(review => (
+                <div>
+                    <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+                    <p>{review.description}</p>
+                </div>))
+            return (
+                <div style={{ marginTop: '100px' }}>
+                    {recentReviews}
+                </div>
+            )
         }
         else if (this.props.s.displayModifier === "volume") {
 

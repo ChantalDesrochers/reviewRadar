@@ -28,21 +28,30 @@ class SentimentCharts extends Component {
     const { reviews } = this.props
     const { showTimeChart, showOverviewChart } = this.state
     const buttonStyle = {
-      margin: 30,
       background: '#DBA2A7',
-      color: 'black'
+      color: 'black',
+      margin: 10,
+
     }
 
      const buttonStyleTwo = {
       background: '#DBA2A7',
-      color: 'black'
+      color: 'black',
+      margin: 10,
+      display: 'inline'
+    }
+
+    const buttonStyles = {
+      margin: 50,
+      position: 'absolute',
+      display: 'inline'
     }
 
     return (
       <div style={{textAlign:'center'}}>
         { (this.props.s.displayModifier === 'time' || this.props.s.displayModifier === 'timebymonth') && <SentimentOverTime clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} s={this.props.s} reviews={reviews} /> }
         { (this.props.s.displayModifier === 'volume' || this.props.s.displayModifier === 'volumeBySentiment') &&  <PieChart s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} />}
-       
+        <div className="chartButtons" style={buttonStyles}>
         <Button
           variant="outlined"
           data-message="overall"
@@ -51,7 +60,7 @@ class SentimentCharts extends Component {
         >
           High level Overview
         </Button>
-       
+
         <Button
           variant="outlined"
           data-message="overtime"
@@ -60,8 +69,8 @@ class SentimentCharts extends Component {
         >
           trends over time
         </Button>
-       
-  
+        </div>
+
 
 
       </div>
