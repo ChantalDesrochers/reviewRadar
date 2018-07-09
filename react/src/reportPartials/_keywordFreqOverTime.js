@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
+import { withStyles } from '@material-ui/core/styles';
+import 'typeface-roboto'
 // import ReturnConcepts from "./organizedConcepts.js";
 // import InputReviews from "./completedData.js";
 // import MonthConceptFrequency from "./monthReturnConcepts.js";
@@ -180,16 +182,43 @@ class KeywordsOverTime extends Component {
         // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
     };
+
+const chartyOptions = {
+        scales: {
+          xAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20
+        }
+      }
+    }
+
+    const chartTitles = {
+  fontSize: 30,
+  fontFamily: 'arial',
+  padding: 0,
+  margin: 0
+}
+
     return (
-      <div className="kwFreqOverTimeChart" style={{"height" : 375}}>
+      <div className="kwFreqOverTimeChart" style={{"height" : 450}}>
+      <h3 style={chartTitles}>Topics mentioned over time</h3>
       <Line
           data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
-          height={150}
+          height={7}
           options={{
-            maintainAspectRatio: false}}/>
+            maintainAspectRatio: false}}
+            options={chartyOptions}/>
       </div>
     );
   }
 }
+
 
 export default KeywordsOverTime;

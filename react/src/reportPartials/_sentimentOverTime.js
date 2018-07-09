@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {Line} from 'react-chartjs-2';
+import 'typeface-roboto'
 
 class SentimentOverTime extends Component {
   constructor(props) {
@@ -212,14 +213,39 @@ class SentimentOverTime extends Component {
       }
     }
 
+     const chartyOptions = {
+        scales: {
+          xAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20
+        }
+      }
+    }
+
+    const chartTitles = {
+  fontSize: 30,
+  fontFamily: 'arial',
+  padding: 0,
+  margin: 0
+}
+
 
     return (
-      <div className="sentiment-over-time" style={{"height" : 375}}>
+      <div className="sentiment-over-time" style={{"height" : 450}}>
+      <h3 style={chartTitles}>Customer perception by month</h3>
         <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}} width={10}
-  height={120}
+  height={7}
   options={{
     maintainAspectRatio: false
-  }}/>
+  }}
+  options={chartyOptions}/>
       </div>
     );
   }

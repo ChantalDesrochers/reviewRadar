@@ -25,7 +25,7 @@ class KeywordCharts extends Component {
       this.props.reviewTypeToDisplayKW(this.props.s.organizedConcepts[0].content)
     }
     this.setState({...resetCharts, [chartName]: true})
-    this.props.changeSentimentDisplayModifier(displayModifier)
+    this.props.changeKeywordDisplayModifier(displayModifier)
   }
 
   
@@ -44,11 +44,12 @@ class KeywordCharts extends Component {
     }
     
     return (
-          <div style={{textAlign:'center'}}>
+      <div className='keywordChartContainer' style={{textAlign:'center'}}>
         {/* { showTimeChart && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> } */}
-        { this.props.s.displayModifier === 'timebymonth' && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> }
+        { (this.props.s.displayModifier === 'time' || this.props.s.displayModifier === 'timebymonth') && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts} changeKeywordDisplayModifier={this.props.changeKeywordDisplayModifier}/> }
         {/* { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />} */}
-        { this.props.s.displayModifier === 'volume' && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />}
+        { this.props.s.displayModifier === 'volume' && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} changeKeywordDisplayModifier={this.props.changeKeywordDisplayModifier}/>}
+
         <Button
           variant="contained"
           data-message="overall"
@@ -60,7 +61,7 @@ class KeywordCharts extends Component {
         <Button
           variant="contained"
           data-message="overtime"
-          onClick={() => this.handleChartChange('showTimeChart', 'timebymonth')}
+          onClick={() => this.handleChartChange('showTimeChart', 'time')}
           style={buttonStyle}
         >
           trends over time

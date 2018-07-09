@@ -48,11 +48,11 @@ class Report extends Component {
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
-      displayTitle: 'This is a stand in title',
+      displayTitle:'Your Top Review - toggle right to go from most positive to least',
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
-      visibleReview: 175,
+      visibleReview: 0,
       leftShowing: 'text',
       keywordChartTarget: '',
       // live server data
@@ -62,8 +62,8 @@ class Report extends Component {
       monthConcepts: [], // reviews parsed into monthly concept data
       keywordArray: [],
       currentTargetedReviews: [],
-      SentimentSummaryIndex:10,
-      SummaryIndexMultiple:10
+      SentimentSummaryIndex:3,
+      SummaryIndexMultiple:3
 
     };
   }
@@ -75,6 +75,23 @@ class Report extends Component {
         this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
         this.state.keywordArray = this.state.organizedConcepts;
       });
+  }
+
+  dateParsingReviews = () => {
+      let reviews = this.state.reviews
+      let dAlteredArray = reviews.map(review =>
+          ({ ...review, datePublished: new Date(review.datePublished) })
+      )
+      const sortedDate = dAlteredArray.sort(function (a, b) {
+          return b.datePublished - a.datePublished
+      })
+      let recentReviews = sortedDate.slice(0, 5)
+      recentReviews = recentReviews.map(review => (
+          <div>
+              <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+              <p>{review.description}</p>
+          </div>))
+      return recentReviews
   }
 
   swapDisplaySides = () => {
@@ -97,14 +114,14 @@ class Report extends Component {
       switch (displaying) {
         case 'sentiment':
           return <div>
-            {/* <DisplayTitle s={this.state}/> */}
-            <SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
+            <DisplayTitle s={this.state}/>
+            <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></div>
           break;
         case 'keyword':
           return <div>
-            {/* <DisplayTitle s={this.state}/> */}
-            <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
+           <DisplayTitle s={this.state}/>
+            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></div>
           break;
         //is this the problem, there is no chart?
@@ -123,6 +140,7 @@ class Report extends Component {
         changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
         clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
         clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
+        changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
         s={this.state}
       />
       </div>
@@ -136,11 +154,11 @@ class Report extends Component {
     if (this.state.dataFocus === 'chart') {
       switch (displaying) {
         case 'sentiment':
-          return <div><SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
+          return <div><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
           </div>
           break;
         case 'keyword':
-          return <div> <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
+          return <div> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
          </div>
           break;
       }
@@ -152,6 +170,7 @@ class Report extends Component {
         organizedConcepts={this.state.organizedConcepts}
         monthConcepts={this.state.monthConcepts}
         changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+        changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
         clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
         clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
         s={this.state}
@@ -193,6 +212,16 @@ class Report extends Component {
     })
   }
 
+changeKeywordDisplayModifier = (displayModifier) => {
+    this.setState((prevState) => {
+      let newState = {
+        ...prevState,
+        displayModifier: displayModifier,
+        visibleReview: 0,
+      }
+      return newState;
+    })
+}
 
   //up down arrow
   clickHandlerForSentimentSummary = (direction) => {
@@ -212,7 +241,6 @@ class Report extends Component {
     }
   }
 
-
   clickHandlerForSentimentTimeChart = (clickedMonth) => {
     let month = clickedMonth.substring(0, 3)
     let dAlteredArray = this.state.reviews.map(review =>
@@ -225,6 +253,7 @@ class Report extends Component {
     })
   }
 
+
   clickHandlerForKeyWordBarChart = (clickedItem) => {
     console.log('clicked for key word bar chart', clickedItem);
     let finalReviews = [];
@@ -233,7 +262,7 @@ class Report extends Component {
       finalReviews.push(this.findObjectByKey(this.state.reviews, 'id', references[i]));
     }
     this.setState((prevState) => {
-      let newState = { ...prevState, currentTargetedReviews: finalReviews }
+      let newState = { ...prevState, currentTargetedReviews: finalReviews, keywordChartTarget: clickedItem }
       return newState;
     })
   }
@@ -298,7 +327,7 @@ class Report extends Component {
       case 'sentiment':
         // newState.displaying = 'sentiment';
         this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', displayTitle: 'From Most Postive To Least Positive', currentTargetedReviews: this.state.reviews, visibleReview: 0, }
+          let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', currentTargetedReviews: this.state.reviews, visibleReview: 0, }
           return newState;
         })
         break;

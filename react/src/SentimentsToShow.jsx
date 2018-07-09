@@ -15,7 +15,6 @@ const styles = {
     reviewTextModifierVolumeFocusReview: { marginTop: '100px', Left: 50, textAlign: 'left' },
     reviewSummary: {fontSize:'1em'},
     reviewFull: {fontSize:'1.5em'},
-    reviewSentimentByVolumeContainer: {display:'scroll', marginTop:'45px'},
     review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
     multipleReviewsText: { maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
 
@@ -53,11 +52,11 @@ class SentimentsToShow extends Component {
         else if (this.props.s.displayModifier === "volumeBySentiment") {
             let finalReviews = [];
             //0,5 is what is going to be toggled by the arrows
-            finalReviews = <div style={styles.reviewSentimentByVolumeContainer}>{this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(this.props.s.SentimentSummaryIndex-this.props.s.SummaryIndexMultiple , this.props.s.SentimentSummaryIndex).map(review => (
+            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(this.props.s.SentimentSummaryIndex-this.props.s.SummaryIndexMultiple , this.props.s.SentimentSummaryIndex).map(review => (
        
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography style={styles.reviewSummary}><b>{review.summary}</b></Typography>
+                            <Typography style={styles.reviewSummary}>{review.summary}</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <Typography style={styles.reviewFull}>
@@ -66,7 +65,7 @@ class SentimentsToShow extends Component {
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                
-            ))}</div>
+            ))
             return finalReviews
         }
 
