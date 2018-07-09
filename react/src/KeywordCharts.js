@@ -14,17 +14,21 @@ class KeywordCharts extends Component {
     }
   }
 
-
   handleChartChange = (chartName, displayModifier) => {
     const resetCharts = {
       showTimeChart: false,
       showOverviewChart: false
     }
+    
+    if (displayModifier === 'volume'){
+    //   this.setState({currentTargetedReviews: this.state.initialState})
+      this.props.reviewTypeToDisplayKW(this.props.s.organizedConcepts[0].content)
+    }
     this.setState({...resetCharts, [chartName]: true})
     this.props.changeKeywordDisplayModifier(displayModifier)
   }
 
-
+  
   render() {
     //const { organizedConcepts } = this.props
     const { showOverviewChart, showTimeChart } = this.state
@@ -38,7 +42,7 @@ class KeywordCharts extends Component {
       background: '#E8D28B',
       color: 'black'
     }
-
+    
     return (
       <div className='keywordChartContainer' style={{textAlign:'center'}}>
         {/* { showTimeChart && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> } */}
