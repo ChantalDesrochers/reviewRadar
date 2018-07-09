@@ -28,7 +28,7 @@ const styles = {
   TopNavPanels: { textAlign: 'center', height: '25%' },
 
   // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
-  ReviewWatson: { position: 'absolute', bottom: '150px', right: '220px' },
+  ReviewWatson: {textAlign:'center', marginTop:'10%'},
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
 

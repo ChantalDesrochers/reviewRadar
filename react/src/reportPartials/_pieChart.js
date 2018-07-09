@@ -4,10 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 import 'typeface-roboto'
 
 const styles ={ 
-  PieOnRight: {width:"83%", margin:'auto'},
-  PieChartContainer: {marginTop:'21px'}
+  PieOnRight: {width:"72%", margin:'auto'},
+  PieChartContainer: {marginTop:'10px'},
+  ChartTitles: {
+  fontSize: 30,
+  fontFamily: 'arial',
+  padding: 20,
+  margin: 0
 }
-
+}
 class PieChart extends Component {
   constructor(props) {
     super(props);
@@ -15,16 +20,13 @@ class PieChart extends Component {
   }
 
   prepareHtml = (handleClicktwo) => {
-     const chartTitles = {
-  fontSize: 30,
-  fontFamily: 'arial',
-  padding: 0,
-  margin: 0
-}
+    
       const chartOptions = {
       legend: {
+        position: 'bottom',
         labels: {
           fontSize: 20,
+          
          
         },
 
@@ -35,7 +37,7 @@ class PieChart extends Component {
 
     if (this.props.s.dataFocus === 'review') {
       return <div style={styles.PieOnRight}>
-       <h3 style={chartTitles}>How your patrons are feeling</h3> 
+       <h3 style={styles.ChartTitles}>How your patrons are feeling</h3> 
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
      width={3}
      height={3}
@@ -44,7 +46,7 @@ class PieChart extends Component {
     }
     else if (this.props.s.dataFocus === 'chart') {
       return <div>
-       <h3 style={chartTitles}>How your patrons are feeling</h3>
+       <h3 style={styles.ChartTitles}>How your patrons are feeling</h3>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}
