@@ -36,6 +36,8 @@ const styles = {
   ChartOnRightSide: {},
   ReviewNavButtonsOnLeftSide: { marginLeft: '10%' },
   ReviewNavButtonsOnRightSide: {}
+
+
 }
 class Report extends Component {
   constructor(props) {
@@ -59,7 +61,9 @@ class Report extends Component {
       organizedConcepts: [], // reviews parsed into concepts
       monthConcepts: [], // reviews parsed into monthly concept data
       keywordArray: [],
-      currentTargetedReviews: []
+      currentTargetedReviews: [],
+      SentimentSummaryIndex:10,
+      SummaryIndexMultiple:10
 
     };
   }
@@ -95,9 +99,9 @@ class Report extends Component {
           return <div>
             {/* <DisplayTitle s={this.state}/> */}
             <SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
-            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary}  /></div>
+            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></div>
           break;
-      case 'keyword':
+        case 'keyword':
           return <div>
             {/* <DisplayTitle s={this.state}/> */}
             <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
@@ -155,6 +159,7 @@ class Report extends Component {
       </div>
     }
   }
+
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
     const leftSide = { ...this.state.leftSide };
@@ -191,7 +196,20 @@ class Report extends Component {
 
   //up down arrow
   clickHandlerForSentimentSummary = (direction) => {
-    console.log('i am an up down arrow', direction);
+    console.log('i am in click handler for sentiment summary', direction);
+    if (direction === 'up') {
+      this.setState((prevState) => {
+        let newState = { ...prevState, SentimentSummaryIndex: this.state.SentimentSummaryIndex + this.state.SummaryIndexMultiple }
+        return newState;
+      })
+    }
+
+    else if (direction === 'down' && this.state.SentimentSummaryIndex > this.state.SummaryIndexMultiple ) {
+      this.setState((prevState) => {
+        let newState = { ...prevState, SentimentSummaryIndex: this.state.SentimentSummaryIndex - this.state.SummaryIndexMultiple  }
+        return newState;
+      })
+    }
   }
 
 

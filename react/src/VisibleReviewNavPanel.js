@@ -19,7 +19,6 @@ class VisibleReviewNavPanel extends Component {
         this.props.clickHandlerForSentimentSummary(direction)
     }
     pickNavButtonType = () => {
-        console.log('in but')
         if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'review') {
             return (<div className="buttons" style={styles.buttonContainerForModifierVolumeFocusReview}>
                        <Grid container >
@@ -83,13 +82,13 @@ class VisibleReviewNavPanel extends Component {
                    <Grid item sm={6}>
       
                        <Button style={{ backgroundColor: 'red' }} variant="contained" size="small" onClick={() => this.changeSummarizedReviews ('up')} >
-                           <ArrowUpward />
+                           <ArrowDownward />
                        </Button>
                    </Grid>
                
                    <Grid item sm={6}>
-                       <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.props.changeSummarizedReviews('down')} >
-                           <ArrowDownward />
+                       <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeSummarizedReviews('down')} >
+                           <ArrowUpward />
                        </Button>
                   </Grid>
            </Grid>
