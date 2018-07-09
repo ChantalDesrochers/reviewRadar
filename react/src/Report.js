@@ -17,7 +17,7 @@ import ReviewStars from "./ReviewStars";
 import ChartsToShow from "./ChartsToShow.js";
 import DisplayTitle from "./DisplayTitle"
 const styles = {
-  AppBar: { backgroundColor: '#f7eac8', height:'100px'},
+  AppBar: { backgroundColor: '#f7eac8', height: '100px' },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
@@ -25,12 +25,12 @@ const styles = {
   // Top: { height: '89vh' },
 
   TopNavPanel: { float: 'left', padding: 20 },
-  TopNavPanels: {textAlign:'center', height:'25%'},
+  TopNavPanels: { textAlign: 'center', height: '25%' },
 
   // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
-  ReviewWatson:{position:'absolute', bottom: '150px', right: '220px'},
+  ReviewWatson: { position: 'absolute', bottom: '150px', right: '220px' },
   WatsonBars: { bottom: 50 },
-  ReviewStars: { bottom: 100},
+  ReviewStars: { bottom: 100 },
 
   ChartOnLeftSide: { marginTop: 100 },
   ChartOnRightSide: {},
@@ -46,11 +46,11 @@ class Report extends Component {
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
-      displayTitle:'This is a stand in title',  
+      displayTitle: 'This is a stand in title',
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
-      visibleReview: 1,
+      visibleReview: 195,
       leftShowing: 'text',
       keywordChartTarget: '',
       // live server data
@@ -58,7 +58,8 @@ class Report extends Component {
       reviews: [], // all reviews
       organizedConcepts: [], // reviews parsed into concepts
       monthConcepts: [], // reviews parsed into monthly concept data
-      keywordArray: []
+      keywordArray: [],
+      currentTargetedReviews: []
 
     };
   }
@@ -68,7 +69,7 @@ class Report extends Component {
       .then(results => { return results.json() })
       .then(results => {
         this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
-this.state.keywordArray = this.state.organizedConcepts;
+        this.state.keywordArray = this.state.organizedConcepts;
       });
   }
 
@@ -92,17 +93,17 @@ this.state.keywordArray = this.state.organizedConcepts;
       switch (displaying) {
         case 'sentiment':
           return <div>
-            <DisplayTitle s={this.state}/>
+            {/* <DisplayTitle s={this.state}/> */}
             <SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
         case 'keyword':
           return <div>
-            <DisplayTitle s={this.state}/>
+            {/* <DisplayTitle s={this.state}/> */}
             <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
-          //is this the problem, there is no chart?
+        //is this the problem, there is no chart?
         case 'chart':
           return <ChartsToShow s={this.state} />
           break;
@@ -226,19 +227,25 @@ this.state.keywordArray = this.state.organizedConcepts;
 
   //arrow key handler
   reviewSwitch = (changeBy) => {
+
     if (changeBy === 'forward') {
-      this.setState((prevState) => {
-        let newState = { ...prevState, visibleReview: prevState.visibleReview + 1 }
-        return newState;
-      })
+      if (this.state.visibleReview !== this.state.currentTargetedReviews.length - 1) {
+        this.setState((prevState) => {
+          let newState = { ...prevState, visibleReview: prevState.visibleReview + 1 }
+          return newState;
+        })
+      }
     }
     else if (changeBy === 'backward') {
-      this.setState((prevState) => {
-        let newState = { ...prevState, visibleReview: prevState.visibleReview - 1 }
-        return newState;
-      })
+      if (this.state.visibleReview > 0) {
+        this.setState((prevState) => {
+          let newState = { ...prevState, visibleReview: prevState.visibleReview - 1 }
+          return newState;
+        })
+      }
     }
   }
+
 
   //not in use but needed for future reference
   toggleFade = () => {
@@ -268,7 +275,7 @@ this.state.keywordArray = this.state.organizedConcepts;
           let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', displayTitle: 'From Most Postive To Least Positive', currentTargetedReviews: this.state.reviews, visibleReview: 1, }
           return newState;
         })
-       
+
         break;
       case 'keyword':
         newState.displaying = 'keyword';
@@ -278,7 +285,7 @@ this.state.keywordArray = this.state.organizedConcepts;
           this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
           return newState
         });
-      
+
         break;
       case 'charts': //added chart state handle
         this.setState((prevState) => {
@@ -299,8 +306,8 @@ this.state.keywordArray = this.state.organizedConcepts;
           {/* LEFT SIDE */}
           <Grid container style={styles.MainContainer} spacing={8}>
             <Grid item sm={8} >
-            <div  style={styles.TopNavPanels}>
-              <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
+              <div style={styles.TopNavPanels}>
+                <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
               </div>
               <Grid style={styles.LeftContainer} item sm={12}>
                 <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
@@ -320,15 +327,15 @@ this.state.keywordArray = this.state.organizedConcepts;
                 <div onClick={this.topNavClickHandler} >
                   {this.RightSideShow()}
                 </div>
-               <Grid item sm={12} >
-               <div style={styles.ReviewWatson}>
-               <ReviewStars s={this.state} style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
-                  <WatsonBars s={this.state} style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+                <Grid item sm={12} >
+                  <div style={styles.ReviewWatson}>
+                    <ReviewStars s={this.state} style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
+                    <WatsonBars s={this.state} style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
                   </div>
-               </Grid>
+                </Grid>
               </Grid>
             </Grid>
-            
+
           </Grid>
 
         </div>)
