@@ -145,6 +145,7 @@ class Report extends Component {
         clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
         clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
         s={this.state}
+        changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
       />
       </div>
     }
@@ -181,6 +182,17 @@ class Report extends Component {
       return newState;
     })
   }
+
+  changeKeywordDisplayModifier = (displayModifier) => {
+    this.setState((prevState) => {
+      let newState = {
+        ...prevState,
+        displayModifier: displayModifier
+      }
+      return newState;
+    })
+  }
+
 
   clickHandlerForSentimentTimeChart = (clickedMonth) => {
     let month = clickedMonth.substring(0, 3)

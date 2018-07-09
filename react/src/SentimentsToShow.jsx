@@ -54,6 +54,7 @@ class SentimentsToShow extends Component {
             let dAlteredArray = reviews.map(review =>
                 ({ ...review, datePublished: new Date(review.datePublished) })
             )
+            console.log(dAlteredArray)
             const sortedDate = dAlteredArray.sort(function (a, b) {
                 return b.datePublished - a.datePublished
             })

@@ -13,12 +13,13 @@ class KeywordCharts extends Component {
     }
   }
 
-  handleChartChange = chartName => {
+  handleChartChange = (chartName, displayModifier) => {
     const resetCharts = {
       showTimeChart: false,
       showOverviewChart: false
     }
     this.setState({...resetCharts, [chartName]: true})
+    this.props.changeKeywordDisplayModifier(displayModifier)
   }
 
 
@@ -48,7 +49,7 @@ class KeywordCharts extends Component {
         <Button
           variant="contained"
           data-message="overtime"
-          onClick={() => this.handleChartChange('showTimeChart')}
+          onClick={() => this.handleChartChange('showTimeChart', 'time')}
           style={buttonStyle}
         >
           trends over time
@@ -56,7 +57,7 @@ class KeywordCharts extends Component {
         <Button
           variant="contained"
           data-message="overall"
-          onClick={() => this.handleChartChange('showOverviewChart')}
+          onClick={() => this.handleChartChange('showOverviewChart', 'volume')}
           style={buttonStyleTwo}
         >
           High level Overview

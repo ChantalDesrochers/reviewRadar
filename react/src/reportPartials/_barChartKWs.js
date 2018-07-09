@@ -4,6 +4,7 @@ import { HorizontalBar } from "react-chartjs-2";
 class KeywordBarChart extends Component {
   constructor(props) {
     super(props);
+
   }
 
   getChartData = returnConcepts => {
@@ -43,6 +44,34 @@ class KeywordBarChart extends Component {
   render() {
 
     const handleClick = elem => {
+      // var datasetIndex;
+      //     var dataset;
+      //     var colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
+
+      //     if (elements.length) {
+      //       console.log(elements)
+      //       var index = elements[0]._index;
+      //       datasetIndex = elements[0]._datasetIndex; //0
+      //       console.log('dataindex', datasetIndex)
+      //       alert('this click is working?')
+      //       // Reset old state
+      //       // dataset = this.data.datasets[datasetIndex];
+      //       var colorsArray = elements[0]['_chart']['config']['data']['datasets'][0]['backgroundColor']
+
+      //       // dataset.backgroundColor = colors.slice();
+      //       // dataset.hoverBackgroundColor = colors.slice();
+
+      //       // dataset.backgroundColor[index] = 'red'; // click color
+      //       // dataset.hoverBackgroundColor[index] = 'red';
+      //     } else {
+      //       // remove hover styles
+      //       // for (datasetIndex = 0; datasetIndex < this.data.datasets.length; ++datasetIndex) {
+      //       //   dataset = this.data.datasets[datasetIndex];
+      //       //   dataset.backgroundColor = colors.slice();
+      //       //   dataset.hoverBackgroundColor = colors.slice();
+      //       // }
+      //     }
+
 
       if (elem[0]) {
         console.log('elem', elem)
@@ -79,7 +108,7 @@ class KeywordBarChart extends Component {
         }
       },
       barThickness: 15,
-      getElementAtEvent: function(evt, elements) {
+      onElementsClick: function(evt, elements) {
           var datasetIndex;
           var dataset;
           var colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
@@ -87,7 +116,7 @@ class KeywordBarChart extends Component {
           if (elements.length) {
             var index = elements[0]._index;
             datasetIndex = elements[0]._datasetIndex;
-            alert('this click is working?')
+            alert('this click is working y?')
             // Reset old state
             dataset = this.data.datasets[datasetIndex];
             dataset.backgroundColor = colors.slice();

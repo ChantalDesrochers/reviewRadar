@@ -42,7 +42,30 @@ class KeywordsToShow extends Component {
                     {monthReviews}
                 </div>
             )
-        }
+        } else if(this.props.s.displayModifier === "time") {
+            let reviews = this.props.s.reviews
+            console.log(reviews)
+            let dAlteredArray = reviews.map(review =>
+                ({ ...review, datePublished: new Date(review.datePublished) })
+            )
+            console.log(dAlteredArray)
+            const sortedDate = dAlteredArray.sort(function (a, b) {
+                return b.datePublished - a.datePublished
+            })
+            let recentReviews = sortedDate.slice(0, 5)
+            recentReviews = recentReviews.map(review => (
+                <div>
+                    <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+                    <p>{review.description}</p>
+                </div>))
+            return (
+                <div style={{ marginTop: '100px' }}>
+                    <h2>Five Most Recent Reviews</h2>
+                    {recentReviews}
+                </div>
+            )
+
+    }
         else if (this.props.s.displayModifier === "volume") {
 
 
