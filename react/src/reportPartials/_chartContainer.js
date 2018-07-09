@@ -9,7 +9,7 @@ const ChartContainer = ({s, clickHandlerForKeywordTimeChart, reviews, displaying
   <div>
     { displaying === "sentiment" ? (
       <SentimentCharts s={s}  clickHandlerForSentimentTimeChart={clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={changeSentimentDisplayModifier} pickReviewTypeToDisplay={pickReviewTypeToDisplay} reviews={reviews}/> ) :
-       (<KeywordCharts clickHandlerForKeywordTimeChart={clickHandlerForKeywordTimeChart} organizedConcepts={organizedConcepts} monthConcepts={monthConcepts} s={s}  reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
+       (<KeywordCharts clickHandlerForKeywordTimeChart={clickHandlerForKeywordTimeChart} changeSentimentDisplayModifier={changeSentimentDisplayModifier} organizedConcepts={organizedConcepts} monthConcepts={monthConcepts} s={s}  reviewTypeToDisplayKW={reviewTypeToDisplayKW}/> ) }
   </div>
 )
 

@@ -267,25 +267,23 @@ class Report extends Component {
   }
 
   topNavClickHandler = (clickedItem) => {
-    const newState = { ...this.state }
+    // const newState = { ...this.state }
     switch (clickedItem) {
       case 'sentiment':
-        newState.displaying = 'sentiment';
+        // newState.displaying = 'sentiment';
         this.setState((prevState) => {
           let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', displayTitle: 'From Most Postive To Least Positive', currentTargetedReviews: this.state.reviews, visibleReview: 0, }
           return newState;
         })
-
         break;
       case 'keyword':
-        newState.displaying = 'keyword';
+        // newState.displaying = 'keyword';
         this.setState((prevState) => {
           let newState = { ...prevState, displayModifier: 'volume', displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content, visibleReview: 0 }
           // this.toggleFade();
           this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
           return newState
         });
-
         break;
       case 'charts': //added chart state handle
         this.setState((prevState) => {
