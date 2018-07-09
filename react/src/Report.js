@@ -97,7 +97,7 @@ class Report extends Component {
             <SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary}  /></div>
           break;
-        case 'keyword':
+      case 'keyword':
           return <div>
             {/* <DisplayTitle s={this.state}/> */}
             <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
@@ -181,7 +181,8 @@ class Report extends Component {
     this.setState((prevState) => {
       let newState = {
         ...prevState,
-        displayModifier: displayModifier
+        displayModifier: displayModifier,
+        visibleReview: 0,
       }
       return newState;
     })

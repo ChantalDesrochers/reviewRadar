@@ -14,24 +14,21 @@ class KeywordCharts extends Component {
     }
   }
 
-  // handleChartChange = chartName => {
-  //   const resetCharts = {
-  //     showTimeChart: false,
-  //     showOverviewChart: false
-  //   }
-  //   this.setState({...resetCharts, [chartName]: true})
-  // }
-
   handleChartChange = (chartName, displayModifier) => {
     const resetCharts = {
       showTimeChart: false,
       showOverviewChart: false
     }
+    
+    if (displayModifier === 'volume'){
+    //   this.setState({currentTargetedReviews: this.state.initialState})
+      this.props.reviewTypeToDisplayKW(this.props.s.organizedConcepts[0].content)
+    }
     this.setState({...resetCharts, [chartName]: true})
     this.props.changeSentimentDisplayModifier(displayModifier)
   }
 
-
+  
   render() {
     //const { organizedConcepts } = this.props
     const { showOverviewChart, showTimeChart } = this.state
@@ -45,21 +42,13 @@ class KeywordCharts extends Component {
       background: '#E8D28B',
       color: 'black'
     }
-
+    
     return (
-      <div style={{textAlign:'center'}}>
+          <div style={{textAlign:'center'}}>
         {/* { showTimeChart && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> } */}
         { this.props.s.displayModifier === 'timebymonth' && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> }
         {/* { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />} */}
         { this.props.s.displayModifier === 'volume' && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />}
-        <Button
-          variant="contained"
-          data-message="overtime"
-          onClick={() => this.handleChartChange('showTimeChart', 'timebymonth')}
-          style={buttonStyle}
-        >
-          trends over time
-        </Button>
         <Button
           variant="contained"
           data-message="overall"
@@ -67,6 +56,14 @@ class KeywordCharts extends Component {
           style={buttonStyleTwo}
         >
           High level Overview
+        </Button>
+        <Button
+          variant="contained"
+          data-message="overtime"
+          onClick={() => this.handleChartChange('showTimeChart', 'timebymonth')}
+          style={buttonStyle}
+        >
+          trends over time
         </Button>
       </div>
     )
