@@ -64,7 +64,6 @@ class SentimentsToShow extends Component {
                 </div>))
             return (
                 <div style={{ marginTop: '100px' }}>
-                    <h2>Five Most Recent Reviews</h2>
                     {recentReviews}
                 </div>
             )

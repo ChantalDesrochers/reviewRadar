@@ -46,7 +46,7 @@ class Report extends Component {
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
-      displayTitle:'This is a stand in title',  
+      displayTitle:'Your Top Review - toggle right to go from most positive to least',
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
@@ -206,7 +206,7 @@ this.state.keywordArray = this.state.organizedConcepts;
       finalReviews.push(this.findObjectByKey(this.state.reviews, 'id', references[i]));
     }
     this.setState((prevState) => {
-      let newState = { ...prevState, currentTargetedReviews: finalReviews }
+      let newState = { ...prevState, currentTargetedReviews: finalReviews, keywordChartTarget: clickedItem }
       return newState;
     })
   }
@@ -265,20 +265,20 @@ this.state.keywordArray = this.state.organizedConcepts;
       case 'sentiment':
         newState.displaying = 'sentiment';
         this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', displayTitle: 'From Most Postive To Least Positive', currentTargetedReviews: this.state.reviews, visibleReview: 1, }
+          let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', displayTitle: 'Most Postive Review - toggle right to see most positive To least positive', currentTargetedReviews: this.state.reviews, visibleReview: 1, }
           return newState;
         })
-       
+
         break;
       case 'keyword':
         newState.displaying = 'keyword';
         this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volume', displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content }
+          let newState = { ...prevState, displayModifier: 'volume', displaying: 'keyword', displayTitle: 'Your Reviews About', keywordChartTarget: this.state.organizedConcepts[0].content }
           // this.toggleFade();
           this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
           return newState
         });
-      
+
         break;
       case 'charts': //added chart state handle
         this.setState((prevState) => {
@@ -328,7 +328,7 @@ this.state.keywordArray = this.state.organizedConcepts;
                </Grid>
               </Grid>
             </Grid>
-            
+
           </Grid>
 
         </div>)

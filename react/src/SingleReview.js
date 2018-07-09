@@ -23,14 +23,14 @@ class SingleReview extends Component {
                 //     console.log('in exit review', styles);
                 break;
         }
-    }           
+    }
     prepareHtml = (fadeBool, reviewsToShow) => {
         const index = this.props.s.visibleReview;
         const review = this.props.s.reviews[index].description;
         const rating = this.props.s.reviews[index].rating;
         const date = this.props.s.reviews[index].datePublished;
         const name = this.props.s.reviews[index].author;
-        const site = "Yelp";
+        const site = this.props.s.reviews[index].origin;
         return (
             <div>
                 <div className={'full-cue-card-review'}  >

@@ -17,7 +17,7 @@ class NameAndSite extends Component {
 
     render() {
         return (
-            <div style={{fontSize:'1.2rem', lineHeight:'29px'}} >{this.props.name} on Yelp</div>
+            <div style={{fontSize:'1.2rem', lineHeight:'29px'}} >{this.props.name} on {this.props.site}</div>
 
         );
     }

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Pie } from 'react-chartjs-2';
+import { withStyles } from '@material-ui/core/styles';
+import 'typeface-roboto'
 
 class PieChart extends Component {
   constructor(props) {
@@ -8,27 +10,40 @@ class PieChart extends Component {
   }
 
   prepareHtml = (handleClicktwo) => {
+    const chartTitles = {
+  fontSize: 30,
+  fontFamily: 'arial'
+}
+      const chartOptions = {
+      legend: {
+        labels: {
+          fontSize: 20
+        }
+      }
+    }
 
     if (this.props.s.dataFocus === 'review') {
-      return <div className="pie-chart" style={{height:375}}>
-
+      return <div className="pie-chart" style={{height:450}}>
+        <h3 style={chartTitles}>How your patrons are feeling</h3>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}
           options={{
             maintainAspectRatio: false
-          }} />
+          }}
+          options={chartOptions} />
       </div>
     }
     else if (this.props.s.dataFocus === 'chart') {
       return <div className="pie-chart" style={{height:550}}>
-
+       <h3>How your patrons are feeling</h3>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}
           options={{
             maintainAspectRatio: false
-          }} />
+          }}
+          options={chartOptions}/>
       </div>
     }
   }
@@ -86,6 +101,7 @@ class PieChart extends Component {
 
   render() {
     // this.parseChartData();
+
     const handleClicktwo = elem => {
       if (elem[0]) {
         let chartPoints = elem;
