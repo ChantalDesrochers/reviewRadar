@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import 'typeface-roboto'
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
-import Date from "./Date.js"
+import DateC from "./Date.js"
 import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel'
@@ -44,9 +44,12 @@ class KeywordsToShow extends Component {
         } else if (this.props.s.displayModifier === 'time') {
             console.log("keywords to show", this.props.s)
             let reviews = this.props.s.reviews
+            console.log('all reviews', reviews)
             let dAlteredArray = reviews.map(review =>
+
                 ({ ...review, datePublished: new Date(review.datePublished) })
             )
+            console.log('daltered array', dAlteredArray)
             const sortedDate = dAlteredArray.sort(function (a, b) {
                 return b.datePublished - a.datePublished
             })
@@ -67,8 +70,7 @@ class KeywordsToShow extends Component {
             let review = this.props.s.currentTargetedReviews[this.props.s.visibleReview].description;
             let name = this.props.s.currentTargetedReviews[this.props.s.visibleReview].author;
             let date = this.props.s.currentTargetedReviews[this.props.s.visibleReview].datePublished;
-            const site = "Yelp";
-            if (this.props.s.displayModifier === "volume") {
+            const site = this.props.s.currentTargetedReviews[this.props.s.visibleReview].origin;
                 if (this.props.s.dataFocus === "review") {
 
                     return <div style={styles.reviewTextModifierVolumeFocusReview} >
@@ -113,7 +115,7 @@ class KeywordsToShow extends Component {
                         </Grid>
                     </div>
                 }
-            }
+
         }
     }
     render() {

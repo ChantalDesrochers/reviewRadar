@@ -10,15 +10,15 @@ class TopNavPanels extends Component {
         const color1 = '#82d9ba'
         const color2 = '#e8d28b'
         const color3 = '#db848b'
-        const color4 = '#88c8e3' 
-        return (   
+        const color4 = '#88c8e3'
+        return (
                 <Grid item sm={8} style={{margin:'auto'}} >
                     <Grid item sm={3} style={styles.TopNavPanel}>
                         <TopNavPanel backgroundColor={color1} destination={"charts"} title={"Chart Land"} topNavClickHandler={this.props.topNavClickHandler} />
                     </Grid>
-                    <Grid item sm={3} style={styles.TopNavPanel}>
+                  {/*  <Grid item sm={3} style={styles.TopNavPanel}>
                         <TopNavPanel  backgroundColor={color2} destination={"keyword"} title={"What Customers Mentioned"} topNavClickHandler={this.props.topNavClickHandler} />
-                    </Grid>
+                    </Grid>*/}
                     <Grid item sm={3} style={styles.TopNavPanel}>
                         <TopNavPanel  backgroundColor={color3} destination={"sentiment"} title={"How Customers Felt"} topNavClickHandler={this.props.topNavClickHandler} />
                     </Grid>

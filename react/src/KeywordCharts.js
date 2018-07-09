@@ -14,11 +14,15 @@ class KeywordCharts extends Component {
     }
   }
 
-
   handleChartChange = (chartName, displayModifier) => {
     const resetCharts = {
       showTimeChart: false,
       showOverviewChart: false
+    }
+
+    if (displayModifier === 'volume'){
+    //   this.setState({currentTargetedReviews: this.state.initialState})
+      this.props.reviewTypeToDisplayKW(this.props.s.organizedConcepts[0].content)
     }
     this.setState({...resetCharts, [chartName]: true})
     this.props.changeKeywordDisplayModifier(displayModifier)

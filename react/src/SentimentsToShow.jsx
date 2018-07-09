@@ -7,9 +7,13 @@ import VisibleReviewNavPanel from "./VisibleReviewNavPanel"
 
 const styles = {
     reviewTextModifierVolumeFocusReview: { marginTop: '100px', Left: 50, textAlign: 'left'},
+
+    reviewTextModifierVolumeBySentimentFocusReview: { marginTop: '20px', Left: 50, textAlign: 'center', fontSize: '1.5em'},
+
     review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
-    multipleReviewsText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
-    multipleReviewsContainer: { marginTop: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }
+    multipleReviewsText: {  maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
+
+    multipleReviewsContainer: { marginTop:'50px'}
 }
 class SentimentsToShow extends Component {
     mouseController = (message) => {
@@ -40,8 +44,8 @@ class SentimentsToShow extends Component {
             let finalReviews = [];
             finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(0, 5).map(review => (
                 <div style={styles.multipleReviewsContainer}>
-                    <Typography style={styles.multipleReviewsText}>
-                        {review.description}
+                    <Typography style={styles.reviewTextModifierVolumeBySentimentFocusReview}>
+                        {review.summary}
                     </Typography>
                 </div>
             ))
@@ -53,6 +57,7 @@ class SentimentsToShow extends Component {
             let dAlteredArray = reviews.map(review =>
                 ({ ...review, datePublished: new Date(review.datePublished) })
             )
+            console.log('dAlteredArray', dAlteredArray)
             const sortedDate = dAlteredArray.sort(function (a, b) {
                 return b.datePublished - a.datePublished
             })

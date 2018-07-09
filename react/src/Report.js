@@ -50,7 +50,7 @@ class Report extends Component {
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
-      visibleReview: 0,
+      visibleReview: 175,
       leftShowing: 'text',
       keywordChartTarget: '',
       // live server data
@@ -95,13 +95,13 @@ class Report extends Component {
           return <div>
             <DisplayTitle s={this.state}/>
             <SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
-            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
+            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary}  /></div>
           break;
-        case 'keyword':
+      case 'keyword':
           return <div>
            <DisplayTitle s={this.state}/>
             <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
-          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
+          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></div>
           break;
         //is this the problem, there is no chart?
         case 'chart':
@@ -202,6 +202,10 @@ changeKeywordDisplayModifier = (displayModifier) => {
 }
 
 
+  //up down arrow
+  clickHandlerForSentimentSummary = (direction) => {
+    console.log('i am an up down arrow', direction);
+  }
 
 
   clickHandlerForSentimentTimeChart = (clickedMonth) => {
@@ -351,9 +355,7 @@ changeKeywordDisplayModifier = (displayModifier) => {
                 </Grid>
               </Grid>
             </Grid>
-
           </Grid>
-
         </div>)
     );
   }

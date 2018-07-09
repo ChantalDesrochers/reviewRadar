@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import 'typeface-roboto'
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
-import Date from "./Date.js"
+import DateC from "./DateC.js"
 import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 
@@ -42,7 +42,7 @@ class SingleReview extends Component {
                         </Grid>
                         <Grid item sm={6} >
                             <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                                <Date style={{ float: 'right'}} date={date} />
+                                <DateC style={{ float: 'right'}} date={date} />
                             </Grid>
                         </Grid>
                         <Grid item sm={12}  >

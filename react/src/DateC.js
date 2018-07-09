@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Paper from '@material-ui/core/Paper'
 import { Star } from '@material-ui/icons'
-class Date extends Component {
+class DateC extends Component {
 
     render() {
 
@@ -11,4 +11,4 @@ class Date extends Component {
         );
     }
 }
-export default Date
+export default DateC
