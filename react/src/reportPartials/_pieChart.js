@@ -105,18 +105,10 @@ class PieChart extends Component {
       }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d9eeacff309db55073e046e8916d60620c3c9af6
     return (<div>
       {this.prepareHtml(handleClicktwo)}
     </div>
     )
-<<<<<<< HEAD
-=======
-
->>>>>>> d9eeacff309db55073e046e8916d60620c3c9af6
   }
 }
 

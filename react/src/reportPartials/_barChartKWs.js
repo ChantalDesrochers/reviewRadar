@@ -17,26 +17,6 @@ class KeywordBarChart extends Component {
     });
     return {
       labels: label,
-<<<<<<< HEAD
-      datasets: [
-        {
-          label: 'Keyword Frequency',
-          backgroundColor: '#6EEFC2',
-          borderColor: '#5FD8AE',
-          borderWidth: 5,
-          hoverBackgroundColor: '#60F2BF',
-          hoverBorderColor: '#1FDA9A',
-          data: data
-        }
-      ],
-      options: {
-        scales: {
-          xAxes: [
-            {
-              ticks: {
-                min: 0
-              }
-=======
       datasets: [{
         label: 'Keyword Frequency',
         backgroundColor: colors,
@@ -51,54 +31,17 @@ class KeywordBarChart extends Component {
           xAxes: [{
             ticks: {
               fontSize: 30
->>>>>>> d9eeacff309db55073e046e8916d60620c3c9af6
             }
           }]
 
         }
       }
-<<<<<<< HEAD
-    };
-  };
-=======
     }
   }
 
->>>>>>> d9eeacff309db55073e046e8916d60620c3c9af6
 
   render() {
     const handleClick = elem => {
-<<<<<<< HEAD
-      if (elem[0]) {
-        console.log(elem);
-        let chartPoints = elem;
-        let clickedPointIndex = chartPoints[0]["_index"];
-        const label =
-          chartPoints[0]["_chart"]["config"]["data"]["labels"][
-            clickedPointIndex
-          ];
-        this.props.reviewTypeToDisplayKW(label);
-        const score =
-          chartPoints[0]["_chart"]["config"]["data"]["datasets"][0]["data"][
-            clickedPointIndex
-          ];
-        console.log(
-          "chartPoints - label",
-          chartPoints[0]["_chart"]["config"]["data"]["labels"][
-            clickedPointIndex
-          ]
-        );
-        console.log(
-          "chartPoints - score",
-          chartPoints[0]["_chart"]["config"]["data"]["datasets"][0]["data"][
-            clickedPointIndex
-          ]
-        );
-      }
-    };
-
-    return (
-=======
 
       if (elem[0]) {
         console.log('elem', elem)
@@ -169,23 +112,16 @@ class KeywordBarChart extends Component {
 
     return (
 
->>>>>>> d9eeacff309db55073e046e8916d60620c3c9af6
       <div className="bar-chart" style={{"height" : 375}}>
         <HorizontalBar
           data={this.getChartData(this.props.organizedConcepts)}
           getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
-<<<<<<< HEAD
-  height={150}
-  options={{
-    maintainAspectRatio: false}}/>
-=======
   height={10}
   options={{
     maintainAspectRatio: false}}
     options={chartyOptions}
     ref="myChart"
     />
->>>>>>> d9eeacff309db55073e046e8916d60620c3c9af6
       </div>
     );
   }
