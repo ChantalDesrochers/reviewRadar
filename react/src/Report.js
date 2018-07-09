@@ -97,7 +97,7 @@ class Report extends Component {
             <SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
-        case 'keyword':
+      case 'keyword':
           return <div>
             {/* <DisplayTitle s={this.state}/> */}
             <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
