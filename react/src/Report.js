@@ -50,7 +50,7 @@ class Report extends Component {
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
-      visibleReview: 195,
+      visibleReview: 0,
       leftShowing: 'text',
       keywordChartTarget: '',
       // live server data
@@ -272,7 +272,7 @@ class Report extends Component {
       case 'sentiment':
         newState.displaying = 'sentiment';
         this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', displayTitle: 'From Most Postive To Least Positive', currentTargetedReviews: this.state.reviews, visibleReview: 1, }
+          let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', displayTitle: 'From Most Postive To Least Positive', currentTargetedReviews: this.state.reviews, visibleReview: 0, }
           return newState;
         })
 
@@ -280,7 +280,7 @@ class Report extends Component {
       case 'keyword':
         newState.displaying = 'keyword';
         this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volume', displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content }
+          let newState = { ...prevState, displayModifier: 'volume', displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content, visibleReview: 0 }
           // this.toggleFade();
           this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
           return newState
