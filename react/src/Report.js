@@ -73,6 +73,23 @@ class Report extends Component {
       });
   }
 
+  dateParsingReviews = () => {
+      let reviews = this.state.reviews
+      let dAlteredArray = reviews.map(review =>
+          ({ ...review, datePublished: new Date(review.datePublished) })
+      )
+      const sortedDate = dAlteredArray.sort(function (a, b) {
+          return b.datePublished - a.datePublished
+      })
+      let recentReviews = sortedDate.slice(0, 5)
+      recentReviews = recentReviews.map(review => (
+          <div>
+              <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+              <p>{review.description}</p>
+          </div>))
+      return recentReviews
+  }
+
   swapDisplaySides = () => {
     if (this.state.dataFocus === 'review') {
       this.setState((prevState) => {
@@ -94,13 +111,13 @@ class Report extends Component {
         case 'sentiment':
           return <div>
             <DisplayTitle s={this.state}/>
-            <SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
+            <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
         case 'keyword':
           return <div>
            <DisplayTitle s={this.state}/>
-            <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
+            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
         //is this the problem, there is no chart?
@@ -133,11 +150,11 @@ class Report extends Component {
     if (this.state.dataFocus === 'chart') {
       switch (displaying) {
         case 'sentiment':
-          return <div><SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
+          return <div><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
           </div>
           break;
         case 'keyword':
-          return <div> <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
+          return <div> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
          </div>
           break;
       }
