@@ -141,7 +141,7 @@ getReviewsPerMonth()
 
 
         return (
-            <div className="pie-chart">
+            <div >
               <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
             </div>
         );

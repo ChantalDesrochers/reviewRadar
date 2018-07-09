@@ -32,7 +32,7 @@ const styles = {
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
 
-  ChartOnLeftSide: { marginTop: 100 },
+  ChartOnLeftSide: { },
   ChartOnRightSide: {},
   ReviewNavButtonsOnLeftSide: { marginLeft: '10%' },
   ReviewNavButtonsOnRightSide: {}

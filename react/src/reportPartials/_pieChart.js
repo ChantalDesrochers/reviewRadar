@@ -3,6 +3,11 @@ import { Pie } from 'react-chartjs-2';
 import { withStyles } from '@material-ui/core/styles';
 import 'typeface-roboto'
 
+const styles ={ 
+  PieOnRight: {width:"83%", margin:'auto'},
+  PieChartContainer: {marginTop:'21px'}
+}
+
 class PieChart extends Component {
   constructor(props) {
     super(props);
@@ -19,31 +24,32 @@ class PieChart extends Component {
       const chartOptions = {
       legend: {
         labels: {
-          fontSize: 20
-        }
-      }
-    }
+          fontSize: 20,
+         
+        },
+
+      },
+      responsive: true, 
+      maintainAspectRatio: true
+    } 
 
     if (this.props.s.dataFocus === 'review') {
-      return <div className="pie-chart" style={{height:450}}>
-        <h3 style={chartTitles}>How your patrons are feeling</h3>
+      return <div style={styles.PieOnRight}>
+       <h3 style={chartTitles}>How your patrons are feeling</h3> 
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
-          width={1}
-          height={1}
-          options={{
-            maintainAspectRatio: true
-          }}
+     width={3}
+     height={3}
           options={chartOptions} />
       </div>
     }
     else if (this.props.s.dataFocus === 'chart') {
-      return <div className="pie-chart" style={{height:550}}>
+      return <div>
        <h3 style={chartTitles}>How your patrons are feeling</h3>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}
           options={{
-            maintainAspectRatio: false
+            maintainAspectRatio: true
           }}
           options={chartOptions}/>
       </div>
@@ -114,7 +120,7 @@ class PieChart extends Component {
       }
     }
 
-    return (<div>
+    return (<div style={styles.PieChartContainer}>
       {this.prepareHtml(handleClicktwo)}
     </div>
     )
@@ -123,4 +129,4 @@ class PieChart extends Component {
 
 
 
-export default PieChart;
+export default withStyles(styles)(PieChart);

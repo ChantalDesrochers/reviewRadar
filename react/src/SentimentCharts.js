@@ -43,8 +43,7 @@ class SentimentCharts extends Component {
 
     const buttonStyles = {
       margin: 50,
-      position: 'absolute',
-      display: 'inline'
+       display: 'inline'
     }
 
     return (

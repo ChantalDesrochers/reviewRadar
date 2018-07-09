@@ -1,12 +1,3 @@
-.summary-div {
-    display: block;
-    font-size: '2em'
-}
-
-.full-div {
-    color: blue;
-    display: hidden;
-}
 
 body {
     background-color:'white'
@@ -31,9 +22,7 @@ header {
 .top{
     height:'100vh';
 }
-.big-chart-container{
-    background-color: blue;
-}
+
 
 .keyword-review{
     font-size: 1em;

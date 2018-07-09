@@ -60,7 +60,7 @@ const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][
  }
 
         return (
-            <div className="pie-chart">
+            <div>
               <Polar data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
             </div>
         );
