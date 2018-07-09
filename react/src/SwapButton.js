@@ -8,7 +8,6 @@ class SwapButton extends Component {
 
     
     render() {
-        console.log('ion swap button my props are:', this.props)
         return (
             <div>
           <Button variant="fab" color="primary" className="swap-button" onClick={() => this.props.swapDisplaySides()}>

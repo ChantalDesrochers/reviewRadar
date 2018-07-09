@@ -6,20 +6,20 @@ import { Typography } from "@material-ui/core";
 import VisibleReviewNavPanel from "./VisibleReviewNavPanel"
 
 const styles = {
-    reviewTextModifierVolumeFocusReview: { marginTop: '200px' },
-    review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
-    multipleReviewsText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
+    reviewTextModifierVolumeFocusReview: { marginTop: '100px', Left: 50, textAlign: 'left'},
+    review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
+    multipleReviewsText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
     multipleReviewsContainer: { marginTop: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }
 }
 class SentimentsToShow extends Component {
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
-                styles.review = { textOverflow: 'ellipsis', overflow: 'auto', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+                styles.review = { textOverflow: 'ellipsis', overflow: 'auto', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em' }
                 this.forceUpdate();
                 break;
             case 'exit-review':
-                styles.review = { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em' }
+                styles.review = { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em' }
                 this.forceUpdate();
                 break;
         }

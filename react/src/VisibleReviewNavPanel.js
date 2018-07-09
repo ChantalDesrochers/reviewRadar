@@ -7,8 +7,8 @@ import { LabelOutline } from '@material-ui/icons'
 
  let styles = {
    
-    buttonContainerForModifierVolumeFocusReview: { marginLeft: '35%', position: 'absolute', top: 450, backgroundColor: 'blue' },
-    buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 600, float: 'left'}
+    buttonContainerForModifierVolumeFocusReview: { marginLeft: '40%', position: 'absolute', top: 400},
+    buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 650, float: 'left'}
  }
 
 class VisibleReviewNavPanel extends Component {
@@ -17,25 +17,45 @@ class VisibleReviewNavPanel extends Component {
     }
     pickNavButtonType = () => {
         if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'review') {
-            return (<Grid className="buttons" style={styles.buttonContainerForModifierVolumeFocusReview}>
-                <Grid item sm={2}>
-                    <div style={{ textAlign: 'center' }}>
-                        <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
-                            <LabelOutline className="icon-flipped" />
-                        </Button>
-                    </div>
+            return (<div className="buttons" style={styles.buttonContainerForModifierVolumeFocusReview}>
+                       <Grid container >
+                <Grid item sm={3}>
+                    <Button style={{ backgroundColor: 'green' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
+                        <LabelOutline className="icon-flipped" />
+                    </Button>
                 </Grid>
-                <Grid item sm={2}>
-                    <div style={{ textAlign: 'center' }}>
-                        <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
-                            <LabelOutline />
-                        </Button>
-                    </div>
-                </Grid>
-            </Grid>)
+            <Grid item sm={6}>
+            </Grid>
+                <Grid item sm={3}>
+                    <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
+                        <LabelOutline />
+                    </Button>
+               </Grid>
+        </Grid>
+            </div>)
         }
         else if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'chart'){
+            // console.log(' chart keyword ')
+         return (
+         <div style={styles.buttonContainerForModifierVolumeFocusChart}>
+         <Grid container >
+                <Grid item sm={6}>
+                    <Button style={{ backgroundColor: 'green' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
+                        <LabelOutline className="icon-flipped" />
+                    </Button>
+                </Grid>
+            
+                <Grid item sm={6}>
+                    <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
+                        <LabelOutline />
+                    </Button>
+               </Grid>
+        </Grid>
+         </div>)
+               }
+        else if (this.props.s.displayModifier === 'keyword' && this.props.s.dataFocus === 'chart'){
             // return (<div style={styles.buttonContainerForModifierVolumeFocusChart}>
+            console.log(' chart keyword ')
          return (
          <div style={styles.buttonContainerForModifierVolumeFocusChart}>
          <Grid container >
@@ -58,8 +78,6 @@ class VisibleReviewNavPanel extends Component {
         }
     }
     render() {
-        console.log('state in visible review nav panel', this.props.s);
-
         return (
             <div>
                 {this.pickNavButtonType()}

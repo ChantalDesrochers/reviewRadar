@@ -35,7 +35,7 @@ var reportData = []
 
 var sentData = {
   //live
-  name: 'Planta (from express)',
+  name: 'Momofuku',
   reviewsL: reportData, //
   organizedConceptsL: parse.conceptAggregator(reportData),
   monthConceptsL: parse.datedAggregator(parse.parseReviewsByDate(reportData)),

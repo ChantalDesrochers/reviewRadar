@@ -8,19 +8,16 @@ import AppBar from '@material-ui/core/AppBar';
 import SentimentsToShow from './SentimentsToShow';
 import KeywordsToShow from './KeyWordsToShow';
 import Colors from './AppColors';
-import KeywordBarChart from './reportPartials/_barChartKWs';
-import SentimentPieChart from './reportPartials/_pieChart';
 import SwapButton from './SwapButton';
 import ChartContainer from "./reportPartials/_chartContainer";
 import TopNavPanels from "./TopNavPanels.js";
-import TopNavPanel from "./TopNavPanel.js";
 import WatsonBars from './WatsonBar';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
-import ChartsToShow from "./ChartsToShow.js"
-
+import ChartsToShow from "./ChartsToShow.js";
+import DisplayTitle from "./DisplayTitle"
 const styles = {
-  AppBar: { backgroundColor: Colors.AppBarColor },
+  AppBar: { backgroundColor: '#f7eac8', height:'100px'},
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
@@ -28,13 +25,16 @@ const styles = {
   // Top: { height: '89vh' },
 
   TopNavPanel: { float: 'left', padding: 20 },
-  TopNavPanelContainer: { backgroundColor: "blue" },
+  TopNavPanels: {textAlign:'center', height:'25%'},
+
+  // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
+  ReviewWatson:{position:'absolute', bottom: '150px', right: '220px'},
   WatsonBars: { bottom: 50 },
-  ReviewStars: { bottom: 100 },
+  ReviewStars: { bottom: 100},
 
   ChartOnLeftSide: { marginTop: 100 },
   ChartOnRightSide: {},
-  ReviewNavButtonsOnLeftSide: { marginLeft: '35%', backgroundColor: 'blue' },
+  ReviewNavButtonsOnLeftSide: { marginLeft: '10%' },
   ReviewNavButtonsOnRightSide: {}
 }
 class Report extends Component {
@@ -46,6 +46,7 @@ class Report extends Component {
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
+      displayTitle:'This is a stand in title',  
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
@@ -57,7 +58,7 @@ class Report extends Component {
       reviews: [], // all reviews
       organizedConcepts: [], // reviews parsed into concepts
       monthConcepts: [], // reviews parsed into monthly concept data
-
+      keywordArray: []
 
     };
   }
@@ -67,7 +68,7 @@ class Report extends Component {
       .then(results => { return results.json() })
       .then(results => {
         this.setState({ loading: false, reviews: results.reviews, currentTargetedReviews: results.reviews, organizedConcepts: results.organizedConcepts, monthConcepts: results.monthConcepts, companyName: results.name })
-
+this.state.keywordArray = this.state.organizedConcepts;
       });
   }
 
@@ -90,13 +91,18 @@ class Report extends Component {
     if (this.state.dataFocus === 'review') {
       switch (displaying) {
         case 'sentiment':
-          return <div><SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
+          return <div>
+            <DisplayTitle s={this.state}/>
+            <SentimentsToShow s={this.state} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
         case 'keyword':
-          return <div><KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
+          return <div>
+            <DisplayTitle s={this.state}/>
+            <KeywordsToShow s={this.state} reviewSwitch={this.reviewSwitch} />;
           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} /></div>
           break;
+          //is this the problem, there is no chart?
         case 'chart':
           return <ChartsToShow s={this.state} />
           break;
@@ -133,7 +139,6 @@ class Report extends Component {
          </div>
           break;
       }
-
     }
     else if (this.state.dataFocus === 'review') {
       return <div style={styles.ChartOnRightSide}><ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
@@ -170,7 +175,6 @@ class Report extends Component {
         return
     }
   }
-
 
   changeSentimentDisplayModifier = (displayModifier) => {
     this.setState((prevState) => {
@@ -261,28 +265,29 @@ class Report extends Component {
       case 'sentiment':
         newState.displaying = 'sentiment';
         this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', currentTargetedReviews: this.state.reviews, visibleReview: 1, }
+          let newState = { ...prevState, displayModifier: 'volume', displaying: 'sentiment', displayTitle: 'From Most Postive To Least Positive', currentTargetedReviews: this.state.reviews, visibleReview: 1, }
           return newState;
         })
+       
         break;
       case 'keyword':
         newState.displaying = 'keyword';
         this.setState((prevState) => {
           let newState = { ...prevState, displayModifier: 'volume', displaying: 'keyword', keywordChartTarget: this.state.organizedConcepts[0].content }
           // this.toggleFade();
+          this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
           return newState
         });
+      
         break;
       case 'charts': //added chart state handle
         this.setState((prevState) => {
           let newState = { ...prevState, displaying: 'chart' }
           return newState;
         })
-        this.clickHandlerForKeyWordBarChart(this.state.organizedConcepts[0].content);
     }
   };
   render() {
-    console.log('state', this.state)
     const watsonIndex = this.state.visibleReview;
     return (
       this.state.loading ? (<div> Loading </div>) : (
@@ -293,8 +298,10 @@ class Report extends Component {
           </AppBar>
           {/* LEFT SIDE */}
           <Grid container style={styles.MainContainer} spacing={8}>
-            <Grid item sm={8}>
+            <Grid item sm={8} >
+            <div  style={styles.TopNavPanels}>
               <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
+              </div>
               <Grid style={styles.LeftContainer} item sm={12}>
                 <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
                   <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
@@ -310,17 +317,18 @@ class Report extends Component {
             {/* RIGHT SIDE */}
             <Grid item sm={4} >
               <Grid item sm={12}  >
-                <Paper onClick={this.topNavClickHandler} >
+                <div onClick={this.topNavClickHandler} >
                   {this.RightSideShow()}
-                </Paper>
-                <div>
-                  <ReviewStars style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
-                  <WatsonBars style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
                 </div>
+               <Grid item sm={12} >
+               <div style={styles.ReviewWatson}>
+               <ReviewStars s={this.state} style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
+                  <WatsonBars s={this.state} style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+                  </div>
+               </Grid>
               </Grid>
-              {/* <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-              </Grid> */}
             </Grid>
+            
           </Grid>
 
         </div>)

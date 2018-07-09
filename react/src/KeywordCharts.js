@@ -37,10 +37,9 @@ class KeywordCharts extends Component {
       background: '#E8D28B',
       color: 'black'
     }
-    {console.log('in keyword chart, being passed all concepts', this.props.organizedConcepts)}
-    // {console.log('in keyword chart, being passed reviewtypetodisplay', this.props.reviewTypeToDisplayKW)}
+
     return (
-      <div>
+      <div style={{textAlign:'center'}}>
         { showTimeChart && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> }
         { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />}
         <Button

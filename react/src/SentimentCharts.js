@@ -30,26 +30,19 @@ class SentimentCharts extends Component {
     const buttonStyle = {
       margin: 30,
       background: '#DBA2A7',
-      color: 'white'
+      color: 'black'
     }
 
      const buttonStyleTwo = {
       background: '#DBA2A7',
-      color: 'white'
+      color: 'black'
     }
 
     return (
-      <div>
+      <div style={{textAlign:'center'}}>
         { showTimeChart && <SentimentOverTime clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} s={this.props.s} reviews={reviews} /> }
         { showOverviewChart &&  <PieChart s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  />}
-        <Button
-          variant="outlined"
-          data-message="overtime"
-          onClick={() => this.handleChartChange('showTimeChart', 'time')}
-          style={buttonStyle}
-        >
-          trends over time
-        </Button>
+       
         <Button
           variant="outlined"
           data-message="overall"
@@ -58,6 +51,19 @@ class SentimentCharts extends Component {
         >
           High level Overview
         </Button>
+       
+        <Button
+          variant="outlined"
+          data-message="overtime"
+          onClick={() => this.handleChartChange('showTimeChart', 'time')}
+          style={buttonStyle}
+        >
+          trends over time
+        </Button>
+       
+  
+
+
       </div>
     )
     }

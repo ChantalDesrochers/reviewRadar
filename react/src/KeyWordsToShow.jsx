@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel'
 const styles = {
     reviewText: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'center', fontSize: '1.6em', display: 'block' },
-    reviewTextModifierVolumeFocusReview: { marginTop: '200px' },
+    reviewTextModifierVolumeFocusReview: { marginTop: '100px', Left: 50, textAlign: 'left' },
     reviewTextModifierVolumeFocusChart: { marginTop: '0' }
 }
 
@@ -28,7 +28,6 @@ class KeywordsToShow extends Component {
         }
     }
     prepareHtml = () => {
-
         if (this.props.s.displayModifier === "timebymonth") {
             const reviews = this.props.s.currentTargetedReviews
             let monthReviews = reviews.map(review => (
@@ -45,15 +44,10 @@ class KeywordsToShow extends Component {
         }
         else if (this.props.s.displayModifier === "volume") {
 
-
-
-            console.log('state is ', this.props.s);
             let review = this.props.s.currentTargetedReviews[this.props.s.visibleReview].description;
             let name = this.props.s.currentTargetedReviews[this.props.s.visibleReview].author;
             let date = this.props.s.currentTargetedReviews[this.props.s.visibleReview].datePublished;
             const site = "Yelp";
-            console.log('state', this.props.s);
-
             if (this.props.s.displayModifier === "volume") {
                 if (this.props.s.dataFocus === "review") {
 
@@ -106,6 +100,7 @@ class KeywordsToShow extends Component {
         return (
             <div style={{ padding: 0 }}>
                 {this.prepareHtml()}
+                <VisibleReviewNavPanel s={this.props.s} reviewSwitch={this.props.reviewSwitch} />
             </div>
         )
     }

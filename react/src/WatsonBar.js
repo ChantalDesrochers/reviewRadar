@@ -4,6 +4,14 @@ import { Star, Favorite } from '@material-ui/icons'
 class WatsonBar extends Component {
 
 
+  parseHtml = (finalRating) => {
+    console.log('state in watson', this.props.s)
+    if (this.props.s.displayModifier !== 'time') {
+
+      return <div>{Array(parseInt(finalRating)).fill(<Favorite style={{ height: '40', width: '40', color: 'blue' }} />)}</div>
+    }
+
+  }
   parseSentimentData = () => {
     let rating = this.props.currentTargetedReviews[this.props.visibleReview].score
 
@@ -21,11 +29,12 @@ class WatsonBar extends Component {
     }
   }
 
+
   render() {
     const finalRating = this.parseSentimentData(this.props.watsonRating);
     return (
-      <Paper>{Array(parseInt(finalRating)).fill(<Favorite />)}</Paper>
-      
+      <div>{this.parseHtml(finalRating)}</div>
+
     );
   }
 }
