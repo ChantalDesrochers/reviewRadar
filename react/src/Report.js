@@ -181,7 +181,8 @@ class Report extends Component {
     this.setState((prevState) => {
       let newState = {
         ...prevState,
-        displayModifier: displayModifier
+        displayModifier: displayModifier,
+        visibleReview: 0,
       }
       return newState;
     })

@@ -54,19 +54,19 @@ class KeywordCharts extends Component {
         { this.props.s.displayModifier === 'volume' && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />}
         <Button
           variant="contained"
-          data-message="overtime"
-          onClick={() => this.handleChartChange('showTimeChart', 'timebymonth')}
-          style={buttonStyle}
-        >
-          trends over time
-        </Button>
-        <Button
-          variant="contained"
           data-message="overall"
           onClick={() => this.handleChartChange('showOverviewChart', 'volume')}
           style={buttonStyleTwo}
         >
           High level Overview
+        </Button>
+        <Button
+          variant="contained"
+          data-message="overtime"
+          onClick={() => this.handleChartChange('showTimeChart', 'timebymonth')}
+          style={buttonStyle}
+        >
+          trends over time
         </Button>
       </div>
     )
