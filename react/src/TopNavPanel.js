@@ -5,15 +5,16 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 let styles = {
-   fontSize: 1.5 
+   Text: { fontSize:'1.4em'}, 
+
     }
 class TopNavPanel extends Component {
 
     prepareHtml =() => {
 
         return (
-        <Button style={{backgroundColor: this.props.backgroundColor, height:110}} variant="contained" onClick={() => this.props.topNavClickHandler(this.props.destination)} >
-        <Typography variant="title" style={{fontSize:'1.4em'}}>{this.props.title}</Typography>
+        <Button style={{backgroundColor: this.props.backgroundColor, height:'70px', width:'270px', marginRight:'-140px'}} variant="contained" onClick={() => this.props.topNavClickHandler(this.props.destination)} >
+        <Typography variant="title" style={styles.Text}>{this.props.title}</Typography>
       </Button>
         )
     }
