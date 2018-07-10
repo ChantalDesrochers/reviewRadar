@@ -36,7 +36,7 @@ class KeywordsToShow extends Component {
                     <p>{review.description}</p>
                 </div>))
             return (
-                <div style={{ marginTop: '100px' }}>
+                <div>
                     <h2>{reviews[0].datePublished.toString().substring(4, 7)} Reviews</h2>
                     {monthReviews}
                 </div>
@@ -44,7 +44,7 @@ class KeywordsToShow extends Component {
         } else if (this.props.s.displayModifier === 'time') {
             let recentReviews = this.props.dateParsingReviews()
             return (
-                <div style={{ marginTop: '100px' }}>
+                <div>
                     {recentReviews}
                 </div>
             )

@@ -95,8 +95,7 @@ class SentimentsToShow extends Component {
                     <p>{review.description}</p>
                 </div>))
             return (
-                <div style={{ marginTop: '100px' }}>
-                    <h2>Five Most Recent Reviews</h2>
+                <div>
                     {recentReviews}
                 </div>
             )
@@ -109,7 +108,7 @@ class SentimentsToShow extends Component {
                     <p>{review.description}</p>
                 </div>))
             return (
-                <div style={{ marginTop: '100px' }}>
+                <div>
                     <h2>{reviews[0].datePublished.toString().substring(4, 7)} Reviews</h2>
                     {monthReviews}
                 </div>
