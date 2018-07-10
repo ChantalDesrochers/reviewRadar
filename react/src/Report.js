@@ -18,36 +18,36 @@ import ChartsToShow from "./ChartsToShow.js";
 import DisplayTitle from "./DisplayTitle"
 
 const styles = {
-  AppBar: { backgroundColor: '#f7eac8', height: '75px', boxShadow:'none', borderRadius: '5px'},
+  AppBar: { backgroundColor: '#f7eac8', height: '75px', boxShadow: 'none', borderRadius: '5px' },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
   LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
   // Top: { height: '89vh' },
-  RightContainer: {paddingRight:'45px'},
-  TopNavPanel: { float: 'left', padding: 20},
-  TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px'},
+  RightContainer: { paddingRight: '45px' },
+  TopNavPanel: { float: 'left', padding: 20 },
+  TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px' },
   // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
-  ReviewWatson: {textAlign:'center', marginTop:'10%'},
+  ReviewWatson: { textAlign: 'center', marginTop: '10%' },
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
-  ChartOnLeftSide: { },
+  ChartOnLeftSide: {},
   ChartOnRightSide: {},
   ReviewNavButtonsOnLeftSide: {},
   ReviewNavButtonsOnRightSide: {},
-  PaperForLeftReview: {height:'400px'}
+  PaperForLeftReview: { height: '400px' }
 }
 
 class Report extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
       dataFocus: 'review',
-      displaying: 'sentiment',
+      displaying: 'keyword',
       displayModifier: 'volume',
       displaySentimentType: '',
-      displayTitle:'Your Top Review - toggle right to go from most positive to least',
+      displayTitle: 'Your Top Review - toggle right to go from most positive to least',
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
@@ -61,8 +61,8 @@ class Report extends Component {
       monthConcepts: [], // reviews parsed into monthly concept data
       keywordArray: [],
       currentTargetedReviews: [],
-      SentimentSummaryIndex:5,
-      SummaryIndexMultiple:5
+      SentimentSummaryIndex: 5,
+      SummaryIndexMultiple: 5
     };
   }
 
@@ -76,20 +76,20 @@ class Report extends Component {
   }
 
   dateParsingReviews = () => {
-      let reviews = this.state.reviews
-      let dAlteredArray = reviews.map(review =>
-          ({ ...review, datePublished: new Date(review.datePublished) })
-      )
-      const sortedDate = dAlteredArray.sort(function (a, b) {
-          return b.datePublished - a.datePublished
-      })
-      let recentReviews = sortedDate.slice(0, 5)
-      recentReviews = recentReviews.map(review => (
-          <div>
-              <h2>{review.datePublished.toString().substring(0, 15)}</h2>
-              <p>{review.description}</p>
-          </div>))
-      return recentReviews
+    let reviews = this.state.reviews
+    let dAlteredArray = reviews.map(review =>
+      ({ ...review, datePublished: new Date(review.datePublished) })
+    )
+    const sortedDate = dAlteredArray.sort(function (a, b) {
+      return b.datePublished - a.datePublished
+    })
+    let recentReviews = sortedDate.slice(0, 5)
+    recentReviews = recentReviews.map(review => (
+      <div>
+        <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+        <p>{review.description}</p>
+      </div>))
+    return recentReviews
   }
 
   swapDisplaySides = () => {
@@ -111,16 +111,20 @@ class Report extends Component {
     if (this.state.dataFocus === 'review') {
       switch (displaying) {
         case 'sentiment':
-          return <div style={{padding:0, margin:0}}><DisplayTitle style={{height:'100px'}} s={this.state}/> <Paper style={styles.PaperForLeftReview}  className="left side i hold title/sentiments to show and the arrows">
-            <SentimentsToShow style={{padding:200}}  s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+          return <div style={{ padding: 0, margin: 0 }}>
+          <DisplayTitle style={{ height: '100px' }} s={this.state} />
+            <Paper style={styles.PaperForLeftReview}>
+              <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
             </Paper>
-            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide}  s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
-            </div>
+            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+          </div>
           break;
         case 'keyword':
-          return <div className="left side i hold title title keywords arrows">
-           <DisplayTitle s={this.state}/>
+          return <div style={{ padding: 0, margin: 0 }}>
+            <DisplayTitle style={{ height: '100px' }} s={this.state} />
+            <Paper style={styles.PaperForLeftReview}>
             <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
+          </Paper>
           <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
           </div>
           break;
@@ -212,7 +216,7 @@ class Report extends Component {
     })
   }
 
-changeKeywordDisplayModifier = (displayModifier) => {
+  changeKeywordDisplayModifier = (displayModifier) => {
     this.setState((prevState) => {
       let newState = {
         ...prevState,
@@ -221,7 +225,7 @@ changeKeywordDisplayModifier = (displayModifier) => {
       }
       return newState;
     })
-}
+  }
 
   //up down arrow
   clickHandlerForSentimentSummary = (direction) => {
@@ -233,9 +237,9 @@ changeKeywordDisplayModifier = (displayModifier) => {
       })
     }
 
-    else if (direction === 'down' && this.state.SentimentSummaryIndex > this.state.SummaryIndexMultiple ) {
+    else if (direction === 'down' && this.state.SentimentSummaryIndex > this.state.SummaryIndexMultiple) {
       this.setState((prevState) => {
-        let newState = { ...prevState, SentimentSummaryIndex: this.state.SentimentSummaryIndex - this.state.SummaryIndexMultiple  }
+        let newState = { ...prevState, SentimentSummaryIndex: this.state.SentimentSummaryIndex - this.state.SummaryIndexMultiple }
         return newState;
       })
     }
@@ -362,7 +366,7 @@ changeKeywordDisplayModifier = (displayModifier) => {
               <div style={styles.TopNavPanels}>
                 <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
               </div>
-              <Grid style={styles.LeftContainer} style={{marginTop:-25}}item sm={12}>
+              <Grid style={styles.LeftContainer} style={{ marginTop: -25 }} item sm={12}>
                 <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
                   <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
                     {this.LeftSideShow()}

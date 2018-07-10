@@ -10,7 +10,7 @@ import { LabelOutline, ArrowDownward, ArrowUpward, TrendingFlat } from '@materia
     buttonContainerForModifierVolumeFocusReview: { },
     buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 650, float: 'left'},
     
-    LeftButtonsLeftRight:{height:'75px', backgroundColor:'#b6d5e3', padding:0},
+    LeftButtonsLeftRight:{height:'75px', backgroundColor:'#f7d784', padding:0},
     LeftArrowIcon:{height:80, width:100}
  }
 

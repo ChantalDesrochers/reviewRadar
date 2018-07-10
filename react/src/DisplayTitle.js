@@ -13,11 +13,17 @@ class DisplayTitle extends Component {
     prepareHtml = () => {
         console.log('in displaxy title state', this.props.s)
         if (this.props.s.displaying === 'keyword' && this.props.s.displayModifier === 'volume') {
-            return (<Typography variant="title" style={{ fontSize: '1.4em', float: 'left', paddingBottom: '2em' }}> reviews about...   <b style={{ fontSize: '2em', textAlign: 'center' }}><i>{this.props.s.keywordChartTarget}</i></b> </Typography>)
+            return (
+            <div style={styles.SingleReviewLeftContainer}>
+            <Paper style={styles.SingleReviewLeftPaper}>
+            <Typography variant="display2" style={{...styles.SingleReviewLeft, fontSize:'1.7em', paddingTop:2}}>
+             reviews about...   <b style={{ fontSize: '2em', textAlign: 'center' }}><i>'{this.props.s.keywordChartTarget}'</i></b> </Typography></Paper></div>)
 
         } else if (this.props.s.displaying === 'sentiment' && this.props.s.displayModifier === 'volume') {
             return (
-               <div style={styles.SingleReviewLeftContainer}><Paper style={styles.SingleReviewLeftPaper}><Typography variant="display2" style={styles.SingleReviewLeft}>Full Reviews</Typography></Paper></div>
+               <div style={styles.SingleReviewLeftContainer}>
+               <Paper style={styles.SingleReviewLeftPaper}>
+               <Typography variant="display2" style={styles.SingleReviewLeft}>Full Reviews</Typography></Paper></div>
             )
         }
         else if (this.props.s.displaySentimentType === 'positive' && this.props.s.displayModifier === 'volumeBySentiment') {
