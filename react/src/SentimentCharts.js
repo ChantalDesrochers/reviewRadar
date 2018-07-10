@@ -31,32 +31,33 @@ class SentimentCharts extends Component {
       background: '#DBA2A7',
       color: 'black',
       margin: 10,
+      width: "40%"
 
     }
 
-     const buttonStyleTwo = {
-      background: '#DBA2A7',
-      color: 'black',
-      margin: 10,
-      display: 'inline'
-    }
+    //  const buttonStyleTwo = {
+    //   background: '#DBA2A7',
+    //   color: 'black',
+    //   margin: 10,
+    //   width:
+    // }
 
     const buttonStyles = {
-      margin: 50,
-      position: 'absolute',
-      display: 'inline'
+      marginBottom: '100px',
+      position:'relative',
+      top: '-60px'
     }
 
     return (
       <div style={{textAlign:'center'}}>
         { (this.props.s.displayModifier === 'time' || this.props.s.displayModifier === 'timebymonth') && <SentimentOverTime clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} s={this.props.s} reviews={reviews} /> }
         { (this.props.s.displayModifier === 'volume' || this.props.s.displayModifier === 'volumeBySentiment') &&  <PieChart s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} />}
-        <div className="chartButtons" style={buttonStyles}>
+        <div  style={buttonStyles}>
         <Button
           variant="outlined"
           data-message="overall"
           onClick={() => this.handleChartChange('showOverviewChart', 'volume')}
-          style={buttonStyleTwo}
+          style={buttonStyle}
         >
           High level Overview
         </Button>

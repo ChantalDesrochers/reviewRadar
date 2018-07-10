@@ -16,26 +16,29 @@ import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
 import ChartsToShow from "./ChartsToShow.js";
 import DisplayTitle from "./DisplayTitle"
+import { Router, Link } from "@reach/router"
 const styles = {
-  AppBar: { backgroundColor: '#f7eac8', height: '100px' },
+  AppBar: { backgroundColor: '#f7eac8', height: '75px' },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
   LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
   // Top: { height: '89vh' },
-
-  TopNavPanel: { float: 'left', padding: 20 },
-  TopNavPanels: { textAlign: 'center', height: '25%' },
+  RightContainer: {paddingRight:'45px'},
+  TopNavPanel: { float: 'left', padding: 20},
+  TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px'},
 
   // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
-  ReviewWatson: { position: 'absolute', bottom: '150px', right: '220px' },
+  ReviewWatson: {textAlign:'center', marginTop:'10%'},
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
 
-  ChartOnLeftSide: { marginTop: 100 },
+  ChartOnLeftSide: { },
   ChartOnRightSide: {},
   ReviewNavButtonsOnLeftSide: { marginLeft: '10%' },
   ReviewNavButtonsOnRightSide: {}
+
+
 }
 class Report extends Component {
   constructor(props) {
@@ -59,7 +62,9 @@ class Report extends Component {
       organizedConcepts: [], // reviews parsed into concepts
       monthConcepts: [], // reviews parsed into monthly concept data
       keywordArray: [],
-      currentTargetedReviews: []
+      currentTargetedReviews: [],
+      SentimentSummaryIndex:5,
+      SummaryIndexMultiple:5
 
     };
   }
@@ -109,21 +114,22 @@ class Report extends Component {
     if (this.state.dataFocus === 'review') {
       switch (displaying) {
         case 'sentiment':
-          return <div>
+          return <Paper>
             <DisplayTitle s={this.state}/>
             <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></div>
+            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+            </Paper>
           break;
-      case 'keyword':
-          return <div>
+        case 'keyword':
+          return <Paper>
            <DisplayTitle s={this.state}/>
-            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></div>
+            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
+          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></Paper>
           break;
         //is this the problem, there is no chart?
-        case 'chart':
-          return <ChartsToShow s={this.state} />
-          break;
+        // case 'chart':
+        //   <Link to="/charts"></Link>
+        //   break;
       }
 
     }
@@ -150,12 +156,12 @@ class Report extends Component {
     if (this.state.dataFocus === 'chart') {
       switch (displaying) {
         case 'sentiment':
-          return <div><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-          </div>
+          return <Paper><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+          </Paper>
           break;
         case 'keyword':
-          return <div> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
-         </div>
+          return <Paper> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
+         </Paper>
           break;
       }
     }
@@ -174,6 +180,7 @@ class Report extends Component {
       </div>
     }
   }
+
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
     const leftSide = { ...this.state.leftSide };
@@ -220,7 +227,20 @@ changeKeywordDisplayModifier = (displayModifier) => {
 
   //up down arrow
   clickHandlerForSentimentSummary = (direction) => {
-    console.log('i am an up down arrow', direction);
+    console.log('i am in click handler for sentiment summary', direction);
+    if (direction === 'up') {
+      this.setState((prevState) => {
+        let newState = { ...prevState, SentimentSummaryIndex: this.state.SentimentSummaryIndex + this.state.SummaryIndexMultiple }
+        return newState;
+      })
+    }
+
+    else if (direction === 'down' && this.state.SentimentSummaryIndex > this.state.SummaryIndexMultiple ) {
+      this.setState((prevState) => {
+        let newState = { ...prevState, SentimentSummaryIndex: this.state.SentimentSummaryIndex - this.state.SummaryIndexMultiple  }
+        return newState;
+      })
+    }
   }
 
   clickHandlerForSentimentTimeChart = (clickedMonth) => {
@@ -303,6 +323,7 @@ changeKeywordDisplayModifier = (displayModifier) => {
     return null;
   }
 
+
   topNavClickHandler = (clickedItem) => {
     // const newState = { ...this.state }
     switch (clickedItem) {
@@ -322,13 +343,20 @@ changeKeywordDisplayModifier = (displayModifier) => {
           return newState
         });
         break;
-      case 'charts': //added chart state handle
-        this.setState((prevState) => {
-          let newState = { ...prevState, displaying: 'chart' }
-          return newState;
-        })
-    }
-  };
+      case 'charts':
+      // added chart state handle
+
+     this.setState((prevState) => {
+          let newState = { ...prevState, displayModifier: '', displaying: 'allcharts', dataFocus: 'review'}
+                return newState
+        });
+      break;
+  }
+}
+
+
+
+
   render() {
     const watsonIndex = this.state.visibleReview;
     return (
@@ -338,13 +366,19 @@ changeKeywordDisplayModifier = (displayModifier) => {
           <AppBar position="static" style={styles.AppBar}>
             <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
           </AppBar>
+{this.state.displaying === 'allcharts'  ? (
+               <div style={styles.TopNavPanels}>
+                <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
+              <ChartsToShow s={this.state}/> </div>) : (
+  <div>
           {/* LEFT SIDE */}
           <Grid container style={styles.MainContainer} spacing={8}>
             <Grid item sm={8} >
               <div style={styles.TopNavPanels}>
-                <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
+                <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
               </div>
-              <Grid style={styles.LeftContainer} item sm={12}>
+
+              <Grid style={styles.LeftContainer} style={{marginTop:-25}}item sm={12}>
                 <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
                   <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
                     {this.LeftSideShow()}
@@ -357,7 +391,7 @@ changeKeywordDisplayModifier = (displayModifier) => {
               <SwapButton swapDisplaySides={this.swapDisplaySides} />
             </div>
             {/* RIGHT SIDE */}
-            <Grid item sm={4} >
+            <Grid item sm={4} style={styles.RightContainer} >
               <Grid item sm={12}  >
                 <div onClick={this.topNavClickHandler} >
                   {this.RightSideShow()}
@@ -371,6 +405,10 @@ changeKeywordDisplayModifier = (displayModifier) => {
               </Grid>
             </Grid>
           </Grid>
+          </div>)
+}
+
+
         </div>)
     );
   }

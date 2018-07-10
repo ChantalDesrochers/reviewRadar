@@ -9,27 +9,27 @@ const styles ={
 class DisplayTitle extends Component {
 
     prepareHtml =() => {
-        console.log('in dispaly title state', this.props.s)
+        console.log('in displaxy title state', this.props.s)
         if(this.props.s.displaying === 'keyword' && this.props.s.displayModifier === 'volume') {
-           return( <Typography variant="title" style={{fontSize:'1.4em', float:'left', paddingBottom:'2em'}}> Reviews about <b style={{fontSize:'2em'}}>{this.props.s.keywordChartTarget}</b> </Typography> )
+           return( <Typography variant="title" style={{fontSize:'1.4em', float:'left', paddingBottom:'2em'}}> reviews about...   <b style={{fontSize:'2em', textAlign:'center'}}><i>{this.props.s.keywordChartTarget}</i></b> </Typography> )
 
         } else if (this.props.s.displaySentimentType == 'positive' && this.props.s.displayModifier == 'volumeBySentiment') {
         return (
-            <Typography variant="title" style={{fontSize:'1.4em', float:'left', paddingBottom:'2em'}}>Toggle through your positive reviews!</Typography>
+            <Typography variant="title" style={{fontSize:'1.4em', paddingBottom:'1em', float:'left'}}>Toggle through your positive reviews!</Typography>
             )
     } else if (this.props.s.displaySentimentType === 'negative' && this.props.s.displayModifier == 'volumeBySentiment') {
         return (
-            <Typography variant="title" style={{fontSize:'1.4em', float:'left', paddingBottom:'2em'}}>Toggle through your negative reviews!</Typography>
+            <Typography variant="title" style={{fontSize:'1.4em', paddingBottom:'1em', float:'left'}}>Toggle through your negative reviews!</Typography>
             )
     } else if (this.props.s.displayModifier === "time") {
         return (
-         <Typography variant="title" style={{fontSize:'1.4em', float:'left', paddingBottom:'2em'}}>View Your Five Most Recent Reviews</Typography>
+         <Typography variant="title" style={{fontSize:'1.4em', paddingBottom:'1em', float:'left'}}>View Your Five Most Recent Reviews</Typography>
             )
     } else if (this.props.s.displayModifier === "timebymonth") {
-        return <Typography variant="title" style={{fontSize:'1.4em', float:'left', paddingBottom:'2em'}}></Typography>
+        return <Typography variant="title" style={{fontSize:'1.4em', paddingBottom:'1em', float:'left'}}></Typography>
     }
         else return (
-        <Typography variant="title" style={{fontSize:'1.4em', float:'left', paddingBottom:'2em'}}> {this.props.s.displayTitle}</Typography>
+        <Typography variant="title" style={{fontSize:'1.4em', paddingBottom:'1em', float:'left'}}> {this.props.s.displayTitle}</Typography>
         )
     }
 

@@ -2,7 +2,27 @@ import React, { Component } from "react";
 import { Pie } from 'react-chartjs-2';
 import { withStyles } from '@material-ui/core/styles';
 import 'typeface-roboto'
+import { Typography } from "@material-ui/core";
 
+const styles ={
+  PieOnRight: {width:"72%", margin:'0px auto 50px auto'},
+  PieOnLeft: {width:"60%", marginLeft: "14%"},
+  PieChartContainer: {marginTop:'10px'},
+  ChartTitles: {
+    Right: {
+  fontSize: 30,
+  padding: 20,
+  margin: 0,
+  color: 'black'
+}, Left: {
+  fontSize: 40,
+  paddingLeft: '22%',
+
+  color: 'black'
+
+}
+}
+}
 class PieChart extends Component {
   constructor(props) {
     super(props);
@@ -10,45 +30,59 @@ class PieChart extends Component {
   }
 
   prepareHtml = (handleClicktwo) => {
-     const chartTitles = {
-  fontSize: 30,
-  fontFamily: 'arial',
-  padding: 0,
-  margin: 0
-}
-      const chartOptions = {
-      legend: {
-        labels: {
-          fontSize: 20
-        }
-      }
-    }
 
+      const chartOptions = {
+        Right: {
+          legend: {
+            position: 'top',
+            labels: {
+              fontSize: 15,
+              fontFamily: 'Roboto'
+            },
+          },
+        responsive: true,
+        maintainAspectRatio: true
+      },
+      Left:  {
+      legend: {
+        position: 'left',
+        labels: {
+          fontSize: 15,
+          fontFamily: 'Roboto'
+
+        },
+
+      },
+      responsive: true,
+      maintainAspectRatio: true
+    }
+  }
+
+console.log(this.props.s)
     if (this.props.s.dataFocus === 'review') {
-      return <div className="pie-chart" style={{height:450}}>
-        <h3 style={chartTitles}>How your patrons are feeling</h3>
+      return <div style={styles.PieOnRight}>
+       <Typography variant='display3' style={styles.ChartTitles.Right}>How your customers feel</Typography>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
-          width={1}
-          height={1}
-          options={{
-            maintainAspectRatio: true
-          }}
-          options={chartOptions} />
+     width={3}
+     height={3}
+          options={chartOptions.Right} />
       </div>
     }
     else if (this.props.s.dataFocus === 'chart') {
-      return <div className="pie-chart" style={{height:550}}>
-       <h3 style={chartTitles}>How your patrons are feeling</h3>
+      return <div style={styles.PieOnLeft}>
+       <Typography  style={styles.ChartTitles.Left} variant='display3'> How your customers feel</Typography >
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}
           options={{
-            maintainAspectRatio: false
+            maintainAspectRatio: true
           }}
-          options={chartOptions}/>
+          options={chartOptions.Left}/>
       </div>
     }
   }
+
+
   parseChartData = (reviews) => {
     let veryPositive = 0;
     let positive = 0;
@@ -105,6 +139,10 @@ class PieChart extends Component {
     // this.parseChartData();
 
     const handleClicktwo = elem => {
+      if (this.props.s.displaying === 'allcharts')
+      {
+        return
+      }
       if (elem[0]) {
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']
@@ -114,7 +152,7 @@ class PieChart extends Component {
       }
     }
 
-    return (<div>
+    return (<div style={styles.PieChartContainer}>
       {this.prepareHtml(handleClicktwo)}
     </div>
     )
@@ -123,4 +161,4 @@ class PieChart extends Component {
 
 
 
-export default PieChart;
+export default withStyles(styles)(PieChart);

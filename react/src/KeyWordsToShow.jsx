@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import 'typeface-roboto'
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
-import DateC from "./Date.js"
+import Date from "./Date.js"
 import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel'
@@ -36,7 +36,7 @@ class KeywordsToShow extends Component {
                     <p>{review.description}</p>
                 </div>))
             return (
-                <div style={{ marginTop: '100px' }}>
+                <div>
                     <h2>{reviews[0].datePublished.toString().substring(4, 7)} Reviews</h2>
                     {monthReviews}
                 </div>
@@ -44,7 +44,7 @@ class KeywordsToShow extends Component {
         } else if (this.props.s.displayModifier === 'time') {
             let recentReviews = this.props.dateParsingReviews()
             return (
-                <div style={{ marginTop: '100px' }}>
+                <div>
                     {recentReviews}
                 </div>
             )
@@ -100,7 +100,7 @@ class KeywordsToShow extends Component {
                         </Grid>
                     </div>
                 }
-
+            }
         }
     }
     render() {
