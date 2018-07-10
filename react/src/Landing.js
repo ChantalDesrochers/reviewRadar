@@ -49,12 +49,12 @@ const styles = {
 
 function Landing() {
   return (
-    <div style={{overflow: 'hidden'}}>
+    <div>
       <div
         style={{
           height: "100vh",
           background:
-            "-webkit-linear-gradient(-45deg, rgba(11,145,255,1) 0%,rgba(81,180,255,0) 100%)",
+            "-webkit-linear-gradient(-45deg, rgba(11,145,255,1) 0%,rgba(81,180,255,0) 100%)"
         }}
       >
         {/* <AppBar position="static" style={styles.header}>
@@ -73,7 +73,7 @@ function Landing() {
         >
           Welcome to ReviewRadar
         </Typography>
-        <div style={{ marginLeft: "36%", marginTop: '4%' }}>
+        <div style={{ marginLeft: "36%", marginTop: "4%" }}>
           <Link
             to="request"
             style={{ textDecoration: "none", marginRight: "20px" }}
@@ -88,10 +88,22 @@ function Landing() {
           src={radar}
           style={{
             height: "75%",
+            left: "78%",
+            position: "absolute",
+            bottom: "56%",
+            zIndex: -1
+          }}
+        />
+        <img
+          src={radar}
+          style={{
+            height: "80%",
             left: "57%",
             position: "absolute",
-            bottom: "37%",
-            zIndex: -1
+            bottom: "23%",
+            zIndex: -1,
+            transform: "rotate(90deg)",
+            opacity: 0.75
           }}
         />
       </div>
@@ -108,18 +120,18 @@ function Landing() {
           <LandingContainer
             header="header"
             img="http://via.placeholder.com/250x300"
-            text="This is container1"
+            text="All of your reviews collected in one location..."
             while
           />
           <LandingContainer
             header="header"
             img="http://via.placeholder.com/250x300"
-            text="This is container2"
+            text="Parsed using the power of machine learning..."
           />
           <LandingContainer
             header="header"
             img="http://via.placeholder.com/250x300"
-            text="This is container3"
+            text="Displayed in a meaningful way"
           />
         </Grid>
       </div>
