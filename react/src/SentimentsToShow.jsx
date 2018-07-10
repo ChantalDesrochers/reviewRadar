@@ -21,7 +21,15 @@ const styles = {
     multipleReviewsContainer: { marginTop: '50px' }
 }
 class SentimentsToShow extends Component {
+    state = {
+        expanded: null,
+      };
 
+    handleChange = panel => (event, expanded) => {
+        this.setState({
+          expanded: expanded ? panel : false,
+        });
+      };
 
     mouseController = (message) => {
         console.log('mouse', message)
@@ -52,9 +60,9 @@ class SentimentsToShow extends Component {
         else if (this.props.s.displayModifier === "volumeBySentiment") {
             let finalReviews = [];
             //0,5 is what is going to be toggled by the arrows
-            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(this.props.s.SentimentSummaryIndex-this.props.s.SummaryIndexMultiple , this.props.s.SentimentSummaryIndex).map(review => (
+            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(this.props.s.SentimentSummaryIndex-this.props.s.SummaryIndexMultiple , this.props.s.SentimentSummaryIndex).map((review, i) => (
        
-                    <ExpansionPanel>
+                    <ExpansionPanel expanded={this.state.expanded === `panel${i}`} onChange={this.handleChange(`panel${i}`)}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography style={styles.reviewSummary}>{review.summary}</Typography>
                         </ExpansionPanelSummary>
@@ -64,6 +72,8 @@ class SentimentsToShow extends Component {
                             </Typography>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
+
+                    
                
             ))
             return finalReviews
@@ -106,6 +116,8 @@ class SentimentsToShow extends Component {
         }
     }
     render() {
+        const { classes } = this.props;
+        const { expanded } = this.state;
         return (
             <div>
                 <div>
