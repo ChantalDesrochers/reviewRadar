@@ -13,9 +13,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 var linkStyle;
 const styles = {
     reviewTextModifierVolumeFocusReview: { marginTop: '100px', Left: 50, textAlign: 'left' },
-    reviewSummary: {fontSize:'1em'},
+    reviewSummary: {fontSize:'1.5em', margin: '5px 0px'},
     reviewFull: {fontSize:'1.5em'},
-    reviewFullContainer: {overflowY: 'auto', maxHeight: '10em', maxWidth: '98%'},
+    // reviewFullContainer: {overflowY: 'auto', maxHeight: '10em'},
     review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
     multipleReviewsText: { maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
 
