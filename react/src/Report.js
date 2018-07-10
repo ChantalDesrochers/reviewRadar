@@ -112,7 +112,7 @@ class Report extends Component {
       switch (displaying) {
         case 'sentiment':
           return <div style={{padding:0, margin:0}}><DisplayTitle style={{height:'100px'}} s={this.state}/> <Paper style={styles.PaperForLeftReview}  className="left side i hold title/sentiments to show and the arrows">
-            <SentimentsToShow  s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+            <SentimentsToShow style={{padding:200}}  s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
             </Paper>
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide}  s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
             </div>
