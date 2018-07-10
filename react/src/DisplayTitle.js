@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper'
 const styles = {
 SingleReviewLeft: {textAlign:'center', margin:'auto', color:'black', position:'relative', left:'40' },
 SingleReviewLeftPaper: {height:'100%', padding:'25px'},
-SingleReviewLeftContainer: {height:'50px'}
+SingleReviewLeftContainer: {margin: 'auto', height:'50px', width:'1100px'}
 }
 class DisplayTitle extends Component {
 

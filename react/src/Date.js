@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Paper from '@material-ui/core/Paper'
 import { Star } from '@material-ui/icons'
+import { Typography } from "@material-ui/core";
 class Date extends Component {
 
     render() {
 
         return (
-            <div style={{fontStyle: 'italic', fontSize:'1.2rem', lineHeight:'29px'}} >{this.props.date}</div>
+            <Typography variant="subheading" style={{fontStyle: 'italic', fontSize:'1.2em', lineHeight:'29px'}} >{this.props.date}</Typography>
 
         );
     }

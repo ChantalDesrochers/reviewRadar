@@ -33,9 +33,9 @@ const styles = {
   ReviewStars: { bottom: 100 },
   ChartOnLeftSide: { },
   ChartOnRightSide: {},
-  ReviewNavButtonsOnLeftSide: {marginLeft:'500px'},
+  ReviewNavButtonsOnLeftSide: {},
   ReviewNavButtonsOnRightSide: {},
-  PaperForLeftReview: {height:'350px'}
+  PaperForLeftReview: {height:'400px'}
 }
 
 class Report extends Component {
@@ -112,16 +112,16 @@ class Report extends Component {
       switch (displaying) {
         case 'sentiment':
           return <div style={{padding:0, margin:0}}><DisplayTitle style={{height:'100px'}} s={this.state}/> <Paper style={styles.PaperForLeftReview}  className="left side i hold title/sentiments to show and the arrows">
-            <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+            <SentimentsToShow  s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
             </Paper>
-            <VisibleReviewNavPanel className='i am thew review nav panel' s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide}  s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
             </div>
           break;
         case 'keyword':
           return <div className="left side i hold title title keywords arrows">
            <DisplayTitle s={this.state}/>
             <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
-          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+          <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
           </div>
           break;
         //is this the problem, there is no chart?

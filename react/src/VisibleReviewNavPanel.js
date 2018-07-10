@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
-import { LabelOutline, ArrowDownward, ArrowUpward } from '@material-ui/icons'
+import { LabelOutline, ArrowDownward, ArrowUpward, TrendingFlat } from '@material-ui/icons'
  import { withStyles } from '@material-ui/core/styles';
-
+ import IconButton from '@material-ui/core/IconButton';
  let styles = {
-    buttonContainerForModifierSentimentVolumeFocusReviews: {backgroundColor:'green', marginTop:'100px'} ,
+    buttonContainerForModifierSentimentVolumeFocusReviews: {marginTop:'100px'} ,
     buttonContainerForModifierVolumeFocusReview: { },
-    buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 650, float: 'left'}
+    buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 650, float: 'left'},
+    
+    LeftButtonsLeftRight:{height:'75px', backgroundColor:'#b6d5e3', padding:0},
+    LeftArrowIcon:{height:80, width:100}
  }
 
 class VisibleReviewNavPanel extends Component {
@@ -21,19 +24,20 @@ class VisibleReviewNavPanel extends Component {
     pickNavButtonType = () => {
         if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'review') {
             return (<div className="buttons" style={styles.buttonContainerForModifierSentimentVolumeFocusReviews}>
-                       <Grid container >
-                <Grid item sm={3}>
-                    <Button style={{ backgroundColor: 'blue' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
-                        <LabelOutline className="icon-flipped" />
+                       <Grid container style={{paddingLeft:'70px'}} >
+                       <Grid item sm={4}></Grid>
+                <Grid item sm={2}>
+                    <Button style={styles.LeftButtonsLeftRight} variant="contained" onClick={() => this.changeDisplayedReviews('backward')} >         
+                        <TrendingFlat style={styles.LeftArrowIcon}className="icon-flipped" />
                     </Button>
                 </Grid>
-            <Grid item sm={6}>
-            </Grid>
-                <Grid item sm={3}>
-                    <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
-                        <LabelOutline />
+  
+                <Grid item sm={2}>
+                    <Button style={styles.LeftButtonsLeftRight} variant="contained"  onClick={() => this.changeDisplayedReviews('forward')} >
+                    <TrendingFlat style={styles.LeftArrowIcon}/>
                     </Button>
                </Grid>
+               <Grid item sm={4}></Grid>
         </Grid>
             </div>)
         }
@@ -97,7 +101,7 @@ class VisibleReviewNavPanel extends Component {
     }
     render() {
         return (
-            <div style={{height:'100%', width:'100%'}} >
+            <div style={{height:'100%', width:'100%', marginTop:-50}} >
                 {this.pickNavButtonType()}
             </div>
         )

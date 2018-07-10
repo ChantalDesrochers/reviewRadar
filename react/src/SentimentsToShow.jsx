@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 var linkStyle;
 const styles = {
-    reviewTextModifierVolumeFocusReview: { marginTop: '100px', Left: 50, textAlign: 'left' },
+    reviewTextModifierVolumeFocusReview: { marginTop: '100px'},
     reviewSummary: {fontSize:'1.5em', margin: '5px 0px'},
     reviewFull: {fontSize:'1.5em'},
     // reviewFullContainer: {overflowY: 'auto', maxHeight: '10em'},
