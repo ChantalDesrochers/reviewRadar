@@ -47,7 +47,7 @@ class PieChart extends Component {
       legend: {
         position: 'left',
         labels: {
-          fontSize: 15,
+          fontSize: 20,
           fontFamily: 'Roboto'
          
         },
@@ -69,7 +69,7 @@ class PieChart extends Component {
     }
     else if (this.props.s.dataFocus === 'chart') {
       return <div style={styles.PieOnLeft}>
-       <Typography  style={styles.ChartTitles.Left} variant='display3'> How your customers feel</Typography >
+       <Typography  style={styles.ChartTitles.Left} variant='title'> How your customers feel</Typography >
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
           width={10}
           height={10}

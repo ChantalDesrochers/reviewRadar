@@ -10,8 +10,8 @@ class SwapButton extends Component {
     render() {
         return (
             <div>
-          <Button variant="fab" color="primary" className="swap-button" onClick={() => this.props.swapDisplaySides()}>
-        <SwapHoriz />
+          <Button style={{width:60, height:60, backgroundColor:"#f7eac8"}} variant="extendedFab" color="primary" className="swap-button" onClick={() => this.props.swapDisplaySides()}>
+        <SwapHoriz style={{width:50, height:50, color:'black'}}   />
       </Button>
           </div>
         );

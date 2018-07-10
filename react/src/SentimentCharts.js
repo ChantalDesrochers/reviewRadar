@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import SentimentOverTime from './reportPartials/_sentimentOverTime'
 import PieChart from './reportPartials/_pieChart'
 import Button from '@material-ui/core/Button';
+import { Typography } from '@material-ui/core';
 
 class SentimentCharts extends Component {
   constructor(props) {
@@ -31,7 +32,8 @@ class SentimentCharts extends Component {
       background: '#DBA2A7',
       color: 'black',
       margin: 10,
-      width: "40%"
+      width: "40%",
+      height:"50px"
 
     }
 
@@ -42,24 +44,26 @@ class SentimentCharts extends Component {
     //   width:
     // }
 
-    const buttonStyles = {
-      marginBottom: '100px',
+    const buttonDiv = {
+      marginBottom: '80px',
       position:'relative',
-      top: '-60px'
+      top: '-40px',
+
+      
     }
 
     return (
       <div style={{textAlign:'center'}}>
         { (this.props.s.displayModifier === 'time' || this.props.s.displayModifier === 'timebymonth') && <SentimentOverTime clickHandlerForSentimentTimeChart={this.props.clickHandlerForSentimentTimeChart} changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} s={this.props.s} reviews={reviews} /> }
         { (this.props.s.displayModifier === 'volume' || this.props.s.displayModifier === 'volumeBySentiment') &&  <PieChart s={this.props.s} reviews={reviews} pickReviewTypeToDisplay={this.props.pickReviewTypeToDisplay}  changeSentimentDisplayModifier={this.props.changeSentimentDisplayModifier} />}
-        <div  style={buttonStyles}>
+        <div  style={buttonDiv}>
         <Button
           variant="outlined"
           data-message="overall"
           onClick={() => this.handleChartChange('showOverviewChart', 'volume')}
           style={buttonStyle}
         >
-          High level Overview
+       <Typography style={{fontSize:'1.3em'}} variant='title'>SENTIMENT TOTALS</Typography>
         </Button>
 
         <Button
@@ -68,7 +72,7 @@ class SentimentCharts extends Component {
           onClick={() => this.handleChartChange('showTimeChart', 'time')}
           style={buttonStyle}
         >
-          trends over time
+         <Typography style={{fontSize:'1.3em'}} variant='title'>TRENDS OVER TIME</Typography>
         </Button>
         </div>
 
