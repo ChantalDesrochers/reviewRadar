@@ -62,8 +62,8 @@ class Report extends Component {
       monthConcepts: [], // reviews parsed into monthly concept data
       keywordArray: [],
       currentTargetedReviews: [],
-      SentimentSummaryIndex:3,
-      SummaryIndexMultiple:3
+      SentimentSummaryIndex:5,
+      SummaryIndexMultiple:5
 
     };
   }
