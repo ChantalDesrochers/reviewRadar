@@ -116,8 +116,6 @@ class SentimentsToShow extends Component {
         }
     }
     render() {
-        const { classes } = this.props;
-        const { expanded } = this.state;
         return (
             <div>
                 <div>
