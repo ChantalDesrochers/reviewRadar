@@ -13,6 +13,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
 import LandingContainer from "./landingPartials/_containers";
 import radar from "./landingPartials/radar.png";
+import bg from "./full background.png";
 
 import Button from "@material-ui/core/Button"; // used to reroute to Registration + Login
 
@@ -57,6 +58,15 @@ function Landing() {
             "-webkit-linear-gradient(-45deg, rgba(11,145,255,1) 0%,rgba(81,180,255,0) 100%)"
         }}
       >
+        {/* <img
+          src={bg}
+          style={{
+            // height: "92%",
+            maxWidth: "100%",
+            position: "absolute",
+            zIndex: -1
+          }}
+        /> */}
         {/* <AppBar position="static" style={styles.header}>
           <Toolbar>
             <Typography variant="title" color="inherit">
@@ -66,7 +76,6 @@ function Landing() {
           <Button color="inherit">Register</Button> 
           </Toolbar>
         </AppBar> */}
-
         <Typography
           style={{ paddingTop: "3em", marginBottom: "15px" }}
           variant="display4"
@@ -84,26 +93,29 @@ function Landing() {
             <Button style={styles.login}>View My Report</Button>
           </Link>
         </div>
+
         <img
           src={radar}
           style={{
-            height: "75%",
-            left: "78%",
+            // height: "92%",
+            width: "40%",
+            left: "80%",
             position: "absolute",
-            bottom: "56%",
+            bottom: "55%",
             zIndex: -1
           }}
         />
         <img
           src={radar}
           style={{
-            height: "80%",
-            left: "57%",
+            // height: "125%",
+            width: "57%",
+            left: "47%",
             position: "absolute",
-            bottom: "23%",
+            bottom: "-10%",
             zIndex: -1,
             transform: "rotate(90deg)",
-            opacity: 0.75
+            opacity: 0.5
           }}
         />
       </div>
