@@ -15,6 +15,7 @@ const styles = {
     reviewTextModifierVolumeFocusReview: { marginTop: '100px', Left: 50, textAlign: 'left' },
     reviewSummary: {fontSize:'1em'},
     reviewFull: {fontSize:'1.5em'},
+    reviewFullContainer: {overflowY: 'auto', maxHeight: '10em', maxWidth: '98%'},
     review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
     multipleReviewsText: { maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
 
@@ -66,7 +67,7 @@ class SentimentsToShow extends Component {
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography style={styles.reviewSummary}>{review.summary}</Typography>
                         </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
+                        <ExpansionPanelDetails style={styles.reviewFullContainer}>
                             <Typography style={styles.reviewFull}>
                                 {review.description}
                             </Typography>
