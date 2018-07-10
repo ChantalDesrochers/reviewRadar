@@ -25,7 +25,7 @@ const styles = {
   // Top: { height: '89vh' },
 
   TopNavPanel: { float: 'left', padding: 20 },
-  TopNavPanels: { textAlign: 'center', height: '25%' },
+  TopNavPanels: { textAlign: 'center', height: '10em' },
 
   // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
   ReviewWatson: {textAlign:'center', marginTop:'10%'},

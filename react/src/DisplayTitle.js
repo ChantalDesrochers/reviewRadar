@@ -9,7 +9,7 @@ const styles ={
 class DisplayTitle extends Component {
 
     prepareHtml =() => {
-        console.log('in display title state', this.props.s)
+        console.log('in displaxy title state', this.props.s)
         if(this.props.s.displaying === 'keyword' && this.props.s.displayModifier === 'volume') {
            return( <Typography variant="title" style={{fontSize:'1.4em', paddingBottom:'1em'}}> Reviews about <b style={{fontSize:'2em'}}>{this.props.s.keywordChartTarget}</b> </Typography> )
 
