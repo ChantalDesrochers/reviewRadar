@@ -46,11 +46,11 @@ class PieSentimentYelp extends Component {
       datasets: [{
         data: array,
         backgroundColor: [
-          '#28ABE3',
-          '#1FDA9A',
-          '#F7EAC8',
-          '#DB3340',
-          '#E8B71A'
+          '#51B7E2',
+          '#3ED8A2',
+          '#F7F0DE',
+          '#DB535E',
+          '#E8C34A'
         ],
         hoverBackgroundColor: [
           '#78C2E2',
@@ -69,7 +69,7 @@ class PieSentimentYelp extends Component {
       const chartTitles = {
   fontSize: 25,
   fontFamily: 'roboto',
-  color: 'grey',
+  color: 'black',
   padding: 0,
   marginBottom: 20,
   textAlign: 'left'
@@ -78,7 +78,7 @@ class PieSentimentYelp extends Component {
           legend: {
             position: 'top',
             labels: {
-              fontSize: 15,
+              fontSize: 20,
               fontFamily: 'Roboto'
             }
           }
@@ -86,9 +86,10 @@ class PieSentimentYelp extends Component {
 
 
     return (
-      <div>
-        <p style={chartTitles}>How Your <b>Yelp</b> Customers Feel</p>
-       <Pie data={this.parseChartData(this.props.reviews)} options={chartOptions}/>
+      <div style={{marginTop: 50, height: 600}}>
+        <p style={chartTitles}>How Your <b style={{color: "#E8B71A"}}>Yelp</b> Customers Feel</p>
+       <Pie data={this.parseChartData(this.props.reviews)} options={chartOptions} width={5}
+          height={5}/>
     </div>
     )
   }

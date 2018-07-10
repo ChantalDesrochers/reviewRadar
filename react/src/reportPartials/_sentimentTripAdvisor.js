@@ -46,11 +46,11 @@ class PieSentimentTripAdvisor extends Component {
       datasets: [{
         data: array,
         backgroundColor: [
-          '#28ABE3',
-          '#1FDA9A',
-          '#F7EAC8',
-          '#DB3340',
-          '#E8B71A'
+          '#2394C4',
+          '#19B780',
+          '#D8CDAF',
+          '#AF2833',
+          '#CCA116'
         ],
         hoverBackgroundColor: [
           '#78C2E2',
@@ -69,7 +69,7 @@ class PieSentimentTripAdvisor extends Component {
     const chartTitles = {
   fontSize: 25,
   fontFamily: 'roboto',
-  color: 'grey',
+  color: 'black',
   padding: 0,
   marginBottom: 20,
   textAlign: 'left'
@@ -78,17 +78,19 @@ class PieSentimentTripAdvisor extends Component {
           legend: {
             position: 'top',
             labels: {
-              fontSize: 15,
-              fontFamily: 'Roboto'
+              fontSize: 20,
+              fontFamily: 'Roboto',
+              color: 'black'
             }
           }
         }
 
 
     return (
-      <div>
-       <p style={chartTitles}>How Your <b>TripAdvisor</b> Customers Feel</p>
-       <Pie data={this.parseChartData(this.props.reviews)} options={chartOptions}/>
+      <div style={{marginTop: 50, height: 600}}>
+       <p style={chartTitles}>How Your <b style={{color: '#C62D3A'}}>TripAdvisor</b> Customers Feel</p>
+       <Pie data={this.parseChartData(this.props.reviews)} options={chartOptions}  width={5}
+          height={5}/>
     </div>
     )
   }

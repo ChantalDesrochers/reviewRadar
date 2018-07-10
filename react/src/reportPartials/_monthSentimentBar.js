@@ -140,19 +140,19 @@ class SentimentBarChartMonth extends Component {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
               label: 'Positive',
-              backgroundColor: 'blue',
-              borderColor: 'rgba(255,99,132,1)',
-              borderWidth: 1,
-              hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-              hoverBorderColor: 'rgba(255,99,132,1)',
+              backgroundColor: '#07EA9A',
+              borderColor: '#049E68',
+              borderWidth: 3,
+              hoverBackgroundColor: '#00F7A0',
+              hoverBorderColor: '#00DB8E',
               data: positive
             }, {
               label: 'Negative',
-              backgroundColor: 'rgba(255,99,132,0.2)',
-              borderColor: 'rgba(255,99,132,1)',
-              borderWidth: 1,
-              hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-              hoverBorderColor: 'rgba(255,99,132,1)',
+              backgroundColor: '#E85864',
+              borderColor: '#B53F49',
+              borderWidth: 3,
+              hoverBackgroundColor: '#E8747D',
+              hoverBorderColor: '#C95A63',
               data: negative
             }],
             options: {
@@ -188,8 +188,8 @@ render() {
         legend: {
         labels: {
           fontSize: 20,
-          fontWeight: 'bold',
-          fontFamily: 'roboto'
+          fontFamily: 'roboto',
+          color: 'black'
         }
       },
       barThickness: 15,
@@ -198,15 +198,15 @@ render() {
    const chartTitles = {
   fontSize: 25,
   fontFamily: 'roboto',
-  color: 'grey',
+  color: 'black',
   padding: 0,
   marginBottom: 20,
   textAlign: 'left'
 }
 
     return (
-            <div className="bar-month-chart">
-              <p style={chartTitles}>How Are Your Customers Feeling on a Monthly Basis</p>
+            <div className="bar-month-chart" style={{marginBottom: 50, marginTop: 50}}>
+              <p style={chartTitles}>How Your Customers Feel on a Monthly Basis</p>
               <Bar data={this.parseSentimentDatabyMonth(this.props.reviews)} options={chartyOptions}/>
             </div>
         );

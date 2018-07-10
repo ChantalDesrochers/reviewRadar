@@ -6,8 +6,8 @@ class ExtendedKeywordBarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: ['#6EEFC2', '#6EEFC2','#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2','#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2'],
-      borderColors: ['#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE','#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE','#5FD8AE', '#5FD8AE', '#5FD8AE']
+      colors: ['#4BA5CC', '#4BA5CC','#4BA5CC', '#4BA5CC', '#4BA5CC', '#4BA5CC', '#4BA5CC', '#4BA5CC','#4BA5CC', '#4BA5CC', '#4BA5CC', '#4BA5CC', '#4BA5CC', '#4BA5CC', '#4BA5CC'],
+      borderColors: ['#2395C6', '#2395C6', '#2395C6', '#2395C6', '#2395C6', '#2395C6','#2395C6', '#2395C6', '#2395C6', '#2395C6', '#2395C6', '#2395C6','#2395C6', '#2395C6', '#2395C6']
     }
   }
 
@@ -29,8 +29,8 @@ class ExtendedKeywordBarChart extends Component {
           backgroundColor: colors,
           borderColor: borderColors,
           borderWidth: 5,
-          hoverBackgroundColor: colors,
-          hoverBorderColor: '#1FDA9A',
+          hoverBackgroundColor: '#68AECC',
+          hoverBorderColor: '#2395C6',
           data: data
         }
       ],
@@ -72,7 +72,7 @@ const chartyOptions = {
   const chartTitles = {
   fontSize: 25,
   fontFamily: 'roboto',
-  color: 'grey',
+  color: 'black',
   padding: 0,
   margin: 0,
   textAlign: 'left'
@@ -82,7 +82,7 @@ const chartyOptions = {
 
     return (
       <div className="bar-chart" style={{'marginTop': 50}}>
-      <p style={chartTitles}>Fifteen Most Commonly Mentioned Terms</p>
+      <p style={chartTitles}>Fifteen Most Mentioned Terms</p>
         <HorizontalBar
           data={this.getChartData(this.props.organizedConcepts)}
     options={chartyOptions}

@@ -483,19 +483,20 @@ class SentimentOverSiteDivide extends Component {
       }
     }
 
-    const chartTitles = {
-  fontSize: 30,
-  fontFamily: 'arial',
+     const chartTitles = {
+  fontSize: 25,
+  fontFamily: 'roboto',
+  color: 'black',
   padding: 0,
-  margin: 0
+  marginBottom: 20,
+  textAlign: 'left'
 }
 
 
     return (
-      <div className="sentiment-over-time-siteDivide">
-      <h3 style={chartTitles}>Customer perception by month</h3>
-        <Line data={this.parseSentimentDatabyTime(this.props.reviews)}
-  options={chartyOptions}/>
+      <div className="sentiment-over-time-siteDivide" style={{marginTop: 150, marginBottom: 140}}>
+      <p style={chartTitles}>Sentiment Over Time and Review Site</p>
+        <Line data={this.parseSentimentDatabyTime(this.props.reviews)} options={chartyOptions}/>
       </div>
     );
   }

@@ -24,13 +24,13 @@ return {
         datasets: [{
           data: data,
           backgroundColor: [
-            '#FF6384',
-            '#4BC0C0',
-            '#FFCE56',
-            '#E7E9ED',
-            '#36A2EB',
-            '#914CAD',
-            '#4CAD8B'
+            '#2DC0FF',
+            '#22F4AB',
+            '#E8DBBB',
+            '#F2BF1A',
+            '#F93949',
+            '#DC22F4',
+            '#1A6D91'
           ],
           label: 'Review Concepts'
         }],
@@ -77,14 +77,14 @@ const chartyOptions = {
  const chartTitles = {
   fontSize: 25,
   fontFamily: 'roboto',
-  color: 'grey',
+  color: 'black',
   padding: 0,
   marginBottom: 20,
   textAlign: 'left'
 }
 
         return (
-            <div style={{marginTop: 75, marginBottom: 90}}>
+            <div style={{marginTop: 120, marginBottom: 130}}>
              <p style={chartTitles}>Radar In On What Users Are Talking About</p>
               <Polar data={this.getKWData(this.props.s.organizedConcepts)} options={chartyOptions}/>
             </div>
