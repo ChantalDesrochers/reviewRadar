@@ -60,9 +60,7 @@ class SentimentsToShow extends Component {
 
         else if (this.props.s.displayModifier === "volumeBySentiment") {
             let finalReviews = [];
-            //0,5 is what is going to be toggled by the arrows
-            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(this.props.s.SentimentSummaryIndex-this.props.s.SummaryIndexMultiple , this.props.s.SentimentSummaryIndex).map((review, i) => (
-       
+            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(this.props.s.SentimentSummaryIndex-this.props.s.SummaryIndexMultiple , this.props.s.SentimentSummaryIndex).map((review, i) => (     
                     <ExpansionPanel expanded={this.state.expanded === `panel${i}`} onChange={this.handleChange(`panel${i}`)}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography style={styles.reviewSummary}>{review.summary}</Typography>
@@ -72,10 +70,7 @@ class SentimentsToShow extends Component {
                                 {review.description}
                             </Typography>
                         </ExpansionPanelDetails>
-                    </ExpansionPanel>
-
-                    
-               
+                    </ExpansionPanel>             
             ))
             return finalReviews
         }
@@ -120,7 +115,7 @@ class SentimentsToShow extends Component {
             <div>
                 <div>
                     {this.prepareHtml()}
-                    <VisibleReviewNavPanel s={this.props.s} reviewSwitch={this.props.reviewSwitch} />
+       
                 </div>
 
             </div>

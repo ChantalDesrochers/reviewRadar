@@ -16,8 +16,9 @@ import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
 import ChartsToShow from "./ChartsToShow.js";
 import DisplayTitle from "./DisplayTitle"
+
 const styles = {
-  AppBar: { backgroundColor: '#f7eac8', height: '75px' },
+  AppBar: { backgroundColor: '#f7eac8', height: '75px', boxShadow:'none', borderRadius: '5px'},
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
@@ -26,22 +27,20 @@ const styles = {
   RightContainer: {paddingRight:'45px'},
   TopNavPanel: { float: 'left', padding: 20},
   TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px'},
-
   // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
   ReviewWatson: {textAlign:'center', marginTop:'10%'},
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
-
   ChartOnLeftSide: { },
   ChartOnRightSide: {},
-  ReviewNavButtonsOnLeftSide: { marginLeft: '10%' },
-  ReviewNavButtonsOnRightSide: {}
-
-
+  ReviewNavButtonsOnLeftSide: {marginLeft:'500px'},
+  ReviewNavButtonsOnRightSide: {},
+  PaperForLeftReview: {height:'350px'}
 }
-class Report extends Component {
-  constructor(props) {
 
+class Report extends Component {
+  
+  constructor(props) {
     super(props);
     this.state = {
       dataFocus: 'review',
@@ -64,7 +63,6 @@ class Report extends Component {
       currentTargetedReviews: [],
       SentimentSummaryIndex:5,
       SummaryIndexMultiple:5
-
     };
   }
 
@@ -113,17 +111,18 @@ class Report extends Component {
     if (this.state.dataFocus === 'review') {
       switch (displaying) {
         case 'sentiment':
-          return <Paper>
-            <DisplayTitle s={this.state}/>
+          return <div style={{padding:0, margin:0}}><DisplayTitle style={{height:'100px'}} s={this.state}/> <Paper style={styles.PaperForLeftReview}  className="left side i hold title/sentiments to show and the arrows">
             <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
             </Paper>
+            <VisibleReviewNavPanel className='i am thew review nav panel' s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+            </div>
           break;
         case 'keyword':
-          return <Paper>
+          return <div className="left side i hold title title keywords arrows">
            <DisplayTitle s={this.state}/>
             <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
-          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></Paper>
+          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+          </div>
           break;
         //is this the problem, there is no chart?
         case 'chart':

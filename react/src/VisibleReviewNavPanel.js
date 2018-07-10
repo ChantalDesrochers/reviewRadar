@@ -6,8 +6,8 @@ import { LabelOutline, ArrowDownward, ArrowUpward } from '@material-ui/icons'
  import { withStyles } from '@material-ui/core/styles';
 
  let styles = {
-    buttonContainerForModifierSentimentVolumeFocusReviews: {position: 'absolute', left: '50%', top: 600, float: 'left'},
-    buttonContainerForModifierVolumeFocusReview: { marginLeft: '40%', position: 'absolute', top: 400},
+    buttonContainerForModifierSentimentVolumeFocusReviews: {backgroundColor:'green', marginTop:'100px'} ,
+    buttonContainerForModifierVolumeFocusReview: { },
     buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 650, float: 'left'}
  }
 
@@ -20,7 +20,7 @@ class VisibleReviewNavPanel extends Component {
     }
     pickNavButtonType = () => {
         if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'review') {
-            return (<div className="buttons" style={styles.buttonContainerForModifierVolumeFocusReview}>
+            return (<div className="buttons" style={styles.buttonContainerForModifierSentimentVolumeFocusReviews}>
                        <Grid container >
                 <Grid item sm={3}>
                     <Button style={{ backgroundColor: 'blue' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
@@ -97,7 +97,7 @@ class VisibleReviewNavPanel extends Component {
     }
     render() {
         return (
-            <div>
+            <div style={{height:'100%', width:'100%'}} >
                 {this.pickNavButtonType()}
             </div>
         )
