@@ -9,9 +9,10 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import Paper from '@material-ui/core/Paper'
 var linkStyle;
 const styles = {
+    PaperForLeftReview: { height: '551px' },
     reviewTextModifierVolumeFocusReview: { marginTop: '100px', padding:15},
     reviewSummary: {fontSize:'1.5em', margin: '5px 0px'},
     reviewFull: {fontSize:'1.5em'},
@@ -51,7 +52,7 @@ class SentimentsToShow extends Component {
     prepareHtml = (fadeBool) => {
         if (this.props.s.displayModifier === "volume") {
             if (this.props.s.dataFocus === "review") {
-                return <div style={styles.reviewTextModifierVolumeFocusReview}><SingleReview style={styles.review} s={this.props.s} /></div>
+                return  <Paper style={styles.PaperForLeftReview}><div style={styles.reviewTextModifierVolumeFocusReview}><SingleReview style={styles.review} s={this.props.s} /></div></Paper>
             }
             else if (this.props.s.dataFocus === "chart") {
                 return <div><SingleReview s={this.props.s} /></div>
@@ -60,6 +61,7 @@ class SentimentsToShow extends Component {
 
         else if (this.props.s.displayModifier === "volumeBySentiment") {
             let finalReviews = [];
+          
             finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType).slice(this.props.s.SentimentSummaryIndex-this.props.s.SummaryIndexMultiple , this.props.s.SentimentSummaryIndex).map((review, i) => (     
                     <ExpansionPanel expanded={this.state.expanded === `panel${i}`} onChange={this.handleChange(`panel${i}`)}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -72,7 +74,7 @@ class SentimentsToShow extends Component {
                         </ExpansionPanelDetails>
                     </ExpansionPanel>             
             ))
-            return finalReviews
+            return <div style={{marginTop:'95px'}}>{finalReviews}</div>
         }
 
         else if (this.props.s.displayModifier === "time") {

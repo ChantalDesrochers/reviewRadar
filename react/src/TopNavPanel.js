@@ -13,7 +13,7 @@ class TopNavPanel extends Component {
     prepareHtml =() => {
 
         return (
-        <Button style={{backgroundColor: this.props.backgroundColor, height:'70px', width:'270px', marginRight:'-140px'}} variant="contained" onClick={() => this.props.topNavClickHandler(this.props.destination)} >
+        <Button style={{backgroundColor: this.props.backgroundColor, height:'90px', width:'270px', marginRight:'-140px'}} variant="contained" onClick={() => this.props.topNavClickHandler(this.props.destination)} >
         <Typography variant="title" style={styles.Text}>{this.props.title}</Typography>
       </Button>
         )

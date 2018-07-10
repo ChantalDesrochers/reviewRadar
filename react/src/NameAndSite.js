@@ -19,7 +19,7 @@ class NameAndSite extends Component {
     render() {
         console.log('site is', this.props.site)
         return (                                                                            
-            <Typography variant="subheading" style={{fontSize:'1.2rem', lineHeight:'29px', color:'#009fe3'}} >{this.props.name}  <span style={{ color:'black'}}>on </span>  <i style={ this.props.site === 'Yelp' ? {color: '#e8b100'} : {color: '#db3340'}}>{this.props.site}</i></Typography>
+            <Typography variant="subheading" style={{fontSize:'1.4rem', lineHeight:'29px', color:'#009fe3'}} >{this.props.name}  <span style={{ color:'black'}}>on </span>  <i style={ this.props.site === 'Yelp' ? {color: '#e8b100'} : {color: '#db3340'}}>{this.props.site}</i></Typography>
 
         );
     }

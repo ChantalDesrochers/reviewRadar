@@ -7,7 +7,7 @@ import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel'
 const styles = {
-    reviewText: {overflow: 'hidden', maxHeight: '200px', textAlign: 'left', fontSize: '1.8em', display: 'block', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
+    reviewText: {overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '2.1em', display: 'block', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
     reviewTextModifierVolumeFocusReview: { padding: 15, marginTop: '100px', Left: 50, textAlign: 'left' },
 
     reviewTextModifierVolumeFocusChart: { marginTop: '0' },
@@ -18,12 +18,12 @@ class KeywordsToShow extends Component {
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
-                styles.reviewText =  {overflow: 'auto', maxHeight: '200px', textAlign: 'left', fontSize: '1.8em', paddingTop: 25, paddingLeft:50, paddingRight:50 }
+                styles.reviewText =  {overflow: 'auto', maxHeight: '300px', textAlign: 'left', fontSize: '2.1em', paddingTop: 25, paddingLeft:50, paddingRight:50 }
                 this.forceUpdate();
                 //       console.log('in enter review', styles);
                 break;
             case 'exit-review':
-                styles.reviewText = {overflow: 'hidden', maxHeight: '200px', textAlign: 'left', fontSize: '1.8em', display: 'block', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
+                styles.reviewText = {overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '2.1em', display: 'block', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
                 this.forceUpdate();
                 //     console.log('in exit review', styles);
                 break;

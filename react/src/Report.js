@@ -18,24 +18,24 @@ import ChartsToShow from "./ChartsToShow.js";
 import DisplayTitle from "./DisplayTitle"
 
 const styles = {
-  AppBar: { backgroundColor: '#f7eac8', height: '75px', boxShadow: 'none', borderRadius: '5px' },
+  AppBar: { backgroundColor: '#69bee3', height: '80px', boxShadow: 'none', borderRadius: '5px' },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
   LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
   // Top: { height: '89vh' },
-  RightContainer: { paddingRight: '45px' },
+  RightContainer: { paddingRight: '45px', height:'88vh'},
   TopNavPanel: { float: 'left', padding: 20 },
   TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px' },
-  // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
-  ReviewWatson: { textAlign: 'center', marginTop: '10%' },
+
+  ReviewWatson: { textAlign: 'center', marginTop: '-25%' },
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
   ChartOnLeftSide: {},
-  ChartOnRightSide: {},
+  ChartOnRightSide: {height:'100%'},
   ReviewNavButtonsOnLeftSide: {},
   ReviewNavButtonsOnRightSide: {},
-  PaperForLeftReview: { height: '400px' }
+  PaperForLeftReview: { height: '551px' }
 }
 
 class Report extends Component {
@@ -44,7 +44,7 @@ class Report extends Component {
     super(props);
     this.state = {
       dataFocus: 'review',
-      displaying: 'keyword',
+      displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
       displayTitle: 'Your Top Review - toggle right to go from most positive to least',
@@ -112,10 +112,8 @@ class Report extends Component {
       switch (displaying) {
         case 'sentiment':
           return <div style={{ padding: 0, margin: 0 }}>
-          <DisplayTitle style={{ height: '100px' }} s={this.state} />
-            <Paper style={styles.PaperForLeftReview}>
+          <DisplayTitle style={{ height: '100px' }} s={this.state} />   
               <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-            </Paper>
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
           </div>
           break;
@@ -136,7 +134,10 @@ class Report extends Component {
 
     }
     else if (this.state.dataFocus === 'chart') {
-      return <div style={styles.ChartOnLeftSide}><ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+      return <div style={styles.ChartOnLeftSide}>
+      
+      
+      <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
         pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
         organizedConcepts={this.state.organizedConcepts}
@@ -168,7 +169,11 @@ class Report extends Component {
       }
     }
     else if (this.state.dataFocus === 'review') {
-      return <div style={styles.ChartOnRightSide}><ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+
+      return <div style={styles.ChartOnRightSide}>
+      
+      <Paper style={{height:'100%'}} >
+      <ChartContainer  className= "Level4" displaying={this.state.displaying} reviews={this.state.reviews}
         pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
         organizedConcepts={this.state.organizedConcepts}
@@ -179,6 +184,7 @@ class Report extends Component {
         clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
         s={this.state}
       />
+      </Paper>
       </div>
     }
   }
@@ -368,20 +374,20 @@ class Report extends Component {
               </div>
               <Grid style={styles.LeftContainer} style={{ marginTop: -25 }} item sm={12}>
                 <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
-                  <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
+                  <div style={{ paddingLeft: '50px', paddingRight: '50px', paddingTop: '20px', backgroundColor: "white" }} >
                     {this.LeftSideShow()}
                   </div>
                 </div>
               </Grid>
             </Grid>
             {/* SWAP BUTTON */}
-            <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
+            <div style={{ position: 'absolute', bottom: '115px', marginLeft: '65%', left:'-25px' }}>
               <SwapButton swapDisplaySides={this.swapDisplaySides} />
             </div>
             {/* RIGHT SIDE */}
             <Grid item sm={4} style={styles.RightContainer} >
-              <Grid item sm={12}  >
-                <div onClick={this.topNavClickHandler} >
+              <Grid item sm={12}className="level1" style={{height:'100%'}}  >
+                <div onClick={this.topNavClickHandler} style={{height:'100%'}} className="level2" >
                   {this.RightSideShow()}
                 </div>
                 <Grid item sm={12} >

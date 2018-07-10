@@ -7,7 +7,7 @@ class Date extends Component {
     render() {
 
         return (
-            <Typography variant="subheading" style={{fontStyle: 'italic', fontSize:'1.2em', lineHeight:'29px'}} >{this.props.date}</Typography>
+            <Typography variant="subheading" style={{fontStyle: 'italic', fontSize:'1.4em', lineHeight:'29px'}} >{this.props.date}</Typography>
 
         );
     }

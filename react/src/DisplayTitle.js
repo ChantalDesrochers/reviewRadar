@@ -5,8 +5,9 @@ import Paper from '@material-ui/core/Paper'
 
 const styles = {
 SingleReviewLeft: {textAlign:'center', margin:'auto', color:'black', position:'relative', left:'40' },
-SingleReviewLeftPaper: {height:'100%', padding:'25px'},
-SingleReviewLeftContainer: {margin: 'auto', height:'50px', width:'1100px'}
+SingleReviewLeftPaper: {height:'100%', padding:'25px', backgroundColor:'#f7eed7'},
+SingleReviewLeftContainer: {margin: 'auto', height:'45px', width:'1100px'},
+SingleReviewLeftContainerMultiple: {margin: 'auto', height:'45px', width:'1100px'}
 }
 class DisplayTitle extends Component {
 
@@ -23,26 +24,27 @@ class DisplayTitle extends Component {
             return (
                <div style={styles.SingleReviewLeftContainer}>
                <Paper style={styles.SingleReviewLeftPaper}>
-               <Typography variant="display2" style={styles.SingleReviewLeft}>Full Reviews</Typography></Paper></div>
+               <Typography variant="display2" style={styles.SingleReviewLeft}>Reviews Sorted By Sentiment</Typography></Paper></div>
             )
         }
         else if (this.props.s.displaySentimentType === 'positive' && this.props.s.displayModifier === 'volumeBySentiment') {
             return (
-                <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em', float: 'left' }}>Toggle through your positive reviews!</Typography>
+                <Paper style={styles.SingleReviewLeftPaper}><Typography variant="display2"  style={styles.SingleReviewLeft}>Positive Reviews</Typography></Paper>
             )
         } else if (this.props.s.displaySentimentType === 'negative' && this.props.s.displayModifier === 'volumeBySentiment') {
             return (
-                <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em', float: 'left' }}>Toggle through your negative reviews!</Typography>
+                <div style={styles.SingleReviewLeftContainerMultiple}>
+                <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Negative Reviews</Typography></Paper></div>
             )
         } else if (this.props.s.displayModifier === "time") {
             return (
-                <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em', float: 'left' }}>View Your Five Most Recent Reviews</Typography>
+                <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em'}}>View Your Five Most Recent Reviews</Typography>
             )
         } else if (this.props.s.displayModifier === "timebymonth") {
-            return <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em', float: 'left' }}></Typography>
+            return <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em' }}></Typography>
         }
         else return (
-            <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em', float: 'left' }}> {this.props.s.displayTitle}</Typography>
+            <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em'}}> {this.props.s.displayTitle}</Typography>
         )
     }
 

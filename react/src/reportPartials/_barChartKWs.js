@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import { HorizontalBar } from "react-chartjs-2";
 import 'typeface-roboto'
+import { Typography } from "@material-ui/core";
 
 class KeywordBarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2'],
-      borderColors: ['#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE']
+      colors: ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2'  , '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2'],
+      borderColors: ['#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE,']
     }
   }
   
   getChartData = returnConcepts => {
     var colors = this.state.colors
     var borderColors = this.state.borderColors
-    var topSeven = returnConcepts.slice(0, 6);
+    var topTen = returnConcepts.slice(0, 10);
     var label = [];
     var data = [];
-    topSeven.forEach(function(concept) {
+    topTen.forEach(function(concept) {
       data.push(concept.references.length);
       label.push(concept.content);
     });
@@ -25,12 +26,12 @@ class KeywordBarChart extends Component {
       labels: label,
       datasets: [
         {
-          label: 'Keyword Frequency',
+          label: 'Concept Frequency',
           backgroundColor: colors,
           borderColor: borderColors,
-          borderWidth: 5,
+          borderWidth: 1,
           hoverBackgroundColor: colors,
-          hoverBorderColor: '#1FDA9A',
+          hoverBorderColor: '#28abe3',
           data: data
         }
       ],
@@ -61,11 +62,10 @@ class KeywordBarChart extends Component {
         // *** fix state set
         // *** fix color choices
         // *** fix top keyword frequency color
-        this.state.colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
-        this.state.borderColors = ['#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE']
-        this.state.colors[clickedPointIndex] = 'red'
-        this.state.borderColors[clickedPointIndex] = 'red'
-
+        this.state.colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2'  , '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
+        this.state.borderColors = ['#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE,']
+        this.state.colors[clickedPointIndex] = '#28abe3'
+        this.state.borderColors[clickedPointIndex] = '#28abe3'
         const label =
           chartPoints[0]["_chart"]["config"]["data"]["labels"][
             clickedPointIndex
@@ -95,13 +95,13 @@ const chartyOptions = {
           yAxes: [
           {
             ticks: {
-              fontSize: 20
+              fontSize: 25
             }
           }]
         },
         legend: {
         labels: {
-          fontSize: 20,
+          fontSize: 25,
           fontWeight: 'bold'
         }
       },
@@ -109,8 +109,8 @@ const chartyOptions = {
       onElementsClick: function(evt, elements) {
           var datasetIndex;
           var dataset;
-          var colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
-
+          var colors = ['#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2',  '#6EEFC2', '#6EEFC2', '#6EEFC2', '#6EEFC2']
+          var  borderColors = ['#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE', '#5FD8AE,']
           if (elements.length) {
             var index = elements[0]._index;
             datasetIndex = elements[0]._datasetIndex;
@@ -120,8 +120,8 @@ const chartyOptions = {
             dataset.backgroundColor = colors.slice();
             dataset.hoverBackgroundColor = colors.slice();
 
-            dataset.backgroundColor[index] = 'red'; // click color
-            dataset.hoverBackgroundColor[index] = 'red';
+            dataset.backgroundColor[index] = '#28abe3'; // click color
+            dataset.hoverBackgroundColor[index] = '#28abe3';
           } else {
             // remove hover styles
             for (datasetIndex = 0; datasetIndex < this.data.datasets.length; ++datasetIndex) {
@@ -136,25 +136,29 @@ const chartyOptions = {
       }
 
   const chartTitles = {
-  fontSize: 30,
-  fontFamily: 'arial',
-  padding: 0,
-  margin: 0
+    fontSize: 30,
+    padding: 20,
+    margin: 0,
+    color: 'black'
 }
 
 
 
     return (
-      <div className="bar-chart" style={{"height" : 450}}>
-      <h3 style={chartTitles}>Most commonly mentioned terms</h3>
+      <div className="bar-chart" >
+      <Typography  variant='display3'  style={chartTitles}>Most commonly mentioned terms</Typography>
+      
+      <div style={{width:'90%'}}>
         <HorizontalBar
           data={this.getChartData(this.props.organizedConcepts)}
-          getElementsAtEvent={(elem) => { handleClick(elem) }}    width={10}
-  height={7}
+          getElementsAtEvent={(elem) => { handleClick(elem) }}    
+          width={6}
+  height={4}
   options={{
     maintainAspectRatio: false}}
     options={chartyOptions}
     ref="myChart"/>
+    </div>
       </div>
     );
   }
