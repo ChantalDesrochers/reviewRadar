@@ -12,14 +12,16 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
 import LandingContainer from "./landingPartials/_containers";
+import radar from "./landingPartials/radar.png";
 
 import Button from "@material-ui/core/Button"; // used to reroute to Registration + Login
 
 const variables = {
   color1: "lightblue",
   color2: "#289aee",
-  buttonPadding: "10 px",
-  buttonHeight: 48
+  buttonPadding: "10px",
+  buttonHeight: 48,
+  buttonFont: "150%"
 };
 
 const styles = {
@@ -30,89 +32,97 @@ const styles = {
   register: {
     background: variables.color2,
     color: "white",
-    height: variables.buttonHeight,
-    padding: variables.buttonPadding
+    padding: variables.buttonPadding,
+    textTransform: "capitalize",
+    fontSize: variables.buttonFont
   },
   login: {
-    border: 0,
+    background: "white",
     color: "grey",
-    height: variables.buttonHeight,
-    padding: variables.buttonPadding
-  },
-  label: {
-    textTransform: "capitalize"
+    padding: variables.buttonPadding,
+    textTransform: "capitalize",
+    fontSize: variables.buttonFont
   }
 };
 
-const paper = {
-  padding: 2,
-  textAlign: "center"
-  // color: palette.text.secondary,
-};
+// -webkit-linear-gradient(-45deg, rgba(11,145,255,1) 0%,rgba(81,180,255,0) 100%)
 
-function Landing(props) {
-  const { classes } = props;
-
+function Landing() {
   return (
-    <div>
-      <AppBar
-        position="static"
-        classes={{
-          root: classes.header
+    <div style={{overflow: 'hidden'}}>
+      <div
+        style={{
+          height: "100vh",
+          background:
+            "-webkit-linear-gradient(-45deg, rgba(11,145,255,1) 0%,rgba(81,180,255,0) 100%)",
         }}
       >
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            [Logo] ReviewRadar
-          </Typography>
-          {/* <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button> */}
-        </Toolbar>
-      </AppBar>
+        {/* <AppBar position="static" style={styles.header}>
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              [Logo] ReviewRadar
+            </Typography>
+          <Button color="inherit">Login</Button>
+          <Button color="inherit">Register</Button> 
+          </Toolbar>
+        </AppBar> */}
 
-      <Typography variant="display3">Welcome to ReviewRadar</Typography>
-      <Link to="request" style={{ textDecoration: "none" }}>
-        <Button
-          classes={{
-            root: classes.register, // class name, e.g. `classes-nesting-root-x`
-            label: classes.label // class name, e.g. `classes-nesting-label-x`
-          }}
+        <Typography
+          style={{ paddingTop: "3em", marginBottom: "15px" }}
+          variant="display4"
         >
-          Get your request
-        </Button>
-      </Link>
-      <Link to="report" style={{ textDecoration: "none" }}>
-        <Button
-          classes={{
-            root: classes.login, // class name, e.g. `classes-nesting-root-x`
-            label: classes.label // class name, e.g. `classes-nesting-label-x`
+          Welcome to ReviewRadar
+        </Typography>
+        <div style={{ marginLeft: "36%", marginTop: '4%' }}>
+          <Link
+            to="request"
+            style={{ textDecoration: "none", marginRight: "20px" }}
+          >
+            <Button style={styles.register}>Start a New Request</Button>
+          </Link>
+          <Link to="report" style={{ textDecoration: "none" }}>
+            <Button style={styles.login}>View My Report</Button>
+          </Link>
+        </div>
+        <img
+          src={radar}
+          style={{
+            height: "75%",
+            left: "57%",
+            position: "absolute",
+            bottom: "37%",
+            zIndex: -1
           }}
+        />
+      </div>
+      <div style={{ height: "95vh", maxWidth: "98%" }}>
+        <Typography
+          variant="display1"
+          style={{ textAlign: "center", margin: "3em 0em" }}
         >
-          Already Registered
-        </Button>
-      </Link>
-      <Typography variant="display1" style={{ textAlign: "center" }}>
-        Understanding how your customers feel, while running daily operations can be
-        difficult. <br />We help simplify the process.
-      </Typography>
+          Understanding how your customers feel, while running daily operations
+          can be difficult. <br />We help simplify the process.
+        </Typography>
 
-      <Grid container spacing={40} justify="center">
-        <LandingContainer
-          header="header"
-          img="http://via.placeholder.com/250x300"
-          text="This is container1"while
-        />
-        <LandingContainer
-          header="header"
-          img="http://via.placeholder.com/250x300"
-          text="This is container2"
-        />
-        <LandingContainer
-          header="header"
-          img="http://via.placeholder.com/250x300"
-          text="This is container3"
-        />
-      </Grid>
+        <Grid container spacing={40} justify="center">
+          <LandingContainer
+            header="header"
+            img="http://via.placeholder.com/250x300"
+            text="This is container1"
+            while
+          />
+          <LandingContainer
+            header="header"
+            img="http://via.placeholder.com/250x300"
+            text="This is container2"
+          />
+          <LandingContainer
+            header="header"
+            img="http://via.placeholder.com/250x300"
+            text="This is container3"
+          />
+        </Grid>
+      </div>
     </div>
   );
 }
