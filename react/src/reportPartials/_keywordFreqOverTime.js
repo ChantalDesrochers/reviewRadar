@@ -5,6 +5,7 @@ import 'typeface-roboto'
 // import ReturnConcepts from "./organizedConcepts.js";
 // import InputReviews from "./completedData.js";
 // import MonthConceptFrequency from "./monthReturnConcepts.js";
+import { Typography } from "@material-ui/core";
 
 class KeywordsOverTime extends Component {
   constructor(props) {
@@ -200,15 +201,30 @@ const chartyOptions = {
     }
 
     const chartTitles = {
-  fontSize: 30,
-  fontFamily: 'arial',
-  padding: 0,
-  margin: 0
-}
+      Right: {
+        fontSize: 30,
+        fontFamily: 'arial',
+        padding: 0,
+        margin: 0
+      },
+      Left: {
+        fontSize: 40,
+        marginLeft: '-1%',
+        color: 'black',
+        marginTop: '11px'
+      }
+    }
 
+
+    /*         display: block;
+    width: 1000px;
+    height: 635px;
+    margin-left: 55px; */
+
+if (this.props.s.dataFocus === 'review') {
     return (
       <div className="kwFreqOverTimeChart" style={{"height" : 450}}>
-      <h3 style={chartTitles}>Topics mentioned over time</h3>
+      <Typography  variant='display3'  style={chartTitles.Right}>Topics mentioned over time</Typography>
       <Line
           data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
           height={7}
@@ -217,6 +233,22 @@ const chartyOptions = {
             options={chartyOptions}/>
       </div>
     );
+  } else if (this.props.s.dataFocus === 'chart') {
+    return (
+      <div className="kwFreqOverTimeChart" style={{"height" : '680px'}}>
+      <Typography variant='title' style={chartTitles.Left}>Topics mentioned over time</Typography>
+      <div style={{'width':'1020px', marginLeft:'58px'}}>
+      <Line
+          data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} 
+          width={1020}
+          height={640}
+          options={{
+            maintainAspectRatio: true}}
+            options={chartyOptions}/>
+      </div>
+      </div>
+    );
+  }
   }
 }
 

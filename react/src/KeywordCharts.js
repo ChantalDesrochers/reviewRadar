@@ -40,17 +40,26 @@ class KeywordCharts extends Component {
       height: "50px"
 
     }
-    const buttonDiv = {
-      marginBottom: '80px',
-      position: 'relative',
-      top: '80px',
+
+    let buttonDiv = {}
+
+    if (this.props.s.dataFocus === 'review') {
+      buttonDiv = {
+        marginBottom: '80px',
+        position: 'relative',
+        top: '80px',
+      }
+    } else if (this.props.s.dataFocus === 'chart') {
+      buttonDiv = {
+        // marginBottom: '80px',
+        position: 'relative',
+        top: '18px',
+      }
     }
     return (
-      <div style={{ textAlign: 'center', marginTop: '10px' }}>
-        {/* { showTimeChart && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts}/> } */}
-        {(this.props.s.displayModifier === 'time' || this.props.s.displayModifier === 'timebymonth') && <KeywordsOverTime clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts} changeKeywordDisplayModifier={this.props.changeKeywordDisplayModifier} />}
-        {/* { showOverviewChart && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} />} */}
-        {this.props.s.displayModifier === 'volume' && <KeywordBarChart reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} changeKeywordDisplayModifier={this.props.changeKeywordDisplayModifier} />}
+      <div style={{ textAlign: 'center' }}>
+        {(this.props.s.displayModifier === 'time' || this.props.s.displayModifier === 'timebymonth') && <KeywordsOverTime s={this.props.s} clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts} changeKeywordDisplayModifier={this.props.changeKeywordDisplayModifier} />}
+        {this.props.s.displayModifier === 'volume' && <KeywordBarChart s={this.props.s} reviewTypeToDisplayKW={this.props.reviewTypeToDisplayKW} organizedConcepts={this.props.organizedConcepts} changeKeywordDisplayModifier={this.props.changeKeywordDisplayModifier} />}
         <div style={buttonDiv}>
           <Button
             variant="outlined"
@@ -59,7 +68,6 @@ class KeywordCharts extends Component {
             style={buttonStyles}
           >
             <Typography style={{ fontSize: '1.3em' }} variant='title'> High level Overview</Typography>
-
           </Button>
           <Button
             variant="outlined"

@@ -352,6 +352,13 @@ class Report extends Component {
           <AppBar position="static" style={styles.AppBar}>
             <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
           </AppBar>
+          <AppBar className='******************' position="absolute" style={{top:'94px', opacity:0.4, backgroundColor:'green', height: '15px', zIndex:1, display:'block'}}>
+          </AppBar>
+          <AppBar className='@@@@@@@@@@@@@@@@' position="absolute" style={{top:'614px', opacity:0.4, backgroundColor:'blue', height: '15px', zIndex:1, display:'block'}}>
+          </AppBar>
+          <AppBar className='!!!!!!!!!!!!!!!!!' position="absolute" style={{top:'948px', opacity:0.4, backgroundColor:'red', height: '15px', zIndex:1, display:'block'}}>
+          </AppBar>
+          
           {/* LEFT SIDE */}
           <Grid container style={styles.MainContainer} spacing={8}>
             <Grid item sm={8} >
