@@ -56,8 +56,6 @@ class KeywordsToShow extends Component {
       
         if (this.props.s.displayModifier === "timebymonth") {
             //we need the month
-            console.log('***********************', this.props)
-            console.log('state in keywords time by month', this.props.s.CurrentMonth)
             let htmlToReturn = [];
             var options = { year: 'numeric', month: 'long', day: 'numeric' };
             const reviews = this.props.s.currentTargetedReviews
@@ -67,10 +65,10 @@ class KeywordsToShow extends Component {
             )
             const sortedDate = dAlteredArray.sort(function (a, b) {
                 return b.datePublished - a.datePublished
-            })
+            }).slice(0,5)
             let finalReviews = [];
             finalReviews = sortedDate.map((review, i) => (
-                <ExpansionPanel expanded={this.state.expanded === `panel${i}`} onChange={this.handleChange(`panel${i}`)}>
+                <ExpansionPanel expanded={this.state.expanded === `panel${(i+30)}`} onChange={this.handleChange(`panel${(i+30)}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary}</Typography>
                     </ExpansionPanelSummary>
@@ -100,7 +98,7 @@ class KeywordsToShow extends Component {
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
     htmlToReturn = recentReviews.map((review, i) => (
 
-        <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
+        <ExpansionPanel expanded={this.state.expanded === `panel${(i+40)}`} onChange={this.handleChange(`panel${(i+40)}`)}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary}</Typography>
             </ExpansionPanelSummary>

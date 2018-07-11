@@ -103,7 +103,7 @@ class SentimentsToShow extends Component {
             var options = {  year: 'numeric', month: 'long', day: 'numeric' };
             htmlToReturn = recentReviews.map((review, i) => (
 
-                <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
+                <ExpansionPanel expanded={this.state.expanded === `panel${(i+10)}`} onChange={this.handleChange(`panel${(i+10)}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     {console.log(review.datePublished)}
                         <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary} </Typography>
@@ -133,7 +133,7 @@ class SentimentsToShow extends Component {
             let htmlToReturn = [];
             var options = { year: 'numeric', month: 'long', day: 'numeric' };
             htmlToReturn = sortedDate.map((review, i) => (
-                <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
+                <ExpansionPanel expanded={this.state.expanded === `panel${(i+20)}`} onChange={this.handleChange(`panel${(i+20)}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary} </Typography>
                       {/* <Typography variant="body" style={styles.reviewSummaryForSentiment}>{review.summary}</Typography> */}

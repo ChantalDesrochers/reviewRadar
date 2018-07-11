@@ -89,7 +89,10 @@ class WatsonBar extends Component {
   }
 
   render() {
-    const finalRating = this.parseSentimentData(this.props.currentTargetedReviews[this.props.visibleReview].score);
+    let finalRating
+    if (this.props.currentTargetedReviews.length){
+      finalRating = this.parseSentimentData(this.props.currentTargetedReviews[this.props.visibleReview].score);
+    }
     return (
       this.props.s.displayModifier === 'volume' ?
       (<div style={{position: 'relative', top: '-40px', paddingBottom: '10px'}} >
