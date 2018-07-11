@@ -66,14 +66,14 @@ const styles ={
             </Grid>
             <Grid item md={6}>
                 <PieSentimentTripAdvisor reviews={this.props.s.reviews} style={{margin:'50px'}}/>
-                 <Typography variant="body2"><Scrollchor style={{color: 'black', position: 'relative', top: '47px'}} to="#top" className="nav-link">Back to Top</Scrollchor></Typography>
+                {/* <Typography variant="body2"><Scrollchor style={{color: 'black', position: 'relative', top: '47px'}} to="#top" className="nav-link">Back to Top</Scrollchor></Typography>*/}
             </Grid>
             <Grid item md={6}>
                  <PieSentimentYelp reviews={this.props.s.reviews} style={{margin:'50px', width: '50px'}}/>
-                  <Typography variant="body2"><Scrollchor style={{color: 'black', position: 'relative', top: '47px'}} to="#top" className="nav-link">Back to Top</Scrollchor></Typography>
+                  {/*<Typography variant="body2"><Scrollchor style={{color: 'black', position: 'relative', top: '47px'}} to="#top" className="nav-link">Back to Top</Scrollchor></Typography>*/}
             </Grid>
             <Grid item md={12} >
-                <SentimentOverSiteDivide reviews={this.props.s.reviews}/>
+                <SentimentOverSiteDivide reviews={this.props.s.reviews} style={{marginTop: '50%%'}}/>
                  <Typography variant="body2"><Scrollchor style={{color: 'black', position: 'relative', top: '-122px'}} to="#top" className="nav-link">Back to Top</Scrollchor></Typography>
             {/*    <PieChart s={this.props.s} reviews={this.props.s.reviews} style={{margin:'50px'}}/>*/}
             </Grid>

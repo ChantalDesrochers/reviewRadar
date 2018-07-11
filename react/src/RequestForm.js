@@ -8,11 +8,10 @@ import "typeface-roboto";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-
-import PaperTexture from "./textured-paper.png";
-import AppBarTexture from "./app-bar-image.png";
+import TextField from "@material-ui/core/TextField";
+import yelpicon from "./yelp color mini.png";
+import tripicon from "./tripadvisor mini.png";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 /* Design wise you'll want to do the following:
 
@@ -41,6 +40,20 @@ const variables = {
 };
 
 const styles = {
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    width: "15%",
+  },
+  textFieldURL: {
+    width: "25%",
+    height: "2.5em"
+  },
+  menu: {
+    width: 200
+  },
   header: {
     background: variables.color2,
     color: "white"
@@ -61,12 +74,6 @@ const styles = {
     textTransform: "capitalize"
   }
 };
-
-const paper = {
-  padding: 2,
-  textAlign: "center"
-  // color: palette.text.secondary,
-};
 class Request extends Component {
   constructor() {
     super();
@@ -80,6 +87,12 @@ class Request extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
 
   handleSubmit(event) {
     event.preventDefault();
@@ -97,7 +110,6 @@ class Request extends Component {
         return;
       });
     }
-
     this.setState({
       url1: "",
       url2: "",
@@ -108,10 +120,66 @@ class Request extends Component {
 
   render() {
     const submitPage = (
-      <form className="form" onSubmit={this.handleSubmit}>
-        <label className="form-text" htmlFor="company">
-          Company Name
-        </label>
+      <div>
+        <form className="form" onSubmit={this.handleSubmit}>
+          <TextField
+            id="company"
+            label="Company Name"
+            style={styles.textField}
+            value={this.state.company}
+            onChange={this.handleChange("company")}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            id="email"
+            label="Email"
+            type="email"
+            style={styles.textField}
+            value={this.state.email}
+            onChange={this.handleChange("email")}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            required
+            id="url1"
+            // label="Yelp URL"
+            style={styles.textFieldURL}
+            value={this.state.url1}
+            onChange={this.handleChange("url1")}
+            margin="normal"
+            // fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <img src={yelpicon} style={{ paddingBottom: "2vh" }} />
+                </InputAdornment>
+              )
+            }}
+          />
+          <br />
+          <TextField
+            required
+            id="url2"
+            // label="TripAdvisor URL"
+            style={styles.textFieldURL}
+            value={this.state.url2}
+            onChange={this.handleChange("url2")}
+            margin="normal"
+            // fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <div>
+                    <img src={tripicon} style={{ paddingBottom: "2vh" }} />
+                  </div>
+                </InputAdornment>
+              )
+            }}
+          />
+          <br />
+          {/*         
         <input
           id="company"
           name="company"
@@ -138,15 +206,16 @@ class Request extends Component {
           type="text"
           onChange={e => this.setState({ url1: e.target.value })}
         />
-        <br /> <br />
-        {/* <label className="form-text" htmlFor="second-url">Enter your second url</label>
+        <br /> <br /> */}
+          {/* <label className="form-text" htmlFor="second-url">Enter your second url</label>
         <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url2: e.target.value})}/>
         <br/> <br/>
         <label className="form-text" htmlFor="third-url">Enter your third url</label>
         <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url3: e.target.value})}/>
         <br/> <br/> */}
-        <button>Get Your Report!</button>
-      </form>
+          <button>Get Your Report!</button>
+        </form>
+      </div>
     );
 
     const thanksPage = (
@@ -159,15 +228,10 @@ class Request extends Component {
 
     return (
       <div>
-        <AppBar
-          position="static"
-          classes={{
-            root: styles.header
-          }}
-        >
+        <AppBar position="static" style={styles.header}>
           <Toolbar>
             <Typography variant="title" color="inherit">
-              [Logo] ReviewRadar
+              ReviewRadar
             </Typography>
             {/* <Button color="inherit">Login</Button>
           <Button color="inherit">Register</Button> */}

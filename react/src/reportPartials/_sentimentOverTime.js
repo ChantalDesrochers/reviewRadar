@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Line} from 'react-chartjs-2';
 import 'typeface-roboto'
+import { Typography } from "@material-ui/core";
 
 class SentimentOverTime extends Component {
   constructor(props) {
@@ -229,17 +230,30 @@ class SentimentOverTime extends Component {
       }
     }
 
+
+
     const chartTitles = {
   fontSize: 30,
   fontFamily: 'arial',
   padding: 0,
-  margin: 0
+  margin: 0,
+  Right: {
+    fontSize: 30,
+    padding: 20,
+    margin: 0,
+    color: 'black'},
+    Left: {
+      fontSize: 40,
+      paddingLeft: '0%',
+      color: 'black',
+      marginTop: '11px'
+    }
 }
 
-
+if (this.props.s.dataFocus === 'review') {
     return (
-      <div className="sentiment-over-time" style={{"height" : 450}}>
-      <h3 style={chartTitles}>Customer perception by month</h3>
+      <div className="sentiment-over-time" style={{"height" : 550, marginTop:'1.5%'}}>
+      <Typography  variant='display3'  style={chartTitles.Right}>Customer perception by month</Typography>
         <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}} width={10}
   height={7}
   options={{
@@ -248,7 +262,23 @@ class SentimentOverTime extends Component {
   options={chartyOptions}/>
       </div>
     );
+  } else if (this.props.s.dataFocus === 'chart') {
+    return (
+      <div className="sentiment-over-time" style={{"height" : '739px', marginLeft:'40px'}}>
+      <Typography variant='title' style={chartTitles.Left}>Customer perception by month</Typography>
+        <div style={{'width':'1035px'}}>
+        <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}} 
+        width={1020}
+  height={640}
+  options={{
+    maintainAspectRatio: false
+  }}
+  options={chartyOptions}/>
+      </div>
+      </div>
+    );
   }
+}
 }
 
 

@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import Paper from '@material-ui/core/Paper'
-import { Star, Favorite, Flare, Dehaze, Blur_on } from '@material-ui/icons'
+import { withStyles } from '@material-ui/core/styles';
+import { Star, Favorite, Flare, Dehaze, FiberManualRecord } from '@material-ui/icons'
+import Typography from "@material-ui/core/Typography";
 
 class WatsonBar extends Component {
+
+
+
 
 
   parseHtml = (finalRating) => {
@@ -11,14 +16,50 @@ class WatsonBar extends Component {
       console.log('final rating', finalRating)
       // return <div>{Array(parseInt(finalRating)).fill(<Favorite style={{ height: '40', width: '40', color: 'blue' }} />)}</div>
     // return <div>{Array(parseInt(finalRating)).fill(<Flare style={{ height: '40', width: '40', color: 'blue' }} />)}</div>
-    if (finalRating >= 5) {
-    return <div>{Array(parseInt(finalRating)).fill(<Dehaze style={{ height: '40', width: '40', color: 'green' }} />)}</div>
-    // return <div>{Array(parseInt(finalRating)).fill(<Blur_on style={{ height: '40', width: '40', color: 'blue' }} />)}</div>
-    } else if (finalRating < 5) {
-    return <div>{Array(parseInt(finalRating)).fill(<Dehaze style={{ height: '40', width: '40', color: 'red' }} />)}</div>
-    }
-  }
+    if (finalRating < 2) {
+      var remain = 10 - finalRating;
+      return <div style={{textAlign: 'left', paddingLeft: 30}}>
+      {Array(parseInt(finalRating)).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: '#9E242E', textAlign: 'left' }} />)}
+       {Array(remain).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: 'grey', textAlign: 'left' }} />)}
+       </div>
+    } else if (finalRating >=2 && finalRating < 4) {
+      var remain = 10 - finalRating;
+      return <div style={{textAlign: 'left', paddingLeft: 30}}>
+      {Array(parseInt(finalRating)).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: '#E87D19', textAlign: 'left' }} />)}
+       {Array(remain).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: 'grey', textAlign: 'left' }} />)}
+       </div>
+    } else if (finalRating === 4 || finalRating === 5) {
+       var remain = 10 - finalRating;
+      return <div style={{textAlign: 'left', paddingLeft: 30}}>
+      {Array(parseInt(finalRating)).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: '#E8CF19', textAlign: 'left' }} />)}
+       {Array(remain).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: 'grey', textAlign: 'left' }} />)}
+       </div>
+    } else if (finalRating >5 && finalRating <=8) {
+      var remain = 10 - finalRating;
+      return <div style={{textAlign: 'left', paddingLeft: 30}}>
+      {Array(parseInt(finalRating)).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: '#8ED81E', textAlign: 'left' }} />)}
+       {Array(remain).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: 'grey', textAlign: 'left' }} />)}
+       </div>
+     } else if (finalRating > 8) {
+      var remain = 10 - finalRating;
+      return <div style={{textAlign: 'left', paddingLeft: 30}}>
+      {Array(parseInt(finalRating)).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: '#1FDA9A', textAlign: 'left' }} />)}
+       {Array(remain).fill(
+      <FiberManualRecord style={{ height: '40', width: '40', color: 'grey', textAlign: 'left' }} />)}
+       </div>
 }
+}
+}
+
   parseSentimentData = () => {
     console.log(this.props.s)
     let rating = this.props.currentTargetedReviews[this.props.visibleReview].score
@@ -45,26 +86,17 @@ class WatsonBar extends Component {
     } else if (rounded >0.9 && rounded <= 1) {
       return 10
     }
-    // var rounded = rating.toFixed(1)
-    // if (rounded === 0) {
-    //   return 3
-    // } else if (rounded > 0 && rounded <= 0.5) {
-    //   return 4
-    // } else if (rounded > 0.5) {
-    //   return 5;
-    // } else if (rounded < 0 && rounded >= -0.5) {
-    //   return 2;
-    // } else if (rounded < -0.5) {
-    //   return 1;
-    // }
+
   }
 
 
   render() {
     const finalRating = this.parseSentimentData(this.props.watsonRating);
     return (
+      <div style={{position: 'relative', top: '-40px', paddingBottom: '10px'}} >
+      <Typography variant="headline" style={{textAlign: 'left', paddingLeft: '30px'}}>Watson Rating</Typography>
       <div>{this.parseHtml(finalRating)}</div>
-
+      </div>
     );
   }
 }

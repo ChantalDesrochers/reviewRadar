@@ -10,10 +10,10 @@ const styles ={
 }
 class TopNavPanels extends Component {
     render() {
-        const color1 = '#82d9ba'
-        const color2 = '#e8d28b'
-        const color3 = '#db848b'
-        const color4 = '#88c8e3'
+        const color1 = '#add9ca'
+        const color2 = '#ccdce3'
+        const color3 = '#bad7e3'
+        const color4 = '#dbb8bb'
         return (
                 <Grid item sm={8} style={{margin:'auto'}} >
                     <Grid item sm={4} style={styles.TopNavPanel}>

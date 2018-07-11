@@ -494,7 +494,7 @@ class SentimentOverSiteDivide extends Component {
 
 
     return (
-      <div className="sentiment-over-time-siteDivide" style={{marginTop: 150, marginBottom: 140}}>
+      <div className="sentiment-over-time-siteDivide" style={{marginTop: 350, marginBottom: 140}}>
       <p style={chartTitles}>Sentiment Over Time and Review Site</p>
         <Line data={this.parseSentimentDatabyTime(this.props.reviews)} options={chartyOptions}/>
       </div>

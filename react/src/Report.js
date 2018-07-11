@@ -16,40 +16,39 @@ import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
 import ChartsToShow from "./ChartsToShow.js";
 import DisplayTitle from "./DisplayTitle"
-import { Router, Link } from "@reach/router"
+
 const styles = {
-  AppBar: { backgroundColor: '#f7eac8', height: '75px' },
+  AppBar: { backgroundColor: '#69bee3', height: '80px', boxShadow: 'none', borderRadius: '5px' },
   MainTitle: { color: 'black', margin: 'auto' },
   menuButton: { color: "red", marginLeft: -12, marginRight: 20, root: { flexGrow: 1 }, flex: { flex: 1 } },
   MainContainer: { height: '100%', marginTop: 8 },
   LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
   // Top: { height: '89vh' },
-  RightContainer: {paddingRight:'45px'},
-  TopNavPanel: { float: 'left', padding: 20},
-  TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px'},
+  RightContainer: { paddingRight: '45px', height:'88vh'},
+  TopNavPanel: { float: 'left', padding: 20 },
+  TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px' },
 
-  // ReviewWatson:{position:'absolute', bottom: '150px', right: '215px'},
-  ReviewWatson: {textAlign:'center', marginTop:'10%'},
+  ReviewWatson: { textAlign: 'center', marginTop: '-28%' },
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
-
-  ChartOnLeftSide: { },
-  ChartOnRightSide: {},
-  ReviewNavButtonsOnLeftSide: { marginLeft: '10%' },
-  ReviewNavButtonsOnRightSide: {}
-
-
+  ChartOnLeftSide: {},
+  ChartOnRightSide: {height:'100%'},
+  ReviewNavButtonsOnLeftSide: {},
+  ReviewNavButtonsOnRightSide: {},
+  PaperForLeftReview: { height: '551px' },
+  WatsonContainer: { position: 'relative', top: '-2px', right: '-7px'}
 }
-class Report extends Component {
-  constructor(props) {
 
+class Report extends Component {
+
+  constructor(props) {
     super(props);
     this.state = {
       dataFocus: 'review',
       displaying: 'sentiment',
       displayModifier: 'volume',
       displaySentimentType: '',
-      displayTitle:'Your Top Review - toggle right to go from most positive to least',
+      displayTitle: 'Your Top Review - toggle right to go from most positive to least',
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
@@ -63,9 +62,8 @@ class Report extends Component {
       monthConcepts: [], // reviews parsed into monthly concept data
       keywordArray: [],
       currentTargetedReviews: [],
-      SentimentSummaryIndex:5,
-      SummaryIndexMultiple:5
-
+      SentimentSummaryIndex: 5,
+      SummaryIndexMultiple: 5
     };
   }
 
@@ -79,20 +77,20 @@ class Report extends Component {
   }
 
   dateParsingReviews = () => {
-      let reviews = this.state.reviews
-      let dAlteredArray = reviews.map(review =>
-          ({ ...review, datePublished: new Date(review.datePublished) })
-      )
-      const sortedDate = dAlteredArray.sort(function (a, b) {
-          return b.datePublished - a.datePublished
-      })
-      let recentReviews = sortedDate.slice(0, 5)
-      recentReviews = recentReviews.map(review => (
-          <div>
-              <h2>{review.datePublished.toString().substring(0, 15)}</h2>
-              <p>{review.description}</p>
-          </div>))
-      return recentReviews
+    let reviews = this.state.reviews
+    let dAlteredArray = reviews.map(review =>
+      ({ ...review, datePublished: new Date(review.datePublished) })
+    )
+    const sortedDate = dAlteredArray.sort(function (a, b) {
+      return b.datePublished - a.datePublished
+    })
+    let recentReviews = sortedDate.slice(0, 5)
+    recentReviews = recentReviews.map(review => (
+      <div>
+        <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+        <p>{review.description}</p>
+      </div>))
+    return recentReviews
   }
 
   swapDisplaySides = () => {
@@ -114,17 +112,20 @@ class Report extends Component {
     if (this.state.dataFocus === 'review') {
       switch (displaying) {
         case 'sentiment':
-          return <Paper>
-            <DisplayTitle s={this.state}/>
-            <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+          return <div style={{ padding: 0, margin: 0 }}>
+          <DisplayTitle style={{ height: '100px' }} s={this.state} />
+              <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
-            </Paper>
+          </div>
           break;
         case 'keyword':
-          return <Paper>
-           <DisplayTitle s={this.state}/>
+          return <div style={{ padding: 0, margin: 0 }}>
+            <DisplayTitle style={{ height: '100px' }} s={this.state} />
+            <Paper style={styles.PaperForLeftReview}>
             <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
-          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} /></Paper>
+          </Paper>
+          <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+          </div>
           break;
         //is this the problem, there is no chart?
         // case 'chart':
@@ -134,7 +135,10 @@ class Report extends Component {
 
     }
     else if (this.state.dataFocus === 'chart') {
-      return <div style={styles.ChartOnLeftSide}><ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+      return <div style={styles.ChartOnLeftSide}>
+
+
+      <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
         pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
         organizedConcepts={this.state.organizedConcepts}
@@ -166,7 +170,11 @@ class Report extends Component {
       }
     }
     else if (this.state.dataFocus === 'review') {
-      return <div style={styles.ChartOnRightSide}><ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+
+      return <div style={styles.ChartOnRightSide}>
+
+      <Paper style={{height:'100%'}} >
+      <ChartContainer  className= "Level4" displaying={this.state.displaying} reviews={this.state.reviews}
         pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
         organizedConcepts={this.state.organizedConcepts}
@@ -177,30 +185,17 @@ class Report extends Component {
         clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
         s={this.state}
       />
+      </Paper>
       </div>
     }
   }
 
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
-    const leftSide = { ...this.state.leftSide };
-    switch (focus) {
-      case 'positive':
-        this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'positive' }
-          return newState;
-        })
-        console.log('positive clicked');
-        // this.setState({ leftSide })
-        return
-      case 'negative':
-        this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'negative' }
-          return newState;
-        })
-        console.log('negative clicked');
-        return
-    }
+      this.setState((prevState) => {
+        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: focus}
+        return newState;
+      })
   }
 
   changeSentimentDisplayModifier = (displayModifier) => {
@@ -214,7 +209,7 @@ class Report extends Component {
     })
   }
 
-changeKeywordDisplayModifier = (displayModifier) => {
+  changeKeywordDisplayModifier = (displayModifier) => {
     this.setState((prevState) => {
       let newState = {
         ...prevState,
@@ -223,7 +218,7 @@ changeKeywordDisplayModifier = (displayModifier) => {
       }
       return newState;
     })
-}
+  }
 
   //up down arrow
   clickHandlerForSentimentSummary = (direction) => {
@@ -235,9 +230,9 @@ changeKeywordDisplayModifier = (displayModifier) => {
       })
     }
 
-    else if (direction === 'down' && this.state.SentimentSummaryIndex > this.state.SummaryIndexMultiple ) {
+    else if (direction === 'down' && this.state.SentimentSummaryIndex > this.state.SummaryIndexMultiple) {
       this.setState((prevState) => {
-        let newState = { ...prevState, SentimentSummaryIndex: this.state.SentimentSummaryIndex - this.state.SummaryIndexMultiple  }
+        let newState = { ...prevState, SentimentSummaryIndex: this.state.SentimentSummaryIndex - this.state.SummaryIndexMultiple }
         return newState;
       })
     }
@@ -371,32 +366,39 @@ changeKeywordDisplayModifier = (displayModifier) => {
                 <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
               <ChartsToShow s={this.state}/> </div>) : (
   <div>
+
+          {/* <AppBar className='******************' position="absolute" style={{top:'94px', opacity:0.4, backgroundColor:'green', height: '15px', zIndex:1, display:'block'}}>
+          </AppBar>
+          <AppBar className='@@@@@@@@@@@@@@@@' position="absolute" style={{top:'614px', opacity:0.4, backgroundColor:'blue', height: '15px', zIndex:1, display:'block'}}>
+          </AppBar>
+          <AppBar className='!!!!!!!!!!!!!!!!!' position="absolute" style={{top:'948px', opacity:0.4, backgroundColor:'red', height: '15px', zIndex:1, display:'block'}}>
+          </AppBar> */}
+
           {/* LEFT SIDE */}
           <Grid container style={styles.MainContainer} spacing={8}>
             <Grid item sm={8} >
               <div style={styles.TopNavPanels}>
                 <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
               </div>
-
-              <Grid style={styles.LeftContainer} style={{marginTop:-25}}item sm={12}>
+              <Grid style={styles.LeftContainer} style={{ marginTop: -25 }} item sm={12}>
                 <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
-                  <div style={{ paddingLeft: '50px', paddingRight: '50px', backgroundColor: "white" }} >
+                  <div style={{ paddingLeft: '50px', paddingRight: '50px', paddingTop: '20px', backgroundColor: "white" }} >
                     {this.LeftSideShow()}
                   </div>
                 </div>
               </Grid>
             </Grid>
             {/* SWAP BUTTON */}
-            <div style={{ position: 'absolute', bottom: 120, marginLeft: '65%' }}>
+            <div style={{ position: 'absolute', bottom: '115px', marginLeft: '65%', left:'-25px' }}>
               <SwapButton swapDisplaySides={this.swapDisplaySides} />
             </div>
             {/* RIGHT SIDE */}
             <Grid item sm={4} style={styles.RightContainer} >
-              <Grid item sm={12}  >
-                <div onClick={this.topNavClickHandler} >
+              <Grid item sm={12}className="level1" style={{height:'100%'}}  >
+                <div onClick={this.topNavClickHandler} style={{height:'100%'}} className="level2" >
                   {this.RightSideShow()}
                 </div>
-                <Grid item sm={12} >
+                <Grid item sm={12} style={styles.WatsonContainer} >
                   <div style={styles.ReviewWatson}>
                     <ReviewStars s={this.state} style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
                     <WatsonBars s={this.state} style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
