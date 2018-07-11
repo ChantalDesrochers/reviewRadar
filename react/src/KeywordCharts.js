@@ -53,9 +53,10 @@ class KeywordCharts extends Component {
       buttonDiv = {
         // marginBottom: '80px',
         position: 'relative',
-        top: '18px',
+        top: '19px',
       }
     }
+
     return (
       <div style={{ textAlign: 'center' }}>
         {(this.props.s.displayModifier === 'time' || this.props.s.displayModifier === 'timebymonth') && <KeywordsOverTime s={this.props.s} clickHandlerForKeywordTimeChart={this.props.clickHandlerForKeywordTimeChart} organizedConcepts={this.props.organizedConcepts} monthConcepts={this.props.monthConcepts} changeKeywordDisplayModifier={this.props.changeKeywordDisplayModifier} />}

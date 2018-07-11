@@ -223,7 +223,7 @@ const chartyOptions = {
 
 if (this.props.s.dataFocus === 'review') {
     return (
-      <div className="kwFreqOverTimeChart" style={{"height" : 450}}>
+      <div className="kwFreqOverTimeChart" style={{"height" : 430, marginTop:'1.5%'}}>
       <Typography  variant='display3'  style={chartTitles.Right}>Topics mentioned over time</Typography>
       <Line
           data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
@@ -237,7 +237,7 @@ if (this.props.s.dataFocus === 'review') {
     return (
       <div className="kwFreqOverTimeChart" style={{"height" : '680px'}}>
       <Typography variant='title' style={chartTitles.Left}>Topics mentioned over time</Typography>
-      <div style={{'width':'1020px', marginLeft:'58px'}}>
+      <div style={{'width':'1020px', marginLeft:'4.5%'}}>
       <Line
           data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} 
           width={1020}

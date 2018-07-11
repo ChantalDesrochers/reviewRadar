@@ -252,7 +252,7 @@ class SentimentOverTime extends Component {
 
 if (this.props.s.dataFocus === 'review') {
     return (
-      <div className="sentiment-over-time" style={{"height" : 450}}>
+      <div className="sentiment-over-time" style={{"height" : 550, marginTop:'1.5%'}}>
       <Typography  variant='display3'  style={chartTitles.Right}>Customer perception by month</Typography>
         <Line data={this.parseSentimentDatabyTime(this.props.reviews)} onElementsClick={(elem)=>{handleClick(elem)}} width={10}
   height={7}
