@@ -4,29 +4,37 @@ import { withStyles } from '@material-ui/core/styles';
 import 'typeface-roboto'
 import { Typography } from "@material-ui/core";
 
-const styles ={
-  PieOnRight: {width:"72%", margin:'0px auto 50px auto'},
-  PieOnLeft: {width:"60%", marginLeft: "14%"},
-  PieChartContainer: {marginTop:'10px'},
+const styles = {
+  PieOnRight: {
+    width: "72%",
+    margin: '0px auto 50px auto'
+  },
+  PieOnLeft: {
+    width: "60%",
+    marginLeft: "14%"
+  },
+  PieChartContainer: {
+    marginTop: '10px'
+  },
   ChartTitles: {
     Right: {
-  fontSize: 30,
-  padding: 20,
-  margin: 0,
-  color: 'black'
-}, Left: {
-  fontSize: 40,
-  paddingLeft: '22%',
+      fontSize: 30,
+      padding: 20,
+      margin: 0,
+      color: 'black'
+    },
+    Left: {
+      fontSize: 40,
+      paddingLeft: '22%',
 
-  color: 'black'
+      color: 'black'
+    }
+  }
+}
 
-}
-}
-}
 class PieChart extends Component {
   constructor(props) {
     super(props);
-
   }
 
   prepareHtml = (handleClicktwo) => {
@@ -136,8 +144,6 @@ console.log(this.props.s)
 
 
   render() {
-    // this.parseChartData();
-
     const handleClicktwo = elem => {
       if (this.props.s.displaying === 'allcharts')
       {

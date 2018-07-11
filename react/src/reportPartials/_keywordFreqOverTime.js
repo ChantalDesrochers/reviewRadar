@@ -168,34 +168,34 @@ class KeywordsOverTime extends Component {
   // this.setState({ ...this.state.data.datasets[0].label = labels[0], ...this.state.data.datasets[1].label = labels[1], ...this.state.data.datasets[2].label = labels[2], ...this.state.data.datasets[3].label = labels[3], ...this.state.data.datasets[4].label = labels[4], ...this.state.data.datasets[0].data = aoa[0], ...this.state.data.datasets[1].data = aoa[1], ...this.state.data.datasets[2].data = aoa[2], ...this.state.data.datasets[3].data = aoa[3], ...this.state.data.datasets[4].data = aoa[4]})
 
   render() {
-    const handleClick = elem => {
-      // if (elem[0]) {
-        console.log(elem)
-        let chartPoints = elem;
-        let clickedPointIndex2 = chartPoints[0]['_datasetIndex']
-        console.log('clickedpoint2', clickedPointIndex2)
-        let clickedPointIndex = chartPoints[0]["_index"];
-        const label =
-          chartPoints[0]["_chart"]["config"]["data"]["labels"][
-            clickedPointIndex
-          ];
-          const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-         console.log(month)
-         this.props.clickHandlerForKeywordTimeChart(month)
-        // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
-      // }
-    };
+    // const handleClick = elem => {
+    //   // if (elem[0]) {
+    //     console.log(elem)
+    //     let chartPoints = elem;
+    //     let clickedPointIndex2 = chartPoints[0]['_datasetIndex']
+    //     console.log('clickedpoint2', clickedPointIndex2)
+    //     let clickedPointIndex = chartPoints[0]["_index"];
+    //     const label =
+    //       chartPoints[0]["_chart"]["config"]["data"]["labels"][
+    //         clickedPointIndex
+    //       ];
+    //       const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
+    //      console.log(month)
+    //      this.props.clickHandlerForKeywordTimeChart(month)
+    //     // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
+    //   // }
+    // };
     const handleHover = elem => {
       if (elem[0]) {
         let clickedPointIndex = elem[0]["_index"];
-        const label =
-          elem[0]["_chart"]["config"]["data"]["labels"][
-            clickedPointIndex
-          ]
         const i = elem[0]['_datasetIndex']
         console.log(i)
-        console.log('label', elem[0]['_chart']['data']['datasets'][i].label)
-        console.log('month', label)
+        const month = elem[0]["_chart"]["config"]["data"]["labels"][clickedPointIndex]
+        const topic = elem[0]['_chart']['data']['datasets'][i].label
+
+        console.log('label', topic)
+        console.log('month', month)
+        this.props.clickHandlerForKeywordTimeChart(month, topic)
       }
     }
 const chartyOptions = {

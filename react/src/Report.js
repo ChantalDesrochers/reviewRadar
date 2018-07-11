@@ -122,7 +122,7 @@ class Report extends Component {
           return <div style={{ padding: 0, margin: 0 }}>
             <DisplayTitle style={{ height: '100px' }} s={this.state} />
             <Paper style={styles.PaperForLeftReview}>
-            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
+            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
           </Paper>
           <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
           </div>
@@ -238,7 +238,7 @@ class Report extends Component {
     }
   }
 
-  clickHandlerForSentimentTimeChart = (clickedMonth) => {
+  clickHandlerForSentimentTimeChart = (clickedMonth, clickedLabel) => {
     let month = clickedMonth.substring(0, 3)
     let dAlteredArray = this.state.reviews.map(review =>
       ({ ...review, datePublished: new Date(review.datePublished) })

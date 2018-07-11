@@ -86,6 +86,10 @@ const styles = {
   link: {
     textDecoration: 'none',
     color: 'black'
+  },
+  background: {
+    marginTop: '53px',
+    marginLeft: '26px',
   }
 };
 class Request extends Component {
@@ -233,7 +237,7 @@ class Request extends Component {
     );
 
     const thanksPage = (
-      <div style={{marginTop: '53px', marginLeft: '26px'}}>
+      <div style={styles.background} >
         <Typography style={{textAlign: 'left', margin: 'auto'}} variant="title">Thank you for your request</Typography>
         <br />
         <Button variant="contained" style={styles.button}><Link style={styles.link} to="../report">Your report will be ready here</Link></Button>
