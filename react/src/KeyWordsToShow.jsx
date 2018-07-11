@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import 'typeface-roboto'
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
-import Date from "./Date.js"
+import DateC from "./Date.js"
 import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -15,6 +15,7 @@ const styles = {
     reviewText: { overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '2.1em', display: 'block', variant: 'body', paddingTop: 25, paddingLeft: 50, paddingRight: 50 },
     reviewTextModifierVolumeFocusReview: { padding: 15, marginTop: '100px', Left: 50, textAlign: 'left' },
     reviewSummary: { fontSize: '1.5em', margin: '5px 0px' },
+    reviewFull: { fontSize: '1.5em' },
     reviewTextModifierVolumeFocusChart: { marginTop: '0' },
     dateLeftSingle: { padding: 10, float: 'right' },
     PaperForLeftReview: { height: '551px' },
@@ -110,13 +111,12 @@ class KeywordsToShow extends Component {
     let recentReviews = sortedDate.slice(0, 5)
 
     let htmlToReturn = [];
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
     htmlToReturn = recentReviews.map((review, i) => (
 
         <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography style={styles.reviewSummary}>{review.summary}</Typography>
-                <Typography style={styles.reviewSummaryForSentiment}>{review.label}</Typography>
+                <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails style={styles.reviewFullContainer}>
                 <Typography style={styles.reviewFull}>
@@ -148,7 +148,7 @@ class KeywordsToShow extends Component {
                     </Grid>
                     <Grid item sm={12} >
                         <Grid style={{ width: "50%", float: 'left', width: "50%", paddingLeft: '25px' }} item sm={6}>
-                            <Date style={styles.dateLeftSingle} date={date} />
+                            <DateC style={styles.dateLeftSingle} date={date} />
                         </Grid>
                     </Grid>
                     <Grid item sm={12}  >
@@ -172,7 +172,7 @@ class KeywordsToShow extends Component {
                     </Grid>
                     <Grid item sm={6} >
                         <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
-                            <Date date={date} />
+                            <DateC date={date} />
                         </Grid>
                     </Grid>
                     <Grid item sm={12}  >

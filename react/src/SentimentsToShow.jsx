@@ -97,12 +97,13 @@ class SentimentsToShow extends Component {
             let recentReviews = sortedDate.slice(0, 5)
             console.log('recent Reviews', recentReviews);
             let htmlToReturn = [];
-            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var options = {  year: 'numeric', month: 'long', day: 'numeric' };
             htmlToReturn = recentReviews.map((review, i) => (
 
                 <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)}</Typography>
+                    {console.log(review.datePublished)}
+                        <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary} </Typography>
                       {/* <Typography variant="body" style={styles.reviewSummaryForSentiment}>{review.summary}</Typography> */}
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails style={styles.reviewFullContainer}>
@@ -117,10 +118,18 @@ class SentimentsToShow extends Component {
             return <div style={{ marginTop: '95px' }}>{htmlToReturn}</div>
         }
         else if (this.props.s.displayModifier === "timebymonth") {
-            const reviews = this.props.s.currentTargetedReviews
+            let reviews = this.props.s.currentTargetedReviews
+
+            let dAlteredArray = reviews.map(review =>
+                ({ ...review, datePublished: new Date(review.datePublished) })
+            )
+            const sortedDate = dAlteredArray.sort(function (a, b) {
+                return b.datePublished - a.datePublished
+            })
+
             let htmlToReturn = [];
-            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            htmlToReturn = reviews.map((review, i) => (
+            var options = { year: 'numeric', month: 'long', day: 'numeric' };
+            htmlToReturn = sortedDate.map((review, i) => (
                 <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary} </Typography>
