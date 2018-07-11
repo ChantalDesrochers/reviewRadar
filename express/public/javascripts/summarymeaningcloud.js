@@ -50,6 +50,7 @@ const srequester = (review, cb) => {
 // function iterateWithDelay(array) {
   // called function, receiving reviews array from scraper
 summaryWithDelay = sendstuffcb => array => {
+  console.log('Starting MeaningCloud Summary parsing')
   reviews = array
   for (let i = 0; i < reviews.length; i++) {
     (function (i) {
