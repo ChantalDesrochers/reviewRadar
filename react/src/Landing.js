@@ -94,7 +94,7 @@ function Landing() {
           </Link>
         </div>
 
-        <img
+        {/* <img
           src={radar}
           style={{
             // height: "92%",
@@ -104,7 +104,7 @@ function Landing() {
             bottom: "55%",
             zIndex: -1
           }}
-        />
+        /> */}
         <img
           src={radar}
           style={{
