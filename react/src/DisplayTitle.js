@@ -65,10 +65,13 @@ class DisplayTitle extends Component {
                 <div style={styles.SingleReviewLeftContainerMultiple}>
                 <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Your Five Most Recent Reviews</Typography></Paper></div>
             )
+        } else if (this.props.s.displayModifier === "timebymonth" && this.props.s.displaying === "sentiment") {
+            return  <div style={styles.SingleReviewLeftContainerMultiple}>
+            <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>{this.props.s.CurrentMonth} reviews </Typography></Paper></div>
         } else if (this.props.s.displayModifier === "timebymonth") {
             return  <div style={styles.SingleReviewLeftContainerMultiple}>
             <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>{this.props.s.CurrentMonth} reviews about <i>{this.props.s.keywordChartTarget}</i></Typography></Paper></div>
-        }
+        } 
         else return (
             <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em'}}>{this.props.s.displayTitle}</Typography>
         )

@@ -246,7 +246,7 @@ class Report extends Component {
     )
     let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
     this.setState((prevState) => {
-      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'sentiment' }
+      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'sentiment', CurrentMonth: clickedMonth }
       return newState;
     })
   }
