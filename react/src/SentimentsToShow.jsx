@@ -118,17 +118,38 @@ class SentimentsToShow extends Component {
         }
         else if (this.props.s.displayModifier === "timebymonth") {
             const reviews = this.props.s.currentTargetedReviews
-            let monthReviews = reviews.map(review => (
-                <div>
-                    <h2>{review.datePublished.toString().substring(0, 15)}</h2>
-                    <p>{review.description}</p>
-                </div>))
-            return (
-                <div>
-                    <h2>{reviews[0].datePublished.toString().substring(4, 7)} Reviews</h2>
-                    {monthReviews}
-                </div>
+            let htmlToReturn = [];
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            htmlToReturn = reviews.map((review, i) => (
+                <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary} </Typography>
+                      {/* <Typography variant="body" style={styles.reviewSummaryForSentiment}>{review.summary}</Typography> */}
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails style={styles.reviewFullContainer}>
+                        <Typography style={styles.reviewFull}>
+                            {review.description}
+                        </Typography>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
             )
+            )
+            // console.log('html to return', htmlToReturn);
+            return <div style={{ marginTop: '95px' }}>{htmlToReturn}</div>
+            
+            
+            
+            // let monthReviews = reviews.map(review => (
+            //     <div>
+            //         <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+            //         <p>{review.description}</p>
+            //     </div>))
+            // return (
+            //     <div>
+            //         <h2>{reviews[0].datePublished.toString().substring(4, 7)} Reviews</h2>
+            //         {monthReviews}
+            //     </div>
+            // )
         }
     }
     render() {
