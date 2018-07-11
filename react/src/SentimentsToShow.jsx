@@ -103,7 +103,7 @@ class SentimentsToShow extends Component {
                 <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)}</Typography>
-                        <Typography style={styles.reviewSummaryForSentiment}>{review.label}</Typography>
+                      {/* <Typography variant="body" style={styles.reviewSummaryForSentiment}>{review.summary}</Typography> */}
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails style={styles.reviewFullContainer}>
                         <Typography style={styles.reviewFull}>

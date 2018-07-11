@@ -62,7 +62,8 @@ class Report extends Component {
       keywordArray: [],
       currentTargetedReviews: [],
       SentimentSummaryIndex: 5,
-      SummaryIndexMultiple: 5
+      SummaryIndexMultiple: 5,
+      CurrentMonth:''
     };
   }
 
@@ -120,9 +121,9 @@ class Report extends Component {
         case 'keyword':
           return <div style={{ padding: 0, margin: 0 }}>
             <DisplayTitle style={{ height: '100px' }} s={this.state} />
-            <Paper style={styles.PaperForLeftReview}>
+             <Paper style={styles.PaperForLeftReview}> 
             <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
-          </Paper>
+           </Paper> 
           <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
           </div>
           break;
@@ -271,7 +272,7 @@ class Report extends Component {
     )
     let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
     this.setState((prevState) => {
-      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'keyword' }
+      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'keyword', CurrentMonth: clickedMonth }
       return newState;
     })
   }

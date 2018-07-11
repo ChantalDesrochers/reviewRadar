@@ -170,15 +170,16 @@ class KeywordsOverTime extends Component {
   render() {
     const handleClick = elem => {
       if (elem[0]) {
-        console.log(elem)
+        console.log('here is the elem', elem)
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]["_index"];
+        console.log('test point', elem);
         const label =
           chartPoints[0]["_chart"]["config"]["data"]["labels"][
             clickedPointIndex
           ];
           const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-         console.log(month)
+         console.log(month, label)
          this.props.clickHandlerForKeywordTimeChart(month)
         // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
