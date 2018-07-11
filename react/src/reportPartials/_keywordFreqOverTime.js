@@ -170,15 +170,16 @@ class KeywordsOverTime extends Component {
   render() {
     const handleClick = elem => {
       if (elem[0]) {
-        console.log(elem)
+        console.log('here is the elem', elem)
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]["_index"];
+        console.log('test point', elem);
         const label =
           chartPoints[0]["_chart"]["config"]["data"]["labels"][
             clickedPointIndex
           ];
           const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-         console.log(month)
+         console.log(month, label)
          this.props.clickHandlerForKeywordTimeChart(month)
         // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
       }
@@ -237,7 +238,7 @@ if (this.props.s.dataFocus === 'review') {
     return (
       <div className="kwFreqOverTimeChart" style={{"height" : '680px'}}>
       <Typography variant='title' style={chartTitles.Left}>Topics mentioned over time</Typography>
-      <div style={{'width':'1020px', marginLeft:'58px'}}>
+      <div style={{'width':'1020px', marginLeft:'4.5%'}}>
       <Line
           data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} 
           width={1020}
