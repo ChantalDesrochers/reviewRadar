@@ -30,7 +30,7 @@ class LandingContainer extends Component {
     return (
         <Grid item xs={2}>
         <Card style={styles.card}>
-          <CardMedia style={styles.media} image={this.props.img} title="Contemplative Reptile" />
+          <CardMedia style={styles.media} image={this.props.img} />
           <CardContent>
             <Typography variant="headline">{this.props.text}</Typography>
           </CardContent>

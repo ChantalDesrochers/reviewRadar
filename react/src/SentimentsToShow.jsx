@@ -128,7 +128,7 @@ class SentimentsToShow extends Component {
             )
             const sortedDate = dAlteredArray.sort(function (a, b) {
                 return b.datePublished - a.datePublished
-            })
+            }).slice(0,5)
 
             let htmlToReturn = [];
             var options = { year: 'numeric', month: 'long', day: 'numeric' };
