@@ -161,12 +161,14 @@ class Report extends Component {
     if (this.state.dataFocus === 'chart') {
       switch (displaying) {
         case 'sentiment':
-          return <Paper><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-          </Paper>
+          return <span>  <DisplayTitle style={{ height: '100px' }} s={this.state} /><Paper><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+          </Paper></span>
           break;
         case 'keyword':
-          return <Paper> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
-         </Paper>
+          return <span><DisplayTitle style={{ height: '100px' }} s={this.state} /> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
+         <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+         </span>
           break;
       }
     }

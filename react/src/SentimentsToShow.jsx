@@ -13,6 +13,8 @@ import Paper from '@material-ui/core/Paper'
 var linkStyle;
 const styles = {
     PaperForLeftReview: { height: '551px' },
+    
+    PaperForRightReview: { height: '450px', marginTop:'75px' },
     reviewTextModifierVolumeFocusReview: { marginTop: '100px', padding: 15 },
     reviewSummary: { fontSize: '1.5em', margin: '5px 0px' },
     reviewSummaryForSentiment: { fontSize: '1em',  marginLeft:'250px'},
@@ -59,10 +61,11 @@ class SentimentsToShow extends Component {
         console.log('in sent prepare whats the modifier', this.props.s.displayModifier)
         if (this.props.s.displayModifier === "volume") {
             if (this.props.s.dataFocus === "review") {
+
                 return <Paper style={styles.PaperForLeftReview}><div style={styles.reviewTextModifierVolumeFocusReview}><SingleReview style={styles.review} s={this.props.s} /></div></Paper>
             }
             else if (this.props.s.dataFocus === "chart") {
-                return <div><SingleReview s={this.props.s} /></div>
+                return  <Paper style={styles.PaperForRightReview}><div><SingleReview s={this.props.s} /></div></Paper>
             }
         }
 
