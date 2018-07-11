@@ -2,3 +2,4 @@ node_modules
 .env
 */src/ratings.js
 .DS_Store
+react/src/.DS_Store
