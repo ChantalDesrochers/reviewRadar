@@ -132,10 +132,10 @@ class KeywordBarChart extends Component {
 
     const chartTitles = {
       Right: {
-      fontSize: 30,
-      padding: 20,
-      margin: 0,
-      color: 'black'},
+        fontSize: 30,
+        padding: 20,
+        margin: 0,
+        color: 'black'},
       Left: {
         fontSize: 40,
         marginLeft: '-5%',

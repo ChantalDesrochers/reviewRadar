@@ -204,10 +204,9 @@ const chartyOptions = {
     const chartTitles = {
       Right: {
         fontSize: 30,
-        fontFamily: 'arial',
-        padding: 0,
-        margin: 0
-      },
+        padding: 20,
+        margin: 0,
+        color: 'black'},
       Left: {
         fontSize: 40,
         marginLeft: '-1%',

@@ -6,10 +6,6 @@ import Typography from "@material-ui/core/Typography";
 
 class WatsonBar extends Component {
 
-
-
-
-
   parseHtml = (finalRating) => {
     console.log('state in watson', this.props.s)
     if (this.props.s.displayModifier !== 'time') {
@@ -17,6 +13,7 @@ class WatsonBar extends Component {
       // return <div>{Array(parseInt(finalRating)).fill(<Favorite style={{ height: '40', width: '40', color: 'blue' }} />)}</div>
     // return <div>{Array(parseInt(finalRating)).fill(<Flare style={{ height: '40', width: '40', color: 'blue' }} />)}</div>
     if (finalRating < 2) {
+      console.log('1')
       var remain = 10 - finalRating;
       return <div style={{textAlign: 'left', paddingLeft: 30}}>
       {Array(parseInt(finalRating)).fill(
@@ -25,6 +22,7 @@ class WatsonBar extends Component {
       <FiberManualRecord style={{ height: '40', width: '40', color: 'grey', textAlign: 'left' }} />)}
        </div>
     } else if (finalRating >=2 && finalRating < 4) {
+      console.log('2')
       var remain = 10 - finalRating;
       return <div style={{textAlign: 'left', paddingLeft: 30}}>
       {Array(parseInt(finalRating)).fill(
@@ -33,6 +31,7 @@ class WatsonBar extends Component {
       <FiberManualRecord style={{ height: '40', width: '40', color: 'grey', textAlign: 'left' }} />)}
        </div>
     } else if (finalRating === 4 || finalRating === 5) {
+      console.log('3')
        var remain = 10 - finalRating;
       return <div style={{textAlign: 'left', paddingLeft: 30}}>
       {Array(parseInt(finalRating)).fill(
@@ -56,13 +55,14 @@ class WatsonBar extends Component {
        {Array(remain).fill(
       <FiberManualRecord style={{ height: '40', width: '40', color: 'grey', textAlign: 'left' }} />)}
        </div>
-}
-}
+      }
+    }
 }
 
-  parseSentimentData = () => {
+  parseSentimentData = arg => {
     console.log(this.props.s)
-    let rating = this.props.currentTargetedReviews[this.props.visibleReview].score
+    let rating = arg
+    // let rating = this.props.currentTargetedReviews[this.props.visibleReview].score
     var rounded = rating.toFixed(1)
     console.log(rounded)
     if (rounded <= -0.8) {
@@ -83,20 +83,19 @@ class WatsonBar extends Component {
       return 8
     } else if (rounded >0.6 && rounded <= 0.8) {
       return 9
-    } else if (rounded >0.9 && rounded <= 1) {
+    } else if (rounded >0.8 && rounded <= 1) {
       return 10
     }
-
   }
 
-
   render() {
-    const finalRating = this.parseSentimentData(this.props.watsonRating);
+    const finalRating = this.parseSentimentData(this.props.currentTargetedReviews[this.props.visibleReview].score);
     return (
-      <div style={{position: 'relative', top: '-40px', paddingBottom: '10px'}} >
+      this.props.s.displayModifier === 'volume' ?
+      (<div style={{position: 'relative', top: '-40px', paddingBottom: '10px'}} >
       <Typography variant="headline" style={{textAlign: 'left', paddingLeft: '30px'}}>Watson Rating</Typography>
       <div>{this.parseHtml(finalRating)}</div>
-      </div>
+      </div>) : <div/>
     );
   }
 }

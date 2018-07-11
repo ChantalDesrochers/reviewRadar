@@ -11,7 +11,7 @@ import Colors from './AppColors';
 import SwapButton from './SwapButton';
 import ChartContainer from "./reportPartials/_chartContainer";
 import TopNavPanels from "./TopNavPanels.js";
-import WatsonBars from './WatsonBar';
+import WatsonBar from './WatsonBar.js';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
 import ChartsToShow from "./ChartsToShow.js";
@@ -123,7 +123,7 @@ class Report extends Component {
           return <div style={{ padding: 0, margin: 0 }}>
             <DisplayTitle style={{ height: '100px' }} s={this.state} />
              <Paper style={styles.PaperForLeftReview}> 
-            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
+            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
            </Paper> 
           <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
           </div>
@@ -401,8 +401,8 @@ class Report extends Component {
                 </div>
                 <Grid item sm={12} style={styles.WatsonContainer} >
                   <div style={styles.ReviewWatson}>
-                    <ReviewStars s={this.state} style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
-                    <WatsonBars s={this.state} style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+                    <ReviewStars s={this.state} style={styles.ReviewStars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
+                    <WatsonBar s={this.state} style={styles.WatsonBars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
                   </div>
                 </Grid>
               </Grid>
