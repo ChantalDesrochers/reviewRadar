@@ -82,7 +82,7 @@ app.post('/1', (req, res) => {
 
     // console.log('liveData', sentData.monthConceptsL)
 
-    fs.writeFileSync(`output.json`, JSON.stringify(savedFile))
+    fs.writeFileSync(`./results/output.json`, JSON.stringify(savedFile))
     fs.writeFileSync(`report.json`, JSON.stringify(reportData))
     fs.writeFileSync(`oconcepts.json`, JSON.stringify(oc))
     fs.writeFileSync(`mconcepts.json`, JSON.stringify(mc))
