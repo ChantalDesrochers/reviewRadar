@@ -82,7 +82,7 @@ class KeywordsToShow extends Component {
                 }
                 else if (this.props.s.dataFocus === "chart") {
 
-                    return <div style={styles.reviewTextModifierVolumeFocusChart} >
+                    return <div style={styles.reviewTextModifierVolumeFocusChart}>
                         <Grid container spacing={0}>
                             <Grid item sm={6} style={{ float: 'left', width: "50%" }}>
                                 <Grid style={{ float: 'left', width: "50%" }} item sm={6}>
