@@ -107,21 +107,21 @@ class DisplayTitle extends Component {
             }
 
         } else if (this.props.s.displaySentimentType === 'neutral' && this.props.s.displayModifier === 'volumeBySentiment') {
-         
+
             if (this.props.s.dataFocus === 'review') {
-            return (
-                <div style={styles.SingleReviewLeftContainerMultiple}>
-                    <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Neutral Reviews</Typography></Paper></div>
-            )
-        }
-        else {
-            return (
-                <div style={styles.SingleReviewRightContainer}>
-                    <Paper style={styles.SingleReviewRightPaper}>
-                        <div style={{ marginTop: '-11px' }}>
-                            <Typography variant="subheading" style={styles.SingleReviewRight}>
-                                Neutral</Typography></div></Paper></div>)
-        }
+                return (
+                    <div style={styles.SingleReviewLeftContainerMultiple}>
+                        <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Neutral Reviews</Typography></Paper></div>
+                )
+            }
+            else {
+                return (
+                    <div style={styles.SingleReviewRightContainer}>
+                        <Paper style={styles.SingleReviewRightPaper}>
+                            <div style={{ marginTop: '-11px' }}>
+                                <Typography variant="subheading" style={styles.SingleReviewRight}>
+                                    Neutral</Typography></div></Paper></div>)
+            }
 
         }
         else if (this.props.s.displaySentimentType === 'very negative' && this.props.s.displayModifier === 'volumeBySentiment') {
@@ -141,23 +141,62 @@ class DisplayTitle extends Component {
                                     Very Negative</Typography></div></Paper></div>)
             }
 
-            
+
 
         }
 
         else if (this.props.s.displayModifier === "time") {
-            return (
 
-                <div style={styles.SingleReviewLeftContainerMultiple}>
-                    <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Your Five Most Recent Reviews</Typography></Paper></div>
-            )
+            if (this.props.s.dataFocus === 'review') {
+                return (
+
+                    <div style={styles.SingleReviewLeftContainerMultiple}>
+                        <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Your Five Most Recent Reviews</Typography></Paper></div>
+                )
+            }
+            else if (this.props.s.dataFocus === 'chart') {
+
+
+                return (
+                    <div style={styles.SingleReviewRightContainer}>
+                        <Paper style={styles.SingleReviewRightPaper}>
+                            <div style={{ marginTop: '-11px' }}>
+                                <Typography variant="subheading" style={styles.SingleReviewRight}>
+                                    Your Five Most Recent Reviews</Typography></div></Paper></div>)
+            }
+
         } else if (this.props.s.displayModifier === "timebymonth" && this.props.s.displaying === "sentiment") {
-            return <div style={styles.SingleReviewLeftContainerMultiple}>
-                <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>{this.props.s.CurrentMonth} reviews </Typography></Paper></div>
+
+            if (this.props.s.dataFocus === 'review') {
+                return <div style={styles.SingleReviewLeftContainerMultiple}>
+                    <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>{this.props.s.CurrentMonth} Reviews </Typography></Paper></div>
+            }
+            else if (this.props.s.dataFocus === 'chart') {
+
+
+                return (
+                    <div style={styles.SingleReviewRightContainer}>
+                        <Paper style={styles.SingleReviewRightPaper}>
+                            <div style={{ marginTop: '-11px' }}>
+                                <Typography variant="subheading" style={styles.SingleReviewRight}>
+                                    {this.props.s.CurrentMonth} Reviews </Typography></div></Paper></div>)
+            }
         } else if (this.props.s.displayModifier === "timebymonth") {
-            return <div style={styles.SingleReviewLeftContainerMultiple}>
-                <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>{this.props.s.CurrentMonth} reviews about <i>{this.props.s.keywordChartTarget}</i></Typography></Paper></div>
+            if (this.props.s.dataFocus === 'review') {
+                return <div style={styles.SingleReviewLeftContainerMultiple}>
+                    <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>{this.props.s.CurrentMonth} reviews about <i>{this.props.s.keywordChartTarget}</i></Typography></Paper></div>
+            } else if (this.props.s.dataFocus === 'chart') {
+
+
+                return (
+                    <div style={styles.SingleReviewRightContainer}>
+                        <Paper style={styles.SingleReviewRightPaper}>
+                            <div style={{ marginTop: '-11px' }}>
+                                <Typography variant="subheading" style={styles.SingleReviewRight}>
+                                    {this.props.s.CurrentMonth} Reviews </Typography></div></Paper></div>)
+            }
         }
+
 
         else return (
 
