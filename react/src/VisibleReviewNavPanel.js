@@ -8,7 +8,7 @@ import { LabelOutline, ArrowDownward, ArrowUpward, TrendingFlat } from '@materia
  let styles = {
     buttonContainerForModifierVolumeFocusReview: {marginTop:'100px'} ,
     buttonContainerForModifierSentimentVolumeFocusReviews: { position:'absolute', marginTop:'-480px', marginLeft:'115px'},
-    buttonContainerForModifierVolumeFocusChart: {position: 'absolute', top: 650, float: 'left'},
+    buttonContainerForModifierVolumeFocusChart: {position:'relative', top:'225px', left:'36%'},
     
     LeftButtonsLeftRight:{height:'60px', backgroundColor:'#f7d784', padding:0},
     LeftArrowIcon:{height:50, width:75}
@@ -22,6 +22,7 @@ class VisibleReviewNavPanel extends Component {
         this.props.clickHandlerForSentimentSummary(direction)
     }
     pickNavButtonType = () => {
+        console.log('in pick nav type ')
         if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'review') {
             return (<div className="buttons" style={styles.buttonContainerForModifierVolumeFocusReview}>
                        <Grid container style={{paddingLeft:'70px'}} >
@@ -41,40 +42,40 @@ class VisibleReviewNavPanel extends Component {
         </Grid>
             </div>)
         }
-        else if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'chart'){
-            // console.log(' chart keyword ')
+        else if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'chart' && this.props.s.displaying==='sentiment'){
+         console.log(' chart volume ')
          return (
          <div style={styles.buttonContainerForModifierVolumeFocusChart}>
          <Grid container >
-                <Grid item sm={6}>
-                    <Button style={{ backgroundColor: 'green' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
-                        <LabelOutline className="icon-flipped" />
+                <Grid item sm={2}>
+                    <Button style={{ backgroundColor:  '#f7eac8', height:50}} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
+                        <TrendingFlat style={{height:41, width:51}} className="icon-flipped" />
                     </Button>
                 </Grid>
             
-                <Grid item sm={6}>
-                    <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
-                        <LabelOutline />
+                <Grid item sm={2}>
+                    <Button style={{ backgroundColor: '#f7eac8', height:50 }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
+                        <TrendingFlat style={{height:41, width:51}}  />
                     </Button>
                </Grid>
         </Grid>
          </div>)
                }
-        else if (this.props.s.displayModifier === 'keyword' && this.props.s.dataFocus === 'chart'){
+        else if (this.props.s.displayModifier === 'volume' && this.props.s.dataFocus === 'chart' && this.props.s.displaying==='keyword'){
             // return (<div style={styles.buttonContainerForModifierVolumeFocusChart}>
             console.log(' chart keyword ')
          return (
-         <div style={styles.buttonContainerForModifierVolumeFocusChart}>
+         <div style={{position:'absolute', top:'700px', right:'275px'}}>
          <Grid container >
                 <Grid item sm={6}>
-                    <Button style={{ backgroundColor: 'green' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
-                        <LabelOutline className="icon-flipped" />
+                    <Button style={{ backgroundColor:  '#f7eac8', width:50 }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
+                    <TrendingFlat style={{height:41, width:51}} className="icon-flipped"  />
                     </Button>
                 </Grid>
             
                 <Grid item sm={6}>
                     <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
-                        <LabelOutline />
+                    <TrendingFlat style={{height:41, width:51}}  />
                     </Button>
                </Grid>
         </Grid>

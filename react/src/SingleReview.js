@@ -8,9 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     
-        reviewText: {  flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center', overflow: 'hidden', maxHeight: '320px', fontSize: '2.2em', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
+        reviewText: {overflow: 'hidden', maxHeight: '320px', fontSize: '2.2em', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
     dateLeftSingle: {padding:10, float: 'right'}
 }
 class SingleReview extends Component {
