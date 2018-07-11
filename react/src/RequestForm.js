@@ -12,6 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import yelpicon from "./yelp color mini.png";
 import tripicon from "./tripadvisor mini.png";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Button from '@material-ui/core/Button';
 
 /* Design wise you'll want to do the following:
 
@@ -72,6 +73,19 @@ const styles = {
   },
   label: {
     textTransform: "capitalize"
+  },
+  button: {
+    backgroundColor: "rgba(232, 196, 81, 0.78)",
+    color: 'black',
+    marginLeft: '43vw',
+    textAlign: 'center',
+    width: '277px',
+    height: '100px',
+    fontSize: '20px'
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black'
   }
 };
 class Request extends Component {
@@ -183,10 +197,10 @@ class Request extends Component {
       </div>
     );
     const thanksPage = (
-      <div>
-        <h2>Thank you for your request</h2>
+      <div style={{marginTop: '53px', marginLeft: '26px'}}>
+        <Typography style={{textAlign: 'left', margin: 'auto'}} variant="title">Thank you for your request</Typography>
         <br />
-        <Link to="../report">Your report will be ready here</Link>
+        <Button variant="contained" style={styles.button}><Link style={styles.link} to="../report">Your report will be ready here</Link></Button>
       </div>
     );
 
@@ -194,7 +208,7 @@ class Request extends Component {
       <div>
         <AppBar position="static" style={styles.header}>
           <Toolbar>
-            <Typography variant="title" color="inherit">
+            <Typography variant="display2" color="inherit">
               ReviewRadar
             </Typography>
             {/* <Button color="inherit">Login</Button>

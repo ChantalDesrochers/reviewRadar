@@ -22,10 +22,9 @@ const styles = {
     PaperForLeftReview: { height: '551px' },
 }
 class KeywordsToShow extends Component {
-
     state = {
         expanded: null,
-        expandedTime: null
+        expandedTime: null,
     };
 
     handleChange = panel => (event, expanded) => {
@@ -38,6 +37,7 @@ class KeywordsToShow extends Component {
             expandedTime: expandedTime ? panel : false,
         });
     };
+
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
@@ -56,21 +56,23 @@ class KeywordsToShow extends Component {
       
         if (this.props.s.displayModifier === "timebymonth") {
             //we need the month
+            console.log('***********************', this.props)
             console.log('state in keywords time by month', this.props.s.CurrentMonth)
             let htmlToReturn = [];
-            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var options = { year: 'numeric', month: 'long', day: 'numeric' };
             const reviews = this.props.s.currentTargetedReviews
-           
+
+            let dAlteredArray = reviews.map(review =>
+                ({ ...review, datePublished: new Date(review.datePublished) })
+            )
+            const sortedDate = dAlteredArray.sort(function (a, b) {
+                return b.datePublished - a.datePublished
+            })
             let finalReviews = [];
-
-            finalReviews = this.props.s.reviews.filter(review => review.label === this.props.s.displaySentimentType)
-            .slice(this.props.s.SentimentSummaryIndex - this.props.s.SummaryIndexMultiple, this.props.s.SentimentSummaryIndex)
-            .map((review, i) => (
-
-                <ExpansionPanel expanded={this.state.expandedTime === `panel${i}`} onChange={this.handleChange(`panel${i}`)}>
+            finalReviews = sortedDate.map((review, i) => (
+                <ExpansionPanel expanded={this.state.expanded === `panel${i}`} onChange={this.handleChange(`panel${i}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)}</Typography>
-                        <Typography style={styles.reviewSummaryForSentiment}>{review.label}</Typography>
+                        <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary}</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails style={styles.reviewFullContainer}>
                         <Typography style={styles.reviewFull}>
@@ -79,26 +81,9 @@ class KeywordsToShow extends Component {
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
             ))
-     
         return (
-            <div style={{ marginTop: '95px' }}>{htmlToReturn}</div>
+            <div style={{ marginTop: '95px' }}>{finalReviews}</div>
         )
-
-        // let htmlToReturn = [];
-        // var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        // htmlToReturn = recentReviews.map((review, i) => (
-
-
-
-
-
-
-
-
-
-
-
-
     } else if(this.props.s.displayModifier === 'time') {
 
     let reviews = this.props.s.reviews

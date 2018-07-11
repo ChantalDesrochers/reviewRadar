@@ -267,15 +267,37 @@ class Report extends Component {
     })
   }
 
-  clickHandlerForKeywordTimeChart = (clickedMonth) => {
-    console.log('clicked month on sentiment chart', clickedMonth)
+  clickHandlerForKeywordTimeChart = (clickedMonth, clickedLabel) => {
+    console.log('clicked month on keyword time chart', clickedMonth)
+    console.log('clicked label on keyword time chart', clickedLabel)
     let month = clickedMonth.substring(0, 3)
     let dAlteredArray = this.state.reviews.map(review =>
       ({ ...review, datePublished: new Date(review.datePublished) })
     )
+    const checkForExisting = match => element => {
+      // console.log('check match', match)
+      // console.log('check element', element)
+      return element == match;
+    };
+
     let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
+    // console.log('month reiews', monthReviews[0]);
+    // let finalReviews = monthReviews.filter(review => review.concepts.includes('bun'));
+    // console.log(finalReviews);
+    let finalReviews = []
+    monthReviews.forEach(function(review) {
+      review.concepts.forEach(function(concept) {
+        let existingIndex = checkForExisting(concept.content)(clickedLabel)
+        if (existingIndex === true) {
+          finalReviews.push(review);
+        }
+      });
+    });
+  
+    console.log(finalReviews)
+
     this.setState((prevState) => {
-      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'keyword', CurrentMonth: clickedMonth }
+      let newState = { ...prevState, currentTargetedReviews: finalReviews, displayModifier: 'timebymonth', displaying: 'keyword', CurrentMonth: clickedMonth, keywordChartTarget: clickedLabel }
       return newState;
     })
   }

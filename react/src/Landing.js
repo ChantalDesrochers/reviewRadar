@@ -73,7 +73,7 @@ function Landing() {
               [Logo] ReviewRadar
             </Typography>
           <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button> 
+          <Button color="inherit">Register</Button>
           </Toolbar>
         </AppBar> */}
         <Typography
@@ -128,21 +128,21 @@ function Landing() {
           can be difficult. <br />We help simplify the process.
         </Typography>
 
-        <Grid container spacing={40} justify="center">
+        <Grid container spacing={8} justify="center">
           <LandingContainer
             header="header"
-            img="http://via.placeholder.com/250x300"
+            img="https://insights.bookbub.com/wp-content/uploads/2014/03/get-more-reader-reviews.png"
             text="All of your reviews collected in one location..."
             while
           />
           <LandingContainer
             header="header"
-            img="http://via.placeholder.com/250x300"
+            img="https://ml.berkeley.edu/assets/mlab_color-e5f058901c6abd2b7d09d4d00cba0b38b36af6c373a85fd65ed10a42dbf1f0dc.png"
             text="Parsed using the power of machine learning..."
           />
           <LandingContainer
             header="header"
-            img="http://via.placeholder.com/250x300"
+            img="https://cdn.dribbble.com/users/206755/screenshots/2387113/upgrade-premium-animation-dribbble.gif"
             text="Displayed in a meaningful way"
           />
         </Grid>
