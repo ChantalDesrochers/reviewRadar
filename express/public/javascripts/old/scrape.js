@@ -9,25 +9,10 @@ const launch = require("puppeteer").launch;
 
 var reviewsArray = []
 
-const conversionObj = {
-  January: '01',
-  February: '02',
-  March: '03',
-  April: '04',
-  May: '05',
-  June: '06',
-  July: '07',
-  August: '08',
-  September: '09',
-  October: '10',
-  November: '11',
-  December: '12'
-}
-
 //multiple page recursion
-const yelpRecursion = (link, i, cb, link2) => {
+const yelpRecursion = (link, i, pages, cb) => {
   // let url = link + i
-  console.log('Yelp scraping started', i+20)
+  console.log('Yelp scraping started', i+20 + '/' + pages*20, 'reviews')
   // console.log(link + '?start=' + i)
   let url = link + '?start=' + i
   request(url, function (error, response, html) {
@@ -48,17 +33,13 @@ const yelpRecursion = (link, i, cb, link2) => {
         }
         reviewsArray.push(review)
       })
-      if (i < 0) {
+      if (i < ((pages - 1) * 20)) {
         i += 20
-        yelpRecursion(link, i, cb, link2)
+        yelpRecursion(link, i, pages, cb)
       } else {
         console.log('Yelp scraping completed', reviewsArray.length)
-        if (!link2) {
-          cb(reviewsArray)
-        } else {
-        tripAdvisorRecursion(link2, 0, cb)
-        }
-        // reviewsArray = [] // resets reviewsArray between  requests
+        cb(reviewsArray)
+        // reviewsArray = [] // resets reviewsArray between requests
       }
     }
   })
@@ -66,7 +47,6 @@ const yelpRecursion = (link, i, cb, link2) => {
 
 async function tripAdvisorRecursion(link, i, cb) {
   console.log("tripadvisor started", i+10);
-  console.log('link passed url1', link)
   url = link.replace(/Reviews/g, `Reviews-or${i}`);
   const browser = await launch({ headless: true });
   const page = await browser.newPage();
@@ -80,20 +60,6 @@ async function tripAdvisorRecursion(link, i, cb) {
     let array = [];
     let divArray = document.querySelectorAll("div.reviewSelector");
     for (var element of divArray) {
-      const conversionObj = {
-        January: '01',
-        February: '02',
-        March: '03',
-        April: '04',
-        May: '05',
-        June: '06',
-        July: '07',
-        August: '08',
-        September: '09',
-        October: '10',
-        November: '11',
-        December: '12'
-      }
       let rating = element
         .querySelector(".rating")
         .childNodes[0].className.replace(/ui_bubble_rating bubble_/g, "")
@@ -101,14 +67,12 @@ async function tripAdvisorRecursion(link, i, cb) {
       let author = element.querySelector("span.scrname").textContent;
       let description = element.querySelector("p.partial_entry").textContent;
       let datePublished = element.querySelector(".ratingDate").title;
-      datePublished = datePublished.replace(/,/g, '').split(' ')
-      let parsedDate = datePublished[2]+'-'+conversionObj[datePublished[0]]+'-'+datePublished[1]
       array.push({
         rating: rating,
         author: author,
         origin: "TripAdvisor",
         description: description,
-        datePublished: parsedDate
+        datePublished: datePublished
       });
     }
     return array;
@@ -124,7 +88,7 @@ async function tripAdvisorRecursion(link, i, cb) {
   await page.close();
   await browser.close();
 
-  if (i < 0) {
+  if (i < 20) {
     i += 10;
     tripAdvisorRecursion(link, i, cb);
   } else {
