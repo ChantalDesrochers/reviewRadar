@@ -62,7 +62,7 @@ const crequester = (review, cb) => {
 // function iterateWithDelay(array) {
   // called function, receiving reviews array from scraper
 conceptWithDelay = sendstuffcb => array => {
-  console.log('Starting Concept parsing')
+  console.log('Starting MeaningCloud Concept parsing')
   reviews = array
   for (let i = 0; i < reviews.length; i++) {
     (function (i) {
