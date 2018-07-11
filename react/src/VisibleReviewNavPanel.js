@@ -65,17 +65,17 @@ class VisibleReviewNavPanel extends Component {
             // return (<div style={styles.buttonContainerForModifierVolumeFocusChart}>
             console.log(' chart keyword ')
          return (
-         <div style={{position:'absolute', top:'700px', right:'275px'}}>
+         <div style={{position:'absolute', top:'697px', right:'285px'}}>
          <Grid container >
                 <Grid item sm={6}>
-                    <Button style={{ backgroundColor:  '#f7eac8', width:50 }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
-                    <TrendingFlat style={{height:41, width:51}} className="icon-flipped"  />
+                    <Button style={{ backgroundColor:  '#f7eac8', width:5, marginLeft:'-70px' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('backward')} >
+                    <TrendingFlat style={{height:35, width:50}} className="icon-flipped"  />
                     </Button>
                 </Grid>
             
                 <Grid item sm={6}>
                     <Button style={{ backgroundColor: '#f7eac8' }} variant="contained" size="small" onClick={() => this.changeDisplayedReviews('forward')} >
-                    <TrendingFlat style={{height:41, width:51}}  />
+                    <TrendingFlat style={{height:35, width:50}}  />
                     </Button>
                </Grid>
         </Grid>
