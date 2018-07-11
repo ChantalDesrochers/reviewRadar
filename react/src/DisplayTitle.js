@@ -29,16 +29,41 @@ class DisplayTitle extends Component {
         }
         else if (this.props.s.displaySentimentType === 'positive' && this.props.s.displayModifier === 'volumeBySentiment') {
             return (
-                <Paper style={styles.SingleReviewLeftPaper}><Typography variant="display2"  style={styles.SingleReviewLeft}>Positive Reviews</Typography></Paper>
+                <div style={styles.SingleReviewLeftContainerMultiple}>
+                <Paper style={styles.SingleReviewLeftPaper}> <Typography variant="display2"  style={styles.SingleReviewLeft}>Positive Reviews</Typography></Paper></div>
             )
         } else if (this.props.s.displaySentimentType === 'negative' && this.props.s.displayModifier === 'volumeBySentiment') {
             return (
                 <div style={styles.SingleReviewLeftContainerMultiple}>
                 <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Negative Reviews</Typography></Paper></div>
             )
-        } else if (this.props.s.displayModifier === "time") {
+
+        } else if (this.props.s.displaySentimentType === 'very positive' && this.props.s.displayModifier === 'volumeBySentiment') {
             return (
-                <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em'}}>View Your Five Most Recent Reviews</Typography>
+                <div style={styles.SingleReviewLeftContainerMultiple}>
+                <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Very Positive Reviews</Typography></Paper></div>
+            )
+
+        }    else if (this.props.s.displaySentimentType === 'neutral' && this.props.s.displayModifier === 'volumeBySentiment') {
+            return (
+                <div style={styles.SingleReviewLeftContainerMultiple}>
+                <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Neutral Reviews</Typography></Paper></div>
+            )
+
+        }    
+        else if (this.props.s.displaySentimentType === 'very negative' && this.props.s.displayModifier === 'volumeBySentiment') {
+            return (
+                <div style={styles.SingleReviewLeftContainerMultiple}>
+                <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Very Negative Reviews</Typography></Paper></div>
+            )
+
+        }    
+        
+        else if (this.props.s.displayModifier === "time") {
+            return (
+
+                <div style={styles.SingleReviewLeftContainerMultiple}>
+                <Paper style={styles.SingleReviewLeftPaper}>  <Typography variant="display2" style={styles.SingleReviewLeft}>Your Five Most Recent Reviews</Typography></Paper></div>
             )
         } else if (this.props.s.displayModifier === "timebymonth") {
             return <Typography variant="title" style={{ fontSize: '1.4em', paddingBottom: '1em' }}></Typography>
