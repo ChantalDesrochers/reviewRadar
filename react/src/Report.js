@@ -191,24 +191,10 @@ class Report extends Component {
 
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
-    const leftSide = { ...this.state.leftSide };
-    switch (focus) {
-      case 'positive':
-        this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'positive' }
-          return newState;
-        })
-        console.log('positive clicked');
-        // this.setState({ leftSide })
-        return
-      case 'negative':
-        this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: 'negative' }
-          return newState;
-        })
-        console.log('negative clicked');
-        return
-    }
+      this.setState((prevState) => {
+        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: focus}
+        return newState;
+      })
   }
 
   changeSentimentDisplayModifier = (displayModifier) => {

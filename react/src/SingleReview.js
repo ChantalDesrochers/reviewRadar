@@ -7,19 +7,22 @@ import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-    reviewText: {overflow: 'hidden', maxHeight: '320px', fontSize: '2.2em', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
+    
+        reviewText: {  flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center', overflow: 'hidden', maxHeight: '320px', fontSize: '2.2em', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
     dateLeftSingle: {padding:10, float: 'right'}
 }
 class SingleReview extends Component {
     mouseController = (message) => {
         switch (message) {
             case 'enter-review':
-              styles.reviewText = {overflow: 'auto', maxHeight: '320px', textAlign: 'left', fontSize:  '2.2em', paddingTop: 25, paddingLeft:50, paddingRight:50 }
+           styles.reviewText = {overflow: 'auto', maxHeight: '320px', textAlign: 'left', fontSize:  '2.2em', paddingTop: 25, paddingLeft:50, paddingRight:50 }
                 this.forceUpdate();
                 //       console.log('in enter review', styles);
                 break;
             case 'exit-review':
-             styles.reviewText = {overflow: 'hidden', maxHeight: '320px', textAlign: 'left', fontSize:  '2.2em', display: 'block', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50}
+        styles.reviewText = {overflow: 'hidden', maxHeight: '320px', textAlign: 'left', fontSize:  '2.2em', display: 'block', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50}
                 this.forceUpdate();
                 //     console.log('in exit review', styles);
                 break;
@@ -48,7 +51,7 @@ class SingleReview extends Component {
                         </Grid>
                         <Grid item sm={12} > 
                             <Typography variant='body' onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}>
-                                {review}
+                              <div className='aroundreview'>  {review} </div>
                             </Typography>
                         </Grid>
                     </Grid>
