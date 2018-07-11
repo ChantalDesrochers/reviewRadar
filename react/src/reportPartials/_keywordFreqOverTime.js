@@ -169,9 +169,11 @@ class KeywordsOverTime extends Component {
 
   render() {
     const handleClick = elem => {
-      if (elem[0]) {
+      // if (elem[0]) {
         console.log(elem)
         let chartPoints = elem;
+        let clickedPointIndex2 = chartPoints[0]['_datasetIndex']
+        console.log('clickedpoint2', clickedPointIndex2)
         let clickedPointIndex = chartPoints[0]["_index"];
         const label =
           chartPoints[0]["_chart"]["config"]["data"]["labels"][
@@ -181,9 +183,21 @@ class KeywordsOverTime extends Component {
          console.log(month)
          this.props.clickHandlerForKeywordTimeChart(month)
         // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
-      }
+      // }
     };
-
+    const handleHover = elem => {
+      if (elem[0]) {
+        let clickedPointIndex = elem[0]["_index"];
+        const label =
+          elem[0]["_chart"]["config"]["data"]["labels"][
+            clickedPointIndex
+          ]
+        const i = elem[0]['_datasetIndex']
+        console.log(i)
+        console.log('label', elem[0]['_chart']['data']['datasets'][i].label)
+        console.log('month', label)
+      }
+    }
 const chartyOptions = {
         scales: {
           xAxes: [
@@ -226,7 +240,7 @@ if (this.props.s.dataFocus === 'review') {
       <div className="kwFreqOverTimeChart" style={{"height" : 430, marginTop:'1.5%'}}>
       <Typography  variant='display3'  style={chartTitles.Right}>Topics mentioned over time</Typography>
       <Line
-          data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} width={10}
+          data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)}   getElementAtEvent={(elem)=>{handleHover(elem)}} width={10}
           height={7}
           options={{
             maintainAspectRatio: false}}
@@ -239,7 +253,7 @@ if (this.props.s.dataFocus === 'review') {
       <Typography variant='title' style={chartTitles.Left}>Topics mentioned over time</Typography>
       <div style={{'width':'1020px', marginLeft:'4.5%'}}>
       <Line
-          data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementsAtEvent={(elem)=>{handleClick(elem)}} 
+          data={this.kwPerMonth(this.props.organizedConcepts, this.props.monthConcepts)} getElementAtEvent={(elem)=>{handleHover(elem)}}
           width={1020}
           height={640}
           options={{
