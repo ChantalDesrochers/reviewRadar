@@ -175,12 +175,13 @@ class KeywordsOverTime extends Component {
     //     let clickedPointIndex2 = chartPoints[0]['_datasetIndex']
     //     console.log('clickedpoint2', clickedPointIndex2)
     //     let clickedPointIndex = chartPoints[0]["_index"];
+    //     console.log('test point', elem);
     //     const label =
     //       chartPoints[0]["_chart"]["config"]["data"]["labels"][
     //         clickedPointIndex
     //       ];
     //       const month = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-    //      console.log(month)
+    //      console.log(month, label)
     //      this.props.clickHandlerForKeywordTimeChart(month)
     //     // console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
     //   // }
@@ -188,14 +189,16 @@ class KeywordsOverTime extends Component {
     const handleHover = elem => {
       if (elem[0]) {
         let clickedPointIndex = elem[0]["_index"];
+        const month =
+          elem[0]["_chart"]["config"]["data"]["labels"][
+            clickedPointIndex
+          ]
         const i = elem[0]['_datasetIndex']
+        let label = elem[0]['_chart']['data']['datasets'][i].label
         console.log(i)
-        const month = elem[0]["_chart"]["config"]["data"]["labels"][clickedPointIndex]
-        const topic = elem[0]['_chart']['data']['datasets'][i].label
-
-        console.log('label', topic)
+        console.log('label', elem[0]['_chart']['data']['datasets'][i].label)
         console.log('month', month)
-        this.props.clickHandlerForKeywordTimeChart(month, topic)
+      this.props.clickHandlerForKeywordTimeChart(month, label)
       }
     }
 const chartyOptions = {
@@ -217,10 +220,9 @@ const chartyOptions = {
     const chartTitles = {
       Right: {
         fontSize: 30,
-        fontFamily: 'arial',
-        padding: 0,
-        margin: 0
-      },
+        padding: 20,
+        margin: 0,
+        color: 'black'},
       Left: {
         fontSize: 40,
         marginLeft: '-1%',

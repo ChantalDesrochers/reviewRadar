@@ -70,76 +70,76 @@ class SentimentOverTime extends Component {
 
   reviews.forEach(function(review) {
   var month = review.datePublished.split('-')[1]
-    if (month === "01" && review.label === "positive") {
+    if (month === "01" && (review.label === "positive" || review.label === "very positive") ) {
       january.positive += 1
     }
-    if (month === "01" && review.label === "negative") {
+    if (month === "01" && (review.label === "negative" || review.label === "very negative") ) {
       january.negative += 1
   }
-  if (month === "02" && review.label === "positive") {
+  if (month === "02" && (review.label === "positive" || review.label === "very positive") ) {
     february.positive += 1
   }
-  if (month === "02" && review.label === "negative") {
+  if (month === "02" && (review.label === "negative" || review.label === "very negative") ) {
     february.negative += 1
   }
-  if (month === "03" && review.label === "positive") {
+  if (month === "03" && (review.label === "positive" || review.label === "very positive") ) {
     march.positive += 1
   }
-  if (month === "03" && review.label === "negative") {
+  if (month === "03" && (review.label === "negative" || review.label === "very negative") ) {
     march.negative += 1
   }
-  if (month === "04" && review.label === "positive") {
+  if (month === "04" && (review.label === "positive" || review.label === "very positive") ) {
     april.positive += 1
   }
-  if (month === "04" && review.label === "negative") {
+  if (month === "04" && (review.label === "negative" || review.label === "very negative") ) {
     april.negative += 1
   }
-  if (month === "05" && review.label === "positive") {
+  if (month === "05" && (review.label === "positive" || review.label === "very positive") ) {
     may.positive += 1
   }
-  if (month === "05" && review.label === "negative") {
+  if (month === "05" && (review.label === "negative" || review.label === "very negative") ) {
     may.negative += 1
   }
-  if (month === "06" && review.label === "positive") {
+  if (month === "06" && (review.label === "positive" || review.label === "very positive") ) {
     june.positive += 1
   }
-  if (month === "06" && review.label === "negative") {
+  if (month === "06" && (review.label === "negative" || review.label === "very negative") ) {
     june.negative += 1
   }
-  if (month === "07" && review.label === "positive") {
+  if (month === "07" && (review.label === "positive" || review.label === "very positive") ) {
     july.positive += 1
   }
-  if (month === "07" && review.label === "negative") {
+  if (month === "07" && (review.label === "negative" || review.label === "very negative") ) {
     july.negative += 1
   }
-  if (month === "08" && review.label === "positive") {
+  if (month === "08" && (review.label === "positive" || review.label === "very positive") ) {
     august.positive += 1
   }
-  if (month === "08" && review.label === "negative") {
+  if (month === "08" && (review.label === "negative" || review.label === "very negative") ) {
     august.negative += 1
   }
-  if (month === "09" && review.label === "positive") {
+  if (month === "09" && (review.label === "positive" || review.label === "very positive") ) {
     september.positive += 1
   }
-  if (month === "09" && review.label === "negative") {
+  if (month === "09" && (review.label === "negative" || review.label === "very negative") ) {
     september.negative += 1
   }
-  if (month === "10" && review.label === "positive") {
+  if (month === "10" && (review.label === "positive" || review.label === "very positive") ) {
     october.positive += 1
   }
-  if (month === "10" && review.label === "negative") {
+  if (month === "10" && (review.label === "negative" || review.label === "very negative") ) {
     october.negative += 1
   }
-  if (month === "11" && review.label === "positive") {
+  if (month === "11" && (review.label === "positive" || review.label === "very positive") ) {
     november.positive += 1
   }
-  if (month === "11" && review.label === "negative") {
+  if (month === "11" && (review.label === "negative" || review.label === "very negative") ) {
     november.negative += 1
   }
-  if (month === "12" && review.label === "positive") {
+  if (month === "12" && (review.label === "positive" || review.label === "very positive") ) {
     december.positive += 1
   }
-  if (month === "12" && review.label === "negative") {
+  if (month === "12" && (review.label === "negative" || review.label === "very negative") ) {
     december.negative += 1
   }
   })
@@ -201,6 +201,8 @@ class SentimentOverTime extends Component {
       console.log('elem', elem)
       console.log('elem 0', elem[0])
       console.log('elem 1', elem[1])
+
+      console.log('***********', this.props.s)
 
       if (elem[0] || elem[1]) {
         let chartPoints = elem;

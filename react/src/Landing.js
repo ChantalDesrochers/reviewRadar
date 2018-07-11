@@ -94,7 +94,7 @@ function Landing() {
           </Link>
         </div>
 
-        <img
+        {/* <img
           src={radar}
           style={{
             // height: "92%",
@@ -104,7 +104,7 @@ function Landing() {
             bottom: "55%",
             zIndex: -1
           }}
-        />
+        /> */}
         <img
           src={radar}
           style={{
@@ -128,7 +128,7 @@ function Landing() {
           can be difficult. <br />We help simplify the process.
         </Typography>
 
-        <Grid container spacing={8} justify="center">
+        <Grid container spacing={40} justify="center">
           <LandingContainer
             header="header"
             img="https://insights.bookbub.com/wp-content/uploads/2014/03/get-more-reader-reviews.png"
@@ -147,6 +147,17 @@ function Landing() {
           />
         </Grid>
       </div>
+      <div style={{ marginLeft: "36%", marginTop: "-10%" }}>
+          <Link
+            to="request"
+            style={{ textDecoration: "none", marginRight: "20px" }}
+          >
+            <Button style={styles.register}>Start a New Request</Button>
+          </Link>
+          <Link to="report" style={{ textDecoration: "none" }}>
+            <Button style={styles.login}>View My Report</Button>
+          </Link>
+        </div>
     </div>
   );
 }

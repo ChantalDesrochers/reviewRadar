@@ -13,6 +13,8 @@ import Paper from '@material-ui/core/Paper'
 var linkStyle;
 const styles = {
     PaperForLeftReview: { height: '551px' },
+    
+    PaperForRightReview: { height: '450px', marginTop:'75px' },
     reviewTextModifierVolumeFocusReview: { marginTop: '100px', padding: 15 },
     reviewSummary: { fontSize: '1.5em', margin: '5px 0px' },
     reviewSummaryForSentiment: { fontSize: '1em',  marginLeft:'250px'},
@@ -59,10 +61,11 @@ class SentimentsToShow extends Component {
         console.log('in sent prepare whats the modifier', this.props.s.displayModifier)
         if (this.props.s.displayModifier === "volume") {
             if (this.props.s.dataFocus === "review") {
+
                 return <Paper style={styles.PaperForLeftReview}><div style={styles.reviewTextModifierVolumeFocusReview}><SingleReview style={styles.review} s={this.props.s} /></div></Paper>
             }
             else if (this.props.s.dataFocus === "chart") {
-                return <div><SingleReview s={this.props.s} /></div>
+                return  <Paper style={styles.PaperForRightReview}><div><SingleReview s={this.props.s} /></div></Paper>
             }
         }
 
@@ -97,13 +100,14 @@ class SentimentsToShow extends Component {
             let recentReviews = sortedDate.slice(0, 5)
             console.log('recent Reviews', recentReviews);
             let htmlToReturn = [];
-            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var options = {  year: 'numeric', month: 'long', day: 'numeric' };
             htmlToReturn = recentReviews.map((review, i) => (
 
-                <ExpansionPanel expandedTime={this.state.expandedTime === `panel${i}`} onChange={this.handleChange2(`panel${i}`)}>
+                <ExpansionPanel expanded={this.state.expanded === `panel${(i+10)}`} onChange={this.handleChange(`panel${(i+10)}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)}</Typography>
-                        <Typography style={styles.reviewSummaryForSentiment}>{review.label}</Typography>
+                    {console.log(review.datePublished)}
+                        <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary} </Typography>
+                      {/* <Typography variant="body" style={styles.reviewSummaryForSentiment}>{review.summary}</Typography> */}
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails style={styles.reviewFullContainer}>
                         <Typography style={styles.reviewFull}>
@@ -117,18 +121,47 @@ class SentimentsToShow extends Component {
             return <div style={{ marginTop: '95px' }}>{htmlToReturn}</div>
         }
         else if (this.props.s.displayModifier === "timebymonth") {
-            const reviews = this.props.s.currentTargetedReviews
-            let monthReviews = reviews.map(review => (
-                <div>
-                    <h2>{review.datePublished.toString().substring(0, 15)}</h2>
-                    <p>{review.description}</p>
-                </div>))
-            return (
-                <div>
-                    <h2>{reviews[0].datePublished.toString().substring(4, 7)} Reviews</h2>
-                    {monthReviews}
-                </div>
+            let reviews = this.props.s.currentTargetedReviews
+
+            let dAlteredArray = reviews.map(review =>
+                ({ ...review, datePublished: new Date(review.datePublished) })
             )
+            const sortedDate = dAlteredArray.sort(function (a, b) {
+                return b.datePublished - a.datePublished
+            }).slice(0,5)
+
+            let htmlToReturn = [];
+            var options = { year: 'numeric', month: 'long', day: 'numeric' };
+            htmlToReturn = sortedDate.map((review, i) => (
+                <ExpansionPanel expanded={this.state.expanded === `panel${(i+20)}`} onChange={this.handleChange(`panel${(i+20)}`)}>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography style={styles.reviewSummary}>{review.datePublished.toLocaleDateString('en-us', options)} - {review.summary} </Typography>
+                      {/* <Typography variant="body" style={styles.reviewSummaryForSentiment}>{review.summary}</Typography> */}
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails style={styles.reviewFullContainer}>
+                        <Typography style={styles.reviewFull}>
+                            {review.description}
+                        </Typography>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+            )
+            )
+            // console.log('html to return', htmlToReturn);
+            return <div style={{ marginTop: '95px' }}>{htmlToReturn}</div>
+            
+            
+            
+            // let monthReviews = reviews.map(review => (
+            //     <div>
+            //         <h2>{review.datePublished.toString().substring(0, 15)}</h2>
+            //         <p>{review.description}</p>
+            //     </div>))
+            // return (
+            //     <div>
+            //         <h2>{reviews[0].datePublished.toString().substring(4, 7)} Reviews</h2>
+            //         {monthReviews}
+            //     </div>
+            // )
         }
     }
     render() {

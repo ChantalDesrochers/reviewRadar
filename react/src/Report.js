@@ -11,7 +11,7 @@ import Colors from './AppColors';
 import SwapButton from './SwapButton';
 import ChartContainer from "./reportPartials/_chartContainer";
 import TopNavPanels from "./TopNavPanels.js";
-import WatsonBars from './WatsonBar';
+import WatsonBar from './WatsonBar.js';
 import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
 import ChartsToShow from "./ChartsToShow.js";
@@ -63,7 +63,8 @@ class Report extends Component {
       keywordArray: [],
       currentTargetedReviews: [],
       SentimentSummaryIndex: 5,
-      SummaryIndexMultiple: 5
+      SummaryIndexMultiple: 5,
+      CurrentMonth:''
     };
   }
 
@@ -121,9 +122,9 @@ class Report extends Component {
         case 'keyword':
           return <div style={{ padding: 0, margin: 0 }}>
             <DisplayTitle style={{ height: '100px' }} s={this.state} />
-            <Paper style={styles.PaperForLeftReview}>
+             <Paper style={styles.PaperForLeftReview}>
             <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-          </Paper>
+           </Paper>
           <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
           </div>
           break;
@@ -160,12 +161,14 @@ class Report extends Component {
     if (this.state.dataFocus === 'chart') {
       switch (displaying) {
         case 'sentiment':
-          return <Paper><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-          </Paper>
+          return <span>  <DisplayTitle style={{ height: '100px' }} s={this.state} /><Paper><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+          </Paper></span>
           break;
         case 'keyword':
-          return <Paper> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
-         </Paper>
+          return <span><DisplayTitle style={{ height: '100px' }} s={this.state} /> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
+         <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+         </span>
           break;
       }
     }
@@ -245,7 +248,7 @@ class Report extends Component {
     )
     let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
     this.setState((prevState) => {
-      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'sentiment' }
+      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'sentiment', CurrentMonth: clickedMonth }
       return newState;
     })
   }
@@ -264,15 +267,37 @@ class Report extends Component {
     })
   }
 
-  clickHandlerForKeywordTimeChart = (clickedMonth) => {
-    console.log('clicked month on sentiment chart', clickedMonth)
+  clickHandlerForKeywordTimeChart = (clickedMonth, clickedLabel) => {
+    console.log('clicked month on keyword time chart', clickedMonth)
+    console.log('clicked label on keyword time chart', clickedLabel)
     let month = clickedMonth.substring(0, 3)
     let dAlteredArray = this.state.reviews.map(review =>
       ({ ...review, datePublished: new Date(review.datePublished) })
     )
+    const checkForExisting = match => element => {
+      // console.log('check match', match)
+      // console.log('check element', element)
+      return element == match;
+    };
+
     let monthReviews = dAlteredArray.filter(review => review.datePublished.toString().includes(month))
+    // console.log('month reiews', monthReviews[0]);
+    // let finalReviews = monthReviews.filter(review => review.concepts.includes('bun'));
+    // console.log(finalReviews);
+    let finalReviews = []
+    monthReviews.forEach(function(review) {
+      review.concepts.forEach(function(concept) {
+        let existingIndex = checkForExisting(concept.content)(clickedLabel)
+        if (existingIndex === true) {
+          finalReviews.push(review);
+        }
+      });
+    });
+
+    console.log(finalReviews)
+
     this.setState((prevState) => {
-      let newState = { ...prevState, currentTargetedReviews: monthReviews, displayModifier: 'timebymonth', displaying: 'keyword' }
+      let newState = { ...prevState, currentTargetedReviews: finalReviews, displayModifier: 'timebymonth', displaying: 'keyword', CurrentMonth: clickedMonth, keywordChartTarget: clickedLabel }
       return newState;
     })
   }
@@ -400,8 +425,8 @@ class Report extends Component {
                 </div>
                 <Grid item sm={12} style={styles.WatsonContainer} >
                   <div style={styles.ReviewWatson}>
-                    <ReviewStars s={this.state} style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
-                    <WatsonBars s={this.state} style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+                    <ReviewStars s={this.state} style={styles.ReviewStars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
+                    <WatsonBar s={this.state} style={styles.WatsonBars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
                   </div>
                 </Grid>
               </Grid>

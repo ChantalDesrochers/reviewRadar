@@ -9,6 +9,7 @@ var cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var controller = require('./public/javascripts/controller.js');
+const fs = require('fs');
 
 var app = express();
 
@@ -33,13 +34,20 @@ app.use('/users', usersRouter);
 
 var reportData = []
 
+var savedFile = {
+  reviews: [],
+  organizedConcepts: [],
+  monthConcepts: [],
+}
+
 var sentData = {
   //live
-  name: 'Momofuku',
+  nameL: 'Momofuku',
   reviewsL: reportData, //
   organizedConceptsL: parse.conceptAggregator(reportData),
   monthConceptsL: parse.datedAggregator(parse.parseReviewsByDate(reportData)),
   //hardcoded
+  name: 'Momofuku',
   reviews: Ratings,
   organizedConcepts: parse.conceptAggregator(Ratings),
   monthConcepts: parse.datedAggregator(parse.parseReviewsByDate(Ratings))
@@ -53,32 +61,50 @@ app.get('/1', (req, res) => {
 app.post('/1', (req, res) => {
   // console.log('full request', req)
   console.log('req body', req.body)
-  sentData.name = req.body.name
+  sentData.nameL = req.body.name
   const sendStuff = (data) =>{
-    console.log('data added to object', JSON.stringify(data))
+    // console.log('data added to object', JSON.stringify(data))
     data.forEach(function(review, i) {
       // review.id = i
       reportData.push(review)
     })
-    // allConcepts = conceptAggregator(data)
-    res.send('success')
+    // runs parse again after receiving the data
+    oc = parse.conceptAggregator(reportData)
+    mc = parse.datedAggregator(parse.parseReviewsByDate(reportData))
+    sentData.organizedConceptsL = oc
+    sentData.monthConceptsL = mc
+    savedFile = {
+      reviews: reportData,
+      organizedConcepts: oc,
+      monthConcepts: mc
+    }
+    // console.log('savedFile added to object', JSON.stringify(savedFile))
+
+    // console.log('liveData', sentData.monthConceptsL)
+
+    fs.writeFileSync(`./results/output.json`, JSON.stringify(savedFile))
+    // fs.writeFileSync(`report.json`, JSON.stringify(reportData))
+    // fs.writeFileSync(`oconcepts.json`, JSON.stringify(oc))
+    // fs.writeFileSync(`mconcepts.json`, JSON.stringify(mc))
+    // <--- this is when mailer should fire
+    // res.send('success')
   }
 
-  if (req.body.url1 != '') {
-    console.log('url1 triggered')
-    controller.getData(req.body.url1, sendStuff)
-  }
-
+  
   if (req.body.url2 != '') {
     console.log('url2 triggered')
-    controller.getData(req.body.url2, sendStuff)
+    controller.getData([req.body.url1, req.body.url2], sendStuff)
+  }
+  else if (req.body.url1 != '') {
+    console.log('url1 triggered')
+    controller.getData(req.body.url1, sendStuff)
   }
 
   // if (req.body.url3 != '') {
   //   console.log('url3 triggered')    
   //   var data3 = sentiment.getData(req.body.url3, sendStuff)
   // }
-  // res.send('success')
+  res.send('success')
 })
 
 // catch 404 and forward to error handler

@@ -178,7 +178,6 @@ class Request extends Component {
           />
           <br />
           <TextField
-            required
             id="url2"
             // label="TripAdvisor URL"
             style={styles.textFieldURL}
@@ -197,45 +196,10 @@ class Request extends Component {
             }}
           />
           <br />
-          {/*
-        <input
-          id="company"
-          name="company"
-          type="text"
-          onChange={e => this.setState({ name: e.target.value })}
-        />
-        <br /> <br />
-        <label className="form-text" htmlFor="email">
-          Enter your email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          onChange={e => this.setState({ email: e.target.value })}
-        />
-        <br /> <br />
-        <label className="form-text" htmlFor="yelp-url">
-          Enter your yelp page
-        </label>
-        <input
-          id="yelp-url"
-          name="yelp-url"
-          type="text"
-          onChange={e => this.setState({ url1: e.target.value })}
-        />
-        <br /> <br /> */}
-          {/* <label className="form-text" htmlFor="second-url">Enter your second url</label>
-        <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url2: e.target.value})}/>
-        <br/> <br/>
-        <label className="form-text" htmlFor="third-url">Enter your third url</label>
-        <input id="yelp-url" name="yelp-url" type="text" onChange={e => this.setState({url3: e.target.value})}/>
-        <br/> <br/> */}
           <button>Get Your Report!</button>
         </form>
       </div>
     );
-
     const thanksPage = (
       <div style={styles.background} >
         <Typography style={{textAlign: 'left', margin: 'auto'}} variant="title">Thank you for your request</Typography>
