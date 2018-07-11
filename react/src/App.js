@@ -6,6 +6,7 @@ import Test from './testPage'
 import Landing from './Landing.js'
 import Registration from  "./Registration"
 import { Router, Link } from "@reach/router"
+import ChartsToShow from './ChartsToShow'
 
 // import { Router } from "@reach/router";
 
@@ -13,13 +14,13 @@ class App extends Component {
   render() {
     return (
       <div >
-   
+
         {/* <header className="App-header">
           <h1 className="App-title">Review Radar</h1>
 
         <Link to="/">Login/Register</Link> |
         <Link to="request">Request Report</Link> |
-        <Link to="report">Reports</Link> | 
+        <Link to="report">Reports</Link> |
         <Link to="test">test</Link>
 
         </header> */}
@@ -31,9 +32,10 @@ class App extends Component {
           <RequestForm path="request"/>
           <Registration path="registration"/>
           <Test path="test" />
+         <ChartsToShow path="charts"/>
 
         </Router>
-  
+
       </div>
     );
   }

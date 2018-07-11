@@ -4,43 +4,10 @@ import {Line} from 'react-chartjs-2';
 class NumberOfReviewsOverTime extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      reviews: this.props.reviews,
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [
-        {
-          label: 'Number of Reviews Generated Monthly',
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: '#F37162',
-          borderColor: '#E53A27',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: '#F37162',
-          pointBackgroundColor: '#F37162',
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: []
-        }]
-      }
-    }
   }
 
-componentWillReceiveProps(nextprops) {
-  if (this.state.reviews != nextprops.reviews) {
-    this.setState({ ...(this.state.reviews = nextprops.reviews) });
-  }
 
-    var getReviewsPerMonth = () => {
-      var reviews = this.state.reviews
+getReviewsPerMonth = (reviews) => {
       var january = {
         count: 0
       }
@@ -118,31 +85,65 @@ componentWillReceiveProps(nextprops) {
 
       })
       var count = [january.count, february.count, march.count, april.count, may.count, june.count, july.count, august.count, september.count, october.count, november.count, december.count];
-      this.setState({...this.state.data.datasets[0].data = count})
-
-    }
-
-getReviewsPerMonth()
+     return {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+        {
+          label: 'Number of Reviews Generated Monthly',
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: '#28ABE3',
+          borderColor: '#2292C1',
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: '#2292C1',
+          pointBackgroundColor: '#2292C1',
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: '#2292C1',
+          pointHoverBorderColor: '#2292C1',
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: count
+        }]
+      }
 
 }
 
   render() {
-      const handleClick = elem => {
-        if (elem[0]) {
-          console.log(elem)
-          let chartPoints = elem;
-          let clickedPointIndex = chartPoints[0]['_index']
-          const label = chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex];
-          const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex];
-          console.log("chartPoints - label", chartPoints[0]['_chart']['config']['data']['labels'][clickedPointIndex])
-          console.log("chartPoints - score", chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][clickedPointIndex])
+    const chartyOptions = {
+        scales: {
+          xAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20,
+          color: 'black'
         }
       }
+    }
 
-
+ const chartTitles = {
+  fontSize: 25,
+  fontFamily: 'roboto',
+  color: 'black',
+  padding: 0,
+  marginBottom: 20,
+  textAlign: 'left'
+}
         return (
-            <div >
-              <Line data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
+
+            <div style={{marginTop: 130, marginBottom: 90}}>
+             <p style={chartTitles}>When are your customers reviewing you the most</p>
+              <Line data={this.getReviewsPerMonth(this.props.reviews)} options={chartyOptions}/>
             </div>
         );
     }

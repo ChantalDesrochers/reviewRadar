@@ -28,14 +28,15 @@ const styles = {
   TopNavPanel: { float: 'left', padding: 20 },
   TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px' },
 
-  ReviewWatson: { textAlign: 'center', marginTop: '-25%' },
+  ReviewWatson: { textAlign: 'center', marginTop: '-28%' },
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
   ChartOnLeftSide: {},
   ChartOnRightSide: {height:'100%'},
   ReviewNavButtonsOnLeftSide: {},
   ReviewNavButtonsOnRightSide: {},
-  PaperForLeftReview: { height: '551px' }
+  PaperForLeftReview: { height: '551px' },
+  WatsonContainer: { position: 'relative', top: '-2px', right: '-7px'}
 }
 
 class Report extends Component {
@@ -51,7 +52,7 @@ class Report extends Component {
       companyName: 'Planta',
       fadeTracker: { sentimentFadeBool: true, keywordFadeBool: false },
       currentWatsonRating: 0,
-      visibleReview: 0,
+      visibleReview: 175,
       leftShowing: 'text',
       keywordChartTarget: '',
       // live server data
@@ -113,7 +114,7 @@ class Report extends Component {
       switch (displaying) {
         case 'sentiment':
           return <div style={{ padding: 0, margin: 0 }}>
-          <DisplayTitle style={{ height: '100px' }} s={this.state} />   
+          <DisplayTitle style={{ height: '100px' }} s={this.state} />
               <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
           </div>
@@ -128,16 +129,16 @@ class Report extends Component {
           </div>
           break;
         //is this the problem, there is no chart?
-        case 'chart':
-          return <ChartsToShow s={this.state} />
-          break;
+        // case 'chart':
+        //   <Link to="/charts"></Link>
+        //   break;
       }
 
     }
     else if (this.state.dataFocus === 'chart') {
       return <div style={styles.ChartOnLeftSide}>
-      
-      
+
+
       <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
         pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
         reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
@@ -172,7 +173,7 @@ class Report extends Component {
     else if (this.state.dataFocus === 'review') {
 
       return <div style={styles.ChartOnRightSide}>
-      
+
       <Paper style={{height:'100%'}} >
       <ChartContainer  className= "Level4" displaying={this.state.displaying} reviews={this.state.reviews}
         pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
@@ -318,6 +319,7 @@ class Report extends Component {
     return null;
   }
 
+
   topNavClickHandler = (clickedItem) => {
     // const newState = { ...this.state }
     switch (clickedItem) {
@@ -337,13 +339,20 @@ class Report extends Component {
           return newState
         });
         break;
-      case 'charts': //added chart state handle
-        this.setState((prevState) => {
-          let newState = { ...prevState, displaying: 'chart' }
-          return newState;
-        })
-    }
-  };
+      case 'charts':
+      // added chart state handle
+
+     this.setState((prevState) => {
+          let newState = { ...prevState, displayModifier: '', displaying: 'allcharts', dataFocus: 'review'}
+                return newState
+        });
+      break;
+  }
+}
+
+
+
+
   render() {
     const watsonIndex = this.state.visibleReview;
     return (
@@ -353,18 +362,24 @@ class Report extends Component {
           <AppBar position="static" style={styles.AppBar}>
             <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
           </AppBar>
+{this.state.displaying === 'allcharts'  ? (
+               <div style={styles.TopNavPanels}>
+                <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
+              <ChartsToShow s={this.state}/> </div>) : (
+  <div>
+
           {/* <AppBar className='******************' position="absolute" style={{top:'94px', opacity:0.4, backgroundColor:'green', height: '15px', zIndex:1, display:'block'}}>
           </AppBar>
           <AppBar className='@@@@@@@@@@@@@@@@' position="absolute" style={{top:'614px', opacity:0.4, backgroundColor:'blue', height: '15px', zIndex:1, display:'block'}}>
           </AppBar>
           <AppBar className='!!!!!!!!!!!!!!!!!' position="absolute" style={{top:'948px', opacity:0.4, backgroundColor:'red', height: '15px', zIndex:1, display:'block'}}>
           </AppBar> */}
-          
+
           {/* LEFT SIDE */}
           <Grid container style={styles.MainContainer} spacing={8}>
             <Grid item sm={8} >
               <div style={styles.TopNavPanels}>
-                <TopNavPanels topNavClickHandler={this.topNavClickHandler} />
+                <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
               </div>
               <Grid style={styles.LeftContainer} style={{ marginTop: -25 }} item sm={12}>
                 <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
@@ -384,7 +399,7 @@ class Report extends Component {
                 <div onClick={this.topNavClickHandler} style={{height:'100%'}} className="level2" >
                   {this.RightSideShow()}
                 </div>
-                <Grid item sm={12} >
+                <Grid item sm={12} style={styles.WatsonContainer} >
                   <div style={styles.ReviewWatson}>
                     <ReviewStars s={this.state} style={styles.ReviewStars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
                     <WatsonBars s={this.state} style={styles.WatsonBars} s={this.state} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
@@ -393,6 +408,10 @@ class Report extends Component {
               </Grid>
             </Grid>
           </Grid>
+          </div>)
+}
+
+
         </div>)
     );
   }

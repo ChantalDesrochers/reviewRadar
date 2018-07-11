@@ -7,7 +7,7 @@ import NameAndSite from './NameAndSite.js'
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-    
+
         reviewText: {  flex: 1,
             justifyContent: 'center',
             alignItems: 'center', overflow: 'hidden', maxHeight: '320px', fontSize: '2.2em', variant:'body', paddingTop: 25, paddingLeft:50, paddingRight:50},
@@ -49,7 +49,7 @@ class SingleReview extends Component {
                                 <Date style={styles.dateLeftSingle} date={date} />
                             </Grid>
                         </Grid>
-                        <Grid item sm={12} > 
+                        <Grid item sm={12} >
                             <Typography variant='body' onMouseOver={() => this.mouseController('enter-review')} onMouseLeave={() => this.mouseController('exit-review')} style={styles.reviewText}>
                               <div className='aroundreview'>  {review} </div>
                             </Typography>

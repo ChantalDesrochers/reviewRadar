@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import 'typeface-roboto'
 import { Typography } from "@material-ui/core";
 
-const styles ={ 
+const styles ={
   PieOnRight: {width:"72%", margin:'0px auto 50px auto'},
   PieOnLeft: {width:"60%", marginLeft: "14%"},
   PieChartContainer: {marginTop:'10px'},
@@ -17,9 +17,9 @@ const styles ={
 }, Left: {
   fontSize: 40,
   paddingLeft: '22%',
-  
+
   color: 'black'
-  
+
 }
 }
 }
@@ -30,7 +30,7 @@ class PieChart extends Component {
   }
 
   prepareHtml = (handleClicktwo) => {
-    
+
       const chartOptions = {
         Right: {
           legend: {
@@ -40,7 +40,7 @@ class PieChart extends Component {
               fontFamily: 'Roboto'
             },
           },
-        responsive: true, 
+        responsive: true,
         maintainAspectRatio: true
       },
       Left:  {
@@ -49,18 +49,19 @@ class PieChart extends Component {
         labels: {
           fontSize: 20,
           fontFamily: 'Roboto'
-         
+
         },
 
       },
-      responsive: true, 
+      responsive: true,
       maintainAspectRatio: true
     }
   }
 
+console.log(this.props.s)
     if (this.props.s.dataFocus === 'review') {
       return <div style={styles.PieOnRight}>
-       <Typography variant='display3' style={styles.ChartTitles.Right}>How your customers feel</Typography> 
+       <Typography variant='display3' style={styles.ChartTitles.Right}>How your customers feel</Typography>
         <Pie data={this.parseChartData(this.props.reviews)} getElementsAtEvent={(elem) => { handleClicktwo(elem) }} ref="myChart"
      width={3}
      height={3}
@@ -80,6 +81,8 @@ class PieChart extends Component {
       </div>
     }
   }
+
+
   parseChartData = (reviews) => {
     let veryPositive = 0;
     let positive = 0;
@@ -136,6 +139,10 @@ class PieChart extends Component {
     // this.parseChartData();
 
     const handleClicktwo = elem => {
+      if (this.props.s.displaying === 'allcharts')
+      {
+        return
+      }
       if (elem[0]) {
         let chartPoints = elem;
         let clickedPointIndex = chartPoints[0]['_index']

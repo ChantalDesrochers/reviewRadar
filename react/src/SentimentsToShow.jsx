@@ -20,7 +20,7 @@ const styles = {
     // reviewFullContainer: {overflowY: 'auto', maxHeight: '10em'},
     review: { textOverflow: 'ellipsis', overflow: 'hidden', maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
     multipleReviewsText: { maxHeight: '300px', textAlign: 'left', fontSize: '1.6em', display: 'block' },
-    
+
     multipleReviewsContainer: { marginTop: '50px' }
 }
 class SentimentsToShow extends Component {

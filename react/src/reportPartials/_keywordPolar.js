@@ -1,35 +1,16 @@
 import React, { Component } from "react";
-import ReturnConcepts from "./returnConcepts.js";
+import organizedConcepts from "./organizedConcepts.js";
 import { Polar } from 'react-chartjs-2';
 
 class KeywordPolar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      reviews: this.props.reviews,
-      testData: ReturnConcepts,
-      data: {
-        datasets: [{
-          data: [],
-          backgroundColor: [
-            '#FF6384',
-            '#4BC0C0',
-            '#FFCE56',
-            '#E7E9ED',
-            '#36A2EB',
-            '#914CAD',
-            '#4CAD8B'
-          ],
-          label: 'Review Concepts'
-        }],
-        labels: []
-      }
-    }
   }
 
- componentDidMount() {
-var getKWData = () => {
-var sortedArray = this.state.testData.sort(function(a, b) {
+
+getKWData = returnConcepts => {
+
+var sortedArray = returnConcepts.sort(function(a, b) {
     return b.references.length - a.references.length
   });
 var topSeven = sortedArray.slice(0,7)
@@ -39,10 +20,23 @@ topSeven.forEach(function(concept) {
   data.push(concept.references.length)
   label.push(concept.content)
 });
-this.setState({ ...this.state.data.labels = label, ...this.state.data.datasets[0].data = data})
+return {
+        datasets: [{
+          data: data,
+          backgroundColor: [
+            '#2DC0FF',
+            '#22F4AB',
+            '#E8DBBB',
+            '#F2BF1A',
+            '#F93949',
+            '#DC22F4',
+            '#1A6D91'
+          ],
+          label: 'Review Concepts'
+        }],
+        labels: label
+      }
 }
-getKWData()
-  }
 
 
 
@@ -59,9 +53,40 @@ const score = chartPoints[0]['_chart']['config']['data']['datasets'][0]['data'][
  }
  }
 
+const chartyOptions = {
+        scales: {
+          yAxes: [
+          {
+            ticks: {
+              fontSize: 20
+            }
+          }]
+        },
+        legend: {
+        labels: {
+          fontSize: 20,
+          fontWeight: 'bold',
+          fontFamily: 'roboto'
+        }
+      },
+      barThickness: 15,
+      }
+
+
+
+ const chartTitles = {
+  fontSize: 25,
+  fontFamily: 'roboto',
+  color: 'black',
+  padding: 0,
+  marginBottom: 20,
+  textAlign: 'left'
+}
+
         return (
-            <div>
-              <Polar data={this.state.data} getElementsAtEvent={(elem)=>{handleClick(elem)}}/>
+            <div style={{marginTop: 120, marginBottom: 130}}>
+             <p style={chartTitles}>Radar In On What Users Are Talking About</p>
+              <Polar data={this.getKWData(this.props.s.organizedConcepts)} options={chartyOptions}/>
             </div>
         );
     }
