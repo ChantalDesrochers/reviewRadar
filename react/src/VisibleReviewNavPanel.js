@@ -9,8 +9,11 @@ import { LabelOutline, ArrowDownward, ArrowUpward, TrendingFlat } from '@materia
     buttonContainerForModifierVolumeFocusReview: {marginTop:'100px'} ,
     buttonContainerForModifierSentimentVolumeFocusReviews: { position:'absolute', marginTop:'-480px', marginLeft:'115px'},
     buttonContainerForModifierVolumeFocusChart: {position:'relative', top:'225px', left:'36%'},
-    
-    LeftButtonsLeftRight:{height:'60px', backgroundColor:'#f7d784', padding:0},
+    color1:'#add9ca',
+    color2:'#ccdce3',
+    color3:'#bad7e3',
+    color4:'#dbb8bb',
+    LeftButtonsLeftRight:{height:'60px', backgroundColor:'#bad7e3', padding:0},
     LeftArrowIcon:{height:50, width:75}
  }
 

@@ -16,6 +16,9 @@ import VisibleReviewNavPanel from './VisibleReviewNavPanel.js';
 import ReviewStars from "./ReviewStars";
 import ChartsToShow from "./ChartsToShow.js";
 import DisplayTitle from "./DisplayTitle"
+import Fade from '@material-ui/core/Fade';
+
+
 
 const styles = {
   AppBar: { backgroundColor: '#69bee3', height: '80px', boxShadow: 'none', borderRadius: '5px' },
@@ -24,7 +27,7 @@ const styles = {
   MainContainer: { height: '100%', marginTop: 8 },
   LargePanel: { position: 'relative', height: '50%', marginTop: 8, fontFamily: 'Bauhaus', backgroundColor: 'white' },
   // Top: { height: '89vh' },
-  RightContainer: { paddingRight: '45px', height:'88vh'},
+  RightContainer: { paddingRight: '45px', height: '88vh' },
   TopNavPanel: { float: 'left', padding: 20 },
   TopNavPanels: { textAlign: 'center', height: '140px', marginLeft: '-125px' },
 
@@ -32,11 +35,13 @@ const styles = {
   WatsonBars: { bottom: 50 },
   ReviewStars: { bottom: 100 },
   ChartOnLeftSide: {},
-  ChartOnRightSide: {height:'100%'},
+  ChartOnRightSide: { height: '100%' },
   ReviewNavButtonsOnLeftSide: {},
   ReviewNavButtonsOnRightSide: {},
   PaperForLeftReview: { height: '551px' },
-  WatsonContainer: { position: 'relative', top: '-2px', right: '-7px'}
+  WatsonContainer: { position: 'relative', top: '-2px', right: '-7px' }
+
+
 }
 
 class Report extends Component {
@@ -55,6 +60,7 @@ class Report extends Component {
       visibleReview: 175,
       leftShowing: 'text',
       keywordChartTarget: '',
+
       // live server data
       loading: true,
       reviews: [], // all reviews
@@ -64,7 +70,13 @@ class Report extends Component {
       currentTargetedReviews: [],
       SentimentSummaryIndex: 5,
       SummaryIndexMultiple: 5,
-      CurrentMonth:''
+      CurrentMonth: '',
+
+      FadeLeftSideSingle: true,
+      FadeRightSideSingle: true,
+      FadeInTime: 5000,
+      FadeOutTime: 5000
+
     };
   }
 
@@ -108,25 +120,35 @@ class Report extends Component {
       })
     }
   }
+
+  //not in use but needed for future reference
+  toggleFade = () => {
+    const newState = { ...this.state }
+    console.log('toggle fade called');
+    newState.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool;
+    newState.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool;
+    this.setState(newState)
+  };
+
   LeftSideShow = (event) => {
     const { displaying, reviews, leftSide, fadeTracker } = this.state;
     if (this.state.dataFocus === 'review') {
       switch (displaying) {
         case 'sentiment':
-          return <div style={{ padding: 0, margin: 0 }}>
-          <DisplayTitle style={{ height: '100px' }} s={this.state} />
-              <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+          return <Fade in={true} timeout={{ enter: this.props.FadeInTime, exit: this.props.FadeOutTime }}><div style={{ padding: 0, margin: 0 }}>
+            <DisplayTitle style={{ height: '100px' }} s={this.state} />
+            <SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
             <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
-          </div>
+          </div></Fade>
           break;
         case 'keyword':
-          return <div style={{ padding: 0, margin: 0 }}>
+          return <Fade in={true} timeout={{ enter: this.props.FadeInTime, exit: this.props.FadeOutTime }}><div style={{ padding: 0, margin: 0 }}>
             <DisplayTitle style={{ height: '100px' }} s={this.state} />
-             <Paper style={styles.PaperForLeftReview}> 
-            <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-           </Paper> 
-          <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
-          </div>
+            <Paper style={styles.PaperForLeftReview}>
+              <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+            </Paper>
+            <VisibleReviewNavPanel s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+          </div></Fade>
           break;
         //is this the problem, there is no chart?
         // case 'chart':
@@ -136,21 +158,22 @@ class Report extends Component {
 
     }
     else if (this.state.dataFocus === 'chart') {
-      return <div style={styles.ChartOnLeftSide}>
+      return  <div style={styles.ChartOnLeftSide}>
 
 
-      <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
-        pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
-        reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
-        organizedConcepts={this.state.organizedConcepts}
-        monthConcepts={this.state.monthConcepts}
-        changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
-        clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
-        clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
-        changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
-        s={this.state}
-      />
+        <ChartContainer displaying={this.state.displaying} reviews={this.state.reviews}
+          pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
+          reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
+          organizedConcepts={this.state.organizedConcepts}
+          monthConcepts={this.state.monthConcepts}
+          changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+          clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
+          clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
+          changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
+          s={this.state}
+        />
       </div>
+      
     }
 
   }
@@ -161,14 +184,14 @@ class Report extends Component {
     if (this.state.dataFocus === 'chart') {
       switch (displaying) {
         case 'sentiment':
-          return <span>  <DisplayTitle style={{ height: '100px' }} s={this.state} /><Paper><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
-           <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
-          </Paper></span>
+          return <Fade in={true} timeout={{ enter: this.props.FadeInTime, exit: this.props.FadeOutTime }}><div>  <DisplayTitle style={{ height: '100px' }} s={this.state} /><Paper><SentimentsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
+            <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
+          </Paper></div></Fade>
           break;
         case 'keyword':
-          return <span><DisplayTitle style={{ height: '100px' }} s={this.state} /> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />;
+          return <Fade in={true} timeout={{ enter: this.props.FadeInTime, exit: this.props.FadeOutTime }}><div><DisplayTitle style={{ height: '100px' }} s={this.state} /> <KeywordsToShow s={this.state} dateParsingReviews={this.dateParsingReviews} reviewSwitch={this.reviewSwitch} />
          <VisibleReviewNavPanel style={styles.ReviewNavButtonsOnLeftSide} s={this.state} reviewSwitch={this.reviewSwitch} clickHandlerForSentimentSummary={this.clickHandlerForSentimentSummary} />
-         </span>
+          </div></Fade>
           break;
       }
     }
@@ -176,29 +199,29 @@ class Report extends Component {
 
       return <div style={styles.ChartOnRightSide}>
 
-      <Paper style={{height:'100%'}} >
-      <ChartContainer  className= "Level4" displaying={this.state.displaying} reviews={this.state.reviews}
-        pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
-        reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
-        organizedConcepts={this.state.organizedConcepts}
-        monthConcepts={this.state.monthConcepts}
-        changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
-        changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
-        clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
-        clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
-        s={this.state}
-      />
-      </Paper>
+        <Paper style={{ height: '100%' }} >
+          <ChartContainer className="Level4" displaying={this.state.displaying} reviews={this.state.reviews}
+            pickReviewTypeToDisplay={this.swapReviewsOnAllSentimentChartClick}
+            reviewTypeToDisplayKW={this.clickHandlerForKeyWordBarChart}
+            organizedConcepts={this.state.organizedConcepts}
+            monthConcepts={this.state.monthConcepts}
+            changeSentimentDisplayModifier={this.changeSentimentDisplayModifier}
+            changeKeywordDisplayModifier={this.changeKeywordDisplayModifier}
+            clickHandlerForSentimentTimeChart={this.clickHandlerForSentimentTimeChart}
+            clickHandlerForKeywordTimeChart={this.clickHandlerForKeywordTimeChart}
+            s={this.state}
+          />
+        </Paper>
       </div>
     }
   }
 
   swapReviewsOnAllSentimentChartClick = (focus) => {
     focus = focus.toLowerCase()
-      this.setState((prevState) => {
-        let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: focus}
-        return newState;
-      })
+    this.setState((prevState) => {
+      let newState = { ...prevState, displayModifier: 'volumeBySentiment', displaySentimentType: focus }
+      return newState;
+    })
   }
 
   changeSentimentDisplayModifier = (displayModifier) => {
@@ -324,14 +347,7 @@ class Report extends Component {
   }
 
 
-  //not in use but needed for future reference
-  toggleFade = () => {
-    const newState = { ...this.state }
-    console.log('toggle fade called');
-    newState.fadeTracker.sentimentFadeBool = !this.state.fadeTracker.sentimentFadeBool;
-    newState.fadeTracker.keywordFadeBool = !this.state.fadeTracker.keywordFadeBool;
-    this.setState(newState)
-  };
+
 
   //this is old but still in use, I think it is doing what the filter.map stuff is doing elsewhere
   findObjectByKey(array, key, value) {
@@ -364,15 +380,15 @@ class Report extends Component {
         });
         break;
       case 'charts':
-      // added chart state handle
+        // added chart state handle
 
-     this.setState((prevState) => {
-          let newState = { ...prevState, displayModifier: '', displaying: 'allcharts', dataFocus: 'review'}
-                return newState
+        this.setState((prevState) => {
+          let newState = { ...prevState, displayModifier: '', displaying: 'allcharts', dataFocus: 'review' }
+          return newState
         });
-      break;
+        break;
+    }
   }
-}
 
 
 
@@ -386,54 +402,54 @@ class Report extends Component {
           <AppBar position="static" style={styles.AppBar}>
             <Typography variant="display3" style={styles.MainTitle}>{this.state.companyName}</Typography>
           </AppBar>
-{this.state.displaying === 'allcharts'  ? (
-               <div style={styles.TopNavPanels}>
-                <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
-              <ChartsToShow s={this.state}/> </div>) : (
-  <div>
+          {this.state.displaying === 'allcharts' ? (
+            <div style={styles.TopNavPanels}>
+              <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
+              <ChartsToShow s={this.state} /> </div>) : (
+              <div>
 
-          {/* <AppBar className='******************' position="absolute" style={{top:'94px', opacity:0.4, backgroundColor:'green', height: '15px', zIndex:1, display:'block'}}>
+                {/* <AppBar className='******************' position="absolute" style={{top:'94px', opacity:0.4, backgroundColor:'green', height: '15px', zIndex:1, display:'block'}}>
           </AppBar>
           <AppBar className='@@@@@@@@@@@@@@@@' position="absolute" style={{top:'614px', opacity:0.4, backgroundColor:'blue', height: '15px', zIndex:1, display:'block'}}>
           </AppBar>
           <AppBar className='!!!!!!!!!!!!!!!!!' position="absolute" style={{top:'948px', opacity:0.4, backgroundColor:'red', height: '15px', zIndex:1, display:'block'}}>
           </AppBar> */}
 
-          {/* LEFT SIDE */}
-          <Grid container style={styles.MainContainer} spacing={8}>
-            <Grid item sm={8} >
-              <div style={styles.TopNavPanels}>
-                <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
-              </div>
-              <Grid style={styles.LeftContainer} style={{ marginTop: -25 }} item sm={12}>
-                <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
-                  <div style={{ paddingLeft: '50px', paddingRight: '50px', paddingTop: '20px', backgroundColor: "white" }} >
-                    {this.LeftSideShow()}
+                {/* LEFT SIDE */}
+                <Grid container style={styles.MainContainer} spacing={8}>
+                  <Grid item sm={8} >
+                    <div style={styles.TopNavPanels}>
+                      <TopNavPanels s={this.state} topNavClickHandler={this.topNavClickHandler} />
+                    </div>
+                    <Grid style={styles.LeftContainer} style={{ marginTop: -25 }} item sm={12}>
+                      <div id="large-panel" style={styles.LargePanel} data-message="left" onClick={this.topNavClickHandler}>
+                        <div style={{ paddingLeft: '50px', paddingRight: '50px', paddingTop: '20px', backgroundColor: "white" }} >
+                          {this.LeftSideShow()}
+                        </div>
+                      </div>
+                    </Grid>
+                  </Grid>
+                  {/* SWAP BUTTON */}
+                  <div style={{ position: 'absolute', bottom: '775px', marginLeft: '65%', left: '-60px' }}>
+                    <SwapButton swapDisplaySides={this.swapDisplaySides} />
                   </div>
-                </div>
-              </Grid>
-            </Grid>
-            {/* SWAP BUTTON */}
-            <div style={{ position: 'absolute', bottom: '115px', marginLeft: '65%', left:'-25px' }}>
-              <SwapButton swapDisplaySides={this.swapDisplaySides} />
-            </div>
-            {/* RIGHT SIDE */}
-            <Grid item sm={4} style={styles.RightContainer} >
-              <Grid item sm={12}className="level1" style={{height:'100%'}}  >
-                <div onClick={this.topNavClickHandler} style={{height:'100%'}} className="level2" >
-                  {this.RightSideShow()}
-                </div>
-                <Grid item sm={12} style={styles.WatsonContainer} >
-                  <div style={styles.ReviewWatson}>
-                    <ReviewStars s={this.state} style={styles.ReviewStars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
-                    <WatsonBar s={this.state} style={styles.WatsonBars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
-                  </div>
+                  {/* RIGHT SIDE */}
+                  <Grid item sm={4} style={styles.RightContainer} >
+                    <Grid item sm={12} className="level1" style={{ height: '100%' }}  >
+                      <div onClick={this.topNavClickHandler} style={{ height: '100%' }} className="level2" >
+                        {this.RightSideShow()}
+                      </div>
+                      <Grid item sm={12} style={styles.WatsonContainer} >
+                        <div style={styles.ReviewWatson}>
+                          <ReviewStars s={this.state} style={styles.ReviewStars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.currentTargetedReviews[this.state.visibleReview]} />
+                          <WatsonBar s={this.state} style={styles.WatsonBars} currentTargetedReviews={this.state.currentTargetedReviews} visibleReview={this.state.visibleReview} />
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-          </div>)
-}
+              </div>)
+          }
 
 
         </div>)
