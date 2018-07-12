@@ -76,8 +76,8 @@ const styles = {
     textTransform: "capitalize"
   },
   button: {
-    backgroundColor: "#1FDA9A",
-    color: 'black',
+    backgroundColor: "#28ABE3",
+    color: 'white',
     opacity: '1',
     width: '277px',
     height: '100px',
