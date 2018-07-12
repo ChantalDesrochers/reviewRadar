@@ -30,7 +30,7 @@ conceptMC = (reviewslength, sendstuffcb) => review => (error, response, body) =>
     reviewslength -= 1
   }
   reviewsCount++;
-  console.log('MeaningCloud Concept parsing:', reviewslength - reviewsCount + '/' + reviewslength, 'reviews completed')
+  console.log('MeaningCloud Concept parsing:', reviewslength - reviewsCount + '/' + reviewslength, 'reviews remaining')
 
   // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {

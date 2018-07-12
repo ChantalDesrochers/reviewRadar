@@ -33,7 +33,7 @@ const addSentiment = cb => (reviews) => {
     const tail = reviews.slice(1);
 
     // console.log('head', head)
-    console.log('IBM Watson Sentiment parsing', reviews.length, 'reviews remaining')
+    console.log('IBM Watson Sentiment parsing:', reviews.length, 'reviews remaining')
 
     // const contentTarget = head.concepts.map(x => x.content)
 
