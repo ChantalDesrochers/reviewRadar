@@ -430,7 +430,7 @@ class Report extends Component {
                     </Grid>
                   </Grid>
                   {/* SWAP BUTTON */}
-                  <div style={{ position: 'absolute', bottom: '775px', marginLeft: '65%', left: '-60px' }}>
+                  <div style={{ position: 'absolute', top: '13%', marginLeft: '64%', left: '-60px' }}>
                     <SwapButton swapDisplaySides={this.swapDisplaySides} />
                   </div>
                   {/* RIGHT SIDE */}
