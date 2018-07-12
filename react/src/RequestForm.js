@@ -76,7 +76,7 @@ const styles = {
     textTransform: "capitalize"
   },
   button: {
-    backgroundColor: "rgba(232, 196, 81, 0.78)",
+    backgroundColor: "#1FDA9A",
     color: 'black',
     opacity: '1',
     width: '277px',
@@ -204,7 +204,7 @@ class Request extends Component {
     const thanksPage = (
       <div style={styles.background} >
       <div style={{margin: 'auto', paddingTop: '172px', textAlign: 'center'}}>
-        <Typography variant="title">Thank you for your request</Typography>
+        <Typography variant="display2">Thank you for your request</Typography>
         <br />
         <Button variant="contained" style={styles.button}><Link style={styles.link} to="../report">Your report will be ready here</Link></Button>
         </div>
