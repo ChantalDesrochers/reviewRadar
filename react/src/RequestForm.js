@@ -13,6 +13,7 @@ import yelpicon from "./yelp color mini.png";
 import tripicon from "./tripadvisor mini.png";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from '@material-ui/core/Button';
+import Background from './20180618-1_thumb.jpg';
 
 /* Design wise you'll want to do the following:
 
@@ -75,10 +76,9 @@ const styles = {
     textTransform: "capitalize"
   },
   button: {
-    backgroundColor: "rgba(232, 196, 81, 0.78)",
-    color: 'black',
-    marginLeft: '43vw',
-    textAlign: 'center',
+    backgroundColor: "#28ABE3",
+    color: 'white',
+    opacity: '1',
     width: '277px',
     height: '100px',
     fontSize: '20px'
@@ -86,6 +86,11 @@ const styles = {
   link: {
     textDecoration: 'none',
     color: 'black'
+  },
+  background: {
+    backgroundImage: 'url(' + Background + ")",
+    backgroundSize: '100% 100%',
+    height: '1000px'
   }
 };
 class Request extends Component {
@@ -197,10 +202,12 @@ class Request extends Component {
       </div>
     );
     const thanksPage = (
-      <div style={{marginTop: '53px', marginLeft: '26px'}}>
-        <Typography style={{textAlign: 'left', margin: 'auto'}} variant="title">Thank you for your request</Typography>
+      <div style={styles.background} >
+      <div style={{margin: 'auto', paddingTop: '172px', textAlign: 'center'}}>
+        <Typography variant="display2">Thank you for your request</Typography>
         <br />
         <Button variant="contained" style={styles.button}><Link style={styles.link} to="../report">Your report will be ready here</Link></Button>
+        </div>
       </div>
     );
 

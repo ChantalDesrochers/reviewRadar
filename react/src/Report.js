@@ -264,7 +264,7 @@ class Report extends Component {
     }
   }
 
-  clickHandlerForSentimentTimeChart = (clickedMonth) => {
+  clickHandlerForSentimentTimeChart = (clickedMonth, clickedLabel) => {
     let month = clickedMonth.substring(0, 3)
     let dAlteredArray = this.state.reviews.map(review =>
       ({ ...review, datePublished: new Date(review.datePublished) })
@@ -316,7 +316,7 @@ class Report extends Component {
         }
       });
     });
-  
+
     console.log(finalReviews)
 
     this.setState((prevState) => {

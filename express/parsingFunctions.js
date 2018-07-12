@@ -23,7 +23,7 @@ conceptAggregator = array => {
       }
     });
   });
-  console.log("allConceptsReady");
+  // console.log("allConceptsReady");
   return allConcepts.sort(function(a, b) {
     return b.references.length - a.references.length;
   });
@@ -127,7 +127,7 @@ const datedAggregator = object => {
   for (let month in object) {
     arrayAggregator(object[month], month, returnObj);
   }
-  console.log('monthConcepts ready');
+  // console.log('monthConcepts ready');
   return returnObj;
 };
 

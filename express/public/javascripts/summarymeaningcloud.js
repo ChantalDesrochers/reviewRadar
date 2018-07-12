@@ -18,7 +18,7 @@ summaryMC = (reviewslength, sendstuffcb) => review => (error, response, body) =>
     reviewslength -= 1
   }
   reviewsCount++;
-  console.log('MeaningCloud Summary parsing:', reviewslength - reviewsCount + '/' + reviewslength, 'reviews remaining')
+  console.log('MeaningCloud Summary parsing:', reviewslength - reviewsCount + '/' + reviewslength, 'reviews remaining ')
 
   // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {

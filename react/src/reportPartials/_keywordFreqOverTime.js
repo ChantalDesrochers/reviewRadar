@@ -199,7 +199,6 @@ class KeywordsOverTime extends Component {
         console.log('label', elem[0]['_chart']['data']['datasets'][i].label)
         console.log('month', month)
       this.props.clickHandlerForKeywordTimeChart(month, label)
-
       }
     }
 const chartyOptions = {

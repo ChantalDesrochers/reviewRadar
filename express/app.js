@@ -73,7 +73,9 @@ app.post('/1', (req, res) => {
     mc = parse.datedAggregator(parse.parseReviewsByDate(reportData))
     sentData.organizedConceptsL = oc
     sentData.monthConceptsL = mc
+    name = sentData.nameL
     savedFile = {
+      name: name,
       reviews: reportData,
       organizedConcepts: oc,
       monthConcepts: mc

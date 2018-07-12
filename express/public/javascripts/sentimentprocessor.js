@@ -24,7 +24,8 @@ const addSentiment = cb => (reviews) => {
     if (reviews.length === 0) {
       //  console.log('******DONE*******')
       // console.log('before sorting', newReviews)
-      console.log('Watson analysis complete')
+      console.log('IBM Watson Sentiment parsing complete')
+      console.log('Report is now ready')
       addedIDReviews = addID(sortResults(newReviews))
       return cb(addedIDReviews)
     }
@@ -32,7 +33,7 @@ const addSentiment = cb => (reviews) => {
     const tail = reviews.slice(1);
 
     // console.log('head', head)
-    console.log('Watson remaining', reviews.length)
+    console.log('IBM Watson Sentiment parsing', reviews.length, 'reviews remaining')
 
     // const contentTarget = head.concepts.map(x => x.content)
 
