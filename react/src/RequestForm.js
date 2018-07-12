@@ -139,7 +139,7 @@ class Request extends Component {
 
   render() {
     const submitPage = (
-      <div>
+      <div style={{marginLeft:'43%', marginTop:'2%'}}>
         <form className="form" onSubmit={this.handleSubmit}>
           <TextField
             id="company"
