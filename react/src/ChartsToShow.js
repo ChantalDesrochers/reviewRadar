@@ -56,7 +56,7 @@ const styles ={
             <Grid item md={12} id="time">
               <Typography style={styles.Subtitles} variant="display2"><i>How Things Are Trending</i></Typography>
               <SentimentBarChartMonth reviews={this.props.s.reviews}/>
-               <Typography variant="body2"><Scrollchor style={{color: 'black', position: 'relative', top: '-80px'}} to="#top" className="nav-link">Back to Top</Scrollchor></Typography>
+               <Typography variant="body2"><Scrollchor style={{color: 'black', position: 'relative', top: '-51px'}} to="#top" className="nav-link">Back to Top</Scrollchor></Typography>
                <NumberOfReviewsOverTime reviews={this.props.s.reviews} />
                 <Typography variant="body2"><Scrollchor style={{color: 'black', position: 'relative', top: '-80px'}} to="#top" className="nav-link">Back to Top</Scrollchor></Typography>
             </Grid>

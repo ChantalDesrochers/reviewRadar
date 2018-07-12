@@ -13,6 +13,7 @@ import yelpicon from "./yelp color mini.png";
 import tripicon from "./tripadvisor mini.png";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from '@material-ui/core/Button';
+import Background from './20180618-1_thumb.jpg';
 
 /* Design wise you'll want to do the following:
 
@@ -77,8 +78,7 @@ const styles = {
   button: {
     backgroundColor: "rgba(232, 196, 81, 0.78)",
     color: 'black',
-    marginLeft: '43vw',
-    textAlign: 'center',
+    opacity: '1',
     width: '277px',
     height: '100px',
     fontSize: '20px'
@@ -88,8 +88,9 @@ const styles = {
     color: 'black'
   },
   background: {
-    marginTop: '53px',
-    marginLeft: '26px',
+    backgroundImage: 'url(' + Background + ")",
+    backgroundSize: '100% 100%',
+    height: '1000px'
   }
 };
 class Request extends Component {
@@ -202,9 +203,11 @@ class Request extends Component {
     );
     const thanksPage = (
       <div style={styles.background} >
-        <Typography style={{textAlign: 'left', margin: 'auto'}} variant="title">Thank you for your request</Typography>
+      <div style={{margin: 'auto', paddingTop: '172px', textAlign: 'center'}}>
+        <Typography variant="title">Thank you for your request</Typography>
         <br />
         <Button variant="contained" style={styles.button}><Link style={styles.link} to="../report">Your report will be ready here</Link></Button>
+        </div>
       </div>
     );
 
