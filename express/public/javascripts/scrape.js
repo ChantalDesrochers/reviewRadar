@@ -52,7 +52,7 @@ const yelpRecursion = (link, i, cb, link2) => {
         i += 20
         yelpRecursion(link, i, cb, link2)
       } else {
-        console.log('Yelp scraping completed', reviewsArray.length)
+        console.log('Yelp scraping completed', reviewsArray.length, 'reviews total')
         if (!link2) {
           cb(reviewsArray)
         } else {
@@ -65,8 +65,8 @@ const yelpRecursion = (link, i, cb, link2) => {
 }
 
 async function tripAdvisorRecursion(link, i, cb) {
-  console.log("tripadvisor started", i+10);
-  console.log('link passed url1', link)
+  console.log("TripAdvisor scraping started", i+10);
+  // console.log('link passed url1', link)
   url = link.replace(/Reviews/g, `Reviews-or${i}`);
   const browser = await launch({ headless: true });
   const page = await browser.newPage();
@@ -130,7 +130,7 @@ async function tripAdvisorRecursion(link, i, cb) {
   } else {
     // console.log("reviews", reviews);
     // console.log("global reviews", reviewsArray);
-    console.log('TripAdvisor scraping completed', reviewsArray.length)
+    console.log('TripAdvisor scraping completed', reviewsArray.length, 'reviews total')
     cb(reviewsArray)
   }
 }

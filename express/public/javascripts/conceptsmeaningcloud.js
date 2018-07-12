@@ -30,11 +30,11 @@ conceptMC = (reviewslength, sendstuffcb) => review => (error, response, body) =>
     reviewslength -= 1
   }
   reviewsCount++;
-  console.log('MeaningCloud Concept remaining', reviewslength - reviewsCount)
+  console.log('MeaningCloud Concept parsing:', reviewslength - reviewsCount + '/' + reviewslength, 'reviews completed')
 
   // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {
-    console.log("MeaningCloud Concept analysis complete");
+    console.log("MeaningCloud Concept parsing complete");
     // console.log(reviews);
     // returnReviews(reviews); // this is where it should go to watson
     reviewsCount = 0; // resetting state before next time it's run
@@ -62,7 +62,7 @@ const crequester = (review, cb) => {
 // function iterateWithDelay(array) {
   // called function, receiving reviews array from scraper
 conceptWithDelay = sendstuffcb => array => {
-  console.log('Starting MeaningCloud Concept parsing')
+  console.log('Beginning MeaningCloud Concept parsing')
   reviews = array
   for (let i = 0; i < reviews.length; i++) {
     (function (i) {

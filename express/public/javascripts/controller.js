@@ -9,7 +9,7 @@ const getData = (url, cb) => {
   // scraper.yelpRecursion(url, 0, cloud.iterateWithDelay(cb)); // meaningcloud in isolation
   // scraper.yelpRecursion(url, 0, watson.addSentiment(cb)); // watson in isolation
   if (Array.isArray(url)) {
-    console.log('it is an array')
+    // console.log('it is an array')
     // scraper.yelpRecursion(url[0], 0, summarycloud.summaryWithDelay(watson.addSentiment(cb)), url[1]) // summary in isolation
     // scraper.yelpRecursion(url[0], 0, conceptcloud.conceptWithDelay(watson.addSentiment(cb)), url[1]) // concept in isolation
     scraper.yelpRecursion(url[0], 0, summarycloud.summaryWithDelay(conceptcloud.conceptWithDelay(watson.addSentiment(cb))), url[1]) // summary in isolation

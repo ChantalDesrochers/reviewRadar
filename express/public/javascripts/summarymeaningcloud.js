@@ -18,11 +18,11 @@ summaryMC = (reviewslength, sendstuffcb) => review => (error, response, body) =>
     reviewslength -= 1
   }
   reviewsCount++;
-  console.log('MeaningCloud Summary analysis remaining', reviewslength - reviewsCount)
+  console.log('MeaningCloud Summary parsing:', reviewslength - reviewsCount + '/' + reviewslength, 'reviews remaining')
 
   // if (reviewsCount === 5) {
   if (reviewsCount === reviewslength) {
-    console.log("MeaningCloud Summary analysis complete");
+    console.log("MeaningCloud Summary parsing complete");
     // console.log(reviews);
     // returnReviews(reviews); // this is where it should go to watson
     reviewsCount = 0; // resetting state before next time it's run
@@ -50,7 +50,7 @@ const srequester = (review, cb) => {
 // function iterateWithDelay(array) {
   // called function, receiving reviews array from scraper
 summaryWithDelay = sendstuffcb => array => {
-  console.log('Starting MeaningCloud Summary parsing')
+  console.log('Beginning MeaningCloud Summary parsing')
   reviews = array
   for (let i = 0; i < reviews.length; i++) {
     (function (i) {

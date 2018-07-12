@@ -60,7 +60,7 @@ app.get('/1', (req, res) => {
 
 app.post('/1', (req, res) => {
   // console.log('full request', req)
-  console.log('req body', req.body)
+  // console.log('req body', req.body)
   sentData.nameL = req.body.name
   const sendStuff = (data) =>{
     // console.log('data added to object', JSON.stringify(data))
@@ -92,11 +92,11 @@ app.post('/1', (req, res) => {
 
   
   if (req.body.url2 != '') {
-    console.log('url2 triggered')
+    // console.log('url2 triggered')
     controller.getData([req.body.url1, req.body.url2], sendStuff)
   }
   else if (req.body.url1 != '') {
-    console.log('url1 triggered')
+    // console.log('url1 triggered')
     controller.getData(req.body.url1, sendStuff)
   }
 
